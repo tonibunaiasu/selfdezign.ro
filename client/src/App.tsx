@@ -11,8 +11,8 @@ import Articles from "./pages/Articles";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Layout from "./components/Layout";
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Layout>
       <Switch>

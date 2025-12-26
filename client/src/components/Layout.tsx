@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import NewsletterForm from "@/components/NewsletterForm";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -159,12 +160,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-accent uppercase tracking-widest mb-6 text-sm">Social</h4>
-            <div className="flex gap-4">
-              {/* Social Icons placeholders */}
-              <a href="#" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300">FB</a>
-              <a href="#" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300">IG</a>
-              <a href="#" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300">LI</a>
+            <NewsletterForm />
+          </div>
+        </div>
+
+        {/* Second Row - Social */}
+        <div className="container mt-12 pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+              <h4 className="font-display font-bold text-accent uppercase tracking-widest mb-4 text-sm">Urmărește-ne</h4>
+              <div className="flex gap-4">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300 text-sm font-bold">FB</a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300 text-sm font-bold">IG</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300 text-sm font-bold">LI</a>
+              </div>
             </div>
           </div>
         </div>
