@@ -21,3 +21,10 @@
 - [x] Change accent color from green to lime yellow
 - [x] Show full SelfDezign logo on both mobile and desktop
 - [x] Update projects page with real images
+
+## About Section (Despre Noi)
+- [x] Create About page with brand positioning (user's text)
+- [x] Develop Vision & Mission content
+- [x] Create Principles & Values page
+- [x] Add navigation links to About section
+- [x] Design consistent layout for About pages

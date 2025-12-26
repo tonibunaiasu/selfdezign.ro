@@ -10,6 +10,9 @@ import Contact from "./pages/Contact";
 import Articles from "./pages/Articles";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import About from "./pages/About";
+import Vision from "./pages/Vision";
+import Values from "./pages/Values";
 import Layout from "./components/Layout";
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -22,6 +25,9 @@ function Router() {
         <Route path={"/articole"} component={Articles} />
         <Route path={"/blog"} component={Blog} />
         <Route path={"/blog/:slug"} component={BlogPost} />
+        <Route path={"/despre"} component={About} />
+        <Route path={"/viziune"} component={Vision} />
+        <Route path={"/valori"} component={Values} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
