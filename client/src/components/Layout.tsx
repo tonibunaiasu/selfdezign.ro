@@ -42,13 +42,32 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container flex items-center justify-between">
           <Link href="/">
             <a className="flex items-center gap-2 group">
-              <div className="relative w-10 h-10 bg-accent flex items-center justify-center overflow-hidden">
-                <span className="font-display font-bold text-2xl text-black transform group-hover:scale-110 transition-transform duration-300">S</span>
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              {/* Logo - Ruler icon representing the brand */}
+              <div className="relative flex items-center">
+                <div className="relative w-8 h-10 sm:w-10 sm:h-12 bg-accent flex items-center justify-center overflow-hidden rounded-t-sm">
+                  {/* Ruler markings */}
+                  <div className="absolute inset-0 flex flex-col justify-between py-1">
+                    <div className="w-full h-[2px] bg-black/80"></div>
+                    <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
+                    <div className="w-full h-[2px] bg-black/80"></div>
+                    <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
+                    <div className="w-full h-[2px] bg-black/80"></div>
+                    <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
+                    <div className="w-full h-[2px] bg-black/80"></div>
+                  </div>
+                  {/* Hole at top */}
+                  <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-black/20 rounded-full"></div>
+                </div>
               </div>
-              <span className="font-display font-bold text-xl tracking-tighter uppercase hidden sm:block">
-                SelfDezign
-              </span>
+              {/* Brand name - visible on all screens */}
+              <div className="flex flex-col leading-none">
+                <span className="font-display font-black text-lg sm:text-xl tracking-tighter uppercase">
+                  SELF
+                </span>
+                <span className="font-display font-black text-lg sm:text-xl tracking-tighter uppercase">
+                  DEZIGN
+                </span>
+              </div>
             </a>
           </Link>
 
@@ -117,12 +136,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-accent flex items-center justify-center">
-                <span className="font-display font-bold text-xl text-black">S</span>
+              {/* Footer Logo - Ruler icon */}
+              <div className="relative w-8 h-10 bg-accent flex items-center justify-center overflow-hidden rounded-t-sm">
+                <div className="absolute inset-0 flex flex-col justify-between py-1">
+                  <div className="w-full h-[2px] bg-black/80"></div>
+                  <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
+                  <div className="w-full h-[2px] bg-black/80"></div>
+                  <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
+                  <div className="w-full h-[2px] bg-black/80"></div>
+                  <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
+                  <div className="w-full h-[2px] bg-black/80"></div>
+                </div>
+                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-black/20 rounded-full"></div>
               </div>
-              <span className="font-display font-bold text-lg tracking-tighter uppercase">
-                SelfDezign
-              </span>
+              <div className="flex flex-col leading-none">
+                <span className="font-display font-bold text-base tracking-tighter uppercase">SELF</span>
+                <span className="font-display font-bold text-base tracking-tighter uppercase">DEZIGN</span>
+              </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               Transformăm spațiul într-o operă de artă care te reprezintă. 100% autentică. 100% funcțională.

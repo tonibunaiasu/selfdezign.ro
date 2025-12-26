@@ -13,62 +13,128 @@ const categories = [
 ];
 
 const projects = [
+  // RESTAURANT / HORECA
   {
     id: 1,
-    title: "Sky Tower Office",
-    category: "Office",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2669&auto=format&fit=crop",
-    description: "Spațiu de birouri modern cu vedere panoramică"
+    title: "Bloom - Specialty Coffee",
+    category: "Restaurant",
+    image: "/projects/bloom-specialty-coffee.webp",
+    description: "Coffee shop cu design floral și atmosferă relaxantă"
   },
   {
     id: 2,
-    title: "Urban Garden Restaurant",
+    title: "Cafeneaua Veche 9",
     category: "Restaurant",
-    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2670&auto=format&fit=crop",
-    description: "Terasă restaurant cu design biofilic"
+    image: "/projects/cafeneaua-veche-9.webp",
+    description: "Cafenea cu caracter vintage și detalii autentice"
   },
   {
     id: 3,
-    title: "Hotel MM Reception",
-    category: "Hotel",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2670&auto=format&fit=crop",
-    description: "Recepție hotel minimalistă"
+    title: "Zero Grade - Pizza în Păltiniș",
+    category: "Restaurant",
+    image: "/projects/zero-grade-paltinis.webp",
+    description: "Pizzerie montană cu design rustic modern"
   },
   {
     id: 4,
-    title: "Concept Store",
-    category: "Comercial",
-    image: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=2670&auto=format&fit=crop",
-    description: "Spațiu comercial vibrant"
+    title: "Restaurant Poeme - Hotel Boutiq Mamaia",
+    category: "Restaurant",
+    image: "/projects/restaurant-poeme-1.webp",
+    description: "Restaurant de fine dining cu vedere la mare"
   },
+  
+  // OFFICE
   {
     id: 5,
-    title: "Festival Lounge",
-    category: "Brand Experience",
-    image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2670&auto=format&fit=crop",
-    description: "Activare de brand outdoor"
+    title: "Global Leader in Live Dealer Gaming",
+    category: "Office",
+    image: "/projects/office-global-leader-gaming.webp",
+    description: "Sediu corporate pentru lider în industria gaming"
   },
   {
     id: 6,
-    title: "Nordic Apartment",
-    category: "Rezidențial",
-    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop",
-    description: "Apartament rezidențial modern"
+    title: "Prima Development",
+    category: "Office",
+    image: "/projects/office-prima-development.webp",
+    description: "Birouri moderne pentru dezvoltator imobiliar"
   },
-  // Duplicate for grid filling
   {
     id: 7,
-    title: "Tech Hub",
+    title: "MyHive Office",
     category: "Office",
-    image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2670&auto=format&fit=crop",
-    description: "Birouri open-space"
+    image: "/projects/office-myhive.webp",
+    description: "Spațiu de coworking premium cu design flexibil"
   },
+  
+  // HOTEL
   {
     id: 8,
-    title: "Bistro 55",
-    category: "Restaurant",
-    image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2574&auto=format&fit=crop",
-    description: "Design interior bistro"
+    title: "Bucharest Comfort Suites ****",
+    category: "Hotel",
+    image: "/projects/hotel-bucharest-comfort-1.webp",
+    description: "Hotel boutique cu design tropical și modern"
+  },
+  {
+    id: 9,
+    title: "Bucharest Comfort Suites - Bathroom",
+    category: "Hotel",
+    image: "/projects/hotel-bucharest-comfort-bathroom.webp",
+    description: "Baie de hotel cu finisaje premium și pattern vegetal"
+  },
+  
+  // COMERCIAL / EXPO
+  {
+    id: 10,
+    title: "mafi Natural Wooden Floors - Showroom",
+    category: "Comercial",
+    image: "/projects/comercial-mafi-showroom.webp",
+    description: "Showroom pentru parchet natural cu design elegant"
+  },
+  
+  // BRAND EXPERIENCE
+  {
+    id: 11,
+    title: "Eveniment Outdoor - Companie Țigarete",
+    category: "Brand Experience",
+    image: "/projects/brand-experience-outdoor.webp",
+    description: "Activare de brand outdoor cu dome geodezic"
+  },
+  {
+    id: 12,
+    title: "Branding Locație - Companie FMCG",
+    category: "Brand Experience",
+    image: "/projects/brand-experience-fmcg.webp",
+    description: "Instalație de brand pentru companie FMCG"
+  },
+  
+  // REZIDENȚIAL
+  {
+    id: 13,
+    title: "Locuință cu Spații Ample - Cartierul Francez",
+    category: "Rezidențial",
+    image: "/projects/rezidential-cartier-francez.webp",
+    description: "Eleganță și rafinament într-un apartament spațios"
+  },
+  {
+    id: 14,
+    title: "Vilă P+E - Cluj Napoca",
+    category: "Rezidențial",
+    image: "/projects/rezidential-vila-cluj.webp",
+    description: "Domeniul de pe deal - vilă modernă cu living generos"
+  },
+  {
+    id: 15,
+    title: "Vilă D+P+E - Piața Domenii",
+    category: "Rezidențial",
+    image: "/projects/rezidential-piata-domenii.webp",
+    description: "Lux și modernitate într-o vilă din București"
+  },
+  {
+    id: 16,
+    title: "Quadra Trees - București",
+    category: "Rezidențial",
+    image: "/projects/rezidential-quadra-trees.webp",
+    description: "Capsula modernă - home office integrat în living"
   }
 ];
 
@@ -125,6 +191,7 @@ export default function Projects() {
                   src={project.image} 
                   alt={project.title}
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
                 />
                 <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="bg-accent text-black text-xs font-bold px-3 py-1 uppercase tracking-widest">
@@ -138,6 +205,24 @@ export default function Projects() {
               <p className="text-gray-500 text-sm mt-1">{project.description}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="container mt-24 px-4">
+        <div className="bg-black text-white p-12 md:p-16 text-center">
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 tracking-tighter">
+            Ai un proiect în minte?
+          </h2>
+          <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+            Hai să transformăm viziunea ta într-o realitate. Contactează-ne pentru o consultație gratuită.
+          </p>
+          <Button 
+            className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm"
+            onClick={() => window.location.href = '/contact'}
+          >
+            Începe un proiect
+          </Button>
         </div>
       </div>
     </div>
