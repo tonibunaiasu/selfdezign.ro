@@ -9,9 +9,20 @@ export default function BlogPost() {
   const [match, params] = useRoute("/blog/:slug");
   const post = match ? blogPosts.find(p => p.slug === params.slug) : null;
 
-  // Inject JSON-LD for SEO/LLM
+  // Update Metadata & Inject JSON-LD for SEO/LLM
   useEffect(() => {
     if (post) {
+      // Update Title & Meta Description
+      document.title = `${post.title} | SelfDezign Blog`;
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.setAttribute('name', 'description');
+        document.head.appendChild(metaDesc);
+      }
+      metaDesc.setAttribute('content', post.excerpt);
+
+      // JSON-LD
       const script = document.createElement('script');
       script.type = 'application/ld+json';
       script.text = JSON.stringify({
@@ -105,6 +116,26 @@ export default function BlogPost() {
               </div>
             </div>
           )}
+
+          {/* Related Articles for Internal Linking SEO */}
+          <div className="mt-16 pt-12 border-t border-gray-200">
+            <h3 className="text-2xl font-display font-bold mb-8">Citește și alte articole</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {blogPosts
+                .filter(p => p.id !== post.id)
+                .slice(0, 2)
+                .map(related => (
+                  <Link key={related.id} href={`/blog/${related.slug}`}>
+                    <a className="group block">
+                      <div className="aspect-video bg-gray-100 mb-4 overflow-hidden">
+                        <img src={related.image} alt={related.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      </div>
+                      <h4 className="font-bold text-lg leading-tight group-hover:text-accent transition-colors">{related.title}</h4>
+                    </a>
+                  </Link>
+                ))}
+            </div>
+          </div>
         </div>
 
         {/* Sidebar */}
