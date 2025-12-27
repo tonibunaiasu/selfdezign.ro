@@ -293,8 +293,13 @@ export const projects: Project[] = [
     description: [
       "Design și amenajare pentru eveniment outdoor de brand."
     ],
-    coverImage: "/projects/brand-experience-outdoor.webp",
-    gallery: []
+    coverImage: "/projects/outdoor-event/outdoor-event-1.webp",
+    gallery: [
+      { src: "/projects/outdoor-event/outdoor-event-1.webp", alt: "Eveniment Outdoor - structură geodezică" },
+      { src: "/projects/outdoor-event/outdoor-event-2.webp", alt: "Eveniment Outdoor - intrare și branding" },
+      { src: "/projects/outdoor-event/outdoor-event-3.webp", alt: "Eveniment Outdoor - interior dome" },
+      { src: "/projects/outdoor-event/outdoor-event-4.webp", alt: "Eveniment Outdoor - lounge area" }
+    ]
   },
   {
     id: "fmcg-branding",
@@ -308,8 +313,13 @@ export const projects: Project[] = [
     description: [
       "Concept de branding pentru locație comercială."
     ],
-    coverImage: "/projects/brand-experience-fmcg.webp",
-    gallery: []
+    coverImage: "/projects/fmcg-branding/fmcg-branding-1.webp",
+    gallery: [
+      { src: "/projects/fmcg-branding/fmcg-branding-1.webp", alt: "FMCG Branding - grill urban" },
+      { src: "/projects/fmcg-branding/fmcg-branding-2.webp", alt: "FMCG Branding - retail space" },
+      { src: "/projects/fmcg-branding/fmcg-branding-3.webp", alt: "FMCG Branding - brand activation" },
+      { src: "/projects/fmcg-branding/fmcg-branding-4.webp", alt: "FMCG Branding - modern interior" }
+    ]
   },
   {
     id: "cartier-francez",

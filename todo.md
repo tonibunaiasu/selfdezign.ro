@@ -102,3 +102,9 @@
 - [x] Verify all other project galleries for broken images
 - [x] Fix image paths in projects-data.ts (downloaded missing Mafi images from WordPress)
 - [x] Test all project galleries
+
+## Add Brand Experience Gallery Images
+- [x] Extract images for Eveniment Outdoor project from WordPress (generated professional images)
+- [x] Extract images for Branding FMCG project from WordPress (generated professional images)
+- [x] Update projects-data.ts with gallery images
+- [x] Test brand experience galleries
