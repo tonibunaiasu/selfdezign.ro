@@ -140,8 +140,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-16 border-t border-white/10">
-        <div className="container grid grid-cols-1 md:grid-cols-4 gap-12">
+      <footer className="bg-black text-white py-12 md:py-16 border-t border-white/10">
+        <div className="container grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           <div className="space-y-6">
             <div className="flex items-center gap-2">
               {/* Footer Logo - Ruler icon */}
@@ -203,7 +203,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
 
         {/* Second Row - Social */}
-        <div className="container mt-12 pt-8 border-t border-white/10">
+        <div className="container mt-8 md:mt-12 pt-6 md:pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
               <h4 className="font-display font-bold text-accent uppercase tracking-widest mb-4 text-sm">Urmărește-ne</h4>
@@ -215,7 +215,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </div>
-        <div className="container mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <div className="container mt-8 md:mt-16 pt-6 md:pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
           <p>© 2025 SelfDezign®. {t.footer.rights}</p>
           <p>Din arhitectura personalității tale.</p>
         </div>
