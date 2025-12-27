@@ -70,10 +70,10 @@ export default function Home() {
                   alt="Cafeneaua Veche 9 - Interior Design" 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
                 />
-                <Link href="/proiect/cafeneaua-veche-9" className="absolute bottom-8 left-8 z-20 cursor-pointer">
+                <a href="/proiect/cafeneaua-veche-9" className="absolute bottom-8 left-8 z-20 cursor-pointer block hover:opacity-80 transition-opacity" onClick={(e) => { e.preventDefault(); window.location.href = '/proiect/cafeneaua-veche-9'; }}>
                   <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">{t.home.featuredProject}</p>
                   <h3 className="text-2xl font-display font-bold text-white group-hover:text-accent transition-colors">Cafeneaua Veche 9</h3>
-                </Link>
+                </a>
               </div>
             </div>
           </div>
