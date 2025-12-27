@@ -228,7 +228,7 @@ export const projects: Project[] = [
   {
     id: "bucharest-comfort",
     slug: "bucharest-comfort-suites",
-    title: "Hotel Bucharest Comfort Suites****",
+    title: "Hotel Bucharest Comfort Suites ★★★★",
     category: "Hotel",
     categorySlug: "hotel",
     year: "2023",

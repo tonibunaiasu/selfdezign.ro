@@ -108,3 +108,9 @@
 - [x] Extract images for Branding FMCG project from WordPress (generated professional images)
 - [x] Update projects-data.ts with gallery images
 - [x] Test brand experience galleries
+
+## Fix Hotel Bucharest Page Layout
+- [x] Fix hotel title - replace asterisks with stars (★★★★)
+- [x] Optimize gallery grid layout for uniform alignment
+- [x] Improve spacing and responsive design
+- [x] Test page on mobile and desktop

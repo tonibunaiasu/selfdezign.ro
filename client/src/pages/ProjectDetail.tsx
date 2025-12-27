@@ -166,18 +166,18 @@ export default function ProjectDetail() {
 
       {/* Gallery Section */}
       {hasGallery ? (
-        <section className="py-20 bg-gray-50">
+        <section className="py-24 bg-gray-50">
           <div className="container">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl font-bold mb-12 font-display text-center"
+              className="text-4xl font-bold mb-16 font-display text-center"
             >
               {c.photoGallery}
             </motion.h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
               {project.gallery.map((image, index) => (
                 <motion.div
                   key={index}
@@ -185,7 +185,7 @@ export default function ProjectDetail() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="relative aspect-[4/3] overflow-hidden cursor-pointer group"
+                  className="relative overflow-hidden cursor-pointer group rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
                   onClick={() => openLightbox(index)}
                 >
                   <img
@@ -193,8 +193,8 @@ export default function ProjectDetail() {
                     alt={image.alt}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium">
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium px-4 py-2 bg-black/50 rounded">
                       {c.viewImage}
                     </span>
                   </div>
