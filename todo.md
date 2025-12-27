@@ -136,3 +136,11 @@
 - [x] Update media-appearances.ts with correct links
 - [x] Modify MediaAppearances component to display clickable links
 - [x] Test all links
+
+## Admin Dashboard + CMS Integration (Manus Management UI)
+- [x] Use Manus Management UI for content management
+- [x] Create comprehensive Management UI guide
+- [x] Document how to edit content visually
+- [x] Document backup and restore process
+- [x] Document domain configuration
+- [x] Document notification setup for contact form
