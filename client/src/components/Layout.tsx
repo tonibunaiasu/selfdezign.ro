@@ -124,24 +124,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <footer className="bg-black text-white py-12 md:py-16 border-t border-white/10">
         <div className="container grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           <div className="space-y-6">
-            <div className="flex items-center gap-2">
-              {/* Footer Logo - Ruler icon */}
-              <div className="relative w-8 h-10 bg-accent flex items-center justify-center overflow-hidden rounded-t-sm">
-                <div className="absolute inset-0 flex flex-col justify-between py-1">
-                  <div className="w-full h-[2px] bg-black/80"></div>
-                  <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
-                  <div className="w-full h-[2px] bg-black/80"></div>
-                  <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
-                  <div className="w-full h-[2px] bg-black/80"></div>
-                  <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
-                  <div className="w-full h-[2px] bg-black/80"></div>
-                </div>
-                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-black/20 rounded-full"></div>
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className="font-display font-bold text-base tracking-tighter uppercase">SELF</span>
-                <span className="font-display font-bold text-base tracking-tighter uppercase">DEZIGN</span>
-              </div>
+            <div className="flex items-center gap-3">
+              <img src="/images/logo-footer-ruler.png" alt="SelfDezign" className="h-16 w-auto" />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               {t.footer.description}
