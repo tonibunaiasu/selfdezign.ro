@@ -28,3 +28,14 @@
 - [x] Create Principles & Values page
 - [x] Add navigation links to About section
 - [x] Design consistent layout for About pages
+
+## Individual Project Pages
+- [ ] Extract all photos from each project on WordPress site
+- [x] Create individual project page template (ProjectDetail.tsx)
+- [x] Add project data with multiple images per project (Bloom, Cafeneaua Veche complete)
+- [x] Link projects from Projects page to individual pages
+- [x] Add image gallery/lightbox functionality
+
+## Awards/Premii Images Fix
+- [x] Extract original award/distinction images from WordPress homepage
+- [x] Update homepage to display awards images correctly

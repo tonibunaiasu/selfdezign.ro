@@ -86,12 +86,32 @@ export default function Home() {
             <div className="md:w-1/4">
               <h3 className="font-display font-bold text-2xl uppercase tracking-tight">Premii și <br/>Distincții</h3>
             </div>
-            <div className="md:w-3/4 flex flex-wrap justify-center md:justify-end gap-8 md:gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-              {/* Logos placeholders */}
-              <div className="h-12 flex items-center font-bold text-gray-400">BIG SEE</div>
-              <div className="h-12 flex items-center font-bold text-gray-400">Romanian Design Week</div>
-              <div className="h-12 flex items-center font-bold text-gray-400">SHARE Architects</div>
-              <div className="h-12 flex items-center font-bold text-gray-400">Bienala de Arhitectură</div>
+            <div className="md:w-3/4 flex flex-wrap items-center justify-center md:justify-end gap-8 md:gap-10">
+              <img 
+                src="/awards/share-architects-logo.webp" 
+                alt="Share Architects" 
+                className="h-10 md:h-12 object-contain opacity-70 hover:opacity-100 transition-opacity"
+              />
+              <img 
+                src="/awards/design-week-blue.webp" 
+                alt="Design Week" 
+                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity"
+              />
+              <img 
+                src="/awards/romanian-design-week.webp" 
+                alt="Romanian Design Week" 
+                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity"
+              />
+              <img 
+                src="/awards/big-see-award.webp" 
+                alt="BIG SEE Interior Design Award 2024" 
+                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity"
+              />
+              <img 
+                src="/awards/bienala-arhitectura.webp" 
+                alt="Bienala Națională de Arhitectură 2023" 
+                className="h-10 md:h-14 object-contain opacity-70 hover:opacity-100 transition-opacity"
+              />
             </div>
           </div>
         </div>
@@ -104,7 +124,7 @@ export default function Home() {
             <div className="relative order-2 lg:order-1">
               <div className="aspect-square bg-gray-200 relative overflow-hidden">
                  <img 
-                  src="/images/irina-stoica.jpg" 
+                  src="/irina-stoica.webp" 
                   alt="Arh. Irina Stoica" 
                   className="w-full h-full object-cover"
                   onError={(e) => {
