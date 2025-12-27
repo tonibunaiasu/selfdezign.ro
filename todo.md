@@ -148,3 +148,9 @@
 ## Bug Fixes - Visibility Issues
 - [x] Fix SelfDezign logo visibility on website (replaced with actual SelfDezign logo)
 - [x] Improve contrast for yellow header elements on white background (updated button and nav links styling)
+
+## SEO Improvements
+- [x] Add meta description and keywords to Home page
+- [ ] Add meta tags to all project pages
+- [ ] Add meta tags to Blog pages
+- [ ] Implement JSON-LD structured data
