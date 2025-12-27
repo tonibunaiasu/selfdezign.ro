@@ -89,10 +89,20 @@ export const projects: Project[] = [
     status: "proiect implementat",
     location: "Păltiniș, Sibiu",
     description: [
-      "Un concept de pizzerie în inima munților, unde designul rustic întâlnește confortul modern."
+      "Un concept de pizzerie în inima munților, unde designul rustic întâlnește confortul modern.",
+      "Zero Grade este un restaurant cu specific italian situat în stațiunea montană Păltiniș. Designul interior combină elemente rustice cu accente moderne, creând o atmosferă caldă și primitoare."
     ],
-    coverImage: "/projects/zero-grade-paltinis.webp",
-    gallery: []
+    coverImage: "/projects/zero-grade/zero-grade-1.webp",
+    gallery: [
+      { src: "/projects/zero-grade/zero-grade-1.webp", alt: "Zero Grade - clădirea în formă de A" },
+      { src: "/projects/zero-grade/zero-grade-2.webp", alt: "Zero Grade - vedere aeriană" },
+      { src: "/projects/zero-grade/zero-grade-3.webp", alt: "Zero Grade - terasa" },
+      { src: "/projects/zero-grade/zero-grade-4.webp", alt: "Zero Grade - barul" },
+      { src: "/projects/zero-grade/zero-grade-5.webp", alt: "Zero Grade - interior și decorațiuni" },
+      { src: "/projects/zero-grade/zero-grade-6.webp", alt: "Zero Grade - zona de dining" },
+      { src: "/projects/zero-grade/zero-grade-7.webp", alt: "Zero Grade - zona de dining și scări" },
+      { src: "/projects/zero-grade/zero-grade-8.webp", alt: "Zero Grade - dormitor/lounge" }
+    ]
   },
   {
     id: "restaurant-poeme",
@@ -104,10 +114,19 @@ export const projects: Project[] = [
     status: "proiect implementat",
     location: "Mamaia",
     description: [
-      "Restaurant elegant într-un hotel boutique pe malul mării."
+      "Restaurant elegant într-un hotel boutique pe malul mării.",
+      "Restaurant Poeme face parte din Hotel Boutiq Mamaia și oferă o experiență culinară rafinată într-un cadru elegant, cu vedere spre lac."
     ],
-    coverImage: "/projects/restaurant-poeme-mamaia.webp",
-    gallery: []
+    coverImage: "/projects/restaurant-poeme/restaurant-poeme-1.webp",
+    gallery: [
+      { src: "/projects/restaurant-poeme/restaurant-poeme-1.webp", alt: "Restaurant Poeme - barul principal" },
+      { src: "/projects/restaurant-poeme/restaurant-poeme-2.webp", alt: "Restaurant Poeme - bar și scaune" },
+      { src: "/projects/restaurant-poeme/restaurant-poeme-3.webp", alt: "Restaurant Poeme - zona de dining" },
+      { src: "/projects/restaurant-poeme/restaurant-poeme-4.webp", alt: "Restaurant Poeme - masă cu vedere spre lac" },
+      { src: "/projects/restaurant-poeme/restaurant-poeme-5.webp", alt: "Restaurant Poeme - perete decorativ și canapele" },
+      { src: "/projects/restaurant-poeme/restaurant-poeme-6.webp", alt: "Restaurant Poeme - zona de dining exterioară" },
+      { src: "/projects/restaurant-poeme/restaurant-poeme-7.webp", alt: "Restaurant Poeme - sala de restaurant" }
+    ]
   },
   {
     id: "cafeteria-ibm",
@@ -119,10 +138,21 @@ export const projects: Project[] = [
     status: "proiect implementat",
     location: "București",
     description: [
-      "Spațiu de relaxare și socializare pentru angajații IBM din clădirea GBC."
+      "Spațiu de relaxare și socializare pentru angajații IBM din clădirea GBC.",
+      "Cafeteria IBM a fost concepută ca un spațiu multifuncțional care să ofere angajaților un loc de relaxare, socializare și recreere în timpul pauzelor."
     ],
-    coverImage: "/projects/bloom/bloom-1.webp",
-    gallery: []
+    coverImage: "/projects/cafeteria-ibm/cafeteria-ibm-1.webp",
+    gallery: [
+      { src: "/projects/cafeteria-ibm/cafeteria-ibm-1.webp", alt: "Cafeteria IBM - zona de dining cu lămpi portocalii" },
+      { src: "/projects/cafeteria-ibm/cafeteria-ibm-2.webp", alt: "Cafeteria IBM - masa de ping-pong" },
+      { src: "/projects/cafeteria-ibm/cafeteria-ibm-3.webp", alt: "Cafeteria IBM - zona lounge" },
+      { src: "/projects/cafeteria-ibm/cafeteria-ibm-4.webp", alt: "Cafeteria IBM - scaun de bar" },
+      { src: "/projects/cafeteria-ibm/cafeteria-ibm-5.webp", alt: "Cafeteria IBM - zona de bar și mese înalte" },
+      { src: "/projects/cafeteria-ibm/cafeteria-ibm-6.webp", alt: "Cafeteria IBM - vedere generală cu lămpi" },
+      { src: "/projects/cafeteria-ibm/cafeteria-ibm-7.webp", alt: "Cafeteria IBM - zona lounge cu canapele" },
+      { src: "/projects/cafeteria-ibm/cafeteria-ibm-8.webp", alt: "Cafeteria IBM - zona lounge cu rafturi" },
+      { src: "/projects/cafeteria-ibm/cafeteria-ibm-9.webp", alt: "Cafeteria IBM - bicicleta și neonul FOOD" }
+    ]
   },
   {
     id: "global-leader-gaming",
@@ -132,12 +162,23 @@ export const projects: Project[] = [
     categorySlug: "office",
     year: "2022",
     status: "proiect implementat",
-    location: "București",
+    location: "Campus C Pipera, București",
     description: [
-      "Birou modern pentru o companie lider în industria gaming-ului live."
+      "Birou modern pentru o companie lider în industria gaming-ului live.",
+      "Amenajarea birourilor Ezugi reflectă spiritul inovator și dinamic al companiei, cu spații deschise, zone de colaborare și elemente de design care stimulează creativitatea."
     ],
-    coverImage: "/projects/office-global-leader-gaming.webp",
-    gallery: []
+    coverImage: "/projects/ezugi-gaming/ezugi-gaming-1.webp",
+    gallery: [
+      { src: "/projects/ezugi-gaming/ezugi-gaming-1.webp", alt: "Ezugi - recepția" },
+      { src: "/projects/ezugi-gaming/ezugi-gaming-2.webp", alt: "Ezugi - zona lounge cu scaune roșii" },
+      { src: "/projects/ezugi-gaming/ezugi-gaming-3.webp", alt: "Ezugi - zona de relaxare cu perete verde" },
+      { src: "/projects/ezugi-gaming/ezugi-gaming-4.webp", alt: "Ezugi - zona de lucru modulară" },
+      { src: "/projects/ezugi-gaming/ezugi-gaming-5.webp", alt: "Ezugi - detaliu perete decorativ" },
+      { src: "/projects/ezugi-gaming/ezugi-gaming-6.webp", alt: "Ezugi - cercuri decorative și perete verde" },
+      { src: "/projects/ezugi-gaming/ezugi-gaming-7.webp", alt: "Ezugi - sala de conferințe cu harta lumii" },
+      { src: "/projects/ezugi-gaming/ezugi-gaming-8.webp", alt: "Ezugi - bucătăria și harta lumii" },
+      { src: "/projects/ezugi-gaming/ezugi-gaming-9.webp", alt: "Ezugi - zona de dining cu ceasuri" }
+    ]
   },
   {
     id: "prima-development",
@@ -145,44 +186,74 @@ export const projects: Project[] = [
     title: "Prima Development",
     category: "Office",
     categorySlug: "office",
-    year: "2021",
+    year: "2022",
     status: "proiect implementat",
-    location: "București",
+    location: "Muntenia Business Center, București",
     description: [
-      "Sediu corporativ cu design elegant și funcțional."
+      "Sediu corporativ cu design elegant și funcțional.",
+      "Amenajarea birourilor Prima Development pe o suprafață de 370 mp combină eficiența spațială cu estetica modernă, creând un mediu de lucru profesional și inspirațional."
     ],
-    coverImage: "/projects/office-prima-development.webp",
-    gallery: []
+    coverImage: "/projects/prima-development/prima-development-1.webp",
+    gallery: [
+      { src: "/projects/prima-development/prima-development-1.webp", alt: "Prima Development - open space cu plante" },
+      { src: "/projects/prima-development/prima-development-2.webp", alt: "Prima Development - birou și dulapuri" },
+      { src: "/projects/prima-development/prima-development-3.webp", alt: "Prima Development - sala de conferințe" },
+      { src: "/projects/prima-development/prima-development-4.webp", alt: "Prima Development - sala de meeting cu scaune portocalii" },
+      { src: "/projects/prima-development/prima-development-5.webp", alt: "Prima Development - sala de conferințe mare" },
+      { src: "/projects/prima-development/prima-development-6.webp", alt: "Prima Development - open space cu canapea galbenă" }
+    ]
   },
   {
     id: "myhive",
     slug: "myhive-office",
-    title: "MyHive Office",
+    title: "Amenajare Lobby MyHive",
     category: "Office",
     categorySlug: "office",
-    year: "2020",
+    year: "2017",
     status: "proiect implementat",
-    location: "București",
+    location: "Bucharest Business Center, București",
     description: [
-      "Spațiu de birouri flexibil în complexul MyHive."
+      "Spațiu de lobby flexibil în complexul MyHive.",
+      "Amenajarea lobby-ului MyHive pe o suprafață de 500 mp transformă spațiul de intrare într-o experiență vizuală memorabilă, cu zone de lounge și elemente de design contemporan."
     ],
-    coverImage: "/projects/office-myhive.webp",
-    gallery: []
+    coverImage: "/projects/myhive/myhive-1.webp",
+    gallery: [
+      { src: "/projects/myhive/myhive-1.webp", alt: "MyHive - lobby principal" },
+      { src: "/projects/myhive/myhive-2.webp", alt: "MyHive - zona de lucru cu mural" },
+      { src: "/projects/myhive/myhive-3.webp", alt: "MyHive - recepția cu lampa roșie" },
+      { src: "/projects/myhive/myhive-4.webp", alt: "MyHive - zona verde cu scaune" },
+      { src: "/projects/myhive/myhive-5.webp", alt: "MyHive - lounge cu fotolii din piele" }
+    ]
   },
   {
     id: "bucharest-comfort",
     slug: "bucharest-comfort-suites",
-    title: "Bucharest Comfort Suites",
+    title: "Hotel Bucharest Comfort Suites****",
     category: "Hotel",
     categorySlug: "hotel",
-    year: "2021",
+    year: "2023",
     status: "proiect implementat",
-    location: "București",
+    location: "Bd.-ul Magheru, București",
+    photographer: "Bela Benedek",
     description: [
-      "Hotel boutique cu camere confortabile și design contemporan."
+      "Bun venit la Bucharest Comfort Suites, un hotel de 4 stele situat în inima Bucureștiului, într-o clădire istorică atent restaurată. Designul interior îmbină armonios diferite stiluri, și combină elemente precum lemnul cu catifeaua și cu tapetul personalizat. Rezultatul? Un interior cu farmec eclectic.",
+      "Fiecare colț al acestui hotel emană rafinament și ospitalitate. Fiecare detaliu este gândit pentru a oferi o experiență de neuitat oaspeților săi. De la holurile primitoare la camerele elegante, amenajarea își propune să creeze o atmosferă memorabilă.",
+      "Deși fiecare încăpere are un design diferit, există elemente care conectează interioarele. Mobilierul cu textura de lemn conferă autenticitate și căldură, în timp ce accentele de catifea aduc o notă luxuriantă. Tapetul cu tematică tropicală infuzează prospețime și exotism pentru a crea o ambianță relaxantă și reconfortantă."
     ],
-    coverImage: "/projects/hotel-bucharest-comfort-1.webp",
-    gallery: []
+    coverImage: "/projects/hotel-bucharest/hotel-bucharest-3.webp",
+    gallery: [
+      { src: "/projects/hotel-bucharest/hotel-bucharest-3.webp", alt: "Hotel Bucharest - tapetul tropical și covor" },
+      { src: "/projects/hotel-bucharest/hotel-bucharest-4.webp", alt: "Hotel Bucharest - dormitor cu tapetul tropical" },
+      { src: "/projects/hotel-bucharest/hotel-bucharest-5.webp", alt: "Hotel Bucharest - dressing cu tapetul palmier" },
+      { src: "/projects/hotel-bucharest/hotel-bucharest-6.webp", alt: "Hotel Bucharest - dormitor și pat" },
+      { src: "/projects/hotel-bucharest/hotel-bucharest-7.webp", alt: "Hotel Bucharest - baie cu duș tropical" },
+      { src: "/projects/hotel-bucharest/hotel-bucharest-8.webp", alt: "Hotel Bucharest - baie și lavoar" },
+      { src: "/projects/hotel-bucharest/hotel-bucharest-9.webp", alt: "Hotel Bucharest - cameră cu șemineu electric" },
+      { src: "/projects/hotel-bucharest/hotel-bucharest-10.webp", alt: "Hotel Bucharest - dormitor portocaliu" },
+      { src: "/projects/hotel-bucharest/hotel-bucharest-11.webp", alt: "Hotel Bucharest - baie cu cadă" },
+      { src: "/projects/hotel-bucharest/hotel-bucharest-12.webp", alt: "Hotel Bucharest - birou cu oglindă" },
+      { src: "/projects/hotel-bucharest/hotel-bucharest-13.webp", alt: "Hotel Bucharest - living cu canapea" }
+    ]
   },
   {
     id: "mafi-showroom",

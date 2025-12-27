@@ -62,17 +62,14 @@ export default function Home() {
                 {/* Placeholder for Hero Image - In real implementation use actual image */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                 <img 
-                  src="/images/hero-placeholder.jpg" 
-                  alt="Interior Design" 
+                  src="/projects/cafeneaua-veche/cafeneaua-veche-4.webp" 
+                  alt="Cafeneaua Veche 9 - Interior Design" 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
-                  onError={(e) => {
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop";
-                  }}
                 />
-                <div className="absolute bottom-8 left-8 z-20">
-                  <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">Featured Project</p>
-                  <h3 className="text-2xl font-display font-bold text-white">Sky Tower Office</h3>
-                </div>
+                <Link href="/proiect/cafeneaua-veche-9" className="absolute bottom-8 left-8 z-20 cursor-pointer">
+                  <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">Proiect Recomandat</p>
+                  <h3 className="text-2xl font-display font-bold text-white group-hover:text-accent transition-colors">Cafeneaua Veche 9</h3>
+                </Link>
               </div>
             </div>
           </div>
