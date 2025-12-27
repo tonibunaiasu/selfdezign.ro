@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Testimonials from "@/components/Testimonials";
 
 export default function Home() {
   const { user, loading, error, isAuthenticated, logout } = useAuth();
@@ -156,6 +157,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <Testimonials />
 
       {/* Categories Preview */}
       <section className="py-24 bg-black text-white">
