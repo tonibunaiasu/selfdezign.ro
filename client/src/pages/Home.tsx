@@ -42,15 +42,19 @@ export default function Home() {
             
             <div className="flex flex-wrap gap-4 pt-4">
               <Link href="/proiecte">
-                <Button size="lg" className="bg-accent text-black hover:bg-accent/90 rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest group">
-                  {t.home.discoverProjects}
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                <a className="inline-block">
+                  <Button size="lg" className="bg-accent text-black hover:bg-accent/90 rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest group">
+                    {t.home.discoverProjects}
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </a>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white hover:text-black rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest">
-                  {t.home.contactUs}
-                </Button>
+                <a className="inline-block">
+                  <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white hover:text-black rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest">
+                    {t.home.contactUs}
+                  </Button>
+                </a>
               </Link>
             </div>
           </div>
@@ -149,9 +153,11 @@ export default function Home() {
               </div>
               
               <Link href="/contact">
-                <Button variant="link" className="text-black font-bold uppercase tracking-widest p-0 hover:text-accent transition-colors text-lg">
-                  {t.home.learnMore} <ChevronRight className="ml-1 w-5 h-5" />
-                </Button>
+                <a className="inline-block">
+                  <Button variant="link" className="text-black font-bold uppercase tracking-widest p-0 hover:text-accent transition-colors text-lg">
+                    {t.home.learnMore} <ChevronRight className="ml-1 w-5 h-5" />
+                  </Button>
+                </a>
               </Link>
             </div>
           </div>
@@ -169,23 +175,30 @@ export default function Home() {
               {t.projects.title}
             </h2>
             <Link href="/proiecte">
-              <Button variant="outline" className="hidden md:flex border-white/20 text-white hover:bg-white hover:text-black rounded-none uppercase tracking-widest">
-                {t.projects.viewProject}
-              </Button>
+              <a className="inline-block hidden md:block">
+                <Button variant="outline" className="border-white/20 text-white hover:bg-white hover:text-black rounded-none uppercase tracking-widest">
+                  {t.projects.viewProject}
+                </Button>
+              </a>
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
             {[
+              // Map categories to projects
+              // Fixed nested anchor tags issue
               { title: t.projects.categories.restaurant, img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2670&auto=format&fit=crop" },
               { title: t.projects.categories.office, img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2669&auto=format&fit=crop" },
               { title: t.projects.categories.hotel, img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2670&auto=format&fit=crop" },
               { title: t.projects.categories.comercial, img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=2670&auto=format&fit=crop" },
               { title: t.projects.categories.brandExperience, img: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2670&auto=format&fit=crop" },
               { title: t.projects.categories.rezidential, img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop" }
-            ].map((cat, idx) => (
-              <Link key={idx} href="/proiecte">
-                <a className="group relative aspect-[4/5] overflow-hidden block bg-gray-900">
+            ].map((cat, idx) => {
+              const handleCategoryClick = () => {
+                window.location.href = '/proiecte';
+              };
+              return (
+              <div key={idx} onClick={handleCategoryClick} className="group relative aspect-[4/5] overflow-hidden block bg-gray-900 cursor-pointer">
                   <img 
                     src={cat.img} 
                     alt={cat.title} 
@@ -196,9 +209,9 @@ export default function Home() {
                     <span className="text-accent text-xs font-bold tracking-widest uppercase mb-2 block">0{idx + 1}</span>
                     <h3 className="text-2xl font-display font-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-300">{cat.title}</h3>
                   </div>
-                </a>
-              </Link>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
