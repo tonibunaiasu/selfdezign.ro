@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { href: "/proiecte", label: t.nav.projects },
     { href: "/contact", label: t.nav.contact },
     { href: "/blog", label: t.nav.blog },
-    { href: "/aparituri-media", label: "Apariții Media" },
+    { href: "/aparituri-media", label: "Media" },
   ];
 
   return (
