@@ -154,3 +154,8 @@
 - [ ] Add meta tags to all project pages
 - [ ] Add meta tags to Blog pages
 - [ ] Implement JSON-LD structured data
+
+## Update Social Media Section
+- [x] Add social media icons (Facebook, Instagram, LinkedIn)
+- [x] Update social media links in footer with correct URLs
+- [x] Test all social media links
