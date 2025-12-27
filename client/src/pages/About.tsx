@@ -1,8 +1,11 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function About() {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -15,14 +18,13 @@ export default function About() {
         <div className="container relative z-10">
           <div className="max-w-4xl">
             <span className="inline-block bg-accent text-black text-xs font-bold px-4 py-2 uppercase tracking-widest mb-8">
-              Despre Noi
+              {t.nav.about}
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter leading-[0.9] mb-8">
-              DESIGN PENTRU <br />
-              <span className="text-accent">CINE EȘTI</span>
+              {t.about.title}
             </h1>
             <p className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed">
-              Creat din arhitectura personalității tale.
+              {t.about.subtitle}
             </p>
           </div>
         </div>
@@ -34,38 +36,22 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div className="space-y-8">
               <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter">
-                Ce <span className="text-accent bg-black px-2">NU</span> este designul interior
+                {t.about.notAbout1}
               </h2>
               <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
-                <p>
-                  Designul interior nu e despre industria creativilor din Palatul de Cleștar.
-                </p>
-                <p>
-                  Nu e despre portofoliul unui arhitect „vedetă".
-                </p>
-                <p>
-                  Nu e despre cât de bine arată sufrageria ta într-o revistă în care nu locuiește nimeni.
-                </p>
+                <p>{t.about.notAbout2}</p>
+                <p>{t.about.notAbout3}</p>
               </div>
             </div>
             
             <div className="space-y-8">
               <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter">
-                Ce <span className="text-black bg-accent px-2">ESTE</span> designul interior
+                {t.about.isAbout1}
               </h2>
               <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
-                <p>
-                  E despre bătăile inimii tale la 7 dimineața.
-                </p>
-                <p>
-                  E despre liniștea pe care o simți când închizi ușa după 10 ore de haos.
-                </p>
-                <p>
-                  E despre lumea la care visezi. Despre proiectele pentru care cauți sens și energie.
-                </p>
-                <p className="font-semibold text-black">
-                  E despre starea ta de bine, nu despre egoul lor.
-                </p>
+                <p>{t.about.isAbout2}</p>
+                <p>{t.about.isAbout3}</p>
+                <p className="font-semibold text-black">{t.about.isAbout4}</p>
               </div>
             </div>
           </div>
@@ -77,8 +63,8 @@ export default function About() {
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
             <blockquote className="text-2xl md:text-4xl font-display font-bold tracking-tight leading-tight mb-8">
-              „Unii designeri vor să-și lase semnătura pe pereții tăi. 
-              <span className="text-accent"> La SelfDezign construim spațiul care îți permite să ți-o lași tu.</span>"
+              „{t.about.conclusion1}
+              <span className="text-accent"> {t.about.conclusion2}</span>"
             </blockquote>
             <div className="w-24 h-1 bg-accent mx-auto"></div>
           </div>
@@ -90,11 +76,8 @@ export default function About() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-4">
-              Descoperă mai mult despre noi
+              {t.about.signature}
             </h2>
-            <p className="text-gray-600 max-w-xl mx-auto">
-              Află ce ne motivează, cum gândim și ce principii ne ghidează în fiecare proiect.
-            </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -105,11 +88,8 @@ export default function About() {
                   <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-accent group-hover:translate-x-1 transition-all" />
                 </div>
                 <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-accent transition-colors">
-                  Viziune & Misiune
+                  {t.about.visionLink}
                 </h3>
-                <p className="text-gray-600">
-                  Unde vrem să ajungem și de ce existăm ca studio de design.
-                </p>
               </a>
             </Link>
             
@@ -120,11 +100,8 @@ export default function About() {
                   <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-accent group-hover:translate-x-1 transition-all" />
                 </div>
                 <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-accent transition-colors">
-                  Principii & Valori
+                  {t.about.valuesLink}
                 </h3>
-                <p className="text-gray-600">
-                  Cum lucrăm și ce ne ghidează în fiecare decizie de design.
-                </p>
               </a>
             </Link>
           </div>
@@ -134,15 +111,9 @@ export default function About() {
       {/* CTA */}
       <section className="py-24 bg-white">
         <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-6">
-            Pregătit să-ți transformi spațiul?
-          </h2>
-          <p className="text-gray-600 max-w-xl mx-auto mb-8">
-            Hai să discutăm despre proiectul tău și să vedem cum putem crea împreună un spațiu care te reprezintă.
-          </p>
           <Link href="/contact">
             <Button className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm">
-              Începe o conversație
+              {t.nav.contact}
             </Button>
           </Link>
         </div>

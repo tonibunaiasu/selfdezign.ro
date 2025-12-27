@@ -4,11 +4,14 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import NewsletterForm from "@/components/NewsletterForm";
+import { LanguageToggle } from "@/components/LanguageToggle";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,12 +26,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, [location]);
 
   const navLinks = [
-    { href: "/", label: "Acasă" },
-    { href: "/despre", label: "Despre" },
-    { href: "/echipa", label: "Echipa" },
-    { href: "/proiecte", label: "Proiecte" },
-    { href: "/contact", label: "Contact" },
-    { href: "/blog", label: "Blog" },
+    { href: "/", label: t.nav.home },
+    { href: "/despre", label: t.nav.about },
+    { href: "/echipa", label: t.nav.team },
+    { href: "/proiecte", label: t.nav.projects },
+    { href: "/contact", label: t.nav.contact },
+    { href: "/blog", label: t.nav.blog },
   ];
 
   return (
@@ -92,9 +95,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             ))}
             <Link href="/contact">
               <Button variant="outline" className="border-accent text-accent hover:bg-accent hover:text-black rounded-none uppercase tracking-widest font-bold text-xs px-6">
-                Scrie-ne
+                {t.nav.writeUs}
               </Button>
             </Link>
+            <LanguageToggle />
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -120,9 +124,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             ))}
             <Link href="/contact">
               <Button size="lg" className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold mt-8">
-                Scrie-ne
+                {t.nav.writeUs}
               </Button>
             </Link>
+            <div className="mt-6">
+              <LanguageToggle />
+            </div>
           </nav>
         </div>
       )}
@@ -156,12 +163,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Transformăm spațiul într-o operă de artă care te reprezintă. 100% autentică. 100% funcțională.
+              {t.footer.description}
             </p>
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-accent uppercase tracking-widest mb-6 text-sm">Contact</h4>
+            <h4 className="font-display font-bold text-accent uppercase tracking-widest mb-6 text-sm">{t.footer.contact}</h4>
             <ul className="space-y-4 text-sm text-gray-400">
               <li>
                 <a href="tel:+40721528448" className="hover:text-white transition-colors">
@@ -209,7 +216,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         <div className="container mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-          <p>© 2025 SelfDezign®. Toate drepturile rezervate.</p>
+          <p>© 2025 SelfDezign®. {t.footer.rights}</p>
           <p>Din arhitectura personalității tale.</p>
         </div>
       </footer>

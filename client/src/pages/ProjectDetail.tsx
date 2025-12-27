@@ -4,21 +4,56 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, X, ChevronLeft, ChevronRight, MapPin, Calendar, Camera } from "lucide-react";
 import Layout from "@/components/Layout";
 import { getProjectBySlug, projects } from "@/data/projects-data";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ProjectDetail() {
   const params = useParams<{ slug: string }>();
   const project = getProjectBySlug(params.slug || "");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { language } = useLanguage();
+
+  const content = {
+    ro: {
+      notFound: "Proiect negăsit",
+      backToProjects: "Înapoi la proiecte",
+      allProjects: "Toate proiectele",
+      photo: "Foto",
+      aboutProject: "Despre Proiect",
+      photoGallery: "Galerie Foto",
+      viewImage: "Vezi imaginea",
+      galleryComingSoon: "Galeria foto pentru acest proiect va fi adăugată în curând.",
+      relatedProjects: "Proiecte Similare",
+      ctaTitle: "Ai un proiect în minte?",
+      ctaText: "Hai să discutăm despre cum putem transforma spațiul tău într-o experiență unică.",
+      contactUs: "CONTACTEAZĂ-NE"
+    },
+    en: {
+      notFound: "Project not found",
+      backToProjects: "Back to projects",
+      allProjects: "All projects",
+      photo: "Photo",
+      aboutProject: "About the Project",
+      photoGallery: "Photo Gallery",
+      viewImage: "View image",
+      galleryComingSoon: "The photo gallery for this project will be added soon.",
+      relatedProjects: "Related Projects",
+      ctaTitle: "Have a project in mind?",
+      ctaText: "Let's discuss how we can transform your space into a unique experience.",
+      contactUs: "CONTACT US"
+    }
+  };
+
+  const c = content[language];
 
   if (!project) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">Proiect negăsit</h1>
+            <h1 className="text-4xl font-bold mb-4">{c.notFound}</h1>
             <Link href="/proiecte" className="text-accent hover:underline">
-              Înapoi la proiecte
+              {c.backToProjects}
             </Link>
           </div>
         </div>
@@ -73,7 +108,7 @@ export default function ProjectDetail() {
             className="absolute top-8 left-4 lg:left-8 flex items-center gap-2 text-white/80 hover:text-accent transition-colors"
           >
             <ArrowLeft size={20} />
-            <span>Toate proiectele</span>
+            <span>{c.allProjects}</span>
           </Link>
           
           <motion.div
@@ -100,7 +135,7 @@ export default function ProjectDetail() {
               {project.photographer && (
                 <div className="flex items-center gap-2">
                   <Camera size={18} />
-                  <span>Foto: {project.photographer}</span>
+                  <span>{c.photo}: {project.photographer}</span>
                 </div>
               )}
             </div>
@@ -118,7 +153,7 @@ export default function ProjectDetail() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold mb-8 font-display">Despre Proiect</h2>
+              <h2 className="text-3xl font-bold mb-8 font-display">{c.aboutProject}</h2>
               <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
                 {project.description.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
@@ -139,7 +174,7 @@ export default function ProjectDetail() {
               viewport={{ once: true }}
               className="text-3xl font-bold mb-12 font-display text-center"
             >
-              Galerie Foto
+              {c.photoGallery}
             </motion.h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -160,7 +195,7 @@ export default function ProjectDetail() {
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                     <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium">
-                      Vezi imaginea
+                      {c.viewImage}
                     </span>
                   </div>
                 </motion.div>
@@ -171,7 +206,7 @@ export default function ProjectDetail() {
       ) : (
         <section className="py-20 bg-gray-50">
           <div className="container text-center">
-            <p className="text-gray-500">Galeria foto pentru acest proiect va fi adăugată în curând.</p>
+            <p className="text-gray-500">{c.galleryComingSoon}</p>
           </div>
         </section>
       )}
@@ -230,7 +265,7 @@ export default function ProjectDetail() {
       {relatedProjects.length > 0 && (
         <section className="py-20 bg-white">
           <div className="container">
-            <h2 className="text-3xl font-bold mb-12 font-display">Proiecte Similare</h2>
+            <h2 className="text-3xl font-bold mb-12 font-display">{c.relatedProjects}</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedProjects.map((relatedProject, index) => (
@@ -268,16 +303,16 @@ export default function ProjectDetail() {
       <section className="py-20 bg-black text-white">
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 font-display">
-            Ai un proiect în minte?
+            {c.ctaTitle}
           </h2>
           <p className="text-white/70 mb-8 max-w-2xl mx-auto">
-            Hai să discutăm despre cum putem transforma spațiul tău într-o experiență unică.
+            {c.ctaText}
           </p>
           <Link
             href="/contact"
             className="inline-block px-8 py-4 bg-accent text-black font-semibold hover:bg-accent/90 transition-colors"
           >
-            CONTACTEAZĂ-NE
+            {c.contactUs}
           </Link>
         </div>
       </section>

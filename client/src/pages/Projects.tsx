@@ -3,21 +3,23 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { projects as projectsData } from "@/data/projects-data";
-
-const categories = [
-  "Toate",
-  "Restaurant",
-  "Office",
-  "Hotel",
-  "Comercial",
-  "Brand Experience",
-  "Rezidențial"
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Projects() {
-  const [activeCategory, setActiveCategory] = useState("Toate");
+  const { t, language } = useLanguage();
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  const filteredProjects = activeCategory === "Toate" 
+  const categories = [
+    { key: "all", label: t.projects.allCategories },
+    { key: "Restaurant", label: t.projects.categories.restaurant },
+    { key: "Office", label: t.projects.categories.office },
+    { key: "Hotel", label: t.projects.categories.hotel },
+    { key: "Comercial", label: t.projects.categories.comercial },
+    { key: "Brand Experience", label: t.projects.categories.brandExperience },
+    { key: "Rezidențial", label: t.projects.categories.rezidential }
+  ];
+
+  const filteredProjects = activeCategory === "all" 
     ? projectsData 
     : projectsData.filter(p => p.category === activeCategory);
 
@@ -27,10 +29,10 @@ export default function Projects() {
       <div className="bg-black text-white pt-32 pb-16 px-4">
         <div className="container">
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 tracking-tighter">
-            PROIECTE <span className="text-accent">RECENTE</span>
+            {t.projects.title}
           </h1>
           <p className="text-gray-400 max-w-2xl text-lg">
-            Proiecte de amenajare office, hotel, restaurant, rezidențial care transformă spațiul într-o experiență.
+            {t.projects.subtitle}
           </p>
         </div>
       </div>
@@ -40,17 +42,17 @@ export default function Projects() {
         <div className="container flex gap-2 min-w-max px-4">
           {categories.map((cat) => (
             <Button
-              key={cat}
-              variant={activeCategory === cat ? "default" : "outline"}
-              onClick={() => setActiveCategory(cat)}
+              key={cat.key}
+              variant={activeCategory === cat.key ? "default" : "outline"}
+              onClick={() => setActiveCategory(cat.key)}
               className={cn(
                 "rounded-none uppercase tracking-widest font-bold text-xs h-10 px-6 transition-all",
-                activeCategory === cat 
+                activeCategory === cat.key 
                   ? "bg-accent text-black hover:bg-accent/90 border-accent" 
                   : "border-gray-200 hover:border-black hover:text-black text-gray-500"
               )}
             >
-              {cat}
+              {cat.label}
             </Button>
           ))}
         </div>
@@ -77,7 +79,7 @@ export default function Projects() {
                   </div>
                   {project.gallery && project.gallery.length > 0 && (
                     <div className="absolute bottom-4 left-4 z-20 bg-black/70 text-white text-xs px-2 py-1">
-                      {project.gallery.length} fotografii
+                      {project.gallery.length} {language === 'ro' ? 'fotografii' : 'photos'}
                     </div>
                   )}
                 </div>
@@ -95,16 +97,18 @@ export default function Projects() {
       <div className="container mt-24 px-4">
         <div className="bg-black text-white p-12 md:p-16 text-center">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 tracking-tighter">
-            Ai un proiect în minte?
+            {language === 'ro' ? 'Ai un proiect în minte?' : 'Have a project in mind?'}
           </h2>
           <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-            Hai să transformăm viziunea ta într-o realitate. Contactează-ne pentru o consultație gratuită.
+            {language === 'ro' 
+              ? 'Hai să transformăm viziunea ta într-o realitate. Contactează-ne pentru o consultație gratuită.'
+              : "Let's transform your vision into reality. Contact us for a free consultation."}
           </p>
           <Button 
             className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm"
             onClick={() => window.location.href = '/contact'}
           >
-            Începe un proiect
+            {language === 'ro' ? 'Începe un proiect' : 'Start a project'}
           </Button>
         </div>
       </div>

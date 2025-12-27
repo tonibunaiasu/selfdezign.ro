@@ -78,3 +78,21 @@
 - [ ] Create e-books section (placeholder for future uploads)
 - [ ] Implement checkout flow for consultations
 - [ ] Create booking confirmation page
+
+## Complete Remaining Galleries
+- [x] Extract Vilă D+P+E Piața Domenii gallery from WordPress - 7 images
+- [x] Update projects-data.ts with Piața Domenii gallery
+
+## Language System (RO/EN)
+- [x] Create language context and translations file
+- [x] Add language toggle button to header
+- [x] Translate all static content to English
+- [x] Translate navigation menu
+- [x] Translate homepage content
+- [x] Translate About/Vision/Values pages
+- [x] Translate Projects page and project details
+- [x] Translate Contact page
+- [x] Translate Blog page
+- [x] Translate Team page
+- [x] Translate footer content
+- [ ] Test language switching functionality

@@ -4,10 +4,37 @@ import NotFound from "@/pages/NotFound";
 import { Calendar, User, ArrowLeft, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function BlogPost() {
   const [match, params] = useRoute("/blog/:slug");
   const post = match ? blogPosts.find(p => p.slug === params.slug) : null;
+  const { language } = useLanguage();
+
+  const content = {
+    ro: {
+      backToBlog: "Înapoi la Blog",
+      faqTitle: "Întrebări Frecvente (FAQ)",
+      relatedTitle: "Citește și alte articole",
+      aboutAuthor: "Despre Autor",
+      authorRole: "Arhitect & Designer",
+      authorBio: "Pasionată de spațiile care spun povești și de intersecția dintre natură și arhitectură.",
+      viewPortfolio: "Vezi Portofoliul",
+      share: "Share"
+    },
+    en: {
+      backToBlog: "Back to Blog",
+      faqTitle: "Frequently Asked Questions (FAQ)",
+      relatedTitle: "Read more articles",
+      aboutAuthor: "About the Author",
+      authorRole: "Architect & Designer",
+      authorBio: "Passionate about spaces that tell stories and the intersection of nature and architecture.",
+      viewPortfolio: "View Portfolio",
+      share: "Share"
+    }
+  };
+
+  const c = content[language];
 
   // Update Metadata & Inject JSON-LD for SEO/LLM
   useEffect(() => {
@@ -73,7 +100,7 @@ export default function BlogPost() {
           <div className="container">
             <Link href="/blog">
               <Button variant="outline" className="mb-8 border-white/30 text-white hover:bg-white hover:text-black rounded-none uppercase tracking-widest text-xs">
-                <ArrowLeft className="mr-2 w-4 h-4" /> Înapoi la Blog
+                <ArrowLeft className="mr-2 w-4 h-4" /> {c.backToBlog}
               </Button>
             </Link>
             <div className="flex gap-2 mb-6">
@@ -105,7 +132,7 @@ export default function BlogPost() {
           {/* FAQ Section for SEO/LLM */}
           {post.faqs && post.faqs.length > 0 && (
             <div className="mt-16 pt-12 border-t border-gray-200">
-              <h3 className="text-2xl font-display font-bold mb-8">Întrebări Frecvente (FAQ)</h3>
+              <h3 className="text-2xl font-display font-bold mb-8">{c.faqTitle}</h3>
               <div className="space-y-6">
                 {post.faqs.map((faq, idx) => (
                   <div key={idx} className="bg-gray-50 p-6 border-l-4 border-accent">
@@ -119,7 +146,7 @@ export default function BlogPost() {
 
           {/* Related Articles for Internal Linking SEO */}
           <div className="mt-16 pt-12 border-t border-gray-200">
-            <h3 className="text-2xl font-display font-bold mb-8">Citește și alte articole</h3>
+            <h3 className="text-2xl font-display font-bold mb-8">{c.relatedTitle}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {blogPosts
                 .filter(p => p.id !== post.id)
@@ -141,26 +168,26 @@ export default function BlogPost() {
         {/* Sidebar */}
         <div className="lg:col-span-4 space-y-12">
           <div className="bg-gray-50 p-8 border border-gray-100 sticky top-24">
-            <h3 className="font-display font-bold text-xl mb-6 uppercase tracking-widest">Despre Autor</h3>
+            <h3 className="font-display font-bold text-xl mb-6 uppercase tracking-widest">{c.aboutAuthor}</h3>
             <div className="flex items-center gap-4 mb-4">
               <div className="w-16 h-16 bg-gray-200 rounded-full overflow-hidden">
                 <img src="/images/irina-stoica.jpg" alt="Author" className="w-full h-full object-cover" />
               </div>
               <div>
                 <p className="font-bold">{post.author}</p>
-                <p className="text-xs text-gray-500 uppercase tracking-wider">Arhitect & Designer</p>
+                <p className="text-xs text-gray-500 uppercase tracking-wider">{c.authorRole}</p>
               </div>
             </div>
             <p className="text-gray-600 text-sm mb-6">
-              Pasionată de spațiile care spun povești și de intersecția dintre natură și arhitectură.
+              {c.authorBio}
             </p>
             <Button variant="outline" className="w-full border-black text-black hover:bg-black hover:text-white rounded-none uppercase tracking-widest text-xs">
-              Vezi Portofoliul
+              {c.viewPortfolio}
             </Button>
           </div>
 
           <div>
-            <h3 className="font-display font-bold text-xl mb-6 uppercase tracking-widest">Share</h3>
+            <h3 className="font-display font-bold text-xl mb-6 uppercase tracking-widest">{c.share}</h3>
             <div className="flex gap-2">
               <Button variant="outline" size="icon" className="rounded-none border-gray-200 hover:border-accent hover:text-accent">
                 <Share2 className="w-4 h-4" />

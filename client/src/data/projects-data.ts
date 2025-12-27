@@ -375,10 +375,19 @@ export const projects: Project[] = [
     status: "proiect implementat",
     location: "București",
     description: [
-      "Renovare și design interior pentru vilă în zona Piața Domenii."
+      "Vilă cu 10 camere în zona Piața Domenii, 670 mp.",
+      "Design interior contemporan cu accente de culoare și materiale premium. Spațiul combină eleganța clasică cu confortul modern."
     ],
-    coverImage: "/projects/rezidential-piata-domenii.webp",
-    gallery: []
+    coverImage: "/projects/vila-domenii/vila-domenii-1.webp",
+    gallery: [
+      { src: "/projects/vila-domenii/vila-domenii-1.webp", alt: "Vila Domenii - living cu canapea gri" },
+      { src: "/projects/vila-domenii/vila-domenii-2.webp", alt: "Vila Domenii - living cu TV" },
+      { src: "/projects/vila-domenii/vila-domenii-3.webp", alt: "Vila Domenii - bucătărie cu lămpi suspendate" },
+      { src: "/projects/vila-domenii/vila-domenii-4.webp", alt: "Vila Domenii - sală de mese cu scaune albastre" },
+      { src: "/projects/vila-domenii/vila-domenii-5.webp", alt: "Vila Domenii - bucătărie cu electrocasnice" },
+      { src: "/projects/vila-domenii/vila-domenii-6.webp", alt: "Vila Domenii - dormitor cu scaune albastre" },
+      { src: "/projects/vila-domenii/vila-domenii-7.webp", alt: "Vila Domenii - dormitor cu oglindă rotundă" }
+    ]
   },
   {
     id: "quadra-trees",

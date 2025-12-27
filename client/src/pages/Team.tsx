@@ -1,12 +1,15 @@
 import { motion } from "framer-motion";
 import { Linkedin, Mail } from "lucide-react";
 import Layout from "@/components/Layout";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface TeamMember {
   id: string;
   name: string;
-  role: string;
-  bio: string;
+  roleRo: string;
+  roleEn: string;
+  bioRo: string;
+  bioEn: string;
   image: string;
   linkedin?: string;
   email?: string;
@@ -16,8 +19,10 @@ const teamMembers: TeamMember[] = [
   {
     id: "irina-stoica",
     name: "Irina Stoica",
-    role: "Fondator & Lead Designer",
-    bio: "Cu o experiență de peste 15 ani în design interior, Irina este vizionara din spatele SelfDezign. Pasiunea ei pentru spații care reflectă personalitatea celor care le locuiesc a stat la baza filozofiei studioului.",
+    roleRo: "Fondator & Lead Designer",
+    roleEn: "Founder & Lead Designer",
+    bioRo: "Cu o experiență de peste 15 ani în design interior, Irina este vizionara din spatele SelfDezign. Pasiunea ei pentru spații care reflectă personalitatea celor care le locuiesc a stat la baza filozofiei studioului.",
+    bioEn: "With over 15 years of experience in interior design, Irina is the visionary behind SelfDezign. Her passion for spaces that reflect the personality of those who inhabit them has been the foundation of the studio's philosophy.",
     image: "/awards/irina-stoica.webp",
     linkedin: "https://linkedin.com/in/irina-stoica",
     email: "irina@selfdezign.ro"
@@ -25,8 +30,10 @@ const teamMembers: TeamMember[] = [
   {
     id: "toni-bunaiasu",
     name: "Toni Bunăiașu",
-    role: "Co-Fondator & Business Development",
-    bio: "Toni aduce viziunea strategică și asigură că fiecare proiect SelfDezign depășește așteptările clienților. Experiența sa în management și dezvoltare de business completează perfect latura creativă a echipei.",
+    roleRo: "Co-Fondator & Business Development",
+    roleEn: "Co-Founder & Business Development",
+    bioRo: "Toni aduce viziunea strategică și asigură că fiecare proiect SelfDezign depășește așteptările clienților. Experiența sa în management și dezvoltare de business completează perfect latura creativă a echipei.",
+    bioEn: "Toni brings strategic vision and ensures that every SelfDezign project exceeds client expectations. His experience in management and business development perfectly complements the creative side of the team.",
     image: "/team/toni-bunaiasu.webp",
     linkedin: "https://linkedin.com/in/toni-bunaiasu",
     email: "toni@selfdezign.ro"
@@ -34,22 +41,28 @@ const teamMembers: TeamMember[] = [
   {
     id: "marco",
     name: "Marco",
-    role: "Senior Interior Designer",
-    bio: "Marco aduce o perspectivă fresh și inovatoare în fiecare proiect. Specializat în design comercial și office, el transformă spațiile de lucru în medii care inspiră productivitate și creativitate.",
+    roleRo: "Senior Interior Designer",
+    roleEn: "Senior Interior Designer",
+    bioRo: "Marco aduce o perspectivă fresh și inovatoare în fiecare proiect. Specializat în design comercial și office, el transformă spațiile de lucru în medii care inspiră productivitate și creativitate.",
+    bioEn: "Marco brings a fresh and innovative perspective to every project. Specializing in commercial and office design, he transforms workspaces into environments that inspire productivity and creativity.",
     image: "/team/marco.webp",
     email: "marco@selfdezign.ro"
   },
   {
     id: "teodora-brancus",
     name: "Teodora Brâncuș",
-    role: "Interior Designer",
-    bio: "Teodora este expertă în design rezidențial și are un ochi deosebit pentru detalii. Abordarea ei empatică o ajută să înțeleagă profund nevoile clienților și să creeze spații cu adevărat personalizate.",
+    roleRo: "Interior Designer",
+    roleEn: "Interior Designer",
+    bioRo: "Teodora este expertă în design rezidențial și are un ochi deosebit pentru detalii. Abordarea ei empatică o ajută să înțeleagă profund nevoile clienților și să creeze spații cu adevărat personalizate.",
+    bioEn: "Teodora is an expert in residential design and has a keen eye for detail. Her empathetic approach helps her deeply understand client needs and create truly personalized spaces.",
     image: "/team/teodora-brancus.webp",
     email: "teodora@selfdezign.ro"
   }
 ];
 
 export default function Team() {
+  const { t, language } = useLanguage();
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -62,10 +75,10 @@ export default function Team() {
             className="max-w-4xl"
           >
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-              ECHIPA<span className="text-[#d4ff00]">.</span>
+              {t.team.title}<span className="text-[#d4ff00]">.</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-              Oamenii din spatele proiectelor care transformă spații în povești.
+              {t.team.subtitle}
             </p>
           </motion.div>
         </div>
@@ -112,10 +125,10 @@ export default function Team() {
                       {member.name}
                     </h3>
                     <p className="text-[#d4ff00] font-medium mb-4 bg-black inline-block px-3 py-1 text-sm">
-                      {member.role}
+                      {language === 'ro' ? member.roleRo : member.roleEn}
                     </p>
                     <p className="text-gray-600 leading-relaxed mb-4">
-                      {member.bio}
+                      {language === 'ro' ? member.bioRo : member.bioEn}
                     </p>
                     
                     {/* Social Links */}
@@ -158,18 +171,19 @@ export default function Team() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Vrei să faci parte din echipă?
+                {language === 'ro' ? 'Vrei să faci parte din echipă?' : 'Want to join the team?'}
               </h2>
               <p className="text-gray-300 text-lg mb-8">
-                Căutăm mereu oameni pasionați de design, care cred că spațiile pot schimba vieți. 
-                Dacă te regăsești în valorile noastre, hai să vorbim.
+                {language === 'ro' 
+                  ? 'Căutăm mereu oameni pasionați de design, care cred că spațiile pot schimba vieți. Dacă te regăsești în valorile noastre, hai să vorbim.'
+                  : "We're always looking for people passionate about design who believe that spaces can change lives. If you share our values, let's talk."}
               </p>
               <a
                 href="mailto:hello@selfdezign.ro?subject=Aplicație pentru echipa SelfDezign"
                 className="inline-flex items-center gap-2 bg-[#d4ff00] text-black px-8 py-4 font-bold hover:bg-white transition-colors"
               >
                 <Mail size={20} />
-                TRIMITE-NE CV-UL TĂU
+                {language === 'ro' ? 'TRIMITE-NE CV-UL TĂU' : 'SEND US YOUR CV'}
               </a>
             </motion.div>
           </div>
@@ -180,7 +194,9 @@ export default function Team() {
       <section className="py-8 bg-gray-100">
         <div className="container">
           <p className="text-center text-gray-500 text-sm">
-            * Fotografiile membrilor echipei vor fi actualizate în curând.
+            {language === 'ro' 
+              ? '* Fotografiile membrilor echipei vor fi actualizate în curând.'
+              : '* Team member photos will be updated soon.'}
           </p>
         </div>
       </section>

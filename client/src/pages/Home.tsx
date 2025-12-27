@@ -1,12 +1,12 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Award, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import { Link } from "wouter";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Home() {
-  // The userAuth hooks provides authentication state
-  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
-  let { user, loading, error, isAuthenticated, logout } = useAuth();
+  const { user, loading, error, isAuthenticated, logout } = useAuth();
+  const { t } = useLanguage();
 
   return (
     <div className="flex flex-col gap-0">
@@ -25,30 +25,30 @@ export default function Home() {
         <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-8">
             <div className="inline-block px-4 py-1 border border-accent/30 rounded-full bg-accent/5 backdrop-blur-sm">
-              <span className="text-accent text-xs font-bold tracking-widest uppercase">You are the designer</span>
+              <span className="text-accent text-xs font-bold tracking-widest uppercase">{t.home.tagline}</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tighter">
-              DESIGNUL <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">INTERIOR</span> <br/>
-              ÎNTÂLNEȘTE <br/>
-              <span className="text-accent">NATURA UMANĂ</span>
+              {t.home.heroTitle1} <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">{t.home.heroTitle2}</span> <br/>
+              {t.home.heroTitle3} <br/>
+              <span className="text-accent">{t.home.heroTitle4}</span>
             </h1>
             
             <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed border-l-2 border-accent pl-6">
-              Vino să creăm experiențe care transformă designul interior într-o declarație a identității personale sau de brand.
+              {t.home.heroDescription}
             </p>
             
             <div className="flex flex-wrap gap-4 pt-4">
               <Link href="/proiecte">
                 <Button size="lg" className="bg-accent text-black hover:bg-accent/90 rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest group">
-                  Descoperă Proiectele
+                  {t.home.discoverProjects}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link href="/contact">
                 <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white hover:text-black rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest">
-                  Contactează-ne
+                  {t.home.contactUs}
                 </Button>
               </Link>
             </div>
@@ -59,7 +59,6 @@ export default function Home() {
               <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-accent"></div>
               <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-accent"></div>
               <div className="w-full h-full bg-gray-900 overflow-hidden relative group">
-                {/* Placeholder for Hero Image - In real implementation use actual image */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                 <img 
                   src="/projects/cafeneaua-veche/cafeneaua-veche-4.webp" 
@@ -67,7 +66,7 @@ export default function Home() {
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
                 />
                 <Link href="/proiect/cafeneaua-veche-9" className="absolute bottom-8 left-8 z-20 cursor-pointer">
-                  <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">Proiect Recomandat</p>
+                  <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">{t.home.featuredProject}</p>
                   <h3 className="text-2xl font-display font-bold text-white group-hover:text-accent transition-colors">Cafeneaua Veche 9</h3>
                 </Link>
               </div>
@@ -81,7 +80,7 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="md:w-1/4">
-              <h3 className="font-display font-bold text-2xl uppercase tracking-tight">Premii și <br/>Distincții</h3>
+              <h3 className="font-display font-bold text-2xl uppercase tracking-tight">{t.home.awardsTitle}</h3>
             </div>
             <div className="md:w-3/4 flex flex-wrap items-center justify-center md:justify-end gap-8 md:gap-10">
               <img 
@@ -130,32 +129,27 @@ export default function Home() {
                 />
               </div>
               <div className="absolute -bottom-8 -right-8 bg-black text-white p-8 max-w-xs hidden md:block">
-                <p className="font-display font-bold text-xl mb-2">arh. Irina Stoica</p>
-                <p className="text-gray-400 text-sm">Fondator SelfDezign</p>
+                <p className="font-display font-bold text-xl mb-2">{t.home.founderName}</p>
+                <p className="text-gray-400 text-sm">{t.home.founderRole}</p>
               </div>
             </div>
             
             <div className="order-1 lg:order-2 space-y-8">
               <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight">
-                DESIGN INTERIOR <br/>
-                ȘI <span className="text-accent bg-black px-2">ARHITECTURĂ</span>
+                {t.home.aboutTitle}
               </h2>
               
               <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
-                <p>
-                  Spațiile interioare în care îți petreci cel mai mult timp din viață sunt esențiale pentru starea ta de bine. Simți că te reprezintă, că te susțin, că te inspiră?
-                </p>
-                <p>
-                  SelfDezign a pornit ca un studio de design interior în misiunea de a transpune personalitațile în habitat. Suntem specializați în crearea de soluții creative și inovatoare pentru spații de birouri, hoteluri, cafenele, dar și zone rezidențiale.
-                </p>
+                <p>{t.home.aboutDescription1}</p>
+                <p>{t.home.aboutDescription2}</p>
                 <blockquote className="border-l-4 border-accent pl-6 py-2 italic text-black font-medium">
-                  "Transformă-ți spațiul într-o operă de artă care te reprezintă. 100% autentică. 100% funcțională."
+                  "{t.home.aboutDescription3}"
                 </blockquote>
               </div>
               
               <Link href="/contact">
                 <Button variant="link" className="text-black font-bold uppercase tracking-widest p-0 hover:text-accent transition-colors text-lg">
-                  Discută cu noi <ChevronRight className="ml-1 w-5 h-5" />
+                  {t.home.learnMore} <ChevronRight className="ml-1 w-5 h-5" />
                 </Button>
               </Link>
             </div>
@@ -168,23 +162,23 @@ export default function Home() {
         <div className="container">
           <div className="flex justify-between items-end mb-16">
             <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tighter">
-              DOMENII DE <br/><span className="text-accent">EXPERTIZĂ</span>
+              {t.projects.title}
             </h2>
             <Link href="/proiecte">
               <Button variant="outline" className="hidden md:flex border-white/20 text-white hover:bg-white hover:text-black rounded-none uppercase tracking-widest">
-                Vezi toate proiectele
+                {t.projects.viewProject}
               </Button>
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
             {[
-              { title: "Restaurant", img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2670&auto=format&fit=crop" },
-              { title: "Office", img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2669&auto=format&fit=crop" },
-              { title: "Hotel", img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2670&auto=format&fit=crop" },
-              { title: "Comercial", img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=2670&auto=format&fit=crop" },
-              { title: "Brand Experience", img: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2670&auto=format&fit=crop" },
-              { title: "Rezidențial", img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop" }
+              { title: t.projects.categories.restaurant, img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2670&auto=format&fit=crop" },
+              { title: t.projects.categories.office, img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2669&auto=format&fit=crop" },
+              { title: t.projects.categories.hotel, img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2670&auto=format&fit=crop" },
+              { title: t.projects.categories.comercial, img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=2670&auto=format&fit=crop" },
+              { title: t.projects.categories.brandExperience, img: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2670&auto=format&fit=crop" },
+              { title: t.projects.categories.rezidential, img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop" }
             ].map((cat, idx) => (
               <Link key={idx} href="/proiecte">
                 <a className="group relative aspect-[4/5] overflow-hidden block bg-gray-900">

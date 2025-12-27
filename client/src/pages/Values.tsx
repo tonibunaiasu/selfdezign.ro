@@ -1,81 +1,203 @@
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Users, Lightbulb, Shield, Leaf, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const values = [
-  {
-    icon: Heart,
-    title: "Autenticitate",
-    subtitle: "Fii tu însuți",
-    description: "Credem că cele mai bune spații sunt cele care reflectă cine ești cu adevărat, nu cine crezi că ar trebui să fii. Nu urmăm tendințe orbește. Ascultăm, observăm și creăm soluții unice pentru fiecare client.",
-    color: "bg-accent"
-  },
-  {
-    icon: Users,
-    title: "Colaborare",
-    subtitle: "Împreună, nu pentru tine",
-    description: "Nu suntem artiști solitari care lucrează în izolare. Suntem parteneri în procesul tău de transformare. Fiecare decizie o luăm împreună, fiecare pas îl facem alături de tine.",
-    color: "bg-black"
-  },
-  {
-    icon: Lightbulb,
-    title: "Funcționalitate",
-    subtitle: "Frumos și util",
-    description: "Un spațiu frumos care nu funcționează este doar o scenografie. Prioritizăm întotdeauna utilitatea și confortul, apoi găsim modalități creative de a le face și estetice.",
-    color: "bg-accent"
-  },
-  {
-    icon: Shield,
-    title: "Integritate",
-    subtitle: "Promisiuni ținute",
-    description: "Spunem ce facem și facem ce spunem. Bugetele sunt respectate, termenele sunt onorate, surprizele neplăcute sunt evitate. Transparența nu este opțională.",
-    color: "bg-black"
-  },
-  {
-    icon: Leaf,
-    title: "Sustenabilitate",
-    subtitle: "Design responsabil",
-    description: "Alegem materiale durabile, furnizori locali și soluții care rezistă în timp. Un design bun nu ar trebui să coste planeta sau să se demodeze în doi ani.",
-    color: "bg-accent"
-  },
-  {
-    icon: Sparkles,
-    title: "Excelență",
-    subtitle: "Detaliile contează",
-    description: "Nu ne mulțumim cu 'suficient de bun'. Fiecare îmbinare, fiecare nuanță, fiecare finisaj primește atenția pe care o merită. Calitatea se vede în detalii.",
-    color: "bg-black"
-  }
-];
+const valuesData = {
+  ro: [
+    {
+      icon: Heart,
+      title: "Autenticitate",
+      subtitle: "Fii tu însuți",
+      description: "Credem că cele mai bune spații sunt cele care reflectă cine ești cu adevărat, nu cine crezi că ar trebui să fii. Nu urmăm tendințe orbește. Ascultăm, observăm și creăm soluții unice pentru fiecare client.",
+      color: "bg-accent"
+    },
+    {
+      icon: Users,
+      title: "Colaborare",
+      subtitle: "Împreună, nu pentru tine",
+      description: "Nu suntem artiști solitari care lucrează în izolare. Suntem parteneri în procesul tău de transformare. Fiecare decizie o luăm împreună, fiecare pas îl facem alături de tine.",
+      color: "bg-black"
+    },
+    {
+      icon: Lightbulb,
+      title: "Funcționalitate",
+      subtitle: "Frumos și util",
+      description: "Un spațiu frumos care nu funcționează este doar o scenografie. Prioritizăm întotdeauna utilitatea și confortul, apoi găsim modalități creative de a le face și estetice.",
+      color: "bg-accent"
+    },
+    {
+      icon: Shield,
+      title: "Integritate",
+      subtitle: "Promisiuni ținute",
+      description: "Spunem ce facem și facem ce spunem. Bugetele sunt respectate, termenele sunt onorate, surprizele neplăcute sunt evitate. Transparența nu este opțională.",
+      color: "bg-black"
+    },
+    {
+      icon: Leaf,
+      title: "Sustenabilitate",
+      subtitle: "Design responsabil",
+      description: "Alegem materiale durabile, furnizori locali și soluții care rezistă în timp. Un design bun nu ar trebui să coste planeta sau să se demodeze în doi ani.",
+      color: "bg-accent"
+    },
+    {
+      icon: Sparkles,
+      title: "Excelență",
+      subtitle: "Detaliile contează",
+      description: "Nu ne mulțumim cu 'suficient de bun'. Fiecare îmbinare, fiecare nuanță, fiecare finisaj primește atenția pe care o merită. Calitatea se vede în detalii.",
+      color: "bg-black"
+    }
+  ],
+  en: [
+    {
+      icon: Heart,
+      title: "Authenticity",
+      subtitle: "Be yourself",
+      description: "We believe the best spaces are those that reflect who you truly are, not who you think you should be. We don't follow trends blindly. We listen, observe, and create unique solutions for each client.",
+      color: "bg-accent"
+    },
+    {
+      icon: Users,
+      title: "Collaboration",
+      subtitle: "Together, not for you",
+      description: "We're not solitary artists working in isolation. We're partners in your transformation process. Every decision is made together, every step is taken alongside you.",
+      color: "bg-black"
+    },
+    {
+      icon: Lightbulb,
+      title: "Functionality",
+      subtitle: "Beautiful and useful",
+      description: "A beautiful space that doesn't work is just a stage set. We always prioritize utility and comfort, then find creative ways to make them aesthetic as well.",
+      color: "bg-accent"
+    },
+    {
+      icon: Shield,
+      title: "Integrity",
+      subtitle: "Promises kept",
+      description: "We say what we do and do what we say. Budgets are respected, deadlines are honored, unpleasant surprises are avoided. Transparency is not optional.",
+      color: "bg-black"
+    },
+    {
+      icon: Leaf,
+      title: "Sustainability",
+      subtitle: "Responsible design",
+      description: "We choose durable materials, local suppliers, and solutions that stand the test of time. Good design shouldn't cost the planet or go out of style in two years.",
+      color: "bg-accent"
+    },
+    {
+      icon: Sparkles,
+      title: "Excellence",
+      subtitle: "Details matter",
+      description: "We don't settle for 'good enough'. Every joint, every shade, every finish receives the attention it deserves. Quality shows in the details.",
+      color: "bg-black"
+    }
+  ]
+};
 
-const principles = [
-  {
-    number: "01",
-    title: "Ascultăm înainte să vorbim",
-    description: "Fiecare proiect începe cu întrebări, nu cu răspunsuri. Vrem să înțelegem cum trăiești, ce te deranjează, ce te face fericit. Abia apoi deschidem caietul de schițe."
-  },
-  {
-    number: "02",
-    title: "Designul servește omul, nu invers",
-    description: "Nu vei fi nevoit să-ți schimbi obiceiurile pentru a te potrivi spațiului. Spațiul se va adapta la tine, la rutinele tale, la modul tău unic de a trăi."
-  },
-  {
-    number: "03",
-    title: "Transparență totală",
-    description: "Știi exact ce primești, cât costă și când va fi gata. Fără costuri ascunse, fără termene amânate, fără surprize. Comunicarea deschisă este fundația încrederii."
-  },
-  {
-    number: "04",
-    title: "Calitate fără compromis",
-    description: "Preferăm să spunem nu unui proiect decât să livrăm ceva sub standardele noastre. Reputația se construiește proiect cu proiect, și fiecare contează."
-  },
-  {
-    number: "05",
-    title: "Evoluție continuă",
-    description: "Industria se schimbă, materialele evoluează, tehnicile se îmbunătățesc. Investim constant în educație și experimentare pentru a oferi cele mai bune soluții."
-  }
-];
+const principlesData = {
+  ro: [
+    {
+      number: "01",
+      title: "Ascultăm înainte să vorbim",
+      description: "Fiecare proiect începe cu întrebări, nu cu răspunsuri. Vrem să înțelegem cum trăiești, ce te deranjează, ce te face fericit. Abia apoi deschidem caietul de schițe."
+    },
+    {
+      number: "02",
+      title: "Designul servește omul, nu invers",
+      description: "Nu vei fi nevoit să-ți schimbi obiceiurile pentru a te potrivi spațiului. Spațiul se va adapta la tine, la rutinele tale, la modul tău unic de a trăi."
+    },
+    {
+      number: "03",
+      title: "Transparență totală",
+      description: "Știi exact ce primești, cât costă și când va fi gata. Fără costuri ascunse, fără termene amânate, fără surprize. Comunicarea deschisă este fundația încrederii."
+    },
+    {
+      number: "04",
+      title: "Calitate fără compromis",
+      description: "Preferăm să spunem nu unui proiect decât să livrăm ceva sub standardele noastre. Reputația se construiește proiect cu proiect, și fiecare contează."
+    },
+    {
+      number: "05",
+      title: "Evoluție continuă",
+      description: "Industria se schimbă, materialele evoluează, tehnicile se îmbunătățesc. Investim constant în educație și experimentare pentru a oferi cele mai bune soluții."
+    }
+  ],
+  en: [
+    {
+      number: "01",
+      title: "We listen before we speak",
+      description: "Every project starts with questions, not answers. We want to understand how you live, what bothers you, what makes you happy. Only then do we open the sketchbook."
+    },
+    {
+      number: "02",
+      title: "Design serves people, not the other way around",
+      description: "You won't have to change your habits to fit the space. The space will adapt to you, to your routines, to your unique way of living."
+    },
+    {
+      number: "03",
+      title: "Total transparency",
+      description: "You know exactly what you're getting, how much it costs, and when it will be ready. No hidden costs, no postponed deadlines, no surprises. Open communication is the foundation of trust."
+    },
+    {
+      number: "04",
+      title: "Quality without compromise",
+      description: "We'd rather say no to a project than deliver something below our standards. Reputation is built project by project, and each one counts."
+    },
+    {
+      number: "05",
+      title: "Continuous evolution",
+      description: "The industry changes, materials evolve, techniques improve. We constantly invest in education and experimentation to offer the best solutions."
+    }
+  ]
+};
 
 export default function Values() {
+  const { t, language } = useLanguage();
+  
+  const values = valuesData[language];
+  const principles = principlesData[language];
+
+  const content = {
+    ro: {
+      backLink: "Înapoi la Despre Noi",
+      badge: "Principii & Valori",
+      title1: "CUM GÂNDIM",
+      title2: "ȘI CUM LUCRĂM",
+      subtitle: "Valorile nu sunt cuvinte pe un perete. Sunt deciziile pe care le luăm când nimeni nu se uită.",
+      valuesTitle: "Valorile noastre",
+      valuesSubtitle: "Șase piloni care ne ghidează în fiecare proiect și în fiecare interacțiune.",
+      principlesTitle: "Principiile noastre de lucru",
+      principlesSubtitle: "Regulile nescrise care definesc modul în care abordăm fiecare proiect.",
+      promiseTitle: "Promisiunea noastră",
+      promiseText: "Nu îți vom livra un spațiu care arată bine în fotografii dar nu funcționează în viața reală. Nu îți vom impune gusturile noastre. Nu îți vom depăși bugetul fără să te anunțăm. Nu vom dispărea după predare.",
+      promiseHighlight: "Îți vom livra un spațiu în care te vei simți acasă.",
+      ctaTitle: "Rezonezi cu valorile noastre?",
+      ctaText: "Hai să vedem dacă suntem potriviți pentru proiectul tău. O conversație nu te obligă la nimic.",
+      prevPage: "Pagina anterioară",
+      prevTitle: "Viziune & Misiune"
+    },
+    en: {
+      backLink: "Back to About Us",
+      badge: "Principles & Values",
+      title1: "HOW WE THINK",
+      title2: "AND HOW WE WORK",
+      subtitle: "Values aren't words on a wall. They're the decisions we make when no one is watching.",
+      valuesTitle: "Our Values",
+      valuesSubtitle: "Six pillars that guide us in every project and every interaction.",
+      principlesTitle: "Our Working Principles",
+      principlesSubtitle: "The unwritten rules that define how we approach every project.",
+      promiseTitle: "Our Promise",
+      promiseText: "We won't deliver a space that looks good in photos but doesn't work in real life. We won't impose our tastes on you. We won't exceed your budget without telling you. We won't disappear after handover.",
+      promiseHighlight: "We will deliver a space where you will feel at home.",
+      ctaTitle: "Do our values resonate with you?",
+      ctaText: "Let's see if we're right for your project. A conversation doesn't commit you to anything.",
+      prevPage: "Previous page",
+      prevTitle: "Vision & Mission"
+    }
+  };
+
+  const c = content[language];
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -89,19 +211,19 @@ export default function Values() {
           <Link href="/despre">
             <a className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8">
               <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm uppercase tracking-widest">Înapoi la Despre Noi</span>
+              <span className="text-sm uppercase tracking-widest">{c.backLink}</span>
             </a>
           </Link>
           <div className="max-w-4xl">
             <span className="inline-block bg-accent text-black text-xs font-bold px-4 py-2 uppercase tracking-widest mb-8">
-              Principii & Valori
+              {c.badge}
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter leading-[0.9] mb-8">
-              CUM GÂNDIM <br />
-              <span className="text-accent">ȘI CUM LUCRĂM</span>
+              {c.title1} <br />
+              <span className="text-accent">{c.title2}</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl">
-              Valorile nu sunt cuvinte pe un perete. Sunt deciziile pe care le luăm când nimeni nu se uită.
+              {c.subtitle}
             </p>
           </div>
         </div>
@@ -112,10 +234,10 @@ export default function Values() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-4">
-              Valorile noastre
+              {c.valuesTitle}
             </h2>
             <p className="text-gray-600 max-w-xl mx-auto">
-              Șase piloni care ne ghidează în fiecare proiect și în fiecare interacțiune.
+              {c.valuesSubtitle}
             </p>
           </div>
           
@@ -140,10 +262,10 @@ export default function Values() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-4">
-                Principiile noastre de lucru
+                {c.principlesTitle}
               </h2>
               <p className="text-gray-600">
-                Regulile nescrise care definesc modul în care abordăm fiecare proiect.
+                {c.principlesSubtitle}
               </p>
             </div>
             
@@ -167,15 +289,13 @@ export default function Values() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-8">
-              Promisiunea noastră
+              {c.promiseTitle}
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed mb-8">
-              Nu îți vom livra un spațiu care arată bine în fotografii dar nu funcționează în viața reală. 
-              Nu îți vom impune gusturile noastre. Nu îți vom depăși bugetul fără să te anunțăm. 
-              Nu vom dispărea după predare.
+              {c.promiseText}
             </p>
             <p className="text-2xl font-display font-bold text-accent">
-              Îți vom livra un spațiu în care te vei simți acasă.
+              {c.promiseHighlight}
             </p>
           </div>
         </div>
@@ -185,20 +305,20 @@ export default function Values() {
       <section className="py-24 bg-white">
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-6">
-            Rezonezi cu valorile noastre?
+            {c.ctaTitle}
           </h2>
           <p className="text-gray-600 max-w-xl mx-auto mb-8">
-            Hai să vedem dacă suntem potriviți pentru proiectul tău. O conversație nu te obligă la nimic.
+            {c.ctaText}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
               <Button className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm">
-                Contactează-ne
+                {t.nav.contact}
               </Button>
             </Link>
             <Link href="/proiecte">
               <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm">
-                Vezi proiectele
+                {t.nav.projects}
               </Button>
             </Link>
           </div>
@@ -213,8 +333,8 @@ export default function Values() {
               <a className="group flex items-center gap-4 text-gray-600 hover:text-black transition-colors">
                 <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                 <div>
-                  <span className="text-xs uppercase tracking-widest text-gray-400 block">Pagina anterioară</span>
-                  <span className="font-display font-bold">Viziune & Misiune</span>
+                  <span className="text-xs uppercase tracking-widest text-gray-400 block">{c.prevPage}</span>
+                  <span className="font-display font-bold">{c.prevTitle}</span>
                 </div>
               </a>
             </Link>

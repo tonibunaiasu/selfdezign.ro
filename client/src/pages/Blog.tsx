@@ -2,18 +2,38 @@ import { Link } from "wouter";
 import { blogPosts } from "@/data/blog-posts";
 import { ArrowRight, Calendar, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Blog() {
+  const { language } = useLanguage();
+
+  const content = {
+    ro: {
+      title1: "JURNAL DE",
+      title2: "DESIGN",
+      subtitle: "Idei, tendințe și povești din culisele proiectelor noastre. O sursă de inspirație pentru spațiul tău.",
+      readMore: "Citește tot"
+    },
+    en: {
+      title1: "DESIGN",
+      title2: "JOURNAL",
+      subtitle: "Ideas, trends, and stories from behind the scenes of our projects. A source of inspiration for your space.",
+      readMore: "Read more"
+    }
+  };
+
+  const c = content[language];
+
   return (
     <div className="min-h-screen bg-background pb-24">
       {/* Header */}
       <div className="bg-black text-white pt-32 pb-24 px-4">
         <div className="container">
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 tracking-tighter">
-            JURNAL DE <span className="text-accent">DESIGN</span>
+            {c.title1} <span className="text-accent">{c.title2}</span>
           </h1>
           <p className="text-gray-400 max-w-2xl text-lg">
-            Idei, tendințe și povești din culisele proiectelor noastre. O sursă de inspirație pentru spațiul tău.
+            {c.subtitle}
           </p>
         </div>
       </div>
@@ -61,7 +81,7 @@ export default function Blog() {
                 <div className="mt-auto pt-4 border-t border-gray-100">
                   <Link href={`/blog/${post.slug}`}>
                     <Button variant="link" className="p-0 h-auto text-black font-bold uppercase tracking-widest text-xs group-hover:translate-x-2 transition-transform">
-                      Citește tot <ArrowRight className="ml-1 w-4 h-4" />
+                      {c.readMore} <ArrowRight className="ml-1 w-4 h-4" />
                     </Button>
                   </Link>
                 </div>
