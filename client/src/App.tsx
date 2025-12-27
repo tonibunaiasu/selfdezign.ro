@@ -16,6 +16,7 @@ import Vision from "./pages/Vision";
 import Values from "./pages/Values";
 import ProjectDetail from "./pages/ProjectDetail";
 import Team from "./pages/Team";
+import MediaAppearances from "./pages/MediaAppearances";
 import Layout from "./components/Layout";
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -32,7 +33,8 @@ function Router() {
         <Route path={"/viziune"} component={Vision} />
         <Route path={"/valori"} component={Values} />
         <Route path={"/echipa"} component={Team} />
-        <Route path={"/proiect/:slug"} component={ProjectDetail} />
+        <Route path={"proiect/:slug"} component={ProjectDetail} />
+        <Route path={"/aparituri-media"} component={MediaAppearances} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />

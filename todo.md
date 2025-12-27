@@ -123,3 +123,10 @@
 - [x] Create Testimonials component with reviews
 - [x] Add testimonials section to Home page
 - [x] Test testimonials section
+
+## Add Media Appearances Section
+- [x] Extract content from Articles page on WordPress
+- [x] Create MediaAppearances component
+- [x] Add /aparituri-media route and page
+- [x] Add navigation link
+- [x] Test section
