@@ -176,7 +176,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <a href="https://www.facebook.com/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300" title="Facebook">
                   <Facebook size={18} />
                 </a>
-                <a href="https://www.instagram.com/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300" title="Instagram">
+                <a href="https://www.instagram.com/selfdezign.ro/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300" title="Instagram">
                   <Instagram size={18} />
                 </a>
                 <a href="https://www.linkedin.com/company/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300" title="LinkedIn">
