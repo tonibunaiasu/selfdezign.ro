@@ -130,3 +130,9 @@
 - [x] Add /aparituri-media route and page
 - [x] Add navigation link
 - [x] Test section
+
+## Add Media Publication Links
+- [x] Find and add URLs for all media articles
+- [x] Update media-appearances.ts with correct links
+- [x] Modify MediaAppearances component to display clickable links
+- [x] Test all links

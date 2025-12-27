@@ -110,8 +110,19 @@ export default function MediaAppearances() {
               </p>
 
               {/* Title */}
-              <h3 className="text-lg font-display font-bold mb-3 text-black leading-tight">
-                {appearance.title}
+              <h3 className="text-lg font-display font-bold mb-3 leading-tight">
+                {appearance.link && appearance.link !== "#" ? (
+                  <a
+                    href={appearance.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-black hover:text-accent transition-colors"
+                  >
+                    {appearance.title}
+                  </a>
+                ) : (
+                  <span className="text-black">{appearance.title}</span>
+                )}
               </h3>
 
               {/* Description */}
