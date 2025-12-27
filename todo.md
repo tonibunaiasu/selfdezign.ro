@@ -144,3 +144,7 @@
 - [x] Document backup and restore process
 - [x] Document domain configuration
 - [x] Document notification setup for contact form
+
+## Bug Fixes - Visibility Issues
+- [x] Fix SelfDezign logo visibility on website (replaced with actual SelfDezign logo)
+- [x] Improve contrast for yellow header elements on white background (updated button and nav links styling)

@@ -47,32 +47,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container flex items-center justify-between">
           <Link href="/">
             <a className="flex items-center gap-2 group">
-              {/* Logo - Ruler icon representing the brand */}
-              <div className="relative flex items-center">
-                <div className="relative w-8 h-10 sm:w-10 sm:h-12 bg-accent flex items-center justify-center overflow-hidden rounded-t-sm">
-                  {/* Ruler markings */}
-                  <div className="absolute inset-0 flex flex-col justify-between py-1">
-                    <div className="w-full h-[2px] bg-black/80"></div>
-                    <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
-                    <div className="w-full h-[2px] bg-black/80"></div>
-                    <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
-                    <div className="w-full h-[2px] bg-black/80"></div>
-                    <div className="w-3/4 h-[1.5px] bg-black/60 ml-auto"></div>
-                    <div className="w-full h-[2px] bg-black/80"></div>
-                  </div>
-                  {/* Hole at top */}
-                  <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-black/20 rounded-full"></div>
-                </div>
-              </div>
-              {/* Brand name - visible on all screens */}
-              <div className="flex flex-col leading-none">
-                <span className="font-display font-black text-lg sm:text-xl tracking-tighter uppercase">
-                  SELF
-                </span>
-                <span className="font-display font-black text-lg sm:text-xl tracking-tighter uppercase">
-                  DEZIGN
-                </span>
-              </div>
+              {/* Logo - SelfDezign brand */}
+              <img 
+                src="/images/logo_selfdezign.png" 
+                alt="SelfDezign Logo" 
+                className="h-12 sm:h-14 w-auto object-contain"
+              />
             </a>
           </Link>
 
@@ -83,7 +63,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <a
                   className={cn(
                     "text-sm font-medium uppercase tracking-widest hover:text-accent transition-colors relative group",
-                    location === link.href ? "text-accent" : "text-muted-foreground"
+                    location === link.href ? "text-accent font-bold" : "text-foreground/80 hover:text-foreground"
                   )}
                 >
                   {link.label}
@@ -95,7 +75,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             <Link href="/contact">
-              <Button variant="outline" className="border-accent text-accent hover:bg-accent hover:text-black rounded-none uppercase tracking-widest font-bold text-xs px-6">
+              <Button variant="outline" className="border-accent text-black bg-accent hover:bg-accent/90 hover:text-black rounded-none uppercase tracking-widest font-bold text-xs px-6">
                 {t.nav.writeUs}
               </Button>
             </Link>
