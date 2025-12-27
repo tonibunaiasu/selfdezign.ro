@@ -30,7 +30,7 @@
 - [x] Design consistent layout for About pages
 
 ## Individual Project Pages
-- [ ] Extract all photos from each project on WordPress site
+- [x] Extract all photos from each project on WordPress site (14/16 complete)
 - [x] Create individual project page template (ProjectDetail.tsx)
 - [x] Add project data with multiple images per project (Bloom, Cafeneaua Veche complete)
 - [x] Link projects from Projects page to individual pages
@@ -48,13 +48,14 @@
 - [x] Prima Development (gallery) - 6 images
 - [x] MyHive Office (gallery) - 5 images
 - [x] Bucharest Comfort Suites (gallery) - 13 images
-- [ ] Mafi Natural Wooden Floors Showroom (gallery)
-- [ ] Eveniment Outdoor - Companie Țigarete (gallery)
-- [ ] Branding Locație - Companie FMCG (gallery)
-- [ ] Locuință Cartierul Francez (gallery)
-- [ ] Vilă P+E Cluj Napoca (gallery)
-- [ ] Vilă D+P+E Piața Domenii (gallery)
-- [ ] Quadra Trees București (gallery)
+- [x] Mafi Natural Wooden Floors Showroom (gallery) - 9 images
+- [ ] Eveniment Outdoor - Companie Țigarete (gallery) - 1 image only
+- [ ] Branding Locație - Companie FMCG (gallery) - 1 image only
+- [x] Locuință Cartierul Francez (gallery) - 10 images
+- [x] Vilă P+E Cluj Napoca (gallery) - 10 images
+- [ ] Vilă D+P+E Piața Domenii (gallery) - needs extraction
+- [x] Quadra Trees București (gallery) - 6 images
+- [x] Vilă P+E Pădurea Andronache (gallery) - 7 images
 
 ## Hero Section Update
 - [x] Replace placeholder Featured Project with real SelfDezign project (Cafeneaua Veche 9)

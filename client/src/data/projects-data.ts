@@ -265,10 +265,21 @@ export const projects: Project[] = [
     status: "proiect implementat",
     location: "București",
     description: [
-      "Showroom elegant pentru prezentarea pardoselilor din lemn natural Mafi."
+      "Showroom elegant pentru prezentarea pardoselilor din lemn natural Mafi.",
+      "Un spațiu conceput pentru a evidenția frumusețea naturală a lemnului, cu zone de expunere care permit clienților să experimenteze textura și calitatea pardoselilor Mafi."
     ],
-    coverImage: "/projects/comercial-mafi-showroom.webp",
-    gallery: []
+    coverImage: "/projects/mafi/mafi-1.webp",
+    gallery: [
+      { src: "/projects/mafi/mafi-1.webp", alt: "Mafi Showroom - pardoseală și canapea rotundă" },
+      { src: "/projects/mafi/mafi-2.webp", alt: "Mafi Showroom - pardoseală și detaliu floral" },
+      { src: "/projects/mafi/mafi-3.webp", alt: "Mafi Showroom - parchet herringbone" },
+      { src: "/projects/mafi/mafi-4.webp", alt: "Mafi Showroom - showroom cu scaun albastru" },
+      { src: "/projects/mafi/mafi-5.webp", alt: "Mafi Showroom - perete decorativ din lemn" },
+      { src: "/projects/mafi/mafi-6.webp", alt: "Mafi Showroom - sertar și detaliu" },
+      { src: "/projects/mafi/mafi-7.webp", alt: "Mafi Showroom - bucătărie din lemn" },
+      { src: "/projects/mafi/mafi-8.webp", alt: "Mafi Showroom - baie cu plante" },
+      { src: "/projects/mafi/mafi-9.webp", alt: "Mafi Showroom - recepție și bibliotecă" }
+    ]
   },
   {
     id: "outdoor-event",
@@ -310,10 +321,22 @@ export const projects: Project[] = [
     status: "proiect implementat",
     location: "București",
     description: [
-      "Amenajare interioară pentru o locuință spațioasă în Cartierul Francez."
+      "Eleganță și rafinament în Cartierul Francez.",
+      "Amenajare interioară pentru o locuință spațioasă care combină elemente moderne cu accente de culoare îndrăznețe, creând un ambient cald și primitor."
     ],
-    coverImage: "/projects/rezidential-cartier-francez.webp",
-    gallery: []
+    coverImage: "/projects/cartierul-francez/cartierul-francez-1.webp",
+    gallery: [
+      { src: "/projects/cartierul-francez/cartierul-francez-1.webp", alt: "Cartierul Francez - living cu fotolii" },
+      { src: "/projects/cartierul-francez/cartierul-francez-2.webp", alt: "Cartierul Francez - baie terrazzo" },
+      { src: "/projects/cartierul-francez/cartierul-francez-3.webp", alt: "Cartierul Francez - living cu canapea albastră" },
+      { src: "/projects/cartierul-francez/cartierul-francez-4.webp", alt: "Cartierul Francez - corpuri de iluminat" },
+      { src: "/projects/cartierul-francez/cartierul-francez-5.webp", alt: "Cartierul Francez - living cu nișă portocalie" },
+      { src: "/projects/cartierul-francez/cartierul-francez-6.webp", alt: "Cartierul Francez - birou home office" },
+      { src: "/projects/cartierul-francez/cartierul-francez-7.webp", alt: "Cartierul Francez - baie gri" },
+      { src: "/projects/cartierul-francez/cartierul-francez-8.webp", alt: "Cartierul Francez - dressing cu taburet verde" },
+      { src: "/projects/cartierul-francez/cartierul-francez-9.webp", alt: "Cartierul Francez - dormitor albastru" },
+      { src: "/projects/cartierul-francez/cartierul-francez-10.webp", alt: "Cartierul Francez - birou din dormitor" }
+    ]
   },
   {
     id: "vila-cluj",
@@ -325,10 +348,22 @@ export const projects: Project[] = [
     status: "proiect implementat",
     location: "Cluj Napoca",
     description: [
-      "Design interior pentru vilă pe două nivele în Cluj Napoca."
+      "Design interior pentru vilă pe două nivele în Cluj Napoca.",
+      "Un proiect rezidențial care îmbină confortul familial cu estetica modernă, cu spații generoase pentru copii și zone de relaxare pentru adulți."
     ],
-    coverImage: "/projects/rezidential-vila-cluj.webp",
-    gallery: []
+    coverImage: "/projects/vila-cluj/vila-cluj-1.webp",
+    gallery: [
+      { src: "/projects/vila-cluj/vila-cluj-1.webp", alt: "Vila Cluj - living cu canapea curbată" },
+      { src: "/projects/vila-cluj/vila-cluj-2.webp", alt: "Vila Cluj - masă de dining din lemn" },
+      { src: "/projects/vila-cluj/vila-cluj-3.webp", alt: "Vila Cluj - bucătărie și bar" },
+      { src: "/projects/vila-cluj/vila-cluj-4.webp", alt: "Vila Cluj - zona de dining cu lămpi colorate" },
+      { src: "/projects/vila-cluj/vila-cluj-5.webp", alt: "Vila Cluj - camera copiilor cu tipi" },
+      { src: "/projects/vila-cluj/vila-cluj-6.webp", alt: "Vila Cluj - dormitor cu perete de cățărare" },
+      { src: "/projects/vila-cluj/vila-cluj-7.webp", alt: "Vila Cluj - camera de joacă cu covor colorat" },
+      { src: "/projects/vila-cluj/vila-cluj-8.webp", alt: "Vila Cluj - camera bebelușului" },
+      { src: "/projects/vila-cluj/vila-cluj-9.webp", alt: "Vila Cluj - dormitor roz" },
+      { src: "/projects/vila-cluj/vila-cluj-10.webp", alt: "Vila Cluj - dressing roz" }
+    ]
   },
   {
     id: "piata-domenii",
@@ -351,14 +386,46 @@ export const projects: Project[] = [
     title: "Quadra Trees",
     category: "Rezidențial",
     categorySlug: "rezidential",
-    year: "2022",
-    status: "proiect implementat",
+    year: "2020",
+    status: "proiect finalizat",
     location: "București",
     description: [
-      "Apartament modern în complexul rezidențial Quadra Trees."
+      "Studio de 42 mp în complexul rezidențial Quadra Trees.",
+      "Un spațiu compact dar funcțional, optimizat pentru viața urbană modernă, cu zone bine definite pentru odihnă, lucru și relaxare."
     ],
-    coverImage: "/projects/rezidential-quadra-trees.webp",
-    gallery: []
+    coverImage: "/projects/quadra-trees/quadra-trees-1.webp",
+    gallery: [
+      { src: "/projects/quadra-trees/quadra-trees-1.webp", alt: "Quadra Trees - dormitor și bucătărie" },
+      { src: "/projects/quadra-trees/quadra-trees-2.webp", alt: "Quadra Trees - dormitor cu TV" },
+      { src: "/projects/quadra-trees/quadra-trees-3.webp", alt: "Quadra Trees - living cu canapea roșie" },
+      { src: "/projects/quadra-trees/quadra-trees-4.webp", alt: "Quadra Trees - familie jucându-se" },
+      { src: "/projects/quadra-trees/quadra-trees-5.webp", alt: "Quadra Trees - dormitor cu lampă" },
+      { src: "/projects/quadra-trees/quadra-trees-6.webp", alt: "Quadra Trees - balcon verde" }
+    ]
+  },
+  {
+    id: "vila-andronache",
+    slug: "vila-andronache",
+    title: "Vilă P+E - Pădurea Andronache",
+    category: "Rezidențial",
+    categorySlug: "rezidential",
+    year: "2021",
+    status: "concept",
+    location: "Voluntari, București",
+    description: [
+      "O casă ca un templu - vilă cu 9 camere pe 570 mp.",
+      "Un proiect rezidențial ambițios care îmbină arhitectura modernă cu elemente naturale, creând un sanctuar de liniște la marginea pădurii Andronache."
+    ],
+    coverImage: "/projects/vila-andronache/vila-andronache-1.webp",
+    gallery: [
+      { src: "/projects/vila-andronache/vila-andronache-1.webp", alt: "Vila Andronache - living cu bibliotecă" },
+      { src: "/projects/vila-andronache/vila-andronache-2.webp", alt: "Vila Andronache - living cu scări" },
+      { src: "/projects/vila-andronache/vila-andronache-3.webp", alt: "Vila Andronache - bucătărie cu șemineu" },
+      { src: "/projects/vila-andronache/vila-andronache-4.webp", alt: "Vila Andronache - bibliotecă și scări" },
+      { src: "/projects/vila-andronache/vila-andronache-5.webp", alt: "Vila Andronache - dormitor cu dressing" },
+      { src: "/projects/vila-andronache/vila-andronache-6.webp", alt: "Vila Andronache - hol cu dulapuri" },
+      { src: "/projects/vila-andronache/vila-andronache-7.webp", alt: "Vila Andronache - lămpi decorative" }
+    ]
   }
 ];
 
