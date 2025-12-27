@@ -96,3 +96,9 @@
 - [x] Translate Team page
 - [x] Translate footer content
 - [ ] Test language switching functionality
+
+## Fix Gallery Images
+- [x] Check Mafi project gallery images - none loading correctly
+- [x] Verify all other project galleries for broken images
+- [x] Fix image paths in projects-data.ts (downloaded missing Mafi images from WordPress)
+- [x] Test all project galleries
