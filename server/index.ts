@@ -10,16 +10,17 @@ async function startServer() {
   const app = express();
   const server = createServer(app);
 
-// Serve static files from dist/public in production
+  // Serve static files from both possible locations
   app.use(express.static(path.join(__dirname, "..", "public")));
   app.use(express.static(path.join(__dirname, "..", "dist", "public")));
-  // Handle client-side routing - serve index.html for all routes
+
+  // Handle client-side routing - serve index.html for all non-static routes
   app.get("*", (_req, res) => {
-    res.sendFile(path.join(staticPath, "index.html"));
+    const indexPath = path.join(__dirname, "..", "dist", "public", "index.html");
+    res.sendFile(indexPath);
   });
 
   const port = process.env.PORT || 3000;
-
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
   });
