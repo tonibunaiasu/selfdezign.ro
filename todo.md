@@ -159,3 +159,15 @@
 - [x] Add social media icons (Facebook, Instagram, LinkedIn)
 - [x] Update social media links in footer with correct URLs
 - [x] Test all social media links
+
+
+## Admin Dashboard for Blog Management
+- [x] Update database schema with blog_articles table (if not exists)
+- [x] Create tRPC procedures for blog CRUD operations (create, read, update, delete)
+- [x] Build Admin Dashboard UI with article list view
+- [x] Create article form component (add/edit)
+- [x] Implement article preview functionality
+- [ ] Add image upload to S3 storage
+- [x] Implement authentication/authorization for admin access
+- [ ] Test admin dashboard functionality
+- [ ] Deploy admin dashboard to VPS

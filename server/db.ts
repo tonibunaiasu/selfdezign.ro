@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, subscribers, InsertSubscriber, Subscriber } from "../drizzle/schema";
+import { InsertUser, users, subscribers, InsertSubscriber, Subscriber, blogPosts, BlogPost, InsertBlogPost } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -154,4 +154,89 @@ export async function getActiveSubscribers(): Promise<Subscriber[]> {
 
   const result = await db.select().from(subscribers).where(eq(subscribers.isActive, "true"));
   return result;
+}
+
+// Blog Post functions
+export async function createBlogPost(data: InsertBlogPost): Promise<BlogPost> {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    const result = await db.insert(blogPosts).values(data);
+    const insertedId = result[0].insertId;
+    const post = await db.select().from(blogPosts).where(eq(blogPosts.id, Number(insertedId))).limit(1);
+    if (!post.length) throw new Error("Failed to create blog post");
+    return post[0];
+  } catch (error) {
+    console.error("[Database] Failed to create blog post:", error);
+    throw error;
+  }
+}
+
+export async function getBlogPosts(limitNum?: number): Promise<BlogPost[]> {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    const query = db.select().from(blogPosts).orderBy(desc(blogPosts.createdAt));
+    const result = limitNum ? await query.limit(limitNum) : await query;
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get blog posts:", error);
+    return [];
+  }
+}
+
+export async function getBlogPostById(id: number): Promise<BlogPost | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  try {
+    const result = await db.select().from(blogPosts).where(eq(blogPosts.id, id)).limit(1);
+    return result.length > 0 ? result[0] : undefined;
+  } catch (error) {
+    console.error("[Database] Failed to get blog post:", error);
+    return undefined;
+  }
+}
+
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  try {
+    const result = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug)).limit(1);
+    return result.length > 0 ? result[0] : undefined;
+  } catch (error) {
+    console.error("[Database] Failed to get blog post by slug:", error);
+    return undefined;
+  }
+}
+
+export async function updateBlogPost(id: number, data: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  try {
+    await db.update(blogPosts).set(data).where(eq(blogPosts.id, id));
+    return await getBlogPostById(id);
+  } catch (error) {
+    console.error("[Database] Failed to update blog post:", error);
+    throw error;
+  }
+}
+
+export async function deleteBlogPost(id: number): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+
+  try {
+    await db.delete(blogPosts).where(eq(blogPosts.id, id));
+    return true;
+  } catch (error) {
+    console.error("[Database] Failed to delete blog post:", error);
+    throw error;
+  }
 }

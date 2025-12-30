@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
-import { addSubscriber, unsubscribe, getActiveSubscribers } from "./db";
+import { addSubscriber, unsubscribe, getActiveSubscribers, createBlogPost, getBlogPosts, getBlogPostById, updateBlogPost, deleteBlogPost } from "./db";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -45,6 +45,76 @@ export const appRouter = router({
           throw new Error("Nu ai permisiunea de a accesa această resursă.");
         }
         return await getActiveSubscribers();
+      }),
+  }),
+
+  // Blog management
+  blog: router({
+    // Public - get all blog posts
+    getPosts: publicProcedure
+      .query(async () => {
+        return await getBlogPosts();
+      }),
+
+    // Public - get single blog post by ID
+    getPostById: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ input }) => {
+        return await getBlogPostById(input.id);
+      }),
+
+    // Admin only - create blog post
+    createPost: protectedProcedure
+      .input(z.object({
+        slug: z.string().min(1),
+        title: z.string().min(1),
+        excerpt: z.string().optional(),
+        content: z.string().min(1),
+        author: z.string().min(1),
+        image: z.string().optional(),
+        tags: z.string().optional(),
+        faqs: z.string().optional(),
+        isPublished: z.enum(["true", "false"]).default("false"),
+        publishedAt: z.date().optional(),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user.role !== "admin") {
+          throw new Error("Nu ai permisiunea de a crea articole.");
+        }
+        return await createBlogPost(input);
+      }),
+
+    // Admin only - update blog post
+    updatePost: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        slug: z.string().optional(),
+        title: z.string().optional(),
+        excerpt: z.string().optional(),
+        content: z.string().optional(),
+        author: z.string().optional(),
+        image: z.string().optional(),
+        tags: z.string().optional(),
+        faqs: z.string().optional(),
+        isPublished: z.enum(["true", "false"]).optional(),
+        publishedAt: z.date().optional(),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user.role !== "admin") {
+          throw new Error("Nu ai permisiunea de a edita articole.");
+        }
+        const { id, ...data } = input;
+        return await updateBlogPost(id, data);
+      }),
+
+    // Admin only - delete blog post
+    deletePost: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user.role !== "admin") {
+          throw new Error("Nu ai permisiunea de a șterge articole.");
+        }
+        return await deleteBlogPost(input.id);
       }),
   }),
 });

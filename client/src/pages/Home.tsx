@@ -198,7 +198,7 @@ export default function Home() {
                 window.location.href = '/proiecte';
               };
               return (
-              <div key={idx} onClick={handleCategoryClick} className="group relative aspect-[4/5] overflow-hidden block bg-gray-900 cursor-pointer">
+                <div key={idx} onClick={handleCategoryClick} className="group relative aspect-[4/5] overflow-hidden block bg-gray-900 cursor-pointer">
                   <img 
                     src={cat.img} 
                     alt={cat.title} 

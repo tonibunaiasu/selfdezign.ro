@@ -17,6 +17,7 @@ import Values from "./pages/Values";
 import ProjectDetail from "./pages/ProjectDetail";
 import Team from "./pages/Team";
 import MediaAppearances from "./pages/MediaAppearances";
+import AdminBlogDashboard from "./pages/AdminBlogDashboard";
 import Layout from "./components/Layout";
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -35,6 +36,7 @@ function Router() {
         <Route path={"/echipa"} component={Team} />
         <Route path={"proiect/:slug"} component={ProjectDetail} />
         <Route path={"/aparituri-media"} component={MediaAppearances} />
+        <Route path={"/admin/blog"} component={AdminBlogDashboard} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
