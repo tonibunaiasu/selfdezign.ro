@@ -21,34 +21,28 @@ import AdminBlogDashboard from "./pages/AdminBlogDashboard";
 import Layout from "./components/Layout";
 function Router() {
   // make sure to consider if you need authentication for certain routes
-  const [location] = useLocation();
-  
-  // Admin routes - render without Layout
-  if (location === "/admin/blog") {
-    return <AdminBlogDashboard />;
-  }
-  
-  // All other routes with Layout
   return (
-    <Layout>
-      <Switch>
-        <Route path={"/"} component={Home} />
-        <Route path={"/proiecte"} component={Projects} />
-        <Route path={"/contact"} component={Contact} />
-        <Route path={"/articole"} component={Articles} />
-        <Route path={"/blog"} component={Blog} />
-        <Route path={"/blog/:slug"} component={BlogPost} />
-        <Route path={"/despre"} component={About} />
-        <Route path={"/viziune"} component={Vision} />
-        <Route path={"/valori"} component={Values} />
-        <Route path={"/echipa"} component={Team} />
-        <Route path={"proiect/:slug"} component={ProjectDetail} />
-        <Route path={"/aparituri-media"} component={MediaAppearances} />
-        <Route path={"/404"} component={NotFound} />
-        {/* Final fallback route */}
-        <Route component={NotFound} />
-      </Switch>
-    </Layout>
+    <Switch>
+      {/* Admin routes - render without Layout */}
+      <Route path={"/admin/blog"} component={AdminBlogDashboard} />
+      
+      {/* Public routes with Layout */}
+      <Route path={"/"} component={Home} />
+      <Route path={"/proiecte"} component={Projects} />
+      <Route path={"/contact"} component={Contact} />
+      <Route path={"/articole"} component={Articles} />
+      <Route path={"/blog"} component={Blog} />
+      <Route path={"/blog/:slug"} component={BlogPost} />
+      <Route path={"/despre"} component={About} />
+      <Route path={"/viziune"} component={Vision} />
+      <Route path={"/valori"} component={Values} />
+      <Route path={"/echipa"} component={Team} />
+      <Route path={"proiect/:slug"} component={ProjectDetail} />
+      <Route path={"/aparituri-media"} component={MediaAppearances} />
+      <Route path={"/404"} component={NotFound} />
+      {/* Final fallback route */}
+      <Route component={NotFound} />
+    </Switch>
   );
 }
 
