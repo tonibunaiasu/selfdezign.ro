@@ -1,0 +1,15 @@
+{
+  "query": "SELECT id, email, role FROM users WHERE email IN ('toni.bunaiasu@gmail.com', 'toni@brandmentors.pro');",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user u4R4WJCKAwSwv4j.root --database UQkRDpVSNiG2FtxsyhpH9c --execute SELECT id, email, role FROM users WHERE email IN ('toni.bunaiasu@gmail.com', 'toni@brandmentors.pro');",
+  "rows": [
+    {
+      "id": "1",
+      "email": "toni.bunaiasu@gmail.com",
+      "role": "admin"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\temail\trole\n1\ttoni.bunaiasu@gmail.com\tadmin\n",
+  "stderr": "",
+  "execution_time_ms": 1213
+}
