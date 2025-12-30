@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,18 +10,46 @@ const __dirname = path.dirname(__filename);
 async function startServer() {
   const app = express();
   const server = createServer(app);
-
-  // Serve static files from dist/public (the built frontend)
-  app.use(express.static(path.join(__dirname, "..", "dist", "public")));
-
+  
+  // Determine paths
+  const distPath = path.join(__dirname, "..", "dist", "public");
+  const indexPath = path.join(distPath, "index.html");
+  
+  // Log for debugging
+  console.log("[Server] __dirname:", __dirname);
+  console.log("[Server] distPath:", distPath);
+  console.log("[Server] indexPath exists:", fs.existsSync(indexPath));
+  
+  // Check if dist exists
+  if (!fs.existsSync(distPath)) {
+    console.error("[ERROR] dist/public directory not found at:", distPath);
+    console.error("[ERROR] Contents of", path.join(__dirname, ".."));
+    try {
+      const parentDir = path.join(__dirname, "..");
+      const contents = fs.readdirSync(parentDir);
+      console.error("[ERROR] Parent directory contents:", contents);
+    } catch (err) {
+      console.error("[ERROR] Could not read parent directory:", err.message);
+    }
+  }
+  
+  // Serve static files from dist/public
+  app.use(express.static(distPath));
+  
   // SPA fallback: serve index.html for all non-static routes
-  app.get("*", (_req, res) => {
-    res.sendFile(path.join(__dirname, "..", "dist", "public", "index.html"));
+  app.get("*", (req, res) => {
+    console.log(`[Server] Serving SPA fallback for path: ${req.path}`);
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      console.error(`[Server] index.html not found at ${indexPath}`);
+      res.status(404).send("index.html not found");
+    }
   });
-
+  
   const port = process.env.PORT || 3000;
-  server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
+  server.listen(port, "0.0.0.0", () => {
+    console.log(`[Server] Running on http://0.0.0.0:${port}/`);
   });
 }
 
