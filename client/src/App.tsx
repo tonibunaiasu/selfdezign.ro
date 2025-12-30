@@ -23,11 +23,9 @@ function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      {/* Admin routes - render without Layout */}
-      <Route path={"/admin/blog"} component={AdminBlogDashboard} />
-      
       {/* Public routes with Layout */}
       <Route path={"/"} component={Home} />
+      <Route path={"/admin/blog"} component={AdminBlogDashboard} />
       <Route path={"/proiecte"} component={Projects} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/articole"} component={Articles} />
