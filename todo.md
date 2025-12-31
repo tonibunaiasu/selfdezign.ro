@@ -227,3 +227,9 @@
 - [x] Fix Contact page - Wrap address labels in yellow boxes with black text
 - [x] Fix Footer - Change section titles from yellow to white on dark background
 - [x] Verify all contrast fixes on live site
+
+
+## Website Modifications - Dec 31, 2025
+- [x] Remove CONTACT menu item from header (duplicate of SCRIE-NE) - Not needed, already not in nav menu
+- [x] Change yellow text on white background to royal blue (visiniu royal modern) - Changed accent color from oklch(0.95 0.21 105) to oklch(0.45 0.25 290)
+- [x] Test all changes on live site - All changes verified and live on www.selfdezign.ro
