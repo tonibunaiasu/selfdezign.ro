@@ -41,16 +41,20 @@ export default function Home() {
             </p>
             
             <div className="flex flex-wrap gap-4 pt-4">
-              <Link href="/proiecte" className="inline-block">
-                <Button size="lg" className="bg-accent text-black hover:bg-accent/90 rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest group">
-                  {t.home.discoverProjects}
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
+              <Link href="/proiecte">
+                <a className="inline-block">
+                  <Button size="lg" className="bg-accent text-black hover:bg-accent/90 rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest group">
+                    {t.home.discoverProjects}
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </a>
               </Link>
-              <Link href="/contact" className="inline-block">
-                <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white hover:text-black rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest">
-                  {t.home.contactUs}
-                </Button>
+              <Link href="/contact">
+                <a className="inline-block">
+                  <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white hover:text-black rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest">
+                    {t.home.contactUs}
+                  </Button>
+                </a>
               </Link>
             </div>
           </div>
@@ -148,10 +152,12 @@ export default function Home() {
                 </blockquote>
               </div>
               
-              <Link href="/contact" className="inline-block">
-                <Button variant="link" className="text-black font-bold uppercase tracking-widest p-0 hover:text-accent transition-colors text-lg">
-                  {t.home.learnMore} <ChevronRight className="ml-1 w-5 h-5" />
-                </Button>
+              <Link href="/contact">
+                <a className="inline-block">
+                  <Button variant="link" className="text-black font-bold uppercase tracking-widest p-0 hover:text-accent transition-colors text-lg">
+                    {t.home.learnMore} <ChevronRight className="ml-1 w-5 h-5" />
+                  </Button>
+                </a>
               </Link>
             </div>
           </div>
@@ -168,10 +174,12 @@ export default function Home() {
             <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tighter">
               {t.projects.title}
             </h2>
-            <Link href="/proiecte" className="inline-block hidden md:block">
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white hover:text-black rounded-none uppercase tracking-widest">
-                {t.projects.viewProject}
-              </Button>
+            <Link href="/proiecte">
+              <a className="inline-block hidden md:block">
+                <Button variant="outline" className="border-white/20 text-white hover:bg-white hover:text-black rounded-none uppercase tracking-widest">
+                  {t.projects.viewProject}
+                </Button>
+              </a>
             </Link>
           </div>
 
