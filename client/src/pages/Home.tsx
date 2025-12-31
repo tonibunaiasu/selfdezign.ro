@@ -81,37 +81,37 @@ export default function Home() {
       </section>
 
       {/* Awards Section */}
-      <section className="py-16 bg-white border-b border-gray-100" style={{paddingTop: '98px', width: '1281px', height: '276px'}}>
+      <section className="py-16 bg-white border-b border-gray-100">
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="md:w-1/4">
-              <h3 className="font-display font-bold text-2xl uppercase tracking-tight" style={{height: '34px'}}>{t.home.awardsTitle}</h3>
+              <h3 className="font-display font-bold text-2xl uppercase tracking-tight">{t.home.awardsTitle}</h3>
             </div>
             <div className="md:w-3/4 flex flex-wrap items-center justify-center md:justify-end gap-8 md:gap-10">
               <img 
                 src="/awards/share-architects-logo.webp" 
                 alt="Share Architects" 
-                className="h-10 md:h-12 object-contain opacity-70 hover:opacity-100 transition-opacity" style={{height: '99px'}}
+                className="h-10 md:h-12 object-contain opacity-70 hover:opacity-100 transition-opacity"
               />
               <img 
                 src="/awards/design-week-blue.webp" 
                 alt="Design Week" 
-                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity" style={{height: '106px', display: 'none'}}
+                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity"
               />
               <img 
                 src="/awards/romanian-design-week.webp" 
                 alt="Romanian Design Week" 
-                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity" style={{height: '121px'}}
+                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity"
               />
               <img 
                 src="/awards/big-see-award.webp" 
                 alt="BIG SEE Interior Design Award 2024" 
-                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity" style={{height: '96px'}}
+                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity"
               />
               <img 
                 src="/awards/bienala-arhitectura.webp" 
                 alt="Bienala Națională de Arhitectură 2023" 
-                className="h-10 md:h-14 object-contain opacity-70 hover:opacity-100 transition-opacity" style={{height: '68px'}}
+                className="h-10 md:h-14 object-contain opacity-70 hover:opacity-100 transition-opacity"
               />
             </div>
           </div>
