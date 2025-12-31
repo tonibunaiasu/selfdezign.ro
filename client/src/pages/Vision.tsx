@@ -100,7 +100,7 @@ export default function Vision() {
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter leading-[0.9] mb-8">
               {c.title1} <br />
-              <span className="text-accent">{c.title2}</span>
+              <span className="text-white">{c.title2}</span>
             </h1>
           </div>
         </div>

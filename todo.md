@@ -218,3 +218,12 @@
 - [x] Optimize build time with caching (node_modules + build artifacts)
 - [x] Remove Coolify configuration from VPS
 - [x] Verify site works without Coolify (HTTP 200 OK)
+
+## Text Contrast Fixes (Yellow on White/Dark)
+- [x] Fix About page - Change numbered labels (01/02) from yellow to black
+- [x] Fix Vision page - Change title "ȘI DE CE" from yellow to white on black background
+- [x] Fix Values page - Change value subtitles from yellow to black
+- [x] Fix Values page - Change principle numbers from yellow to gray
+- [x] Fix Contact page - Wrap address labels in yellow boxes with black text
+- [x] Fix Footer - Change section titles from yellow to white on dark background
+- [x] Verify all contrast fixes on live site

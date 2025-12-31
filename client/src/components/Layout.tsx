@@ -166,7 +166,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-accent uppercase tracking-widest mb-6 text-sm">{t.footer.contact}</h4>
+            <h4 className="font-display font-bold text-white uppercase tracking-widest mb-6 text-sm">{t.footer.contact}</h4>
             <ul className="space-y-4 text-sm text-gray-400">
               <li>
                 <a href="tel:+40721528448" className="hover:text-white transition-colors">
@@ -182,7 +182,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-accent uppercase tracking-widest mb-6 text-sm">Birouri</h4>
+            <h4 className="font-display font-bold text-white uppercase tracking-widest mb-6 text-sm">Birouri</h4>
             <ul className="space-y-4 text-sm text-gray-400">
               <li>
                 <span className="block text-white mb-1">B1:</span>
@@ -204,7 +204,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mt-8 md:mt-12 pt-6 md:pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-              <h4 className="font-display font-bold text-accent uppercase tracking-widest mb-4 text-sm">Urmărește-ne</h4>
+              <h4 className="font-display font-bold text-white uppercase tracking-widest mb-4 text-sm">Urmărește-ne</h4>
               <div className="flex gap-4">
                 <a href="https://www.facebook.com/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300" title="Facebook">
                   <Facebook size={18} />

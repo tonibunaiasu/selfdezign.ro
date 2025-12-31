@@ -84,11 +84,11 @@ export default function Contact() {
               </h3>
               <div className="space-y-6">
                 <div className="bg-white p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                  <span className="text-accent font-bold text-xs uppercase tracking-widest mb-2 block">{t.contact.address1}</span>
+                  <span className="text-black font-bold text-xs uppercase tracking-widest mb-3 block bg-accent px-3 py-2 inline-block rounded">{t.contact.address1}</span>
                   <p className="text-gray-800 font-medium">Strada Politiei, nr. 3, București</p>
                 </div>
                 <div className="bg-white p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                  <span className="text-accent font-bold text-xs uppercase tracking-widest mb-2 block">{t.contact.address2}</span>
+                  <span className="text-black font-bold text-xs uppercase tracking-widest mb-3 block bg-accent px-3 py-2 inline-block rounded">{t.contact.address2}</span>
                   <p className="text-gray-800 font-medium">Calea Floreasca nr. 246C, etaj 18, București</p>
                 </div>
               </div>

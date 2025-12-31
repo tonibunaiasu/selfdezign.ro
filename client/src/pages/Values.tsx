@@ -248,7 +248,7 @@ export default function Values() {
                   <value.icon className={`w-7 h-7 ${value.color === 'bg-accent' ? 'text-black' : 'text-accent'}`} />
                 </div>
                 <h3 className="text-2xl font-display font-bold mb-1">{value.title}</h3>
-                <p className="text-accent text-sm font-medium uppercase tracking-widest mb-4">{value.subtitle}</p>
+                <p className="text-black text-sm font-medium uppercase tracking-widest mb-4">{value.subtitle}</p>
                 <p className="text-gray-600 leading-relaxed">{value.description}</p>
               </div>
             ))}
@@ -272,7 +272,7 @@ export default function Values() {
             <div className="space-y-8">
               {principles.map((principle, index) => (
                 <div key={index} className="flex gap-6 p-6 bg-white border-l-4 border-accent">
-                  <span className="text-4xl font-display font-bold text-accent/30">{principle.number}</span>
+                  <span className="text-4xl font-display font-bold text-gray-300">{principle.number}</span>
                   <div>
                     <h3 className="text-xl font-display font-bold mb-2">{principle.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{principle.description}</p>
