@@ -187,7 +187,7 @@
 
 
 ## UX Improvements Implementation
-- [ ] Deploy latest changes to VPS through Coolify
-- [ ] Add smooth hover transitions to all buttons
-- [ ] Implement swipe gesture for mobile menu closing
-- [ ] Test all improvements on live site
+- [x] Deploy latest changes to VPS through Coolify
+- [x] Add smooth hover transitions to all buttons
+- [x] Implement swipe gesture for mobile menu closing
+- [x] Test all improvements on live site

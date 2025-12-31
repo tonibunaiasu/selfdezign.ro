@@ -11,7 +11,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const { t } = useLanguage();
+  
+  // Minimum swipe distance (in px) to trigger close
+  const minSwipeDistance = 50;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +29,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
+  
+  // Handle touch events for swipe gesture
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+  
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+  
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    // Close menu on left or right swipe
+    if (isLeftSwipe || isRightSwipe) {
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   const navLinks = [
     { href: "/", label: t.nav.home },
@@ -94,7 +120,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-background flex flex-col items-center justify-center md:hidden animate-in fade-in duration-200">
+        <div 
+          className="fixed inset-0 z-40 bg-background flex flex-col items-center justify-center md:hidden animate-in fade-in duration-200"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <nav className="flex flex-col items-center gap-8">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>

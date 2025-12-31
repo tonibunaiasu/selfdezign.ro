@@ -160,6 +160,27 @@
   input[type="radio"]:not(:disabled) {
     @apply cursor-pointer;
   }
+  
+  /* Smooth hover transitions for all interactive elements */
+  button,
+  [role="button"],
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  a,
+  select,
+  input {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  /* Enhanced button hover effects */
+  button:hover:not(:disabled),
+  [role="button"]:hover:not([aria-disabled="true"]),
+  [type="button"]:hover:not(:disabled),
+  [type="submit"]:hover:not(:disabled),
+  [type="reset"]:hover:not(:disabled) {
+    @apply transform scale-[1.02];
+  }
 }
 
 @layer components {
