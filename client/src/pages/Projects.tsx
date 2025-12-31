@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "wouter";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { projects as projectsData } from "@/data/projects-data";
@@ -7,7 +7,17 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Projects() {
   const { t, language } = useLanguage();
+  const [location] = useLocation();
   const [activeCategory, setActiveCategory] = useState("all");
+  
+  // Read category from URL parameter on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const categoryParam = params.get('category');
+    if (categoryParam) {
+      setActiveCategory(categoryParam);
+    }
+  }, [location]);
 
   const categories = [
     { key: "all", label: t.projects.allCategories },

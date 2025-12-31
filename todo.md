@@ -171,3 +171,10 @@
 - [x] Implement authentication/authorization for admin access
 - [ ] Test admin dashboard functionality
 - [ ] Deploy admin dashboard to VPS
+
+
+## Project Category Filtering Fix
+- [x] Investigate homepage project category links
+- [x] Implement category filtering on Projects page with URL parameter
+- [x] Update homepage category links to pass category parameter
+- [x] Test all category filters (Restaurant, Office, Hotel, Comercial, Brand Experience, Rezidențial)

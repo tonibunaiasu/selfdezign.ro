@@ -194,8 +194,17 @@ export default function Home() {
               { title: t.projects.categories.brandExperience, img: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2670&auto=format&fit=crop" },
               { title: t.projects.categories.rezidential, img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop" }
             ].map((cat, idx) => {
+              const categoryMap: Record<string, string> = {
+                [t.projects.categories.restaurant]: 'Restaurant',
+                [t.projects.categories.office]: 'Office',
+                [t.projects.categories.hotel]: 'Hotel',
+                [t.projects.categories.comercial]: 'Comercial',
+                [t.projects.categories.brandExperience]: 'Brand Experience',
+                [t.projects.categories.rezidential]: 'Rezidențial'
+              };
               const handleCategoryClick = () => {
-                window.location.href = '/proiecte';
+                const categoryKey = categoryMap[cat.title];
+                window.location.href = `/proiecte?category=${encodeURIComponent(categoryKey)}`;
               };
               return (
                 <div key={idx} onClick={handleCategoryClick} className="group relative aspect-[4/5] overflow-hidden block bg-gray-900 cursor-pointer">
