@@ -206,3 +206,12 @@
 - [x] Remove Contact button from header navigation
 - [x] Rearrange navigation in psychologically optimal order (ACASĂ, DESPRE, ECHIPA, PROIECTE, BLOG, MEDIA, SCRIE-NE)
 - [x] Test navigation changes on all pages
+
+
+## GitHub Actions Auto-Deploy Setup
+- [ ] Create GitHub Actions workflow file (.github/workflows/deploy.yml)
+- [ ] Generate SSH key pair for GitHub Actions authentication
+- [ ] Add SSH private key to GitHub Secrets
+- [ ] Create deployment script on VPS (deploy.sh)
+- [ ] Test workflow with manual trigger
+- [ ] Verify auto-deploy on next git push
