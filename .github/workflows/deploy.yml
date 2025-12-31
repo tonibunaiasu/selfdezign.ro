@@ -21,6 +21,22 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Cache build artifacts
+        uses: actions/cache@v3
+        with:
+          path: dist
+          key: ${{ runner.os }}-build-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+
       - name: Install dependencies
         run: npm ci
 
@@ -44,10 +60,15 @@ jobs:
           sleep 10
           curl -f http://${{ secrets.VPS_HOST }}:3000/ || exit 1
 
-      - name: Deployment notification
+      - name: Deployment success notification
         if: success()
-        run: echo "✅ Deployment successful!"
+        run: |
+          echo "✅ Deployment successful!"
+          echo "📦 Build: ${{ github.sha }}"
+          echo "🚀 Deployed to: http://${{ secrets.VPS_HOST }}"
 
-      - name: Deployment failed notification
+      - name: Deployment failure notification
         if: failure()
-        run: echo "❌ Deployment failed!"
+        run: |
+          echo "❌ Deployment failed!"
+          echo "Check logs at: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

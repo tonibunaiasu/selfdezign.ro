@@ -209,9 +209,12 @@
 
 
 ## GitHub Actions Auto-Deploy Setup
-- [ ] Create GitHub Actions workflow file (.github/workflows/deploy.yml)
-- [ ] Generate SSH key pair for GitHub Actions authentication
-- [ ] Add SSH private key to GitHub Secrets
-- [ ] Create deployment script on VPS (deploy.sh)
-- [ ] Test workflow with manual trigger
-- [ ] Verify auto-deploy on next git push
+- [x] Create GitHub Actions workflow file (.github/workflows/deploy.yml)
+- [x] Generate SSH key pair for GitHub Actions authentication
+- [x] Add SSH private key to GitHub Secrets
+- [x] Test workflow with manual trigger
+- [x] Verify auto-deploy on next git push
+- [x] Add monitoring and failure notifications
+- [x] Optimize build time with caching (node_modules + build artifacts)
+- [x] Remove Coolify configuration from VPS
+- [x] Verify site works without Coolify (HTTP 200 OK)
