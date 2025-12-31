@@ -1,16 +1,45 @@
-import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Testimonials from "@/components/Testimonials";
+import SEO from "@/components/SEO";
 
 export default function Home() {
-  const { user, loading, error, isAuthenticated, logout } = useAuth();
   const { t } = useLanguage();
+  
+  const organizationStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SelfDezign",
+    "url": "https://selfdezign.ro",
+    "logo": "https://selfdezign.ro/images/logo_selfdezign.png",
+    "description": "Studio de design interior specializat în proiecte comerciale și rezidențiale. Designul interior întâlnește natura umană.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "RO"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+40-721-528-448",
+      "email": "hello@selfdezign.ro",
+      "contactType": "Customer Service"
+    },
+    "sameAs": [
+      "https://www.facebook.com/selfdezign",
+      "https://www.instagram.com/selfdezign.ro",
+      "https://www.linkedin.com/company/selfdezign"
+    ]
+  };
 
   return (
     <div className="flex flex-col gap-0">
+      <SEO 
+        title="Acasă"
+        description="SelfDezign - Studio de design interior specializat în proiecte comerciale și rezidențiale. Designul interior întâlnește natura umană."
+        url="/"
+        structuredData={organizationStructuredData}
+      />
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-black text-white">
         {/* Abstract Background Elements */}
@@ -80,38 +109,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Awards Section */}
-      <section className="py-16 bg-white border-b border-gray-100">
+      {/* Awards Section - Enlarged for better visibility */}
+      <section className="py-20 md:py-28 bg-white border-b border-gray-100">
         <div className="container">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="md:w-1/4">
-              <h3 className="font-display font-bold text-2xl uppercase tracking-tight">{t.home.awardsTitle}</h3>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-16">
+            <div className="md:w-1/3">
+              <h3 className="font-display font-bold text-3xl md:text-4xl uppercase tracking-tight">{t.home.awardsTitle}</h3>
             </div>
-            <div className="md:w-3/4 flex flex-wrap items-center justify-center md:justify-end gap-8 md:gap-10">
+            <div className="md:w-2/3 flex flex-wrap items-center justify-center md:justify-end gap-10 md:gap-14">
               <img 
                 src="/awards/share-architects-logo.webp" 
                 alt="Share Architects" 
-                className="h-10 md:h-12 object-contain opacity-70 hover:opacity-100 transition-opacity"
+                className="h-14 md:h-20 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
               />
               <img 
                 src="/awards/design-week-blue.webp" 
                 alt="Design Week" 
-                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity"
+                className="h-16 md:h-24 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
               />
               <img 
                 src="/awards/romanian-design-week.webp" 
                 alt="Romanian Design Week" 
-                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity"
+                className="h-16 md:h-24 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
               />
               <img 
                 src="/awards/big-see-award.webp" 
                 alt="BIG SEE Interior Design Award 2024" 
-                className="h-12 md:h-16 object-contain opacity-70 hover:opacity-100 transition-opacity"
+                className="h-16 md:h-24 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
               />
               <img 
                 src="/awards/bienala-arhitectura.webp" 
                 alt="Bienala Națională de Arhitectură 2023" 
-                className="h-10 md:h-14 object-contain opacity-70 hover:opacity-100 transition-opacity"
+                className="h-14 md:h-20 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
               />
             </div>
           </div>

@@ -5,6 +5,7 @@ import { ArrowLeft, X, ChevronLeft, ChevronRight, MapPin, Calendar, Camera } fro
 import Layout from "@/components/Layout";
 import { getProjectBySlug, projects } from "@/data/projects-data";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 
 export default function ProjectDetail() {
   const params = useParams<{ slug: string }>();
@@ -88,9 +89,32 @@ export default function ProjectDetail() {
   const relatedProjects = projects
     .filter(p => p.categorySlug === project.categorySlug && p.id !== project.id)
     .slice(0, 3);
+  
+  // Structured data for project
+  const projectStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": project.title,
+    "description": project.description,
+    "image": `https://selfdezign.ro${project.coverImage}`,
+    "creator": {
+      "@type": "Organization",
+      "name": "SelfDezign"
+    },
+    "about": project.category,
+    "datePublished": project.year
+  };
 
   return (
     <Layout>
+      <SEO 
+        title={project.title}
+        description={project.description}
+        image={project.coverImage}
+        url={`/proiect/${project.slug}`}
+        type="article"
+        structuredData={projectStructuredData}
+      />
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[500px]">
         <div className="absolute inset-0">
