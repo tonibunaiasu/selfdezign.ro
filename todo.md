@@ -184,3 +184,10 @@
 - [x] Investigate header navigation active link styling in Layout.tsx
 - [x] Change active link color from yellow (accent) to black for better contrast
 - [x] Test navigation visibility on all pages
+
+
+## UX Improvements Implementation
+- [ ] Deploy latest changes to VPS through Coolify
+- [ ] Add smooth hover transitions to all buttons
+- [ ] Implement swipe gesture for mobile menu closing
+- [ ] Test all improvements on live site
