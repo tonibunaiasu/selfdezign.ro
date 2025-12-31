@@ -45,33 +45,31 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         )}
       >
         <div className="container flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-2 group">
-              {/* Logo - SelfDezign brand */}
-              <img 
-                src="/images/logo_selfdezign.png" 
-                alt="SelfDezign Logo" 
-                className="h-12 sm:h-14 w-auto object-contain"
-              />
-            </a>
+          <Link href="/" className="flex items-center gap-2 group">
+            {/* Logo - SelfDezign brand */}
+            <img 
+              src="/images/logo_selfdezign.png" 
+              alt="SelfDezign Logo" 
+              className="h-12 sm:h-14 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <a
-                  className={cn(
-                    "text-sm font-medium uppercase tracking-widest hover:text-accent transition-colors relative group",
-                    location === link.href ? "text-accent font-bold" : "text-foreground/80 hover:text-foreground"
-                  )}
-                >
-                  {link.label}
-                  <span className={cn(
-                    "absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform transition-transform duration-300 origin-left",
-                    location === link.href ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                  )}></span>
-                </a>
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-sm font-medium uppercase tracking-widest hover:text-accent transition-colors relative group",
+                  location === link.href ? "text-accent font-bold" : "text-foreground/80 hover:text-foreground"
+                )}
+              >
+                {link.label}
+                <span className={cn(
+                  "absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform transition-transform duration-300 origin-left",
+                  location === link.href ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                )}></span>
               </Link>
             ))}
             <Link href="/contact">
@@ -97,10 +95,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="fixed inset-0 z-40 bg-background flex flex-col items-center justify-center md:hidden animate-in fade-in duration-200">
           <nav className="flex flex-col items-center gap-8">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <a className="text-3xl font-display font-bold uppercase hover:text-accent transition-colors">
-                  {link.label}
-                </a>
+              <Link key={link.href} href={link.href} className="text-3xl font-display font-bold uppercase hover:text-accent transition-colors">
+                {link.label}
               </Link>
             ))}
             <Link href="/contact">
