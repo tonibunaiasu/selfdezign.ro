@@ -22,25 +22,27 @@ import Layout from "./components/Layout";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
-    <Switch>
-      {/* Public routes with Layout */}
-      <Route path={"/"} component={Home} />
-      <Route path={"/admin/blog"} component={AdminBlogDashboard} />
-      <Route path={"/proiecte"} component={Projects} />
-      <Route path={"/contact"} component={Contact} />
-      <Route path={"/articole"} component={Articles} />
-      <Route path={"/blog"} component={Blog} />
-      <Route path={"/blog/:slug"} component={BlogPost} />
-      <Route path={"/despre"} component={About} />
-      <Route path={"/viziune"} component={Vision} />
-      <Route path={"/valori"} component={Values} />
-      <Route path={"/echipa"} component={Team} />
-      <Route path={"proiect/:slug"} component={ProjectDetail} />
-      <Route path={"/aparituri-media"} component={MediaAppearances} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
+    <Layout>
+      <Switch>
+        {/* Public routes with Layout */}
+        <Route path={"/"} component={Home} />
+        <Route path={"/admin/blog"} component={AdminBlogDashboard} />
+        <Route path={"/proiecte"} component={Projects} />
+        <Route path={"/contact"} component={Contact} />
+        <Route path={"/articole"} component={Articles} />
+        <Route path={"/blog"} component={Blog} />
+        <Route path={"/blog/:slug"} component={BlogPost} />
+        <Route path={"/despre"} component={About} />
+        <Route path={"/viziune"} component={Vision} />
+        <Route path={"/valori"} component={Values} />
+        <Route path={"/echipa"} component={Team} />
+        <Route path={"proiect/:slug"} component={ProjectDetail} />
+        <Route path={"/aparituri-media"} component={MediaAppearances} />
+        <Route path={"/404"} component={NotFound} />
+        {/* Final fallback route */}
+        <Route component={NotFound} />
+      </Switch>
+    </Layout>
   );
 }
 
