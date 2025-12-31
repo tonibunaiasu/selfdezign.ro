@@ -56,7 +56,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { href: "/despre", label: t.nav.about },
     { href: "/echipa", label: t.nav.team },
     { href: "/proiecte", label: t.nav.projects },
-    { href: "/contact", label: t.nav.contact },
     { href: "/blog", label: t.nav.blog },
     { href: "/aparituri-media", label: "Media" },
   ];

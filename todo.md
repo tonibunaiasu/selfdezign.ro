@@ -200,3 +200,9 @@
 - [x] Implement JSON-LD structured data for all project pages
 - [x] Enlarge Awards section on homepage for better logo visibility
 - [x] Test SEO meta tags with validators
+
+
+## Header Navigation Optimization
+- [x] Remove Contact button from header navigation
+- [x] Rearrange navigation in psychologically optimal order (ACASĂ, DESPRE, ECHIPA, PROIECTE, BLOG, MEDIA, SCRIE-NE)
+- [x] Test navigation changes on all pages
