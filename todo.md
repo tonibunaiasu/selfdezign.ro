@@ -231,5 +231,6 @@
 
 ## Website Modifications - Dec 31, 2025
 - [x] Remove CONTACT menu item from header (duplicate of SCRIE-NE) - Not needed, already not in nav menu
-- [x] Change yellow text on white background to royal blue (visiniu royal modern) - Changed accent color from oklch(0.95 0.21 105) to oklch(0.45 0.25 290)
+- [x] Change yellow text on white background to royal blue (visiniu royal modern) - Added .text-accent-on-white class for specific elements on Contact page
 - [x] Test all changes on live site - All changes verified and live on www.selfdezign.ro
+- [x] Verify yellow on dark backgrounds remains intact - Confirmed on home page and other sections

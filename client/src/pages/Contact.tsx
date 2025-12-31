@@ -59,16 +59,16 @@ export default function Contact() {
           {/* Contact Info */}
           <div className="space-y-12">
             <div>
-              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3">
-                <Clock className="text-accent w-6 h-6" />
+              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3 text-accent-on-white">
+                <Clock className="text-accent-on-white w-6 h-6" />
                 {t.contact.scheduleTitle}
               </h3>
               <p className="text-gray-600 text-lg">{t.contact.schedule}</p>
             </div>
 
             <div>
-              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3">
-                <Phone className="text-accent w-6 h-6" />
+              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3 text-accent-on-white">
+                <Phone className="text-accent-on-white w-6 h-6" />
                 {t.contact.phoneTitle}
               </h3>
               <div className="space-y-2">
@@ -78,8 +78,8 @@ export default function Contact() {
             </div>
 
             <div>
-              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3">
-                <MapPin className="text-accent w-6 h-6" />
+              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3 text-accent-on-white">
+                <MapPin className="text-accent-on-white w-6 h-6" />
                 {t.contact.addressTitle}
               </h3>
               <div className="space-y-6">
