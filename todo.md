@@ -178,3 +178,9 @@
 - [x] Implement category filtering on Projects page with URL parameter
 - [x] Update homepage category links to pass category parameter
 - [x] Test all category filters (Restaurant, Office, Hotel, Comercial, Brand Experience, Rezidențial)
+
+
+## Header Navigation Active Link Visibility Fix
+- [x] Investigate header navigation active link styling in Layout.tsx
+- [x] Change active link color from yellow (accent) to black for better contrast
+- [x] Test navigation visibility on all pages

@@ -63,7 +63,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <a
                   className={cn(
                     "text-sm font-medium uppercase tracking-widest hover:text-accent transition-colors relative group",
-                    location === link.href ? "text-accent font-bold" : "text-foreground/80 hover:text-foreground"
+                    location === link.href ? "text-black font-bold" : "text-foreground/80 hover:text-foreground"
                   )}
                 >
                   {link.label}
@@ -98,7 +98,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <nav className="flex flex-col items-center gap-8">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
-                <a className="text-3xl font-display font-bold uppercase hover:text-accent transition-colors">
+                <a className={cn(
+                  "text-3xl font-display font-bold uppercase hover:text-accent transition-colors",
+                  location === link.href ? "text-black" : "text-foreground"
+                )}>
                   {link.label}
                 </a>
               </Link>
