@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development tsx watch server/_core/index.ts",
-    "build": "vite build && cp -r server dist/",
+    "build": "vite build && tsc server --outDir dist/server --module esnext --target esnext --moduleResolution node --skipLibCheck true",
     "start": "NODE_ENV=production node --experimental-modules dist/server/_core/index.js",
     "check": "tsc --noEmit",
     "format": "prettier --write .",
