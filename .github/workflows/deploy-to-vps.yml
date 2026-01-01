@@ -1,0 +1,56 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
+        run: |
+          # Install sshpass
+          sudo apt-get update && sudo apt-get install -y sshpass
+          
+          # SSH into VPS and run deploy script
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no "$VPS_USER@$VPS_HOST" << 'SCRIPT'
+          #!/bin/bash
+          set -e
+          cd /opt/selfdezign
+          git fetch origin main
+          git reset --hard origin/main
+          docker build -t selfdezign-app:latest .
+          docker stop selfdezign-app 2>/dev/null || true
+          docker rm selfdezign-app 2>/dev/null || true
+          docker run -d --name selfdezign-app -p 3000:3000 -e NODE_ENV=production selfdezign-app:latest
+          sleep 3
+          if docker ps | grep -q selfdezign-app; then
+            echo "Deployment successful"
+            exit 0
+          else
+            echo "Deployment failed"
+            docker logs selfdezign-app
+            exit 1
+          fi
+          SCRIPT
+
+      - name: Verify deployment
+        run: |
+          sleep 5
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://selfdezign.ro)
+          if [ "$STATUS" = "200" ] || [ "$STATUS" = "301" ] || [ "$STATUS" = "302" ]; then
+            echo "Website is online (HTTP $STATUS)"
+            exit 0
+          else
+            echo "Website check failed (HTTP $STATUS)"
+            exit 1
+          fi
