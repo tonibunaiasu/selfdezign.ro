@@ -23,17 +23,20 @@ WORKDIR /app
 
 RUN npm install -g pnpm@10.4.1
 
-# Copy package.json + lockfile
-COPY package.json pnpm-lock.yaml ./
+# Copy package.json + lockfile from builder
+COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
 
 # Install only production deps
 RUN pnpm install --frozen-lockfile --prod
 
-# Copy dist from build stage
+# Copy backend dist from build stage
 COPY --from=builder /app/dist ./dist
+
+# Copy frontend dist to dist/public
+COPY --from=builder /app/client/dist ./dist/public
 
 # Expose port
 EXPOSE 3000
 
 # Start
-CMD ["node", "dist/index.js"]
+CMD ["pnpm", "start"]
