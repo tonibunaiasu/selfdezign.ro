@@ -1,6 +1,6 @@
 import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, subscribers, InsertSubscriber, Subscriber, blogPosts, BlogPost, InsertBlogPost, homeContent, aboutContent, contactContent, footerContent, teamMembers } from "../drizzle/schema";
+import { InsertUser, users, subscribers, InsertSubscriber, Subscriber, blogPosts, BlogPost, InsertBlogPost, homeContent, aboutContent, contactContent, footerContent, teamMembers } from "../drizzle/schema.js";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;

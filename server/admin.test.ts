@@ -9,7 +9,7 @@ import {
   getFooterContent,
   updateFooterContent,
   getTeamMembers,
-} from "./db";
+} from "./db.js";
 
 describe("Admin Dashboard CRUD Operations", () => {
   describe("Home Content", () => {
