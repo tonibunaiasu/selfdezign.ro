@@ -77,10 +77,10 @@ export default function Team() {
             className="max-w-2xl"
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-4">
-              {pageContent?.title || t.team.title}
+              {pageContent?.title || (language === 'ro' ? 'Echipa Noastră' : 'Our Team')}
             </h1>
             <p className="text-xl text-gray-300">
-              {pageContent?.description || t.team.subtitle}
+              {pageContent?.description || (language === 'ro' ? 'Oamenii din spatele SelfDezign' : 'The people behind SelfDezign')}
             </p>
           </motion.div>
         </div>
