@@ -234,3 +234,9 @@
 - [x] Change yellow text on white background to royal blue (visiniu royal modern) - Added .text-accent-on-white class for specific elements on Contact page
 - [x] Test all changes on live site - All changes verified and live on www.selfdezign.ro
 - [x] Verify yellow on dark backgrounds remains intact - Confirmed on home page and other sections
+
+
+## Remove CONTACT Menu Item from Header
+- [ ] Remove CONTACT link from header navigation (duplicate of SCRIE-NE button)
+- [ ] Deploy changes to VPS
+- [ ] Verify CONTACT is removed from live site
