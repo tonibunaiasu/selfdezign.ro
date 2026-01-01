@@ -248,3 +248,62 @@
 - [x] Update GitHub Actions workflow for auto-deploy
 - [x] Commit and push workflow to GitHub
 - [ ] Test auto-deploy workflow with test push
+
+
+## Comprehensive Admin Dashboard Implementation - Phase 1 MVP
+- [x] Plan database schema for all content types
+- [x] Create database tables for pages content (home, about, vision, values, team, blog, contact, footer)
+- [x] Create database tables for SEO metadata
+- [x] Create database tables for content versions/history
+- [x] Build Admin Dashboard UI layout with sidebar navigation
+- [ ] Create Admin Home section (hero, featured project, testimonials)
+- [ ] Create Admin About section (about text, vision, values, principles)
+- [ ] Create Admin Team section (team members, descriptions, photos)
+- [ ] Create Admin Blog section (articles, rich text editor)
+- [ ] Create Admin Contact section (contact info, form settings)
+- [ ] Create Admin Footer section (links, company info)
+- [ ] Implement tRPC procedures for CRUD operations
+- [ ] Implement form components for each section
+- [ ] Implement multi-language support (RO/EN) for all content
+- [ ] Add authentication/authorization for admin access
+- [ ] Test Admin Dashboard functionality
+- [ ] Deploy Admin Dashboard to VPS
+- [ ] (Future) Implement rich text editor (TipTap or similar)
+- [ ] (Future) Implement image upload to S3
+- [ ] (Future) Implement gallery management
+- [ ] (Future) Implement versioning/history system
+- [ ] (Future) Implement live preview functionality
+- [ ] (Future) Implement scheduling for content publication
+
+## Shop Page and E-Commerce Implementation
+- [ ] Create database tables for products (ebooks, courses, consultations, services)
+- [ ] Create database tables for product categories
+- [ ] Create database tables for shopping cart
+- [ ] Create database tables for wishlist
+- [ ] Create database tables for reviews and ratings
+- [ ] Create database tables for orders and order items
+- [ ] Build Shop page UI with product grid
+- [ ] Implement product filtering by category
+- [ ] Implement product search functionality
+- [ ] Implement product detail page with description and gallery
+- [ ] Implement shopping cart functionality
+- [ ] Implement wishlist functionality
+- [ ] Implement product reviews and rating system
+- [ ] Integrate Stripe payment processing
+- [ ] Create checkout page with Stripe integration
+- [ ] Create order confirmation page
+- [ ] Create order history/account page for customers
+- [ ] Implement email notifications for orders
+- [ ] Add product inventory management
+- [ ] Test Shop functionality with test payments
+- [ ] Deploy Shop to VPS
+
+## Admin Dashboard - Product Management
+- [ ] Create Admin Products section
+- [ ] Implement product CRUD operations
+- [ ] Implement product category management
+- [ ] Implement product inventory tracking
+- [ ] Implement product pricing and discounts
+- [ ] Implement product image upload and gallery
+- [ ] Implement product SEO metadata
+- [ ] Test product management functionality
