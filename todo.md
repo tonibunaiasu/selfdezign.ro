@@ -237,6 +237,14 @@
 
 
 ## Remove CONTACT Menu Item from Header
-- [ ] Remove CONTACT link from header navigation (duplicate of SCRIE-NE button)
-- [ ] Deploy changes to VPS
-- [ ] Verify CONTACT is removed from live site
+- [x] Remove CONTACT link from header navigation (duplicate of SCRIE-NE button) - Already not in nav menu
+- [x] Deploy changes to VPS
+- [x] Verify CONTACT is removed from live site
+
+## Auto-Deploy Setup - GitHub Actions + SSH
+- [x] Generate SSH key pair for GitHub Actions
+- [x] Add SSH public key to VPS authorized_keys
+- [x] Add SSH private key to GitHub Secrets (DEPLOY_KEY)
+- [x] Update GitHub Actions workflow for auto-deploy
+- [x] Commit and push workflow to GitHub
+- [ ] Test auto-deploy workflow with test push
