@@ -21,7 +21,8 @@ type AdminSection =
   | "blog"
   | "contact"
   | "footer"
-  | "seo";
+  | "seo"
+  | "cms";
 
 export default function AdminDashboard() {
   const [, navigate] = useLocation();
@@ -29,6 +30,7 @@ export default function AdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const menuItems = [
+    { id: "cms", label: "Gestionare Conținut", icon: FileText },
     { id: "home", label: "Home", icon: Home },
     { id: "about", label: "About & Vision", icon: FileText },
     { id: "team", label: "Team", icon: Users },
@@ -41,6 +43,10 @@ export default function AdminDashboard() {
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
     navigate("/");
+  };
+
+  const handleCMSClick = () => {
+    navigate("/admin/cms");
   };
 
   return (
@@ -73,7 +79,13 @@ export default function AdminDashboard() {
             return (
               <button
                 key={item.id}
-                onClick={() => setCurrentSection(item.id as AdminSection)}
+                onClick={() => {
+                  if (item.id === "cms") {
+                    handleCMSClick();
+                  } else {
+                    setCurrentSection(item.id as AdminSection);
+                  }
+                }}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                   currentSection === item.id
                     ? "bg-accent text-accent-foreground"

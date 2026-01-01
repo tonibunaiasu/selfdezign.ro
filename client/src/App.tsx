@@ -19,6 +19,7 @@ import Team from "./pages/Team";
 import MediaAppearances from "./pages/MediaAppearances";
 import AdminBlogDashboard from "./pages/AdminBlogDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminCMS from "./pages/AdminCMS";
 import AdminLogin from "./pages/AdminLogin";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
@@ -28,6 +29,13 @@ function Router() {
     <Switch>
       {/* Admin routes without Layout */}
       <Route path="/admin/login" component={AdminLogin} />
+      <Route path="/admin/cms">
+        {() => (
+          <ProtectedRoute requiredRole="admin">
+            <AdminCMS />
+          </ProtectedRoute>
+        )}
+      </Route>
       <Route path="/admin">
         {() => (
           <ProtectedRoute requiredRole="admin">

@@ -1,6 +1,7 @@
 import { COOKIE_NAME } from "../shared/const.js";
 import { getSessionCookieOptions } from "./_core/cookies.js";
 import { systemRouter } from "./_core/systemRouter.js";
+import { cmsRouter } from "./_core/cms.js";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc.js";
 import { addSubscriber, unsubscribe, getActiveSubscribers, createBlogPost, getBlogPosts, getBlogPostById, updateBlogPost, deleteBlogPost, getHomeContent, updateHomeContent, getAboutContent, updateAboutContent, getContactContent, updateContactContent, getFooterContent, updateFooterContent, getTeamMembers, createTeamMember, updateTeamMember, deleteTeamMember } from "./db.js";
 import { z } from "zod";
@@ -8,6 +9,7 @@ import { z } from "zod";
 export const appRouter = router({
   // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
   system: systemRouter,
+  cms: cmsRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

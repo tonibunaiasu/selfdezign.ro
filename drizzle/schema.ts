@@ -177,6 +177,93 @@ export const seoMetadata = mysqlTable("seoMetadata", {
 export type SeoMetadata = typeof seoMetadata.$inferSelect;
 export type InsertSeoMetadata = typeof seoMetadata.$inferInsert;
 
+// Team Page Content
+export const teamPageContent = mysqlTable("teamPageContent", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 500 }),
+  description: text("description"),
+  image: varchar("image", { length: 500 }),
+  language: varchar("language", { length: 10 }).default("ro").notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type TeamPageContent = typeof teamPageContent.$inferSelect;
+export type InsertTeamPageContent = typeof teamPageContent.$inferInsert;
+
+// Projects Page Content
+export const projectsPageContent = mysqlTable("projectsPageContent", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 500 }),
+  description: text("description"),
+  image: varchar("image", { length: 500 }),
+  language: varchar("language", { length: 10 }).default("ro").notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ProjectsPageContent = typeof projectsPageContent.$inferSelect;
+export type InsertProjectsPageContent = typeof projectsPageContent.$inferInsert;
+
+// Projects
+export const projects = mysqlTable("projects", {
+  id: int("id").autoincrement().primaryKey(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  title: varchar("title", { length: 500 }).notNull(),
+  description: text("description"),
+  content: text("content"),
+  image: varchar("image", { length: 500 }),
+  category: varchar("category", { length: 255 }),
+  order: int("order").default(0),
+  language: varchar("language", { length: 10 }).default("ro").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Project = typeof projects.$inferSelect;
+export type InsertProject = typeof projects.$inferInsert;
+
+// Blog Page Content
+export const blogPageContent = mysqlTable("blogPageContent", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 500 }),
+  description: text("description"),
+  image: varchar("image", { length: 500 }),
+  language: varchar("language", { length: 10 }).default("ro").notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type BlogPageContent = typeof blogPageContent.$inferSelect;
+export type InsertBlogPageContent = typeof blogPageContent.$inferInsert;
+
+// Media Page Content
+export const mediaPageContent = mysqlTable("mediaPageContent", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 500 }),
+  description: text("description"),
+  image: varchar("image", { length: 500 }),
+  language: varchar("language", { length: 10 }).default("ro").notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type MediaPageContent = typeof mediaPageContent.$inferSelect;
+export type InsertMediaPageContent = typeof mediaPageContent.$inferInsert;
+
+// Media Items
+export const mediaItems = mysqlTable("mediaItems", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 500 }).notNull(),
+  description: text("description"),
+  image: varchar("image", { length: 500 }),
+  link: varchar("link", { length: 500 }),
+  type: varchar("type", { length: 50 }), // 'article', 'interview', 'podcast', etc.
+  order: int("order").default(0),
+  language: varchar("language", { length: 10 }).default("ro").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type MediaItem = typeof mediaItems.$inferSelect;
+export type InsertMediaItem = typeof mediaItems.$inferInsert;
+
 // Content Versions/History
 export const contentHistory = mysqlTable("contentHistory", {
   id: int("id").autoincrement().primaryKey(),
