@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Linkedin, Mail } from "lucide-react";
 import Layout from "@/components/Layout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useCMSContent } from "@/hooks/useCMSContent";
 
 interface TeamMember {
   id: string;
@@ -61,24 +62,25 @@ const teamMembers: TeamMember[] = [
 ];
 
 export default function Team() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+  const { content: pageContent, loading: contentLoading } = useCMSContent("cms.getTeamPageContent");;
 
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-black text-white">
+      <section className="py-20 bg-gradient-to-br from-black to-gray-900 text-white">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl"
+            className="max-w-2xl"
           >
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-              {t.team.title}<span className="text-[#d4ff00]">.</span>
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+              {pageContent?.title || t.team.title}
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-              {t.team.subtitle}
+            <p className="text-xl text-gray-300">
+              {pageContent?.description || t.team.subtitle}
             </p>
           </motion.div>
         </div>
@@ -89,35 +91,35 @@ export default function Team() {
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
             {teamMembers.map((member, index) => (
-              <motion.div
-                key={member.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group"
-              >
-                <div className="flex flex-col md:flex-row gap-6">
-                  {/* Photo */}
-                  <div className="w-full md:w-48 h-64 md:h-56 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                    <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          // Fallback to initials if image doesn't load
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          target.parentElement!.innerHTML = `
-                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#d4ff00] to-[#a8cc00]">
-                              <span class="text-4xl font-bold text-black">${member.name.split(' ').map(n => n[0]).join('')}</span>
-                            </div>
-                          `;
-                        }}
-                      />
-                    </div>
+            <motion.div
+              key={member.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="group"
+            >
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* Photo */}
+                <div className="w-full md:w-48 h-64 md:h-56 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                  <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                    <img
+                      src={pageContent?.image || member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback to initials if image doesn't load
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        target.parentElement!.innerHTML = `
+                          <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#d4ff00] to-[#a8cc00]">
+                            <span class="text-4xl font-bold text-black">${member.name.split(' ').map(n => n[0]).join('')}</span>
+                          </div>
+                        `;
+                      }}
+                    />
                   </div>
+                </div>
 
                   {/* Info */}
                   <div className="flex-1">
