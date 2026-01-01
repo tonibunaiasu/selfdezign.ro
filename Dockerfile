@@ -32,6 +32,7 @@ RUN pnpm install --frozen-lockfile --prod
 
 # Copy backend dist and frontend public from build stage
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/shared ./dist/shared
 
 # Expose port
 EXPOSE 3000
