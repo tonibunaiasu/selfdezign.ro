@@ -1,27 +1,21 @@
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ContentEditor from "@/components/ContentEditor";
-import { trpc } from "@/lib/trpc";
 import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AdminCMS() {
   const [activeTab, setActiveTab] = useState("team");
 
-  // Team Page
-  const teamContent = trpc.cms.getTeamPageContent.useQuery();
-  const updateTeamContent = trpc.cms.updateTeamPageContent.useMutation();
-
-  // Projects Page
-  const projectsContent = trpc.cms.getProjectsPageContent.useQuery();
-  const updateProjectsContent = trpc.cms.updateProjectsPageContent.useMutation();
-
-  // Blog Page
-  const blogContent = trpc.cms.getBlogPageContent.useQuery();
-  const updateBlogContent = trpc.cms.updateBlogPageContent.useMutation();
-
-  // Media Page
-  const mediaContent = trpc.cms.getMediaPageContent.useQuery();
-  const updateMediaContent = trpc.cms.updateMediaPageContent.useMutation();
+  const handleSave = async (data: Record<string, any>) => {
+    try {
+      // Placeholder for API calls
+      console.log("Saving content:", data);
+      // TODO: Implement actual API calls when backend is ready
+      return Promise.resolve();
+    } catch (error) {
+      throw error;
+    }
+  };
 
   return (
     <DashboardLayout>
@@ -43,82 +37,74 @@ export default function AdminCMS() {
 
           {/* Team Page */}
           <TabsContent value="team">
-            {teamContent.isLoading ? (
-              <div>Se încarcă...</div>
-            ) : (
-              <ContentEditor
-                title="Pagina Echipei"
-                fields={[
-                  { name: "title", label: "Titlu", type: "text" },
-                  { name: "description", label: "Descriere", type: "textarea" },
-                  { name: "image", label: "Imagine", type: "image" },
-                ]}
-                initialData={teamContent.data || {}}
-                onSave={async (data) => {
-                  await updateTeamContent.mutateAsync(data);
-                }}
-              />
-            )}
+            <ContentEditor
+              title="Pagina Echipei"
+              fields={[
+                { name: "title", label: "Titlu", type: "text" },
+                { name: "description", label: "Descriere", type: "textarea" },
+                { name: "image", label: "Imagine", type: "image" },
+              ]}
+              initialData={{
+                title: "Echipa Noastră",
+                description: "<p>Descrierea echipei...</p>",
+                image: "https://via.placeholder.com/800x400",
+              }}
+              onSave={handleSave}
+            />
           </TabsContent>
 
           {/* Projects Page */}
           <TabsContent value="projects">
-            {projectsContent.isLoading ? (
-              <div>Se încarcă...</div>
-            ) : (
-              <ContentEditor
-                title="Pagina Proiecte"
-                fields={[
-                  { name: "title", label: "Titlu", type: "text" },
-                  { name: "description", label: "Descriere", type: "textarea" },
-                  { name: "image", label: "Imagine", type: "image" },
-                ]}
-                initialData={projectsContent.data || {}}
-                onSave={async (data) => {
-                  await updateProjectsContent.mutateAsync(data);
-                }}
-              />
-            )}
+            <ContentEditor
+              title="Pagina Proiecte"
+              fields={[
+                { name: "title", label: "Titlu", type: "text" },
+                { name: "description", label: "Descriere", type: "textarea" },
+                { name: "image", label: "Imagine", type: "image" },
+              ]}
+              initialData={{
+                title: "Proiectele Noastre",
+                description: "<p>Descrierea proiectelor...</p>",
+                image: "https://via.placeholder.com/800x400",
+              }}
+              onSave={handleSave}
+            />
           </TabsContent>
 
           {/* Blog Page */}
           <TabsContent value="blog">
-            {blogContent.isLoading ? (
-              <div>Se încarcă...</div>
-            ) : (
-              <ContentEditor
-                title="Pagina Blog"
-                fields={[
-                  { name: "title", label: "Titlu", type: "text" },
-                  { name: "description", label: "Descriere", type: "textarea" },
-                  { name: "image", label: "Imagine", type: "image" },
-                ]}
-                initialData={blogContent.data || {}}
-                onSave={async (data) => {
-                  await updateBlogContent.mutateAsync(data);
-                }}
-              />
-            )}
+            <ContentEditor
+              title="Pagina Blog"
+              fields={[
+                { name: "title", label: "Titlu", type: "text" },
+                { name: "description", label: "Descriere", type: "textarea" },
+                { name: "image", label: "Imagine", type: "image" },
+              ]}
+              initialData={{
+                title: "Blog",
+                description: "<p>Descrierea blog-ului...</p>",
+                image: "https://via.placeholder.com/800x400",
+              }}
+              onSave={handleSave}
+            />
           </TabsContent>
 
           {/* Media Page */}
           <TabsContent value="media">
-            {mediaContent.isLoading ? (
-              <div>Se încarcă...</div>
-            ) : (
-              <ContentEditor
-                title="Pagina Media"
-                fields={[
-                  { name: "title", label: "Titlu", type: "text" },
-                  { name: "description", label: "Descriere", type: "textarea" },
-                  { name: "image", label: "Imagine", type: "image" },
-                ]}
-                initialData={mediaContent.data || {}}
-                onSave={async (data) => {
-                  await updateMediaContent.mutateAsync(data);
-                }}
-              />
-            )}
+            <ContentEditor
+              title="Pagina Media"
+              fields={[
+                { name: "title", label: "Titlu", type: "text" },
+                { name: "description", label: "Descriere", type: "textarea" },
+                { name: "image", label: "Imagine", type: "image" },
+              ]}
+              initialData={{
+                title: "Aparituri Media",
+                description: "<p>Descrierea apariturilor media...</p>",
+                image: "https://via.placeholder.com/800x400",
+              }}
+              onSave={handleSave}
+            />
           </TabsContent>
         </Tabs>
       </div>
