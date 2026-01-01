@@ -3,10 +3,10 @@ import express from "express";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { registerOAuthRoutes } from "./oauth.js.js";
-import { appRouter } from "../routers.js.js";
-import { createContext } from "./context.js.js";
-import { serveStatic } from "./vite.js.js";
+import { registerOAuthRoutes } from "./oauth.js";
+import { appRouter } from "../routers.js";
+import { createContext } from "./context.js";
+import { serveStatic } from "./vite.js";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
