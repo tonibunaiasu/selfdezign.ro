@@ -46,26 +46,47 @@ jobs:
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.VPS_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H 31.97.125.27 >> ~/.ssh/known_hosts 2>/dev/null || true
 
       - name: Deploy to VPS
         run: |
-          scp -r dist/* root@${{ secrets.VPS_HOST }}:/var/www/selfdezign.ro/
-          ssh root@${{ secrets.VPS_HOST }} 'cd /var/www/selfdezign.ro && npm install && npm start'
+          ssh -i ~/.ssh/deploy_key root@31.97.125.27 << 'DEPLOY_EOF'
+          set -e
+          echo "=== Starting deployment ==="
+          cd /opt/selfdezign/app
+          echo "=== Pulling latest code from GitHub ==="
+          git fetch origin main
+          git reset --hard origin/main
+          echo "=== Installing dependencies ==="
+          npm install --legacy-peer-deps
+          echo "=== Building application ==="
+          npm run build
+          echo "=== Restarting Docker container ==="
+          docker restart selfdezign-app
+          echo "=== Waiting for container to be ready ==="
+          sleep 5
+          echo "=== Verifying deployment ==="
+          if curl -f http://localhost:3000 > /dev/null 2>&1; then
+            echo "✅ Deployment successful!"
+          else
+            echo "❌ Deployment failed - app not responding"
+            exit 1
+          fi
+          DEPLOY_EOF
 
       - name: Verify deployment
         run: |
-          sleep 10
-          curl -f http://${{ secrets.VPS_HOST }}:3000/ || exit 1
+          sleep 5
+          curl -f http://31.97.125.27:3000/ || exit 1
 
       - name: Deployment success notification
         if: success()
         run: |
           echo "✅ Deployment successful!"
           echo "📦 Build: ${{ github.sha }}"
-          echo "🚀 Deployed to: http://${{ secrets.VPS_HOST }}"
+          echo "🚀 Deployed to: www.selfdezign.ro"
 
       - name: Deployment failure notification
         if: failure()
