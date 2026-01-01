@@ -36,5 +36,5 @@ COPY --from=builder /app/client/dist ./dist/public
 # Expose port
 EXPOSE 3000
 
-# Start
-CMD ["node", "dist/index.js"]
+# Start using pnpm
+CMD ["pnpm", "start"]
