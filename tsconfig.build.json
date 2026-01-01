@@ -6,9 +6,9 @@
     "lib": ["ES2020"],
     "outDir": "./dist",
     "rootDir": ".",
-    "baseUrl": ".",
+    "baseUrl": "./server",
     "paths": {
-      "@shared/*": ["shared/*"]
+      "@shared/*": ["../shared/*"]
     },
     "declaration": false,
     "sourceMap": false,
