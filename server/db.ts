@@ -1,6 +1,6 @@
 import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, subscribers, InsertSubscriber, Subscriber, blogPosts, BlogPost, InsertBlogPost } from "../drizzle/schema";
+import { InsertUser, users, subscribers, InsertSubscriber, Subscriber, blogPosts, BlogPost, InsertBlogPost, homeContent, aboutContent, contactContent, footerContent, teamMembers } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -237,6 +237,185 @@ export async function deleteBlogPost(id: number): Promise<boolean> {
     return true;
   } catch (error) {
     console.error("[Database] Failed to delete blog post:", error);
+    throw error;
+  }
+}
+
+
+// Content Management functions
+export async function getHomeContent(language: string = 'ro'): Promise<any> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db.select().from(homeContent).where(eq(homeContent.language, language)).limit(1);
+    return result.length > 0 ? result[0] : null;
+  } catch (error) {
+    console.error("[Database] Failed to get home content:", error);
+    return null;
+  }
+}
+
+export async function updateHomeContent(language: string, data: any): Promise<any> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const existing = await getHomeContent(language);
+    if (existing) {
+      await db.update(homeContent).set(data).where(eq(homeContent.language, language));
+    } else {
+      await db.insert(homeContent).values({ ...data, language });
+    }
+    return await getHomeContent(language);
+  } catch (error) {
+    console.error("[Database] Failed to update home content:", error);
+    throw error;
+  }
+}
+
+export async function getAboutContent(language: string = 'ro'): Promise<any> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db.select().from(aboutContent).where(eq(aboutContent.language, language)).limit(1);
+    return result.length > 0 ? result[0] : null;
+  } catch (error) {
+    console.error("[Database] Failed to get about content:", error);
+    return null;
+  }
+}
+
+export async function updateAboutContent(language: string, data: any): Promise<any> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const existing = await getAboutContent(language);
+    if (existing) {
+      await db.update(aboutContent).set(data).where(eq(aboutContent.language, language));
+    } else {
+      await db.insert(aboutContent).values({ ...data, language });
+    }
+    return await getAboutContent(language);
+  } catch (error) {
+    console.error("[Database] Failed to update about content:", error);
+    throw error;
+  }
+}
+
+export async function getContactContent(language: string = 'ro'): Promise<any> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db.select().from(contactContent).where(eq(contactContent.language, language)).limit(1);
+    return result.length > 0 ? result[0] : null;
+  } catch (error) {
+    console.error("[Database] Failed to get contact content:", error);
+    return null;
+  }
+}
+
+export async function updateContactContent(language: string, data: any): Promise<any> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const existing = await getContactContent(language);
+    if (existing) {
+      await db.update(contactContent).set(data).where(eq(contactContent.language, language));
+    } else {
+      await db.insert(contactContent).values({ ...data, language });
+    }
+    return await getContactContent(language);
+  } catch (error) {
+    console.error("[Database] Failed to update contact content:", error);
+    throw error;
+  }
+}
+
+export async function getFooterContent(language: string = 'ro'): Promise<any> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db.select().from(footerContent).where(eq(footerContent.language, language)).limit(1);
+    return result.length > 0 ? result[0] : null;
+  } catch (error) {
+    console.error("[Database] Failed to get footer content:", error);
+    return null;
+  }
+}
+
+export async function updateFooterContent(language: string, data: any): Promise<any> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const existing = await getFooterContent(language);
+    if (existing) {
+      await db.update(footerContent).set(data).where(eq(footerContent.language, language));
+    } else {
+      await db.insert(footerContent).values({ ...data, language });
+    }
+    return await getFooterContent(language);
+  } catch (error) {
+    console.error("[Database] Failed to update footer content:", error);
+    throw error;
+  }
+}
+
+// Team management
+export async function getTeamMembers(language: string = 'ro'): Promise<any[]> {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db.select().from(teamMembers).where(eq(teamMembers.language, language));
+  } catch (error) {
+    console.error("[Database] Failed to get team members:", error);
+    return [];
+  }
+}
+
+export async function createTeamMember(data: any): Promise<any> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db.insert(teamMembers).values(data);
+    return data;
+  } catch (error) {
+    console.error("[Database] Failed to create team member:", error);
+    throw error;
+  }
+}
+
+export async function updateTeamMember(id: number, data: any): Promise<any> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    await db.update(teamMembers).set(data).where(eq(teamMembers.id, id));
+    const result = await db.select().from(teamMembers).where(eq(teamMembers.id, id)).limit(1);
+    return result.length > 0 ? result[0] : null;
+  } catch (error) {
+    console.error("[Database] Failed to update team member:", error);
+    throw error;
+  }
+}
+
+export async function deleteTeamMember(id: number): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+
+  try {
+    await db.delete(teamMembers).where(eq(teamMembers.id, id));
+    return true;
+  } catch (error) {
+    console.error("[Database] Failed to delete team member:", error);
     throw error;
   }
 }

@@ -29,7 +29,7 @@ async function startServer() {
       const contents = fs.readdirSync(parentDir);
       console.error("[ERROR] Parent directory contents:", contents);
     } catch (err) {
-      console.error("[ERROR] Could not read parent directory:", err.message);
+      console.error("[ERROR] Could not read parent directory:", err instanceof Error ? err.message : String(err));
     }
   }
   
@@ -47,7 +47,7 @@ async function startServer() {
     }
   });
   
-  const port = process.env.PORT || 3000;
+  const port = parseInt(process.env.PORT || "3000", 10);
   server.listen(port, "0.0.0.0", () => {
     console.log(`[Server] Running on http://0.0.0.0:${port}/`);
   });

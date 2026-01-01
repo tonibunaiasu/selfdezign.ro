@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "wouter";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -12,6 +12,7 @@ import {
   X,
   ChevronRight,
 } from "lucide-react";
+import { HomeContentForm, AboutContentForm, ContactContentForm, FooterContentForm, TeamMembersForm } from "@/components/AdminForms";
 
 type AdminSection =
   | "home"
@@ -139,64 +140,39 @@ export default function AdminDashboard() {
 
 // Section Components
 function HomeSection() {
-  return (
-    <Card className="p-6">
-      <h3 className="text-xl font-semibold mb-4">Home Page Content</h3>
-      <p className="text-muted-foreground">Coming soon...</p>
-    </Card>
-  );
+  return <HomeContentForm />;
 }
 
 function AboutSection() {
-  return (
-    <Card className="p-6">
-      <h3 className="text-xl font-semibold mb-4">About & Vision</h3>
-      <p className="text-muted-foreground">Coming soon...</p>
-    </Card>
-  );
+  return <AboutContentForm />;
 }
 
 function TeamSection() {
-  return (
-    <Card className="p-6">
-      <h3 className="text-xl font-semibold mb-4">Team Members</h3>
-      <p className="text-muted-foreground">Coming soon...</p>
-    </Card>
-  );
+  return <TeamMembersForm />;
 }
 
 function BlogSection() {
   return (
     <Card className="p-6">
       <h3 className="text-xl font-semibold mb-4">Blog Posts</h3>
-      <p className="text-muted-foreground">Coming soon...</p>
+      <p className="text-muted-foreground">Blog management coming soon...</p>
     </Card>
   );
 }
 
 function ContactSection() {
-  return (
-    <Card className="p-6">
-      <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
-      <p className="text-muted-foreground">Coming soon...</p>
-    </Card>
-  );
+  return <ContactContentForm />;
 }
 
 function FooterSection() {
-  return (
-    <Card className="p-6">
-      <h3 className="text-xl font-semibold mb-4">Footer Content</h3>
-      <p className="text-muted-foreground">Coming soon...</p>
-    </Card>
-  );
+  return <FooterContentForm />;
 }
 
 function SeoSection() {
   return (
     <Card className="p-6">
       <h3 className="text-xl font-semibold mb-4">SEO Metadata</h3>
-      <p className="text-muted-foreground">Coming soon...</p>
+      <p className="text-muted-foreground">SEO management coming soon...</p>
     </Card>
   );
 }

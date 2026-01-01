@@ -256,16 +256,16 @@
 - [x] Create database tables for SEO metadata
 - [x] Create database tables for content versions/history
 - [x] Build Admin Dashboard UI layout with sidebar navigation
-- [ ] Create Admin Home section (hero, featured project, testimonials)
-- [ ] Create Admin About section (about text, vision, values, principles)
-- [ ] Create Admin Team section (team members, descriptions, photos)
+- [x] Create Admin Home section (hero, featured project, testimonials)
+- [x] Create Admin About section (about text, vision, values, principles)
+- [x] Create Admin Team section (team members, descriptions, photos)
 - [ ] Create Admin Blog section (articles, rich text editor)
-- [ ] Create Admin Contact section (contact info, form settings)
-- [ ] Create Admin Footer section (links, company info)
-- [ ] Implement tRPC procedures for CRUD operations
-- [ ] Implement form components for each section
-- [ ] Implement multi-language support (RO/EN) for all content
-- [ ] Add authentication/authorization for admin access
+- [x] Create Admin Contact section (contact info, form settings)
+- [x] Create Admin Footer section (links, company info)
+- [x] Implement tRPC procedures for CRUD operations
+- [x] Implement form components for each section
+- [x] Implement multi-language support (RO/EN) for all content
+- [x] Add authentication/authorization for admin access
 - [ ] Test Admin Dashboard functionality
 - [ ] Deploy Admin Dashboard to VPS
 - [ ] (Future) Implement rich text editor (TipTap or similar)
