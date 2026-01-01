@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Loader2, Save, X } from "lucide-react";
 import { toast } from "sonner";
+import RichTextEditor from "./RichTextEditor";
 
 interface ContentEditorProps {
   title: string;
@@ -77,13 +78,13 @@ export default function ContentEditor({
             )}
 
             {field.type === "textarea" && (
-              <Textarea
-                id={field.name}
-                placeholder={field.placeholder}
-                value={data[field.name] || ""}
-                onChange={(e) => handleChange(field.name, e.target.value)}
-                className="mt-2 min-h-32"
-              />
+              <div className="mt-2">
+                <RichTextEditor
+                  value={data[field.name] || ""}
+                  onChange={(value) => handleChange(field.name, value)}
+                  placeholder={field.placeholder}
+                />
+              </div>
             )}
 
             {field.type === "image" && (
