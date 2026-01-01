@@ -23,8 +23,8 @@ WORKDIR /app
 
 RUN npm install -g pnpm@10.4.1
 
-# Copy package.json + lockfile
-COPY package.json pnpm-lock.yaml ./
+# Copy package.json + lockfile from builder
+COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
 
 # Install only production deps
 RUN pnpm install --frozen-lockfile --prod
