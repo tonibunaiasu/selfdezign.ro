@@ -4,7 +4,7 @@
     "module": "ES2020",
     "moduleResolution": "node",
     "lib": ["ES2020"],
-    "outDir": "./dist/server",
+    "outDir": "./dist",
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
@@ -25,6 +25,6 @@
     "forceConsistentCasingInFileNames": true,
     "noEmitOnError": false
   },
-  "include": ["server/**/*.ts"],
+  "include": ["server/**/*.ts", "shared/**/*.ts"],
   "exclude": ["node_modules", "dist", "client", "vite.config.ts"]
 }
