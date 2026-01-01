@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Linkedin, Mail } from "lucide-react";
 import Layout from "@/components/Layout";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useCMSContent } from "@/hooks/useCMSContent";
 
 interface TeamMember {
   id: string;
@@ -63,7 +62,7 @@ const teamMembers: TeamMember[] = [
 
 export default function Team() {
   const { language } = useLanguage();
-  const { content: pageContent, loading: contentLoading } = useCMSContent("cms.getTeamPageContent");;
+  // Removed useCMSContent - use fallback text instead
 
   return (
     <Layout>
@@ -77,10 +76,10 @@ export default function Team() {
             className="max-w-2xl"
           >
             <h1 className="text-5xl md:text-6xl font-bold mb-4">
-              {pageContent?.title || (language === 'ro' ? 'Echipa Noastră' : 'Our Team')}
+              {language === 'ro' ? 'Echipa Noastră' : 'Our Team'}
             </h1>
             <p className="text-xl text-gray-300">
-              {pageContent?.description || (language === 'ro' ? 'Oamenii din spatele SelfDezign' : 'The people behind SelfDezign')}
+              {language === 'ro' ? 'Oamenii din spatele SelfDezign' : 'The people behind SelfDezign'}
             </p>
           </motion.div>
         </div>
