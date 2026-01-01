@@ -262,9 +262,9 @@ export async function updateHomeContent(language: string, data: any): Promise<an
 
   try {
     const existing = await getHomeContent(language);
-    if (existing) {
+    if (existing && Object.keys(data).length > 0) {
       await db.update(homeContent).set(data).where(eq(homeContent.language, language));
-    } else {
+    } else if (!existing) {
       await db.insert(homeContent).values({ ...data, language });
     }
     return await getHomeContent(language);
@@ -293,9 +293,9 @@ export async function updateAboutContent(language: string, data: any): Promise<a
 
   try {
     const existing = await getAboutContent(language);
-    if (existing) {
+    if (existing && Object.keys(data).length > 0) {
       await db.update(aboutContent).set(data).where(eq(aboutContent.language, language));
-    } else {
+    } else if (!existing) {
       await db.insert(aboutContent).values({ ...data, language });
     }
     return await getAboutContent(language);
@@ -324,9 +324,9 @@ export async function updateContactContent(language: string, data: any): Promise
 
   try {
     const existing = await getContactContent(language);
-    if (existing) {
+    if (existing && Object.keys(data).length > 0) {
       await db.update(contactContent).set(data).where(eq(contactContent.language, language));
-    } else {
+    } else if (!existing) {
       await db.insert(contactContent).values({ ...data, language });
     }
     return await getContactContent(language);
@@ -355,9 +355,9 @@ export async function updateFooterContent(language: string, data: any): Promise<
 
   try {
     const existing = await getFooterContent(language);
-    if (existing) {
+    if (existing && Object.keys(data).length > 0) {
       await db.update(footerContent).set(data).where(eq(footerContent.language, language));
-    } else {
+    } else if (!existing) {
       await db.insert(footerContent).values({ ...data, language });
     }
     return await getFooterContent(language);
