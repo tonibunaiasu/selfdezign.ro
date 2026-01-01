@@ -29,11 +29,8 @@ COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
 # Install only production deps
 RUN pnpm install --frozen-lockfile --prod
 
-# Copy backend dist from build stage
+# Copy backend dist and frontend public from build stage
 COPY --from=builder /app/dist ./dist
-
-# Copy frontend dist to dist/public
-COPY --from=builder /app/client/dist ./dist/public
 
 # Expose port
 EXPOSE 3000
