@@ -35,4 +35,4 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts 2>/dev/null || true
           ssh $VPS_USER@$VPS_HOST 'mkdir -p /var/www/selfdezign/dist'
-          scp -r dist/* $VPS_USER@$VPS_HOST:/var/www/selfdezign/dist/          ssh $VPS_USER@$VPS_HOST 'sudo systemctl reload nginx'
+          scp -r dist/ $VPS_USER@$VPS_HOST:/var/www/selfdezign/
