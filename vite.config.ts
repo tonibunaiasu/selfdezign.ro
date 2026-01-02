@@ -5,7 +5,6 @@ import path from "path";
 import { defineConfig } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
-
 const plugins = [react(), tailwindcss(), vitePluginManusRuntime()];
 
 export default defineConfig({
@@ -24,6 +23,33 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
     chunkSizeWarningLimit: 2000,
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ["console.info", "console.debug"],
+      },
+      format: {
+        comments: false,
+      },
+    },
+    cssCodeSplit: true,
+    reportCompressedSize: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom", "react-router-dom"],
+          framer: ["framer-motion"],
+          lucide: ["lucide-react"],
+        },
+        chunkFileNames: "assets/[name]-[hash].js",
+        entryFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash][extname]",
+      },
+    },
+    target: "esnext",
+    sourcemap: false,
   },
   server: {
     host: true,
@@ -36,33 +62,9 @@ export default defineConfig({
       "localhost",
       "127.0.0.1",
     ],
-        build: {
-      rollupOptions: {
-        output: {
-          m
-                  assetInlineLimit: 4096,anualChunks: {
-                  target: 'esnext',
-            'vendor': ['react', 'react-dom', 'react-router-dom'],
-            'framer': ['framer-motion'],
-            'lucide': ['lucide-react']
-          },
-          chunkFileNames: 'assets/[name]-[hash].js',
-          entryFileNames: 'assets/[name]-[hash].js'
-        }
-      },
-      minify: 'terser',
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true
-        }
-      },
-      cssCodeSplit: true,
-      reportCompressedSize: false
-    },
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
-    },
+  },
+  optimizeDeps: {
+    include: ["react", "react-dom", "react-router-dom", "framer-motion"],
+    exclude: ["@vite/client", "@vite/env"],
   },
 });
