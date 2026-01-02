@@ -9,7 +9,7 @@ RUN npm install -g pnpm@10.4.1
 # Copy dependencies
 COPY pnpm-lock.yaml package.json ./
 RUN pnpm install --frozen-lockfile
-
+RUN npm install --legacy-peer-deps
 # Copy source code
 COPY . .
 
@@ -27,7 +27,7 @@ RUN npm install -g pnpm@10.4.1
 COPY package.json pnpm-lock.yaml ./
 
 # Install only production deps
-RUN pnpm install --frozen-lockfile --prod
+RUN npm install --legacy-peer-deps --prod
 
 # Copy dist from build stage
 COPY --from=builder /app/dist ./dist
