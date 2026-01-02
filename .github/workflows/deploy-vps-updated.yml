@@ -60,4 +60,7 @@ jobs:
           fi
           rm -rf dist.old /tmp/dist.tar.gz
           echo "✓ Deployment completed"
+           echo "Restarting application services..."
+ sleep 2
+ docker compose restart || docker restart selfdezign-app || true
           EOF
