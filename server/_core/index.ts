@@ -31,6 +31,25 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  
+ // Trust Cloudflare proxy headers
+ app.set('trust proxy', ['cloudflare', '127.0.0.1']);
+
+ // Prevent redirect loop with Cloudflare Flexible SSL
+ // When using Cloudflare Free (Flexible mode), traffic arrives as HTTP to origin
+ // Only redirect to HTTPS if NOT coming from Cloudflare
+ app.use((req, res, next) => {
+   const isBehindCloudflare = req.headers['cf-ray'] || req.headers['cf-connecting-ip'];
+   const isProduction = process.env.NODE_ENV === 'production';
+   
+   // In production: redirect to HTTPS only if NOT from Cloudflare
+   if (isProduction && !isBehindCloudflare && req.protocol === 'http') {
+     return res.redirect(301, `https://${req.headers.host}${req.url}`);
+   }
+   
+   next();
+ });
+
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
