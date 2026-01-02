@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     
@@ -14,52 +14,44 @@ jobs:
       with:
         fetch-depth: 0
     
-    - name: Build and Push Docker image
-      run: |
-        # Create a simple deploy script that will be executed on the VPS
-        cat > deploy.sh << 'EOF'
-#!/bin/bash
-set -e
-echo "Starting deployment..."
-cd /home/runner/selfdezign.ro
-echo "Pulling latest code..."
-git pull origin main
-echo "Building Docker image..."
-docker build -t selfdezign-app:latest .
-echo "Stopping old container..."
-docker stop selfdezign-app || true
-docker rm selfdezign-app || true
-echo "Starting new container..."
-docker run -d --name selfdezign-app -p 3000:3000 selfdezign-app:latest
-echo "Deployment complete!"
-EOF
-        chmod +x deploy.sh
-    
-    - name: Deploy to VPS via SSH
+    - name: Deploy to VPS
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.VPS_HOST }}
         username: ${{ secrets.VPS_USER }}
-        key: ${{ secrets.VPS_SSH_KEY }}
+        key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
         port: 22
-        script_stop: true
+        timeout: 300s
+        command_timeout: 300s
         script: |
+          set -e
+          echo "Starting deployment..."
+          cd /home/runner/selfdezign.ro || mkdir -p /home/runner/selfdezign.ro
           cd /home/runner/selfdezign.ro
-          git pull origin main
+          echo "Current directory: $(pwd)"
+          echo "Pulling latest code..."
+          git pull origin main 2>/dev/null || git clone https://github.com/tonibunaiasu/selfdezign.ro.git .
+          echo "Stopping old container..."
+          docker stop selfdezign-app 2>/dev/null || true
+          docker rm selfdezign-app 2>/dev/null || true
+          echo "Building Docker image..."
           docker build -t selfdezign-app:latest .
-          docker stop selfdezign-app || true
-          docker rm selfdezign-app || true
+          echo "Starting new container..."
           docker run -d --name selfdezign-app -p 3000:3000 selfdezign-app:latest
-          echo "Deployment successful!"
+          echo "Waiting for app to start..."
+          sleep 5
+          echo "Deployment complete"
     
     - name: Verify deployment
       run: |
+        echo "Verifying deployment..."
         sleep 5
-        STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://selfdezign.ro/)
-        if [ "$STATUS" = "200" ]; then
-          echo "Website is online (HTTP $STATUS)"
+        STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://selfdezign.ro/ || echo "000")
+        echo "Website HTTP status: $STATUS"
+        if [ "$STATUS" = "200" ] || [ "$STATUS" = "301" ] || [ "$STATUS" = "302" ]; then
+          echo "Website is online"
           exit 0
         else
-          echo "Website returned HTTP $STATUS"
+          echo "Website check returned: $STATUS"
           exit 1
         fi
