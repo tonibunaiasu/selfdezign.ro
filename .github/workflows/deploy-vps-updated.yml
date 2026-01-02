@@ -10,25 +10,54 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-            - uses: pnpm/action-setup@v2
+      
+      - uses: pnpm/action-setup@v2
         with:
           version: 8
-
+      
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'pnpm'
+      
       - name: Build application
         run: |
           pnpm install
           pnpm run -C client build
-ls -la dist/ && echo 'Build output found'      - name: Deploy to VPS
+          ls -la dist/ && echo 'Build output found'
+      
+      - name: Deploy to VPS
         env:
           SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USER: ${{ secrets.VPS_USER }}
         run: |
-          tar -czf dist.tar.gz -C . dist
-          scp -C dist.tar.gz $VPS_USER@$VPS_HOST:/tmp/
-ssh $VPS_USER@$VPS_HOST "cd /var/www/selfdezign && rm -rf dist && tar -xzf /tmp/dist.tar.gz && rm /tmp/dist.tar.gz && sudo systemctl reload nginx"
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts
+          
+          tar -czf dist.tar.gz -C client dist/
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key dist.tar.gz $VPS_USER@$VPS_HOST:/tmp/
+          
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST 'bash -s' << EOF
+          set -e
+          echo "Starting deployment..."
+          cd /var/www/selfdezign
+          rm -rf dist.old
+          [ -d dist ] && mv dist dist.old || true
+          mkdir -p dist
+          tar -xzf /tmp/dist.tar.gz -C dist --strip-components=1
+          chmod -R 755 dist
+          find dist -type f -exec chmod 644 {} \\;
+          if [ -f dist/index.html ]; then
+            echo "✓ Deployment successful"
+            wc -c dist/index.html
+          else
+            echo "✗ Deployment failed"
+            exit 1
+          fi
+          rm -rf dist.old /tmp/dist.tar.gz
+          echo "✓ Deployment completed"
+          EOF
