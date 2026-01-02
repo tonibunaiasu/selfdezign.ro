@@ -103,7 +103,7 @@ export default function Team() {
                 <div className="w-full md:w-48 h-64 md:h-56 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                   <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
                     <img
-                      src={pageContent?.image || member.image}
+                      src={member?.image || member.image}
                       alt={member.name}
                       className="w-full h-full object-cover"
                       onError={(e) => {
