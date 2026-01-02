@@ -15,17 +15,13 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18'
-        cache: 'pnpm'
+        cache: 'pnpmnpm
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 8
 
     - name: Build application
       run: |
-        pnpm install
-        pnpm run build
+        npm install
+        npm run build
 
     - name: Deploy to VPS
       env:
