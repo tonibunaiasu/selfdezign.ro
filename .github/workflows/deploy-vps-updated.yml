@@ -37,7 +37,6 @@ jobs:
         ssh $VPS_USER@$VPS_HOST 'mkdir -p /var/www/selfdezign && chmod 755 /var/www/selfdezign'
         
         # Copy the dist folder to the VPS
-        scp -r dist/ $VPS_USER@$VPS_HOST:/var/www/selfdezign/
-        
+        scp -r dist/public/* $VPS_USER@$VPS_HOST:/var/www/selfdezign/dist/        
         # Reload Nginx to serve the new static files
         ssh $VPS_USER@$VPS_HOST 'sudo systemctl reload nginx'
