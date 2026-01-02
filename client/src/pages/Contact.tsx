@@ -59,16 +59,16 @@ export default function Contact() {
           {/* Contact Info */}
           <div className="space-y-12">
             <div>
-              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3 text-accent-on-white">
-                <Clock className="text-accent-on-white w-6 h-6" />
+              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3">
+                <Clock className="text-accent w-6 h-6" />
                 {t.contact.scheduleTitle}
               </h3>
               <p className="text-gray-600 text-lg">{t.contact.schedule}</p>
             </div>
 
             <div>
-              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3 text-accent-on-white">
-                <Phone className="text-accent-on-white w-6 h-6" />
+              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3">
+                <Phone className="text-accent w-6 h-6" />
                 {t.contact.phoneTitle}
               </h3>
               <div className="space-y-2">
@@ -78,17 +78,17 @@ export default function Contact() {
             </div>
 
             <div>
-              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3 text-accent-on-white">
-                <MapPin className="text-accent-on-white w-6 h-6" />
+              <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3">
+                <MapPin className="text-accent w-6 h-6" />
                 {t.contact.addressTitle}
               </h3>
               <div className="space-y-6">
                 <div className="bg-white p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                  <span className="text-black font-bold text-xs uppercase tracking-widest mb-3 block bg-accent px-3 py-2 inline-block rounded">{t.contact.address1}</span>
+                  <span className="text-accent font-bold text-xs uppercase tracking-widest mb-2 block">{t.contact.address1}</span>
                   <p className="text-gray-800 font-medium">Strada Politiei, nr. 3, București</p>
                 </div>
                 <div className="bg-white p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                  <span className="text-black font-bold text-xs uppercase tracking-widest mb-3 block bg-accent px-3 py-2 inline-block rounded">{t.contact.address2}</span>
+                  <span className="text-accent font-bold text-xs uppercase tracking-widest mb-2 block">{t.contact.address2}</span>
                   <p className="text-gray-800 font-medium">Calea Floreasca nr. 246C, etaj 18, București</p>
                 </div>
               </div>

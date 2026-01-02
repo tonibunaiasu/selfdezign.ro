@@ -184,15 +184,6 @@
 }
 
 @layer components {
-  /* Override accent color for text on white backgrounds */
-  .text-accent-on-white {
-    color: oklch(0.45 0.25 290); /* Royal blue/visiniu royal */
-  }
-  
-  .text-accent-on-white svg {
-    color: oklch(0.45 0.25 290); /* Royal blue/visiniu royal */
-  }
-
   /**
    * Custom container utility that centers content and adds responsive padding.
    *

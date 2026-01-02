@@ -1,13 +1,13 @@
+import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "path";
 import { defineConfig } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
-import htmlOptimizationPlugin from './client/src/lib/htmlOptimizationPlugin';
 
 
-const plugins = [react(), tailwindcss(), vitePluginManusRuntime, htmlOptimizationPlugin()()];
+const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()];
 
 export default defineConfig({
   plugins,
@@ -24,34 +24,6 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
-    chunkSizeWarningLimit: 2000,
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ["console.info", "console.debug"],
-      },
-      format: {
-        comments: false,
-      },
-    },
-    cssCodeSplit: true,
-    reportCompressedSize: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ["react", "react-dom", "react-router-dom"],
-          framer: ["framer-motion"],
-          lucide: ["lucide-react"],
-        },
-        chunkFileNames: "assets/[name]-[hash].js",
-        entryFileNames: "assets/[name]-[hash].js",
-        assetFileNames: "assets/[name]-[hash][extname]",
-      },
-    },
-    target: "esnext",
-    sourcemap: false,
   },
   server: {
     host: true,
@@ -64,15 +36,9 @@ export default defineConfig({
       "localhost",
       "127.0.0.1",
     ],
-  },
-  optimizeDeps: {
-    include: ["react", "react-dom", "react-router-dom", "framer-motion"],
-    exclude: ["@vite/client", "@vite/env"],
+    fs: {
+      strict: true,
+      deny: ["**/.*"],
+    },
   },
 });
-
-
-  // OPTIMIZATION STEP 3: Dynamic Code Splitting & Tree-shaking
-  // Reduce unused JavaScript by ~906 KiB through improved bundling
-  // Enabled by: manualChunks strategy, proper UI component imports, and es-side-effects
-  // See OPTIMIZATION_STEP3.md for details

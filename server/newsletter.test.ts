@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
-import { appRouter } from "./routers.js";
-import type { TrpcContext } from "./_core/context.js";
+import { appRouter } from "./routers";
+import type { TrpcContext } from "./_core/context";
 
 // Mock the database functions
 vi.mock("./db", () => ({

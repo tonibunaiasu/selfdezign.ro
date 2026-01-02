@@ -4,7 +4,6 @@ import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Testimonials from "@/components/Testimonials";
 import SEO from "@/components/SEO";
-import { OptimizedImage } from "@/components/OptimizedImage";
 
 export default function Home() {
   const { t } = useLanguage();

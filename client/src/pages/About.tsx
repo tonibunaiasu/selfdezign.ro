@@ -84,7 +84,7 @@ export default function About() {
             <Link href="/viziune">
               <a className="group block bg-white p-8 border border-gray-200 hover:border-accent transition-colors">
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-black text-sm font-bold uppercase tracking-widest">01</span>
+                  <span className="text-accent text-sm font-bold uppercase tracking-widest">01</span>
                   <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-accent group-hover:translate-x-1 transition-all" />
                 </div>
                 <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-accent transition-colors">
@@ -96,7 +96,7 @@ export default function About() {
             <Link href="/valori">
               <a className="group block bg-white p-8 border border-gray-200 hover:border-accent transition-colors">
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-black text-sm font-bold uppercase tracking-widest">02</span>
+                  <span className="text-accent text-sm font-bold uppercase tracking-widest">02</span>
                   <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-accent group-hover:translate-x-1 transition-all" />
                 </div>
                 <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-accent transition-colors">
