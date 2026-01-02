@@ -1,3 +1,4 @@
+<!-- Workflow test run: 2026-01-02 14:00 UTC -->
 # SelfDezign Deployment Pipeline
 
 ## Architecture
