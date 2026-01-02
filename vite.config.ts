@@ -39,7 +39,9 @@ export default defineConfig({
         build: {
       rollupOptions: {
         output: {
-          manualChunks: {
+          m
+                  assetInlineLimit: 4096,anualChunks: {
+                  target: 'esnext',
             'vendor': ['react', 'react-dom', 'react-router-dom'],
             'framer': ['framer-motion'],
             'lucide': ['lucide-react']
