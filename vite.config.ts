@@ -41,5 +41,20 @@ export default defineConfig({
       strict: true,
       deny: ["**/.*"],
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: id => {
+            if (id.includes('node_modules')) {
+              if (id.includes('@radix-ui')) return 'vendor-ui';
+              return 'vendor';
+            }
+          },
+        },
+      },
+      assetsInlineLimit: 4096,
+      minify: 'terser',
+      terserOptions: { compress: { drop_console: true } },
+    },
   },
 });
