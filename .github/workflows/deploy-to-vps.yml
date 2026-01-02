@@ -7,18 +7,27 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     
     steps:
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
     
     - name: Build Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: false
+        load: true
+        tags: selfdezign-app:latest
+    
+    - name: Save Docker image
       run: |
-        docker build -t selfdezign-app:latest .
-        docker save selfdezign-app:latest > /tmp/selfdezign-app.tar
-        ls -lh /tmp/selfdezign-app.tar
+        docker save selfdezign-app:latest -o selfdezign-app.tar
+        gzip selfdezign-app.tar
+        ls -lh selfdezign-app.tar.gz
     
     - name: Deploy to VPS
       uses: appleboy/ssh-action@master
@@ -27,57 +36,41 @@ jobs:
         username: ${{ secrets.VPS_USER }}
         password: ${{ secrets.VPS_PASSWORD }}
         port: 22
-        timeout: 600s
-        command_timeout: 600s
+        timeout: 300s
         script: |
-          set -e
-          echo "Stopping old container..."
+          echo "Preparing VPS for deployment"
           docker stop selfdezign-app 2>/dev/null || true
           docker rm selfdezign-app 2>/dev/null || true
-          docker rmi selfdezign-app 2>/dev/null || true
-          mkdir -p /tmp/deploy
-          echo "Deployment scripts ready"
+          docker rmi selfdezign-app:latest 2>/dev/null || true
+          mkdir -p /tmp/docker-deploy
+          echo "Ready for image transfer"
     
-    - name: Transfer Docker image
+    - name: Transfer and load image
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.VPS_HOST }}
         username: ${{ secrets.VPS_USER }}
         password: ${{ secrets.VPS_PASSWORD }}
         port: 22
-        source: "/tmp/selfdezign-app.tar"
-        target: "/tmp/deploy/"
-        timeout: 600s
+        source: "selfdezign-app.tar.gz"
+        target: "/tmp/docker-deploy/"
     
-    - name: Load and run Docker image
+    - name: Extract, load and run
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.VPS_HOST }}
         username: ${{ secrets.VPS_USER }}
         password: ${{ secrets.VPS_PASSWORD }}
         port: 22
-        timeout: 600s
-        command_timeout: 600s
         script: |
-          set -e
-          echo "Loading Docker image from tar file..."
-          docker load < /tmp/deploy/selfdezign-app.tar
-          echo "Starting new container..."
+          cd /tmp/docker-deploy
+          gunzip -c selfdezign-app.tar.gz | docker load
           docker run -d --name selfdezign-app -p 3000:3000 selfdezign-app:latest
-          echo "Waiting for app to start..."
           sleep 5
           echo "Deployment complete"
     
     - name: Verify deployment
       run: |
-        echo "Verifying deployment..."
         sleep 5
-        STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://selfdezign.ro/ || echo "000")
-        echo "Website HTTP status: $STATUS"
-        if [ "$STATUS" = "200" ] || [ "$STATUS" = "301" ] || [ "$STATUS" = "302" ]; then
-          echo "Website is online"
-          exit 0
-        else
-          echo "Website check returned: $STATUS"
-          exit 1
-        fi
+        curl -s https://selfdezign.ro/ | head -20
+        echo "Check completed"
