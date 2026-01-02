@@ -39,13 +39,13 @@ const teamMembers: TeamMember[] = [
     email: "toni@selfdezign.ro"
   },
   {
-    id: "marco",
+    id: "mario",
     name: "Mario",
     roleRo: "Junior Interior Designer",
     roleEn: "Junior Interior Designer",
     bioRo: "Mario aduce o perspectivă fresh și inovatoare în fiecare proiect. Specializat în design comercial și office, el transformă spațiile de lucru în medii care inspiră productivitate și creativitate.",
     bioEn: "Mario brings a fresh and innovative perspective to every project. Specializing in commercial and office design, he transforms workspaces into environments that inspire productivity and creativity.",
-    image: "/team/marco.webp",
+    image: "/team/mario.webp",
     email: "mario@selfdezign.ro"
   },
   {
