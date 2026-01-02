@@ -40,13 +40,13 @@ const teamMembers: TeamMember[] = [
   },
   {
     id: "marco",
-    name: "Marco",
-    roleRo: "Senior Interior Designer",
-    roleEn: "Senior Interior Designer",
-    bioRo: "Marco aduce o perspectivă fresh și inovatoare în fiecare proiect. Specializat în design comercial și office, el transformă spațiile de lucru în medii care inspiră productivitate și creativitate.",
-    bioEn: "Marco brings a fresh and innovative perspective to every project. Specializing in commercial and office design, he transforms workspaces into environments that inspire productivity and creativity.",
+    name: "Mario",
+    roleRo: "Junior Interior Designer",
+    roleEn: "Junior Interior Designer",
+    bioRo: "Mario aduce o perspectivă fresh și inovatoare în fiecare proiect. Specializat în design comercial și office, el transformă spațiile de lucru în medii care inspiră productivitate și creativitate.",
+    bioEn: "Mario brings a fresh and innovative perspective to every project. Specializing in commercial and office design, he transforms workspaces into environments that inspire productivity and creativity.",
     image: "/team/marco.webp",
-    email: "marco@selfdezign.ro"
+    email: "mario@selfdezign.ro"
   },
   {
     id: "teodora-brancus",
