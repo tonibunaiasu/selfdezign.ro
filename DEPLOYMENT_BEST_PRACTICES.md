@@ -271,3 +271,60 @@ Import Rules:
 - [ ] Configurează cron monitor pe VPS
 - [ ] Documentează path resolution în proiect
 - [ ] Creează runbook pentru incident response
+
+
+## 13. **Cloudflare SSL/TLS Configuration**
+
+### Problema: ERR_TOO_MANY_REDIRECTS cu Cloudflare Flexible SSL
+
+Dacă folosești Cloudflare Free plan cu modul **Flexible SSL**, serverul tău primește request-uri pe HTTP, dar le redirecționează la HTTPS, ceea ce crează un loop infinit:
+
+```
+Visitor (HTTPS) → Cloudflare (decrypts) → Origin (HTTP)
+         ↑                                        ↓
+         ←───── Server redirect HTTP→HTTPS ─────┘
+```
+
+### Soluție: Detect Cloudflare Headers
+
+Middleware-ul din `server/_core/index.ts` detectează traficul din Cloudflare și **NU** redirecționează HTTPS dacă vine de acolo:
+
+```typescript
+// Detectează header-ele Cloudflare
+const isBehindCloudflare = req.headers['cf-ray'] || req.headers['cf-connecting-ip'];
+
+// Redirect doar dacă NU ești în spatele Cloudflare
+if (isProduction && !isBehindCloudflare && req.protocol === 'http') {
+  return res.redirect(301, `https://${req.headers.host}${req.url}`);
+}
+```
+
+### Cloudflare Settings (Recomandări):
+
+1. **SSL/TLS Mode**: Setează pe **Flexible** (Free) sau **Full** (cu certificat pe origin)
+2. **Always Use HTTPS**: ✅ Enabled (Cloudflare va força vizitatorii să folosească HTTPS)
+3. **HSTS**: ✅ Enabled (cu max-age pe 6 luni minimum)
+4. **Opportunistic Encryption**: ✅ Enabled
+5. **Automatic HTTPS Rewrites**: ✅ Enabled
+
+### Testing:
+
+```bash
+# Testează dacă serverul răspunde corect pe HTTP (ca Cloudflare)
+curl -i http://localhost:3000
+# → Ar trebui să primești response-ul (NU redirect)
+
+# Testează dacă redirect HTTP→HTTPS funcționează LOCAL (fără Cloudflare headers)
+curl -i -H "Host: selfdezign.ro" http://localhost:3000
+# → Ar trebui să primești 301 redirect la HTTPS
+```
+
+### Migrare la Full SSL (Opțional, pentru mai mult control):
+
+Dacă dorești să folosești Cloudflare **Full** mode (mai sigur):
+1. Genereaza Cloudflare Origin Certificate din dashboard
+2. Instalează-l pe origin (nginx/express)
+3. Setează SSL/TLS Mode pe **Full (strict)**
+4. Acum toate comunicatiile sunt HTTPS end-to-end
+
+---
