@@ -15,6 +15,8 @@ COPY . .
 
 # Build
 RUN pnpm run build
+RUN echo 'Builder stage - checking dist directory:' && ls -la /app/dist/ || echo 'No /app/dist directory'
+RUN echo 'Builder stage - checking dist/public directory:' && ls -la /app/dist/public/ || echo 'No /app/dist/public directory'
 
 # Production stage
 FROM node:22-alpine
