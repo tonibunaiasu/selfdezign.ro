@@ -28,7 +28,7 @@ jobs:
           cd /opt/selfdezign
           git fetch origin main
           git reset --hard origin/main
-          docker build--no-cache  -t selfdezign-app:latest .
+          docker build --build-arg CACHEBUST=$(date +%s) -t selfdezign-app:latest .
           docker stop selfdezign-app 2>/dev/null || true
           docker rm selfdezign-app 2>/dev/null || true
           docker run -d --name selfdezign-app -p 3000:3000 -e NODE_ENV=production selfdezign-app:latest
