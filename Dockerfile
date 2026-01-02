@@ -3,33 +3,28 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Install pnpm
-RUN npm install -g pnpm@10.4.1
-
 # Copy package files
-COPY pnpm-lock.yaml package.json ./
+COPY package.json package-lock.json* ./
 
-# Install dependencies
-RUN pnpm install
+# Install dependencies with npm
+RUN npm install --legacy-peer-deps
 
 # Copy source code
 COPY . .
 
-# Build
-RUN pnpm run build
+# Build application
+RUN npm run build
 
 # Production stage
 FROM node:22-alpine
 
 WORKDIR /app
 
-RUN npm install -g pnpm@10.4.1
-
-# Copy package.json
-COPY package.json pnpm-lock.yaml ./
+# Copy package.json for production dependencies
+COPY package.json package-lock.json* ./
 
 # Install only production dependencies
-RUN pnpm install --prod
+RUN npm ci --only=production --legacy-peer-deps
 
 # Copy dist from build stage
 COPY --from=builder /app/dist ./dist
@@ -37,5 +32,5 @@ COPY --from=builder /app/dist ./dist
 # Expose port
 EXPOSE 3000
 
-# Start
+# Start application
 CMD ["node", "dist/index.js"]
