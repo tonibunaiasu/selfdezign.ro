@@ -22,7 +22,8 @@ jobs:
       - name: Build application
         run: |
           pnpm install
-          pnpm run build
+          pnpm run -C client build
+          cp -r client/dist . || true
 
       - name: Deploy to VPS
         env:
