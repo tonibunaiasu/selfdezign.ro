@@ -30,9 +30,6 @@ jobs:
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USER: ${{ secrets.VPS_USER }}
         run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts 2>/dev/null || true
-          ssh $VPS_USER@$VPS_HOST 'mkdir -p /var/www/selfdezign/dist'
-          scp -r dist/. $VPS_USER@$VPS_HOST:/var/www/selfdezign/dist/
+          tar -czf dist.tar.gz -C . dist
+          scp -C dist.tar.gz $VPS_USER@$VPS_HOST:/tmp/
+          ssh $VPS_USER@$VPS_HOST "cd /var/www/selfdezign && rm -rf dist && tar -xzf /tmp/dist.tar.gz && rm /tmp/dist.tar.gz && sudo systemctl reload nginx"
