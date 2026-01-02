@@ -23,8 +23,7 @@ jobs:
         run: |
           pnpm install
           pnpm run -C client build
-test -d client/dist && cp -r client/dist . || (echo 'ERROR: client/dist not found' && exit 1)
-      - name: Deploy to VPS
+ls -la dist/ && echo 'Build output found'      - name: Deploy to VPS
         env:
           SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
           VPS_HOST: ${{ secrets.VPS_HOST }}
