@@ -33,8 +33,7 @@ async function startServer() {
   const server = createServer(app);
   
  // Trust Cloudflare proxy headers
- app.set('trust proxy', ['cloudflare', '127.0.0.1']);
-
+ app.set('trust proxy', ['127.0.0.1']);
  // Prevent redirect loop with Cloudflare Flexible SSL
  // When using Cloudflare Free (Flexible mode), traffic arrives as HTTP to origin
  // Only redirect to HTTPS if NOT coming from Cloudflare
