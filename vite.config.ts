@@ -4,8 +4,10 @@ import fs from "node:fs";
 import path from "path";
 import { defineConfig } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
+import htmlOptimizationPlugin from './client/src/lib/htmlOptimizationPlugin';
 
-const plugins = [react(), tailwindcss(), vitePluginManusRuntime()];
+
+const plugins = [react(), tailwindcss(), vitePluginManusRuntime, htmlOptimizationPlugin()()];
 
 export default defineConfig({
   plugins,
