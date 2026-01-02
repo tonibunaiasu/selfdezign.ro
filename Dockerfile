@@ -1,3 +1,4 @@
+ARG CACHEBUST=default
 # Build stage
 # Cache bust - invalidate build cache to force rebuild
 FROM node:22-alpine AS builder
@@ -36,6 +37,7 @@ RUN pnpm install --frozen-lockfile --prod
 # Copy backend dist and frontend public from build stage
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/shared ./dist/server/shared
+RUN echo 'Cache bust: ${CACHEBUST}'
 COPY --from=builder /app/dist/public ./public
 RUN ls -la /public || echo 'ERROR: /public does not exist or is empty'
 
