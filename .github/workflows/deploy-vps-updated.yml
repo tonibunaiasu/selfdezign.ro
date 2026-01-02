@@ -7,25 +7,26 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Setup Node.js
-          uses: actions/setup-node@v3
+      uses: actions/setup-node@v3
       with:
         node-version: '18'
         cache: 'pnpm'
+
     - name: Install pnpm
       uses: pnpm/action-setup@v2
       with:
         version: 8
-        node-version: '18'
-        cache: 'pnpm'    
+
     - name: Build application
       run: |
-        pnpm install        pnpm run build
-    
+        pnpm install
+        pnpm run build
+
     - name: Deploy to VPS
       env:
         SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
@@ -37,10 +38,8 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts 2>/dev/null || true
         
-        # Create the web root directory if it doesn't exist
-        ssh $VPS_USER@$VPS_HOST 'mkdir -p /var/www/selfdezign && chmod 755 /var/www/selfdezign'
+        ssh $VPS_USER@$VPS_HOST 'mkdir -p /var/www/selfdezign/dist'
         
-        # Copy the dist folder to the VPS
-        scp -r dist/public/* $VPS_USER@$VPS_HOST:/var/www/selfdezign/dist/        
-        # Reload Nginx to serve the new static files
+        scp -r dist/public/* $VPS_USER@$VPS_HOST:/var/www/selfdezign/dist/
+        
         ssh $VPS_USER@$VPS_HOST 'sudo systemctl reload nginx'
