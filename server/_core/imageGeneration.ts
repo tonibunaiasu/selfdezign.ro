@@ -15,8 +15,7 @@
  *     }]
  *   });
  */
-import { storageAgent } from "../storage.js";import { ENV } from "./env.js";
-
+import { storageAgent } from "../../storage.js";
 export type GenerateImageOptions = {
   prompt: string;
   originalImages?: Array<{
