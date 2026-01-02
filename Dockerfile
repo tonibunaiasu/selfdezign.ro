@@ -34,6 +34,7 @@ RUN pnpm install --frozen-lockfile --prod
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/shared ./dist/server/shared
 COPY --from=builder /app/dist/public ./public
+RUN ls -la /public || echo 'ERROR: /public does not exist or is empty'
 
 # Expose port
 EXPOSE 3000
