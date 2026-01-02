@@ -1,4 +1,4 @@
-name: Deploy to VPS (Updated)
+name: Deploy Static Site to VPS
 
 on:
   push:
@@ -10,6 +10,12 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
     
     - name: Build application
       run: |
@@ -27,5 +33,11 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts 2>/dev/null || true
         
-        # Deploy
-        ssh $VPS_USER@$VPS_HOST 'cd /var/www/selfdezign && git pull origin main && npm install && npm run build && pm2 restart selfdezign || pm2 start "npm run preview" --name selfdezign --cwd /var/www/selfdezign && pm2 save'
+        # Create the web root directory if it doesn't exist
+        ssh $VPS_USER@$VPS_HOST 'mkdir -p /var/www/selfdezign && chmod 755 /var/www/selfdezign'
+        
+        # Copy the dist folder to the VPS
+        scp -r dist/ $VPS_USER@$VPS_HOST:/var/www/selfdezign/
+        
+        # Reload Nginx to serve the new static files
+        ssh $VPS_USER@$VPS_HOST 'sudo systemctl reload nginx'
