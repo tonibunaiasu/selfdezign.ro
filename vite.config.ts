@@ -36,6 +36,28 @@ export default defineConfig({
       "localhost",
       "127.0.0.1",
     ],
+        build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor': ['react', 'react-dom', 'react-router-dom'],
+            'framer': ['framer-motion'],
+            'lucide': ['lucide-react']
+          },
+          chunkFileNames: 'assets/[name]-[hash].js',
+          entryFileNames: 'assets/[name]-[hash].js'
+        }
+      },
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true
+        }
+      },
+      cssCodeSplit: true,
+      reportCompressedSize: false
+    },
     fs: {
       strict: true,
       deny: ["**/.*"],
