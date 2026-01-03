@@ -1,7 +1,10 @@
 backend:
-  name: test-repo
-
-local_backend: true
+  name: github
+  repo: tonibunaiasu/selfdezign.ro
+  branch: main
+  api_root: https://api.github.com
+  site_domain: selfdezign.ro
+  base_url: https://auth.decapcms.vercel.app
 
 media_folder: public/images
 public_folder: /images
