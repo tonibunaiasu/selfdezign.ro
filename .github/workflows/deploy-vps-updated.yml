@@ -19,11 +19,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Build application
         run: |
-          pnpm install
           pnpm run build
           ls -la dist/ && echo 'Build output found'
 
@@ -41,7 +42,7 @@ jobs:
           tar -czf dist.tar.gz -C . dist/
           scp -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key dist.tar.gz $VPS_USER@$VPS_HOST:/tmp/
 
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST 'bash -s' << EOF
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST 'bash -s' << 'EOF'
           set -e
           echo "Starting deployment..."
           cd /var/www/selfdezign
@@ -50,7 +51,7 @@ jobs:
           mkdir -p dist
           tar -xzf /tmp/dist.tar.gz -C dist --strip-components=1
           chmod -R 755 dist
-          find dist -type f -exec chmod 644 {} \\;
+          find dist -type f -exec chmod 644 {} \;
           if [ -f dist/index.html ]; then
             echo "✓ Deployment successful"
             wc -c dist/index.html
