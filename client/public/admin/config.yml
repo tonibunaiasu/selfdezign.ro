@@ -1,0 +1,30 @@
+backend:
+  name: test-repo
+
+local_backend: true
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: team
+    label: Team Members
+    folder: src/pages
+    create: false
+    slug: '{{slug}}'
+    files:
+      - file: src/pages/Team.tsx
+        label: Team Members
+        name: team
+        fields:
+          - { label: 'Team Data', name: 'body', widget: 'code', default_language: 'typescript' }
+
+  - name: pages
+    label: Pages
+    folder: src/pages
+    create: true
+    slug: '{{slug}}'
+    extension: tsx
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Content', name: 'body', widget: 'markdown' }
