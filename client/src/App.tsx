@@ -71,3 +71,15 @@ function App() {
 }
 
 export default App;
+- import { Route, Switch } from "wouter";, Navigate
++ import { Route, Switch, Redirect } from "wouter";
+
+...
+- <Route path={"/admin"} element={<Navigate to="/admin/blog" />} />
++ <Route path="/admin">
++   <Redirect to="/admin/blog" />
++ </Route>
+
+- <Route path={"proiect/:slug"} component={ProjectDetail} />
++ <Route path={"/proiect/:slug"} component={ProjectDetail} />
+
