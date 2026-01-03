@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch } from "wouter";, Navigate
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
@@ -27,6 +27,7 @@ function Router() {
         {/* Public routes with Layout */}
         <Route path={"/"} component={Home} />
         <Route path={"/admin/blog"} component={AdminBlogDashboard} />
+                <Route path={"/admin"} element={<Navigate to="/admin/blog" />} />
         <Route path={"/proiecte"} component={Projects} />
         <Route path={"/contact"} component={Contact} />
         <Route path={"/articole"} component={Articles} />
