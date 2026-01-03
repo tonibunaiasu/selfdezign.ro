@@ -10,26 +10,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - uses: pnpm/action-setup@v2
         with:
-          version: 8
-      
+          version: '8'
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'pnpm'
-      
+
       - name: Build application
         run: |
           pnpm install
           pnpm run build
           ls -la dist/ && echo 'Build output found'
-      
+
       - name: Deploy to VPS
         env:
-      SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USER: ${{ secrets.VPS_USER }}
         run: |
@@ -37,10 +37,10 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts
-          
-                    tar -czf dist.tar.gz -C . dist/
+
+          tar -czf dist.tar.gz -C . dist/
           scp -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key dist.tar.gz $VPS_USER@$VPS_HOST:/tmp/
-          
+
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST 'bash -s' << EOF
           set -e
           echo "Starting deployment..."
@@ -60,7 +60,7 @@ jobs:
           fi
           rm -rf dist.old /tmp/dist.tar.gz
           echo "✓ Deployment completed"
-           echo "Restarting application services..."
- sleep 2
- docker compose restart || docker restart selfdezign-app || true
+          echo "Restarting application services..."
+          sleep 2
+          docker compose restart || docker restart selfdezign-app || true
           EOF
