@@ -1,64 +1,61 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";, Navigate
+import { Redirect, Route, Switch } from "wouter";
+
 import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
+import Layout from "./components/Layout";
 import { LanguageProvider } from "./contexts/LanguageContext";
-import Home from "./pages/Home";
-import Projects from "./pages/Projects";
-import Contact from "./pages/Contact";
+import { ThemeProvider } from "./contexts/ThemeContext";
+
+import About from "./pages/About";
+import AdminBlogDashboard from "./pages/AdminBlogDashboard";
 import Articles from "./pages/Articles";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import About from "./pages/About";
-import Vision from "./pages/Vision";
-import Values from "./pages/Values";
-import ProjectDetail from "./pages/ProjectDetail";
-import Team from "./pages/Team";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
 import MediaAppearances from "./pages/MediaAppearances";
-import AdminBlogDashboard from "./pages/AdminBlogDashboard";
-import Layout from "./components/Layout";
+import ProjectDetail from "./pages/ProjectDetail";
+import Projects from "./pages/Projects";
+import Team from "./pages/Team";
+import Values from "./pages/Values";
+import Vision from "./pages/Vision";
+
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
     <Layout>
       <Switch>
-        {/* Public routes with Layout */}
-        <Route path={"/"} component={Home} />
-        <Route path={"/admin/blog"} component={AdminBlogDashboard} />
-                <Route path={"/admin"} element={<Navigate to="/admin/blog" />} />
-        <Route path={"/proiecte"} component={Projects} />
-        <Route path={"/contact"} component={Contact} />
-        <Route path={"/articole"} component={Articles} />
-        <Route path={"/blog"} component={Blog} />
-        <Route path={"/blog/:slug"} component={BlogPost} />
-        <Route path={"/despre"} component={About} />
-        <Route path={"/viziune"} component={Vision} />
-        <Route path={"/valori"} component={Values} />
-        <Route path={"/echipa"} component={Team} />
-        <Route path={"proiect/:slug"} component={ProjectDetail} />
-        <Route path={"/aparituri-media"} component={MediaAppearances} />
-        <Route path={"/404"} component={NotFound} />
-        {/* Final fallback route */}
+        <Route path="/" component={Home} />
+
+        <Route path="/admin/blog" component={AdminBlogDashboard} />
+        <Route path="/admin">{() => <Redirect to="/admin/blog" />}</Route>
+
+        <Route path="/proiecte" component={Projects} />
+        <Route path="/proiect/:slug" component={ProjectDetail} />
+
+        <Route path="/contact" component={Contact} />
+        <Route path="/articole" component={Articles} />
+        <Route path="/blog" component={Blog} />
+        <Route path="/blog/:slug" component={BlogPost} />
+
+        <Route path="/despre" component={About} />
+        <Route path="/viziune" component={Vision} />
+        <Route path="/valori" component={Values} />
+        <Route path="/echipa" component={Team} />
+        <Route path="/aparituri-media" component={MediaAppearances} />
+
+        <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
-function App() {
+export default function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
+      <ThemeProvider defaultTheme="light">
         <LanguageProvider>
           <TooltipProvider>
             <Toaster />
@@ -69,17 +66,3 @@ function App() {
     </ErrorBoundary>
   );
 }
-
-export default App;
-- import { Route, Switch } from "wouter";, Navigate
-+ import { Route, Switch, Redirect } from "wouter";
-
-...
-- <Route path={"/admin"} element={<Navigate to="/admin/blog" />} />
-+ <Route path="/admin">
-+   <Redirect to="/admin/blog" />
-+ </Route>
-
-- <Route path={"proiect/:slug"} component={ProjectDetail} />
-+ <Route path={"/proiect/:slug"} component={ProjectDetail} />
-
