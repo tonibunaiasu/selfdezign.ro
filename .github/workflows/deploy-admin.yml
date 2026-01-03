@@ -1,0 +1,30 @@
+name: Deploy Decap Admin
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy Admin
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts 2>/dev/null || true
+          
+          echo "Creating admin directory..."
+          ssh -i ~/.ssh/id_rsa $VPS_USER@$VPS_HOST "mkdir -p /var/www/selfdezign/dist/admin && chmod 755 /var/www/selfdezign/dist/admin"
+          
+          echo "Deploying admin files..."
+          scp -i ~/.ssh/id_rsa client/public/admin/* $VPS_USER@$VPS_HOST:/var/www/selfdezign/dist/admin/
+          
+          echo "Setting permissions..."
+          ssh -i ~/.ssh/id_rsa $VPS_USER@$VPS_HOST "chmod 644 /var/www/selfdezign/dist/admin/* && ls -la /var/www/selfdezign/dist/admin/"
+          
+          echo "✓ Admin deployed successfully"
