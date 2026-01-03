@@ -156,3 +156,8 @@ docker run -p 5173:5173 selfdezign:latest
 - **GitHub:** https://github.com/tonibunaiasu/selfdezign.ro
 
 **Built with love by SelfDezign**
+
+## Content Management
+
+- **Admin Interface**: Decap CMS at https://www.selfdezign.ro/admin
+- **GitHub OAuth**: Secure authentication for content editors
