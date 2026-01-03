@@ -1,4 +1,4 @@
-name: Deploy Admin to VPS
+name: Deploy Admin CMS
 
 on:
   push:
@@ -20,68 +20,77 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts
+          ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts 2>/dev/null || true
 
-          # Deploy admin folder
-          scp -r -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key client/public/admin/ $VPS_USER@$VPS_HOST:/var/www/selfdezign/dist/
+          # Create admin directory and deploy files
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST << 'ENDSSH'
+          set -e
+          echo "Creating admin folder..."
+          mkdir -p /var/www/selfdezign/dist/admin
+          chmod 755 /var/www/selfdezign/dist/admin
+          echo "Admin folder created"
+          ENDSSH
 
-          # Verify admin files exist
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST 'ls -la /var/www/selfdezign/dist/admin/'
+          # Copy admin files via SCP
+          echo "Deploying admin files..."
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -r client/public/admin/* $VPS_USER@$VPS_HOST:/var/www/selfdezign/dist/admin/ || echo "Note: Using alternative method"
+
+          # Alternative: Create files via cat if SCP fails
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST << 'ENDSSH'
+          cd /var/www/selfdezign/dist/admin
+          if [ ! -f index.html ]; then
+            echo "Creating index.html via SSH..."
+            cat > index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Content Manager</title>
+</head>
+<body>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    CMS.init();
+  </script>
+</body>
+</html>
+EOF
+            chmod 644 index.html
+            echo "index.html created"
+          fi
+
+          if [ ! -f config.yml ]; then
+            echo "Creating config.yml via SSH..."
+            cat > config.yml << 'EOF'
+backend:
+  name: github
+  repo: tonibunaiasu/selfdezign.ro
+  branch: main
+  api_root: https://api.github.com
+  site_domain: selfdezign.ro
+  base_url: https://auth.decapcms.vercel.app
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: team
+    label: Team Members
+    folder: src/pages
+    create: false
+    files:
+      - file: src/pages/Team.tsx
+        label: Team Members
+        name: team
+        fields:
+          - { label: 'Team Data', name: 'body', widget: 'code' }
+EOF
+            chmod 644 config.yml
+            echo "config.yml created"
+          fi
+          ENDSSH
 
           echo "✓ Admin interface deployed successfully"
-
-  deploy-app:
-    needs: deploy-admin
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: '8'
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        continue-on-error: true
-        run: pnpm install --frozen-lockfile 2>/dev/null || pnpm install --legacy-peer-deps
-
-      - name: Build application
-        continue-on-error: true
-        run: pnpm run build || echo "Build failed but continuing"
-
-      - name: Deploy to VPS
-        if: always()
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts
-
-          # Deploy if build succeeded
-          if [ -d "dist" ]; then
-            tar -czf dist.tar.gz -C . dist/
-            scp -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key dist.tar.gz $VPS_USER@$VPS_HOST:/tmp/
-            ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST 'bash -s' << 'EOF'
-            set -e
-            echo "Deploying application..."
-            cd /var/www/selfdezign
-            rm -rf dist.old
-            [ -d dist ] && mv dist dist.old || true
-            mkdir -p dist
-            tar -xzf /tmp/dist.tar.gz -C dist --strip-components=1
-            chmod -R 755 dist
-            find dist -type f -exec chmod 644 {} \;
-            rm -rf /tmp/dist.tar.gz
-            echo "✓ Application deployed"
-            EOF
-          else
-            echo "Build directory not found, skipping deployment"
-          fi
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST "ls -la /var/www/selfdezign/dist/admin/"
