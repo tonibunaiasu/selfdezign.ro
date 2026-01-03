@@ -3,20 +3,20 @@ backend:
   repo: tonibunaiasu/selfdezign.ro
   branch: main
   api_root: https://api.github.com
-  site_domain: selfdezign.ro
+  site_domain: www.selfdezign.ro
   base_url: https://auth.decapcms.vercel.app
 
-media_folder: public/images
+media_folder: client/public/images
 public_folder: /images
 
 collections:
   - name: team
     label: Team Members
-    folder: src/pages
+    folder: client/src/pages
     create: false
     slug: '{{slug}}'
     files:
-      - file: src/pages/Team.tsx
+      - file: client/src/pages/Team.tsx
         label: Team Members
         name: team
         fields:
@@ -24,7 +24,7 @@ collections:
 
   - name: pages
     label: Pages
-    folder: src/pages
+    folder: client/src/pages
     create: true
     slug: '{{slug}}'
     extension: tsx
