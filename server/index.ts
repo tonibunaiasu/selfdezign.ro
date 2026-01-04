@@ -13,7 +13,7 @@ async function startServer() {
   const app = express();
 app.set("trust proxy", 1);
 app.use(cookieParser());
-registerDecapAuth(app);
+try { registerDecapAuth(app); } catch (e) { console.error("[DecapAuth] disabled:", e); }
 
   const server = createServer(app);
   
