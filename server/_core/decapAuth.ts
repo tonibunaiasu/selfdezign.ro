@@ -12,11 +12,34 @@ function q(req: Request, key: string): string | undefined {
   return typeof v === "string" ? v : undefined;
 }
 
+function normalizeOrigin(value?: string): string | undefined {
+  if (!value) return undefined;
+  try {
+    const withProtocol = value.startsWith("http") ? value : `https://${value}`;
+    return new URL(withProtocol).origin;
+  } catch {
+    return undefined;
+  }
+}
+
+function parseAllowlist(value?: string): string[] {
+  if (!value) return [];
+  return value
+    .split(/[,\s]+/)
+    .map((entry) => normalizeOrigin(entry))
+    .filter((entry): entry is string => Boolean(entry));
+}
+
 export function registerDecapAuth(app: Express) {
   const clientId = env("DECAP_GITHUB_CLIENT_ID");
   const clientSecret = env("DECAP_GITHUB_CLIENT_SECRET");
   // URL-ul site-ului public (exact, cu https + www dacă așa folosești)
   const origin = env("DECAP_ORIGIN").replace(/\/+$/, ""); // ex: https://www.selfdezign.ro
+  const normalizedOrigin = normalizeOrigin(origin) ?? origin;
+  const allowedOrigins = new Set([
+    normalizedOrigin,
+    ...parseAllowlist(process.env.DECAP_ORIGIN_ALLOWLIST),
+  ]);
   const basePath = "/decap-auth";
   const redirectUri = `${origin}${basePath}/callback`;
 
@@ -24,6 +47,14 @@ export function registerDecapAuth(app: Express) {
   app.get(`${basePath}/auth`, async (req: Request, res: Response) => {
     const provider = q(req, "provider") ?? "github";
     if (provider !== "github") return res.status(400).send("Only github provider supported");
+    const requestedOrigin =
+      normalizeOrigin(q(req, "site_url")) ??
+      normalizeOrigin(q(req, "site_domain")) ??
+      normalizeOrigin(req.headers.origin) ??
+      normalizeOrigin(req.headers.referer);
+    const allowedOrigin = requestedOrigin && allowedOrigins.has(requestedOrigin)
+      ? requestedOrigin
+      : undefined;
 
     const state = crypto.randomBytes(16).toString("hex");
     res.cookie("decap_oauth_state", state, {
@@ -33,6 +64,15 @@ export function registerDecapAuth(app: Express) {
       maxAge: 10 * 60 * 1000,
       path: basePath,
     });
+    if (allowedOrigin) {
+      res.cookie("decap_oauth_origin", allowedOrigin, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "lax",
+        maxAge: 10 * 60 * 1000,
+        path: basePath,
+      });
+    }
 
     const authorize = new URL("https://github.com/login/oauth/authorize");
     authorize.searchParams.set("client_id", clientId);
@@ -48,6 +88,10 @@ export function registerDecapAuth(app: Express) {
     const code = q(req, "code");
     const state = q(req, "state");
     const expectedState = req.cookies?.decap_oauth_state;
+    const cookieOrigin = normalizeOrigin(req.cookies?.decap_oauth_origin);
+    const callbackOrigin = cookieOrigin && allowedOrigins.has(cookieOrigin)
+      ? cookieOrigin
+      : normalizedOrigin;
 
     if (!code || !state) return res.status(400).send("Missing code/state");
     if (!expectedState || state !== expectedState) return res.status(400).send("Invalid state");
@@ -88,7 +132,7 @@ export function registerDecapAuth(app: Express) {
   try {
     window.opener && window.opener.postMessage(
       'authorization:github:success:' + JSON.stringify(payload),
-      ${JSON.stringify(origin)}
+      ${JSON.stringify(callbackOrigin)}
     );
   } catch (e) {}
   window.close();
