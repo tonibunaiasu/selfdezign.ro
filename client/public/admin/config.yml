@@ -3,31 +3,101 @@ backend:
   repo: tonibunaiasu/selfdezign.ro
   branch: main
   api_root: https://api.github.com
-  site_domain: www.selfdezign.ro
-  base_url: https://auth.decapcms.vercel.app
+
+  # IMPORTANT: domeniul unde deschizi CMS-ul (recomand admin.selfdezign.ro ca să eviți Cloudflare challenge)
+  site_domain: admin.selfdezign.ro
+
+  # OAuth local (implementat de tine la /decap-auth)
+  base_url: https://admin.selfdezign.ro
+  auth_endpoint: decap-auth/auth
 
 media_folder: client/public/images
 public_folder: /images
 
 collections:
-  - name: team
-    label: Team Members
-    folder: client/src/pages
-    create: false
-    slug: '{{slug}}'
-    files:
-      - file: client/src/pages/Team.tsx
-        label: Team Members
-        name: team
-        fields:
-          - { label: 'Team Data', name: 'body', widget: 'code', default_language: 'typescript' }
-
   - name: pages
-    label: Pages
-    folder: client/src/pages
-    create: true
-    slug: '{{slug}}'
-    extension: tsx
-    fields:
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Content', name: 'body', widget: 'markdown' }
+    label: Pages (code)
+    files:
+      - label: Home
+        name: home
+        file: client/src/pages/Home.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: About
+        name: about
+        file: client/src/pages/About.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: Contact
+        name: contact
+        file: client/src/pages/Contact.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: Projects
+        name: projects
+        file: client/src/pages/Projects.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: ProjectDetail
+        name: project_detail
+        file: client/src/pages/ProjectDetail.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: Team
+        name: team
+        file: client/src/pages/Team.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: Vision
+        name: vision
+        file: client/src/pages/Vision.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: Values
+        name: values
+        file: client/src/pages/Values.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: Articles
+        name: articles
+        file: client/src/pages/Articles.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: Blog
+        name: blog
+        file: client/src/pages/Blog.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: BlogPost
+        name: blog_post
+        file: client/src/pages/BlogPost.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: MediaAppearances
+        name: media_appearances
+        file: client/src/pages/MediaAppearances.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: AdminBlogDashboard
+        name: admin_blog_dashboard
+        file: client/src/pages/AdminBlogDashboard.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
+
+      - label: NotFound
+        name: not_found
+        file: client/src/pages/NotFound.tsx
+        fields:
+          - { label: Code, name: body, widget: code, default_language: typescript }
