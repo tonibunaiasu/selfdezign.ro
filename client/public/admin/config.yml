@@ -9,7 +9,7 @@ backend:
 
   # OAuth local (route din serverul tău)
   base_url: https://admin.selfdezign.ro
-  auth_endpoint: decap-auth/auth
+  auth_endpoint: /decap-auth/auth
 
 media_folder: client/public/images
 public_folder: /images
