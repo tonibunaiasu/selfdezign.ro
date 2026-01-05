@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "title": "Exemplu proiect",
+      "slug": "exemplu-proiect",
+      "category": "Restaurant",
+      "metricValue": "+18%",
+      "metricLabel": "Creștere vânzări",
+      "summary": "Descriere scurtă a proiectului (1–2 propoziții).",
+      "coverImage": "/images/placeholder.jpg",
+      "draft": true
+    }
+  ]
+}
