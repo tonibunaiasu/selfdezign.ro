@@ -1,12 +1,42 @@
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "wouter";
+import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Testimonials from "@/components/Testimonials";
 import SEO from "@/components/SEO";
+import caseStudiesData from "@/data/case-studies.json";
+
+type CaseStudy = {
+  title: string;
+  slug: string;
+  category: string;
+  metricValue: string;
+  metricLabel: string;
+  summary: string;
+  coverImage: string;
+  draft?: boolean;
+};
 
 export default function Home() {
   const { t } = useLanguage();
+  const caseStudies = useMemo(
+    () =>
+      (caseStudiesData.items as CaseStudy[]).filter((item) => !item.draft),
+    []
+  );
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (!caseStudies.length) return;
+    const id = window.setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % caseStudies.length);
+    }, 6000);
+    return () => window.clearInterval(id);
+  }, [caseStudies.length]);
+
+  const activeCaseStudy = caseStudies[activeIndex] ?? caseStudies[0];
   
   const organizationStructuredData = {
     "@context": "https://schema.org",
@@ -88,24 +118,93 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="lg:col-span-5 relative hidden lg:block">
-            <div className="relative w-full aspect-[3/4] border border-white/10 p-4">
-              <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-accent"></div>
-              <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-accent"></div>
-              <div className="w-full h-full bg-gray-900 overflow-hidden relative group">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                <img 
-                  src="/projects/cafeneaua-veche/cafeneaua-veche-4.webp" 
-                  alt="Cafeneaua Veche 9 - Interior Design" 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
-                />
-                <a href="/proiect/cafeneaua-veche-9" className="absolute bottom-8 left-8 z-20 cursor-pointer block hover:opacity-80 transition-opacity" onClick={(e) => { e.preventDefault(); window.location.href = '/proiect/cafeneaua-veche-9'; }}>
-                  <p className="text-accent font-bold text-sm uppercase tracking-widest mb-2">{t.home.featuredProject}</p>
-                  <h3 className="text-2xl font-display font-bold text-white group-hover:text-accent transition-colors">Cafeneaua Veche 9</h3>
-                </a>
+          {activeCaseStudy && (
+            <div className="lg:col-span-5 relative hidden lg:block">
+              <div className="relative w-full aspect-[3/4] border border-white/10 p-4">
+                <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-accent"></div>
+                <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-accent"></div>
+                <div className="w-full h-full bg-gray-900 overflow-hidden relative group">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent z-10"></div>
+                  <img 
+                    src={activeCaseStudy.coverImage}
+                    alt={activeCaseStudy.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+                  />
+                  <div className="absolute top-6 left-6 z-20 flex flex-col gap-3">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 text-white text-xs uppercase tracking-[0.2em]">
+                      {t.home.featuredProject}
+                      <span className="inline-block w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+                    </span>
+                    <div className="flex items-center gap-2 px-4 py-2 bg-black/70 text-white backdrop-blur-sm border border-white/10">
+                      <span className="text-2xl font-display font-bold text-accent">{activeCaseStudy.metricValue}</span>
+                      <span className="text-sm text-gray-300">{activeCaseStudy.metricLabel}</span>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-8 z-20 space-y-4">
+                    <p className="text-accent text-xs uppercase tracking-[0.2em]">{activeCaseStudy.category}</p>
+                    <h3 className="text-3xl font-display font-bold text-white group-hover:text-accent transition-colors">
+                      {activeCaseStudy.title}
+                    </h3>
+                    <p className="text-gray-300 max-w-xl leading-relaxed">{activeCaseStudy.summary}</p>
+                    <div className="flex items-center gap-3 pt-2">
+                      <Link href={`/proiect/${activeCaseStudy.slug}`}>
+                        <a onClick={(e) => { e.preventDefault(); window.location.href = `/proiect/${activeCaseStudy.slug}`; }}>
+                          <Button className="bg-accent text-black hover:bg-accent/90 rounded-none h-12 px-6 uppercase tracking-widest font-bold">
+                            {t.projects.viewProject}
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        </a>
+                      </Link>
+                      <Link href="/contact">
+                        <a>
+                          <Button variant="ghost" className="text-white hover:text-accent hover:bg-white/10 rounded-none">
+                            {t.home.contactUs}
+                          </Button>
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center justify-between mt-4">
+                <div className="flex items-center gap-2">
+                  {caseStudies.map((item, idx) => (
+                    <button
+                      key={item.slug}
+                      aria-label={`Select ${item.title}`}
+                      onClick={() => setActiveIndex(idx)}
+                      className={cn(
+                        "h-1.5 rounded-full transition-all",
+                        idx === activeIndex ? "w-10 bg-accent" : "w-4 bg-white/30 hover:bg-white/60"
+                      )}
+                    />
+                  ))}
+                </div>
+                <div className="flex items-center gap-3">
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    className="rounded-none bg-white/5 text-white border-white/20 hover:bg-white/10"
+                    onClick={() => setActiveIndex((prev) => (prev - 1 + caseStudies.length) % caseStudies.length)}
+                    aria-label="Previous case study"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    className="rounded-none bg-white/5 text-white border-white/20 hover:bg-white/10"
+                    onClick={() => setActiveIndex((prev) => (prev + 1) % caseStudies.length)}
+                    aria-label="Next case study"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 

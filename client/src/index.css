@@ -45,7 +45,7 @@
 
 :root {
   /* Branding Colors - Brutalist Minimalism with Neon Accent */
-  --color-brand-neon: oklch(0.95 0.21 105); /* #e6ff00 - Lime Yellow (matching logo ruler) */
+  --color-brand-neon: #ff6b6b; /* Light Red */
   --color-brand-black: oklch(0.15 0 0); /* #1a1a1a - Soft Black */
   --color-brand-gray: oklch(0.6 0 0); /* #8c8c8c - Concrete Gray */
 

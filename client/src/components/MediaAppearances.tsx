@@ -31,7 +31,7 @@ export default function MediaAppearances() {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "award":
-        return "bg-yellow-50 border-yellow-200";
+        return "bg-red-50 border-red-200";
       case "press":
         return "bg-blue-50 border-blue-200";
       case "feature":

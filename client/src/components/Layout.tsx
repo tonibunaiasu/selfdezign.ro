@@ -100,6 +100,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             <Link href="/contact">
+              <Button className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold text-xs px-6 shadow-[0_10px_40px_-12px_rgba(255,107,107,0.35)]">
+                {t.nav.bookCall}
+              </Button>
+            </Link>
+            <Link href="/contact">
               <Button variant="outline" className="border-accent text-black bg-accent hover:bg-accent/90 hover:text-black rounded-none uppercase tracking-widest font-bold text-xs px-6">
                 {t.nav.writeUs}
               </Button>
@@ -136,6 +141,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </a>
               </Link>
             ))}
+            <Link href="/contact">
+              <Button size="lg" className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold mt-8 w-64">
+                {t.nav.bookCall}
+              </Button>
+            </Link>
             <Link href="/contact">
               <Button size="lg" className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold mt-8">
                 {t.nav.writeUs}

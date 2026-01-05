@@ -15,6 +15,30 @@ media_folder: client/public/images
 public_folder: /images
 
 collections:
+  - name: case-studies
+    label: Case Studies
+    editor:
+      preview: false
+    files:
+      - label: Hero Case Studies (mini-carousel)
+        name: hero_case_studies
+        file: client/src/data/case-studies.json
+        description: Proiectele evidențiate în hero, cu metrici/rezultat.
+        fields:
+          - label: Studii de caz
+            name: items
+            widget: list
+            allow_add: true
+            fields:
+              - { label: Titlu, name: title, widget: string }
+              - { label: Slug proiect, name: slug, widget: string, hint: "Slug din /proiect/:slug pentru link" }
+              - { label: Categorie, name: category, widget: string }
+              - { label: Rezultat / metrică, name: metricValue, widget: string, hint: "Ex: +18% revenue, +32% footfall" }
+              - { label: Etichetă metrică, name: metricLabel, widget: string, hint: "Ex: Creștere vânzări" }
+              - { label: Rezumat scurt, name: summary, widget: text }
+              - { label: Imagine, name: coverImage, widget: image, allow_multiple: false }
+              - { label: Draft, name: draft, widget: boolean, default: false }
+
   - name: pages
     label: Pages (code)
     files:
