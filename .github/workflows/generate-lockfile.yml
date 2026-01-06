@@ -4,6 +4,8 @@ on:
 jobs:
   generate-lockfile:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       
@@ -23,5 +25,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add pnpm-lock.yaml
-          git commit -m "chore: Generate pnpm-lock.yaml" || echo "No changes to commit"
-          git push
+          git diff --quiet --cached || (
+            git commit -m "chore: Generate pnpm-lock.yaml" &&
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git main
+          )
