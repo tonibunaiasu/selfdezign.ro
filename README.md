@@ -161,3 +161,4 @@ docker run -p 5173:5173 selfdezign:latest
 
 - **Admin Interface**: Decap CMS at https://www.selfdezign.ro/admin
 - **GitHub OAuth**: Secure authentication for content editors
+# Strategic fix complete
