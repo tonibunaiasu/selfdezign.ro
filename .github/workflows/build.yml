@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: |
+            dist/
+            build/
+          retention-days: 5
+      
+      - name: Archive build output
+        run: tar -czf build-output.tar.gz dist/ build/ 2>/dev/null || true
+      
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: build-output
+          path: build-output.tar.gz
+          retention-days: 5
