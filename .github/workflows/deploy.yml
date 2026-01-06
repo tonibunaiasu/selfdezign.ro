@@ -17,8 +17,7 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
         run: |
           npm install -g vercel
-          vercel deploy --prod --token $VERCEL_TOKEN
-
+          vercel deploy --prod --token=$VERCEL_TOKEN
       - name: Notify deployment start
         run: echo "Deployment triggered for SHA ${{ github.sha }}"
 
