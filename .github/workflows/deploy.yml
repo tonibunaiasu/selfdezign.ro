@@ -9,22 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Trigger Coolify deployment
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
         run: |
-          curl -X POST "${{ secrets.COOLIFY_WEBHOOK_URL }}" \
-            -H "Content-Type: application/json" \
-            -d '{"deployment": "main"}' || true
-      
+          npm install -g vercel
+          vercel deploy --prod --token $VERCEL_TOKEN
+
       - name: Notify deployment start
         run: echo "Deployment triggered for SHA ${{ github.sha }}"
-      
+
       - name: Health check (with retry)
         run: |
           MAX_RETRIES=10
           RETRY_DELAY=30
           URL="https://selfdezign.ro/api/health"
-          
+
           for i in $(seq 1 $MAX_RETRIES); do
             if curl -sf $URL > /dev/null 2>&1; then
               echo "✓ Application is healthy"
@@ -33,14 +36,14 @@ jobs:
             echo "Attempt $i/$MAX_RETRIES: Waiting for application..."
             sleep $RETRY_DELAY
           done
-          
+
           echo "✗ Application health check failed after $MAX_RETRIES attempts"
           exit 1
-      
+
       - name: Deployment complete
         if: success()
         run: echo "✓ Deployment to production completed successfully"
-      
+
       - name: Deployment failed
         if: failure()
         run: echo "✗ Deployment failed or health check failed"
