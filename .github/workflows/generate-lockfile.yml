@@ -14,10 +14,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
       
-      - name: Generate pnpm-lock.yaml
-        run: pnpm install --frozen-lockfile=false
+      - name: Install dependencies and generate lockfile
+        run: pnpm install
       
       - name: Commit and push lockfile
         run: |
