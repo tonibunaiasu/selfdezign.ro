@@ -1,0 +1,96 @@
+name: Deploy Admin CMS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-admin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy Admin to VPS
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts 2>/dev/null || true
+
+          # Create admin directory and deploy files
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST << 'ENDSSH'
+          set -e
+          echo "Creating admin folder..."
+          mkdir -p /var/www/selfdezign/dist/admin
+          chmod 755 /var/www/selfdezign/dist/admin
+          echo "Admin folder created"
+          ENDSSH
+
+          # Copy admin files via SCP
+          echo "Deploying admin files..."
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key -r client/public/admin/* $VPS_USER@$VPS_HOST:/var/www/selfdezign/dist/admin/ || echo "Note: Using alternative method"
+
+          # Alternative: Create files via cat if SCP fails
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST << 'ENDSSH'
+          cd /var/www/selfdezign/dist/admin
+          if [ ! -f index.html ]; then
+            echo "Creating index.html via SSH..."
+            cat > index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Content Manager</title>
+</head>
+<body>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    CMS.init();
+  </script>
+</body>
+</html>
+EOF
+            chmod 644 index.html
+            echo "index.html created"
+          fi
+
+          if [ ! -f config.yml ]; then
+            echo "Creating config.yml via SSH..."
+            cat > config.yml << 'EOF'
+backend:
+  name: github
+  repo: tonibunaiasu/selfdezign.ro
+  branch: main
+  api_root: https://api.github.com
+  site_domain: selfdezign.ro
+  base_url: https://auth.decapcms.vercel.app
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: team
+    label: Team Members
+    folder: src/pages
+    create: false
+    files:
+      - file: src/pages/Team.tsx
+        label: Team Members
+        name: team
+        fields:
+          - { label: 'Team Data', name: 'body', widget: 'code' }
+EOF
+            chmod 644 config.yml
+            echo "config.yml created"
+          fi
+          ENDSSH
+
+          echo "✓ Admin interface deployed successfully"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key $VPS_USER@$VPS_HOST "ls -la /var/www/selfdezign/dist/admin/"

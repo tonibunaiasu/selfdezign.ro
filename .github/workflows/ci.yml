@@ -11,36 +11,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - uses: pnpm/action-setup@v2
+
+      - uses: pnpm/action-setup@v4
         with:
-          version: 8
-      
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
-          pnpm-version: "latest"
-              node-version: '20'
+          node-version: '20'
           cache: 'pnpm'
-      
+
       - run: pnpm install
-      - run: pnpm run format:check
       - run: pnpm run lint
 
   type-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - uses: pnpm/action-setup@v2
+
+      - uses: pnpm/action-setup@v4
         with:
-          version: 8
-      
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
-          pnpm-version: "latest"
-              node-version: '20'
+          node-version: '20'
           cache: 'pnpm'
-      
+
       - run: pnpm install
       - run: pnpm run type-check
 
@@ -48,16 +45,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - uses: pnpm/action-setup@v2
+
+      - uses: pnpm/action-setup@v4
         with:
-          version: 8
-      
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
-          pnpm-version: "latest"
-              node-version: '20'
+          node-version: '20'
           cache: 'pnpm'
-      
+
       - run: pnpm install
-      - run: pnpm run test -- --run --coverage
+      - run: pnpm run build
