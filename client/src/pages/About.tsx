@@ -17,7 +17,7 @@ export default function About() {
         </div>
         <div className="container relative z-10">
           <div className="max-w-4xl">
-            <span className="inline-block bg-accent text-black text-xs font-bold px-4 py-2 uppercase tracking-widest mb-8">
+            <span className="inline-block bg-[var(--color-brand-yellow)] text-black text-xs font-bold px-4 py-2 uppercase tracking-widest mb-8">
               {t.nav.about}
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter leading-[0.9] mb-8">
@@ -66,7 +66,7 @@ export default function About() {
               „{t.about.conclusion1}
               <span className="text-accent"> {t.about.conclusion2}</span>"
             </blockquote>
-            <div className="w-24 h-1 bg-accent mx-auto"></div>
+            <div className="w-24 h-1 bg-[var(--color-brand-yellow)] mx-auto"></div>
           </div>
         </div>
       </section>
@@ -112,7 +112,7 @@ export default function About() {
       <section className="py-24 bg-white">
         <div className="container text-center">
           <Link href="/contact">
-            <Button className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm">
+            <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm">
               {t.nav.contact}
             </Button>
           </Link>

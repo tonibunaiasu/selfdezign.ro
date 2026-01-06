@@ -346,7 +346,7 @@ export default function ComponentsShowcase() {
                       Muted background with foreground text
                     </p>
                   </div>
-                  <div className="bg-accent text-accent-foreground rounded-lg p-4">
+                  <div className="bg-[var(--color-brand-yellow)] text-accent-foreground rounded-lg p-4">
                     <p className="font-medium mb-1">Accent</p>
                     <p className="text-sm opacity-90">
                       Accent background with foreground text

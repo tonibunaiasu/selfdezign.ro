@@ -44,7 +44,7 @@ export default function MediaAppearances() {
   const getCategoryBadgeColor = (category: string) => {
     switch (category) {
       case "award":
-        return "bg-accent text-black";
+        return "bg-[var(--color-brand-yellow)] text-black";
       case "press":
         return "bg-blue-500 text-white";
       case "feature":

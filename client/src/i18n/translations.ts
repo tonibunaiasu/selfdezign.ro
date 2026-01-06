@@ -9,7 +9,6 @@ export interface Translations {
     projects: string;
     contact: string;
     blog: string;
-    writeUs: string;
     bookCall: string;
   };
   // Homepage
@@ -191,13 +190,12 @@ export const translations: Record<Language, Translations> = {
     nav: {
       home: "Acasă",
       about: "Despre",
-    team: "Echipa",
-    projects: "Proiecte",
-    contact: "Contact",
-    blog: "Blog",
-    writeUs: "Scrie-ne",
-    bookCall: "Programează o discuție"
-  },
+      team: "Echipa",
+      projects: "Proiecte",
+      contact: "Contact",
+      blog: "Blog",
+      bookCall: "Hai sa vorbim"
+    },
     home: {
       tagline: "YOU ARE THE DESIGNER",
       heroTitle1: "DESIGNUL",
@@ -368,8 +366,7 @@ export const translations: Record<Language, Translations> = {
       projects: "Projects",
       contact: "Contact",
       blog: "Blog",
-      writeUs: "Write Us",
-      bookCall: "Book a Call"
+      bookCall: "Let's talk"
     },
     home: {
       tagline: "YOU ARE THE DESIGNER",

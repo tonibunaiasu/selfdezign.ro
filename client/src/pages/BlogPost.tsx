@@ -105,7 +105,7 @@ export default function BlogPost() {
             </Link>
             <div className="flex gap-2 mb-6">
               {post.tags.map(tag => (
-                <span key={tag} className="bg-accent text-black text-xs font-bold px-3 py-1 uppercase tracking-widest">
+                <span key={tag} className="bg-[var(--color-brand-yellow)] text-black text-xs font-bold px-3 py-1 uppercase tracking-widest">
                   {tag}
                 </span>
               ))}

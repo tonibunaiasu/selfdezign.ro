@@ -129,7 +129,7 @@ export default function ProjectDetail() {
         <div className="relative h-full container flex flex-col justify-end pb-16">
           <Link 
             href="/proiecte"
-            className="absolute top-8 left-4 lg:left-8 flex items-center gap-2 text-white/80 hover:text-accent transition-colors"
+            className="absolute top-8 left-4 lg:left-8 flex items-center gap-2 text-white/80 hover:text-[var(--color-brand-yellow)] transition-colors"
           >
             <ArrowLeft size={20} />
             <span>{c.allProjects}</span>
@@ -140,7 +140,7 @@ export default function ProjectDetail() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-3 py-1 bg-accent text-black text-sm font-medium mb-4">
+            <span className="inline-block px-3 py-1 bg-[var(--color-brand-yellow)] text-black text-sm font-medium mb-4">
               {project.category}
             </span>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 font-display">
@@ -334,7 +334,7 @@ export default function ProjectDetail() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-4 bg-accent text-black font-semibold hover:bg-accent/90 transition-colors"
+            className="inline-block px-8 py-4 bg-[var(--color-brand-yellow)] text-black font-semibold hover:bg-[var(--color-brand-yellow)]/90 transition-colors"
           >
             {c.contactUs}
           </Link>

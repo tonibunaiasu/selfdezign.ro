@@ -110,7 +110,7 @@ export default function Team() {
                           const target = e.target as HTMLImageElement;
                           target.style.display = 'none';
                           target.parentElement!.innerHTML = `
-                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#ff6b6b] to-[#ff9b9b]">
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#f5c400] to-[#fde68a]">
                               <span class="text-4xl font-bold text-black">${member.name.split(' ').map(n => n[0]).join('')}</span>
                             </div>
                           `;
@@ -124,7 +124,7 @@ export default function Team() {
                     <h3 className="text-2xl font-bold text-black mb-1">
                       {member.name}
                     </h3>
-                    <p className="text-accent font-medium mb-4 bg-black inline-block px-3 py-1 text-sm">
+                    <p className="text-[var(--color-brand-yellow)] font-medium mb-4 bg-black inline-block px-3 py-1 text-sm">
                       {language === 'ro' ? member.roleRo : member.roleEn}
                     </p>
                     <p className="text-gray-600 leading-relaxed mb-4">
@@ -138,7 +138,7 @@ export default function Team() {
                           href={member.linkedin}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-accent hover:text-black transition-colors"
+                          className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black transition-colors"
                         >
                           <Linkedin size={18} />
                         </a>
@@ -146,7 +146,7 @@ export default function Team() {
                       {member.email && (
                         <a
                           href={`mailto:${member.email}`}
-                          className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-accent hover:text-black transition-colors"
+                          className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black transition-colors"
                         >
                           <Mail size={18} />
                         </a>
@@ -180,7 +180,7 @@ export default function Team() {
               </p>
               <a
                 href="mailto:hello@selfdezign.ro?subject=Aplicație pentru echipa SelfDezign"
-                className="inline-flex items-center gap-2 bg-accent text-black px-8 py-4 font-bold hover:bg-accent/90 transition-colors"
+                className="inline-flex items-center gap-2 bg-[var(--color-brand-yellow)] text-black px-8 py-4 font-bold hover:bg-[var(--color-brand-yellow)]/90 transition-colors"
               >
                 <Mail size={20} />
                 {language === 'ro' ? 'TRIMITE-NE CV-UL TĂU' : 'SEND US YOUR CV'}

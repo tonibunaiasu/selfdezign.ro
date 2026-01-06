@@ -10,7 +10,7 @@ const valuesData = {
       title: "Autenticitate",
       subtitle: "Fii tu însuți",
       description: "Credem că cele mai bune spații sunt cele care reflectă cine ești cu adevărat, nu cine crezi că ar trebui să fii. Nu urmăm tendințe orbește. Ascultăm, observăm și creăm soluții unice pentru fiecare client.",
-      color: "bg-accent"
+      color: "bg-[var(--color-brand-yellow)]"
     },
     {
       icon: Users,
@@ -24,7 +24,7 @@ const valuesData = {
       title: "Funcționalitate",
       subtitle: "Frumos și util",
       description: "Un spațiu frumos care nu funcționează este doar o scenografie. Prioritizăm întotdeauna utilitatea și confortul, apoi găsim modalități creative de a le face și estetice.",
-      color: "bg-accent"
+      color: "bg-[var(--color-brand-yellow)]"
     },
     {
       icon: Shield,
@@ -38,7 +38,7 @@ const valuesData = {
       title: "Sustenabilitate",
       subtitle: "Design responsabil",
       description: "Alegem materiale durabile, furnizori locali și soluții care rezistă în timp. Un design bun nu ar trebui să coste planeta sau să se demodeze în doi ani.",
-      color: "bg-accent"
+      color: "bg-[var(--color-brand-yellow)]"
     },
     {
       icon: Sparkles,
@@ -54,7 +54,7 @@ const valuesData = {
       title: "Authenticity",
       subtitle: "Be yourself",
       description: "We believe the best spaces are those that reflect who you truly are, not who you think you should be. We don't follow trends blindly. We listen, observe, and create unique solutions for each client.",
-      color: "bg-accent"
+      color: "bg-[var(--color-brand-yellow)]"
     },
     {
       icon: Users,
@@ -68,7 +68,7 @@ const valuesData = {
       title: "Functionality",
       subtitle: "Beautiful and useful",
       description: "A beautiful space that doesn't work is just a stage set. We always prioritize utility and comfort, then find creative ways to make them aesthetic as well.",
-      color: "bg-accent"
+      color: "bg-[var(--color-brand-yellow)]"
     },
     {
       icon: Shield,
@@ -82,7 +82,7 @@ const valuesData = {
       title: "Sustainability",
       subtitle: "Responsible design",
       description: "We choose durable materials, local suppliers, and solutions that stand the test of time. Good design shouldn't cost the planet or go out of style in two years.",
-      color: "bg-accent"
+      color: "bg-[var(--color-brand-yellow)]"
     },
     {
       icon: Sparkles,
@@ -215,7 +215,7 @@ export default function Values() {
             </a>
           </Link>
           <div className="max-w-4xl">
-            <span className="inline-block bg-accent text-black text-xs font-bold px-4 py-2 uppercase tracking-widest mb-8">
+            <span className="inline-block bg-[var(--color-brand-yellow)] text-black text-xs font-bold px-4 py-2 uppercase tracking-widest mb-8">
               {c.badge}
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter leading-[0.9] mb-8">
@@ -245,7 +245,7 @@ export default function Values() {
             {values.map((value, index) => (
               <div key={index} className="group p-8 border border-gray-200 hover:border-accent transition-colors">
                 <div className={`w-14 h-14 ${value.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <value.icon className={`w-7 h-7 ${value.color === 'bg-accent' ? 'text-black' : 'text-accent'}`} />
+                  <value.icon className={`w-7 h-7 ${value.color === 'bg-[var(--color-brand-yellow)]' ? 'text-black' : 'text-accent'}`} />
                 </div>
                 <h3 className="text-2xl font-display font-bold mb-1">{value.title}</h3>
                 <p className="text-accent text-sm font-medium uppercase tracking-widest mb-4">{value.subtitle}</p>
@@ -312,7 +312,7 @@ export default function Values() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
-              <Button className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm">
+              <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm">
                 {t.nav.contact}
               </Button>
             </Link>

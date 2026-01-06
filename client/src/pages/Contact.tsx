@@ -50,7 +50,7 @@ export default function Contact() {
                 <label htmlFor="message" className="text-sm font-bold uppercase tracking-widest text-gray-500">{t.contact.messageLabel}</label>
                 <Textarea id="message" placeholder={t.contact.messagePlaceholder} className="bg-white border-gray-200 min-h-[150px] rounded-none focus:ring-accent focus:border-accent" />
               </div>
-              <Button size="lg" className="w-full bg-black text-white hover:bg-accent hover:text-black rounded-none h-14 text-base font-bold uppercase tracking-widest transition-colors">
+              <Button size="lg" className="w-full bg-black text-white hover:bg-[var(--color-brand-yellow)] hover:text-black rounded-none h-14 text-base font-bold uppercase tracking-widest transition-colors">
                 {t.contact.sendButton}
               </Button>
             </form>

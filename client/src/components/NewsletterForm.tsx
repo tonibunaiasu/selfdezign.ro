@@ -37,7 +37,7 @@ export default function NewsletterForm() {
   return (
     <div className="w-full">
       <div className="flex items-center gap-2 mb-4">
-        <Mail className="w-5 h-5 text-accent" />
+        <Mail className="w-5 h-5 text-[var(--color-brand-yellow)]" />
         <h4 className="font-display font-bold text-lg uppercase tracking-wider">Newsletter</h4>
       </div>
       
@@ -46,7 +46,7 @@ export default function NewsletterForm() {
       </p>
 
       {status === "success" ? (
-        <div className="flex items-center gap-2 text-accent bg-accent/10 p-4 border border-accent/20">
+        <div className="flex items-center gap-2 text-[var(--color-brand-yellow)] bg-[var(--color-brand-yellow)]/10 p-4 border border-accent/20">
           <CheckCircle className="w-5 h-5 flex-shrink-0" />
           <span className="text-sm">{message}</span>
         </div>
@@ -63,7 +63,7 @@ export default function NewsletterForm() {
             />
             <Button 
               type="submit" 
-              className="bg-accent text-black hover:bg-accent/90 rounded-none px-6 font-bold uppercase tracking-wider"
+              className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none px-6 font-bold uppercase tracking-wider"
               disabled={status === "loading"}
             >
               {status === "loading" ? (

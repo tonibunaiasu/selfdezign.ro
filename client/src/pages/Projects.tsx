@@ -58,7 +58,7 @@ export default function Projects() {
               className={cn(
                 "rounded-none uppercase tracking-widest font-bold text-xs h-10 px-6 transition-all",
                 activeCategory === cat.key 
-                  ? "bg-accent text-black hover:bg-accent/90 border-accent" 
+                  ? "bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 border-accent" 
                   : "border-gray-200 hover:border-black hover:text-black text-gray-500"
               )}
             >
@@ -83,7 +83,7 @@ export default function Projects() {
                     loading="lazy"
                   />
                   <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="bg-accent text-black text-xs font-bold px-3 py-1 uppercase tracking-widest">
+                    <div className="bg-[var(--color-brand-yellow)] text-black text-xs font-bold px-3 py-1 uppercase tracking-widest">
                       {project.category}
                     </div>
                   </div>
@@ -115,7 +115,7 @@ export default function Projects() {
               : "Let's transform your vision into reality. Contact us for a free consultation."}
           </p>
           <Button 
-            className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm"
+            className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm"
             onClick={() => window.location.href = '/contact'}
           >
             {language === 'ro' ? 'Începe un proiect' : 'Start a project'}

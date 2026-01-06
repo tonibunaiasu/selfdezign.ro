@@ -61,7 +61,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-accent selection:text-accent-foreground">
+    <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-[var(--color-brand-yellow)] selection:text-accent-foreground">
       {/* Navigation */}
       <header
         className={cn(
@@ -93,20 +93,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 >
                   {link.label}
                   <span className={cn(
-                    "absolute -bottom-1 left-0 w-full h-[2px] bg-accent transform transition-transform duration-300 origin-left",
+                    "absolute -bottom-1 left-0 w-full h-[2px] bg-[var(--color-brand-neon)] transform transition-transform duration-300 origin-left",
                     location === link.href ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                   )}></span>
                 </a>
               </Link>
             ))}
             <Link href="/contact">
-              <Button className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold text-xs px-6 shadow-[0_10px_40px_-12px_rgba(255,107,107,0.35)]">
+              <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs px-6 shadow-[0_10px_40px_-12px_rgba(245,196,0,0.35)]">
                 {t.nav.bookCall}
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button variant="outline" className="border-accent text-black bg-accent hover:bg-accent/90 hover:text-black rounded-none uppercase tracking-widest font-bold text-xs px-6">
-                {t.nav.writeUs}
               </Button>
             </Link>
             <LanguageToggle />
@@ -142,13 +137,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             <Link href="/contact">
-              <Button size="lg" className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold mt-8 w-64">
+              <Button size="lg" className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold mt-8 w-64">
                 {t.nav.bookCall}
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button size="lg" className="bg-accent text-black hover:bg-accent/90 rounded-none uppercase tracking-widest font-bold mt-8">
-                {t.nav.writeUs}
               </Button>
             </Link>
             <div className="mt-6">
@@ -176,7 +166,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-accent uppercase tracking-widest mb-6 text-sm">{t.footer.contact}</h4>
+            <h4 className="font-display font-bold text-[var(--color-brand-yellow)] uppercase tracking-widest mb-6 text-sm">{t.footer.contact}</h4>
             <ul className="space-y-4 text-sm text-gray-400">
               <li>
                 <a href="tel:+40721528448" className="hover:text-white transition-colors">
@@ -192,7 +182,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-accent uppercase tracking-widest mb-6 text-sm">Birouri</h4>
+            <h4 className="font-display font-bold text-[var(--color-brand-yellow)] uppercase tracking-widest mb-6 text-sm">Birouri</h4>
             <ul className="space-y-4 text-sm text-gray-400">
               <li>
                 <span className="block text-white mb-1">B1:</span>
@@ -214,15 +204,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mt-8 md:mt-12 pt-6 md:pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-              <h4 className="font-display font-bold text-accent uppercase tracking-widest mb-4 text-sm">Urmărește-ne</h4>
+              <h4 className="font-display font-bold text-[var(--color-brand-yellow)] uppercase tracking-widest mb-4 text-sm">Urmărește-ne</h4>
               <div className="flex gap-4">
-                <a href="https://www.facebook.com/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300" title="Facebook">
+                <a href="https://www.facebook.com/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300" title="Facebook">
                   <Facebook size={18} />
                 </a>
-                <a href="https://www.instagram.com/selfdezign.ro/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300" title="Instagram">
+                <a href="https://www.instagram.com/selfdezign.ro/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300" title="Instagram">
                   <Instagram size={18} />
                 </a>
-                <a href="https://www.linkedin.com/company/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-accent hover:text-black hover:border-accent transition-all duration-300" title="LinkedIn">
+                <a href="https://www.linkedin.com/company/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300" title="LinkedIn">
                   <Linkedin size={18} />
                 </a>
               </div>

@@ -157,7 +157,7 @@ export default function AdminBlogDashboard() {
                 setFormData(initialFormData);
                 setShowForm(true);
               }}
-              className="bg-accent text-black hover:bg-accent/90"
+              className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90"
             >
               <Plus className="w-4 h-4 mr-2" />
               Articol Nou
@@ -287,7 +287,7 @@ export default function AdminBlogDashboard() {
                   <Button
                     type="submit"
                     disabled={createMutation.isPending || updateMutation.isPending}
-                    className="bg-accent text-black hover:bg-accent/90"
+                    className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90"
                   >
                     {createMutation.isPending || updateMutation.isPending ? (
                       <>
@@ -382,7 +382,7 @@ export default function AdminBlogDashboard() {
                   setFormData(initialFormData);
                   setShowForm(true);
                 }}
-                className="bg-accent text-black hover:bg-accent/90"
+                className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Articol Nou

@@ -95,7 +95,7 @@ export default function Vision() {
             </a>
           </Link>
           <div className="max-w-4xl">
-            <span className="inline-block bg-accent text-black text-xs font-bold px-4 py-2 uppercase tracking-widest mb-8">
+            <span className="inline-block bg-[var(--color-brand-yellow)] text-black text-xs font-bold px-4 py-2 uppercase tracking-widest mb-8">
               {c.badge}
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter leading-[0.9] mb-8">
@@ -112,7 +112,7 @@ export default function Vision() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             <div className="lg:col-span-4">
               <div className="sticky top-32">
-                <div className="w-16 h-16 bg-accent flex items-center justify-center mb-6">
+                <div className="w-16 h-16 bg-[var(--color-brand-yellow)] flex items-center justify-center mb-6">
                   <Eye className="w-8 h-8 text-black" />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-4">
@@ -174,7 +174,7 @@ export default function Vision() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             <div className="lg:col-span-4">
               <div className="sticky top-32">
-                <div className="w-16 h-16 bg-accent flex items-center justify-center mb-6">
+                <div className="w-16 h-16 bg-[var(--color-brand-yellow)] flex items-center justify-center mb-6">
                   <Compass className="w-8 h-8 text-black" />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-4">

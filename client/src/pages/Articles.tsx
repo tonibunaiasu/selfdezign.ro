@@ -83,7 +83,7 @@ export default function Articles() {
           {articles.map((article) => (
             <article key={article.id} className="group flex flex-col h-full">
               <div className="relative aspect-video overflow-hidden bg-gray-100 mb-6">
-                <div className="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 mix-blend-multiply"></div>
+                <div className="absolute inset-0 bg-[var(--color-brand-yellow)]/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 mix-blend-multiply"></div>
                 <img 
                   src={article.image} 
                   alt={article.title}

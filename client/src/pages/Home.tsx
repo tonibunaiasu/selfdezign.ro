@@ -75,8 +75,8 @@ export default function Home() {
         {/* Abstract Background Elements */}
         <div className="absolute inset-0 z-0 opacity-30">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_rgba(204,255,0,0.1),_transparent_70%)]"></div>
-          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-[var(--color-brand-yellow)]/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[var(--color-brand-yellow)]/5 rounded-full blur-3xl"></div>
         </div>
         
         {/* Grid Overlay */}
@@ -84,7 +84,7 @@ export default function Home() {
 
         <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-8">
-            <div className="inline-block px-4 py-1 border border-accent/30 rounded-full bg-accent/5 backdrop-blur-sm">
+            <div className="inline-block px-4 py-1 border border-accent/30 rounded-full bg-[var(--color-brand-yellow)]/5 backdrop-blur-sm">
               <span className="text-accent text-xs font-bold tracking-widest uppercase">{t.home.tagline}</span>
             </div>
             
@@ -102,7 +102,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-4 pt-4">
               <Link href="/proiecte">
                 <a className="inline-block">
-                  <Button size="lg" className="bg-accent text-black hover:bg-accent/90 rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest group">
+                  <Button size="lg" className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest group">
                     {t.home.discoverProjects}
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
@@ -135,7 +135,7 @@ export default function Home() {
                   <div className="absolute top-6 left-6 z-20 flex flex-col gap-3">
                     <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 text-white text-xs uppercase tracking-[0.2em]">
                       {t.home.featuredProject}
-                      <span className="inline-block w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+                      <span className="inline-block w-2 h-2 bg-[var(--color-brand-yellow)] rounded-full animate-pulse"></span>
                     </span>
                     <div className="flex items-center gap-2 px-4 py-2 bg-black/70 text-white backdrop-blur-sm border border-white/10">
                       <span className="text-2xl font-display font-bold text-accent">{activeCaseStudy.metricValue}</span>
@@ -144,14 +144,14 @@ export default function Home() {
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-8 z-20 space-y-4">
                     <p className="text-accent text-xs uppercase tracking-[0.2em]">{activeCaseStudy.category}</p>
-                    <h3 className="text-3xl font-display font-bold text-white group-hover:text-accent transition-colors">
+                    <h3 className="text-3xl font-display font-bold text-white group-hover:text-[var(--color-brand-yellow)] transition-colors">
                       {activeCaseStudy.title}
                     </h3>
                     <p className="text-gray-300 max-w-xl leading-relaxed">{activeCaseStudy.summary}</p>
                     <div className="flex items-center gap-3 pt-2">
                       <Link href={`/proiect/${activeCaseStudy.slug}`}>
                         <a onClick={(e) => { e.preventDefault(); window.location.href = `/proiect/${activeCaseStudy.slug}`; }}>
-                          <Button className="bg-accent text-black hover:bg-accent/90 rounded-none h-12 px-6 uppercase tracking-widest font-bold">
+                          <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none h-12 px-6 uppercase tracking-widest font-bold">
                             {t.projects.viewProject}
                             <ArrowRight className="ml-2 h-4 w-4" />
                           </Button>
@@ -159,7 +159,7 @@ export default function Home() {
                       </Link>
                       <Link href="/contact">
                         <a>
-                          <Button variant="ghost" className="text-white hover:text-accent hover:bg-white/10 rounded-none">
+                          <Button variant="ghost" className="text-white hover:text-[var(--color-brand-yellow)] hover:bg-white/10 rounded-none">
                             {t.home.contactUs}
                           </Button>
                         </a>
@@ -177,7 +177,7 @@ export default function Home() {
                       onClick={() => setActiveIndex(idx)}
                       className={cn(
                         "h-1.5 rounded-full transition-all",
-                        idx === activeIndex ? "w-10 bg-accent" : "w-4 bg-white/30 hover:bg-white/60"
+                        idx === activeIndex ? "w-10 bg-[var(--color-brand-yellow)]" : "w-4 bg-white/30 hover:bg-white/60"
                       )}
                     />
                   ))}
