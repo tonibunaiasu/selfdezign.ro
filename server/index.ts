@@ -41,6 +41,11 @@ try { registerDecapAuth(app); } catch (e) { console.error("[DecapAuth] disabled:
   
   // Serve static files from dist/public
   app.use(express.static(distPath));
+
+  // Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'healthy', timestamp: new Date().toISOString() });
+});
   
   // SPA fallback: serve index.html for all non-static routes
   app.get("*", (req, res) => {
