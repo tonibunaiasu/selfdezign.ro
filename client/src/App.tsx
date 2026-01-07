@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Redirect, Route, Switch } from "wouter";
 
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -60,6 +61,7 @@ export default function App() {
           <TooltipProvider>
             <Toaster />
             <Router />
+            <SpeedInsights />
           </TooltipProvider>
         </LanguageProvider>
       </ThemeProvider>
