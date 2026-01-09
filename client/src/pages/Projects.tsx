@@ -139,12 +139,15 @@ export default function Projects() {
               ? 'Hai să transformăm viziunea ta într-o realitate. Contactează-ne pentru o consultație gratuită.'
               : "Let's transform your vision into reality. Contact us for a free consultation."}
           </p>
-          <Button 
-            className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm"
-            onClick={() => window.location.href = '/contact'}
-          >
-            {language === 'ro' ? 'Începe un proiect' : 'Start a project'}
-          </Button>
+          <Link href="/contact">
+            <a>
+              <Button 
+                className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm"
+              >
+                {language === 'ro' ? 'Începe un proiect' : 'Start a project'}
+              </Button>
+            </a>
+          </Link>
         </div>
       </div>
       {payloadMode === "append" ? payloadSection : null}

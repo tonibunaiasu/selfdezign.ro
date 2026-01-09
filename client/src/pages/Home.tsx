@@ -184,7 +184,7 @@ export default function Home() {
                     <p className="text-gray-300 max-w-xl leading-relaxed">{activeCaseStudy.summary}</p>
                     <div className="flex items-center gap-3 pt-2">
                       <Link href={`/proiect/${activeCaseStudy.slug}`}>
-                        <a onClick={(e) => { e.preventDefault(); window.location.href = `/proiect/${activeCaseStudy.slug}`; }}>
+                        <a>
                           <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none h-12 px-6 uppercase tracking-widest font-bold">
                             {t.projects.viewProject}
                             <ArrowRight className="ml-2 h-4 w-4" />
@@ -378,28 +378,24 @@ export default function Home() {
                 img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop",
               },
             ].map((cat, idx) => (
-              <div
-                key={cat.key}
-                onClick={() => {
-                  window.location.href = `/proiecte?category=${encodeURIComponent(cat.key)}`;
-                }}
-                className="group relative aspect-[4/5] overflow-hidden block bg-gray-900 cursor-pointer"
-              >
-                <img
-                  src={cat.img}
-                  alt={cat.title}
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
-                <div className="absolute bottom-0 left-0 w-full p-8 border-t border-white/10 group-hover:border-accent transition-colors">
-                  <span className="text-accent text-xs font-bold tracking-widest uppercase mb-2 block">
-                    0{idx + 1}
-                  </span>
-                  <h3 className="text-2xl font-display font-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-300">
-                    {cat.title}
-                  </h3>
-                </div>
-              </div>
+              <Link key={cat.key} href={`/proiecte?category=${encodeURIComponent(cat.key)}`}>
+                <a className="group relative aspect-[4/5] overflow-hidden block bg-gray-900">
+                  <img
+                    src={cat.img}
+                    alt={cat.title}
+                    className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                  <div className="absolute bottom-0 left-0 w-full p-8 border-t border-white/10 group-hover:border-accent transition-colors">
+                    <span className="text-accent text-xs font-bold tracking-widest uppercase mb-2 block">
+                      0{idx + 1}
+                    </span>
+                    <h3 className="text-2xl font-display font-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-300">
+                      {cat.title}
+                    </h3>
+                  </div>
+                </a>
+              </Link>
             ))}
           </div>
         </div>
