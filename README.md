@@ -159,6 +159,6 @@ docker run -p 5173:5173 selfdezign:latest
 
 ## Content Management
 
-- **Admin Interface**: Decap CMS at https://www.selfdezign.ro/admin
-- **GitHub OAuth**: Secure authentication for content editors
-# Strategic fix complete
+- **Admin Interface**: Payload CMS at https://cms.selfdezign.ro
+- **Frontend integration**: expects a `pages` collection with `slug`, `html`, and optional `renderMode` (`replace`, `prepend`, `append`) plus `seoTitle`/`seoDescription`.
+- **Env**: set `VITE_PAYLOAD_URL` (defaults to `https://cms.selfdezign.ro`).

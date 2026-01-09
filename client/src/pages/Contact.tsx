@@ -3,12 +3,36 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import PayloadHtml from "@/components/PayloadHtml";
+import { usePayloadPage } from "@/lib/payload";
 
 export default function Contact() {
   const { t } = useLanguage();
+  const { page } = usePayloadPage("contact");
+  const payloadMode = page?.renderMode ?? "append";
+  const payloadSection = page?.html ? (
+    <section className="py-16 bg-white">
+      <div className="container">
+        <PayloadHtml html={page.html} />
+      </div>
+    </section>
+  ) : null;
+
+  if (page?.renderMode === "replace" && page.html) {
+    return (
+      <div className="min-h-screen bg-background">
+        <section className="py-20">
+          <div className="container">
+            <PayloadHtml html={page.html} />
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
+      {payloadMode === "prepend" ? payloadSection : null}
       {/* Hero Text */}
       <div className="bg-black text-white pt-32 pb-24 px-4">
         <div className="container">
@@ -96,6 +120,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      {payloadMode === "append" ? payloadSection : null}
     </div>
   );
 }

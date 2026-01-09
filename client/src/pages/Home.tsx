@@ -7,6 +7,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Testimonials from "@/components/Testimonials";
 import SEO from "@/components/SEO";
 import caseStudiesData from "@/data/case-studies.json";
+import PayloadHtml from "@/components/PayloadHtml";
+import { usePayloadPage } from "@/lib/payload";
 
 type CaseStudy = {
   title: string;
@@ -21,6 +23,7 @@ type CaseStudy = {
 
 export default function Home() {
   const { t } = useLanguage();
+  const { page } = usePayloadPage("home");
   const caseStudies = useMemo(
     () =>
       (caseStudiesData.items as CaseStudy[]).filter((item) => !item.draft),
@@ -62,8 +65,39 @@ export default function Home() {
     ]
   };
 
+  const payloadMode = page?.renderMode ?? "append";
+  const payloadSection = page?.html ? (
+    <section className="py-16 bg-white">
+      <div className="container">
+        <PayloadHtml html={page.html} />
+      </div>
+    </section>
+  ) : null;
+
+  if (page?.renderMode === "replace" && page.html) {
+    return (
+      <div className="min-h-screen bg-background">
+        <SEO
+          title={page.seoTitle ?? "Acasă"}
+          description={
+            page.seoDescription ??
+            "SelfDezign - Studio de design interior specializat în proiecte comerciale și rezidențiale. Designul interior întâlnește natura umană."
+          }
+          url="/"
+          structuredData={organizationStructuredData}
+        />
+        <section className="py-20">
+          <div className="container">
+            <PayloadHtml html={page.html} />
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-0">
+      {payloadMode === "prepend" ? payloadSection : null}
       <SEO 
         title="Acasă"
         description="SelfDezign - Studio de design interior specializat în proiecte comerciale și rezidențiale. Designul interior întâlnește natura umană."
@@ -313,45 +347,64 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
             {[
-              // Map categories to projects
-              // Fixed nested anchor tags issue
-              { title: t.projects.categories.restaurant, img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2670&auto=format&fit=crop" },
-              { title: t.projects.categories.office, img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2669&auto=format&fit=crop" },
-              { title: t.projects.categories.hotel, img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2670&auto=format&fit=crop" },
-              { title: t.projects.categories.comercial, img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=2670&auto=format&fit=crop" },
-              { title: t.projects.categories.brandExperience, img: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2670&auto=format&fit=crop" },
-              { title: t.projects.categories.rezidential, img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop" }
-            ].map((cat, idx) => {
-              const categoryMap: Record<string, string> = {
-                [t.projects.categories.restaurant]: 'Restaurant',
-                [t.projects.categories.office]: 'Office',
-                [t.projects.categories.hotel]: 'Hotel',
-                [t.projects.categories.comercial]: 'Comercial',
-                [t.projects.categories.brandExperience]: 'Brand Experience',
-                [t.projects.categories.rezidential]: 'Rezidențial'
-              };
-              const handleCategoryClick = () => {
-                const categoryKey = categoryMap[cat.title];
-                window.location.href = `/proiecte?category=${encodeURIComponent(categoryKey)}`;
-              };
-              return (
-                <div key={idx} onClick={handleCategoryClick} className="group relative aspect-[4/5] overflow-hidden block bg-gray-900 cursor-pointer">
-                  <img 
-                    src={cat.img} 
-                    alt={cat.title} 
-                    className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
-                  <div className="absolute bottom-0 left-0 w-full p-8 border-t border-white/10 group-hover:border-accent transition-colors">
-                    <span className="text-accent text-xs font-bold tracking-widest uppercase mb-2 block">0{idx + 1}</span>
-                    <h3 className="text-2xl font-display font-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-300">{cat.title}</h3>
-                  </div>
+              {
+                key: "Restaurant",
+                title: t.projects.categories.restaurant,
+                img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2670&auto=format&fit=crop",
+              },
+              {
+                key: "Office",
+                title: t.projects.categories.office,
+                img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2669&auto=format&fit=crop",
+              },
+              {
+                key: "Hotel",
+                title: t.projects.categories.hotel,
+                img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2670&auto=format&fit=crop",
+              },
+              {
+                key: "Comercial",
+                title: t.projects.categories.comercial,
+                img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=2670&auto=format&fit=crop",
+              },
+              {
+                key: "Brand Experience",
+                title: t.projects.categories.brandExperience,
+                img: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2670&auto=format&fit=crop",
+              },
+              {
+                key: "Rezidențial",
+                title: t.projects.categories.rezidential,
+                img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop",
+              },
+            ].map((cat, idx) => (
+              <div
+                key={cat.key}
+                onClick={() => {
+                  window.location.href = `/proiecte?category=${encodeURIComponent(cat.key)}`;
+                }}
+                className="group relative aspect-[4/5] overflow-hidden block bg-gray-900 cursor-pointer"
+              >
+                <img
+                  src={cat.img}
+                  alt={cat.title}
+                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+                <div className="absolute bottom-0 left-0 w-full p-8 border-t border-white/10 group-hover:border-accent transition-colors">
+                  <span className="text-accent text-xs font-bold tracking-widest uppercase mb-2 block">
+                    0{idx + 1}
+                  </span>
+                  <h3 className="text-2xl font-display font-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-300">
+                    {cat.title}
+                  </h3>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
+      {payloadMode === "append" ? payloadSection : null}
     </div>
   );
 }

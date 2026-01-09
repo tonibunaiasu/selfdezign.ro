@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Linkedin, Mail } from "lucide-react";
 import Layout from "@/components/Layout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import PayloadHtml from "@/components/PayloadHtml";
+import { usePayloadPage } from "@/lib/payload";
 
 interface TeamMember {
   id: string;
@@ -62,9 +64,31 @@ const teamMembers: TeamMember[] = [
 
 export default function Team() {
   const { t, language } = useLanguage();
+  const { page } = usePayloadPage("team");
+  const payloadMode = page?.renderMode ?? "append";
+  const payloadSection = page?.html ? (
+    <section className="py-16 bg-white">
+      <div className="container">
+        <PayloadHtml html={page.html} />
+      </div>
+    </section>
+  ) : null;
+
+  if (page?.renderMode === "replace" && page.html) {
+    return (
+      <Layout>
+        <section className="py-20">
+          <div className="container">
+            <PayloadHtml html={page.html} />
+          </div>
+        </section>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
+      {payloadMode === "prepend" ? payloadSection : null}
       {/* Hero Section */}
       <section className="pt-32 pb-16 bg-black text-white">
         <div className="container">
@@ -200,6 +224,7 @@ export default function Team() {
           </p>
         </div>
       </section>
+      {payloadMode === "append" ? payloadSection : null}
     </Layout>
   );
 }

@@ -4,9 +4,12 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { projects as projectsData } from "@/data/projects-data";
 import { useLanguage } from "@/contexts/LanguageContext";
+import PayloadHtml from "@/components/PayloadHtml";
+import { usePayloadPage } from "@/lib/payload";
 
 export default function Projects() {
   const { t, language } = useLanguage();
+  const { page } = usePayloadPage("projects");
   const [location] = useLocation();
   const [activeCategory, setActiveCategory] = useState("all");
   
@@ -33,8 +36,30 @@ export default function Projects() {
     ? projectsData 
     : projectsData.filter(p => p.category === activeCategory);
 
+  const payloadMode = page?.renderMode ?? "append";
+  const payloadSection = page?.html ? (
+    <section className="py-16 bg-white">
+      <div className="container">
+        <PayloadHtml html={page.html} />
+      </div>
+    </section>
+  ) : null;
+
+  if (page?.renderMode === "replace" && page.html) {
+    return (
+      <div className="min-h-screen bg-background">
+        <section className="py-20">
+          <div className="container">
+            <PayloadHtml html={page.html} />
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background pb-24">
+      {payloadMode === "prepend" ? payloadSection : null}
       {/* Header */}
       <div className="bg-black text-white pt-32 pb-16 px-4">
         <div className="container">
@@ -122,6 +147,7 @@ export default function Projects() {
           </Button>
         </div>
       </div>
+      {payloadMode === "append" ? payloadSection : null}
     </div>
   );
 }

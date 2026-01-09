@@ -2,6 +2,8 @@ import { Link } from "wouter";
 import { ArrowLeft, Heart, Users, Lightbulb, Shield, Leaf, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import PayloadHtml from "@/components/PayloadHtml";
+import { usePayloadPage } from "@/lib/payload";
 
 const valuesData = {
   ro: [
@@ -153,6 +155,27 @@ const principlesData = {
 
 export default function Values() {
   const { t, language } = useLanguage();
+  const { page } = usePayloadPage("values");
+  const payloadMode = page?.renderMode ?? "append";
+  const payloadSection = page?.html ? (
+    <section className="py-16 bg-white">
+      <div className="container">
+        <PayloadHtml html={page.html} />
+      </div>
+    </section>
+  ) : null;
+
+  if (page?.renderMode === "replace" && page.html) {
+    return (
+      <div className="min-h-screen bg-background">
+        <section className="py-20">
+          <div className="container">
+            <PayloadHtml html={page.html} />
+          </div>
+        </section>
+      </div>
+    );
+  }
   
   const values = valuesData[language];
   const principles = principlesData[language];
@@ -200,6 +223,7 @@ export default function Values() {
 
   return (
     <div className="min-h-screen bg-background">
+      {payloadMode === "prepend" ? payloadSection : null}
       {/* Hero Section */}
       <section className="bg-black text-white pt-32 pb-24 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -341,6 +365,7 @@ export default function Values() {
           </div>
         </div>
       </section>
+      {payloadMode === "append" ? payloadSection : null}
     </div>
   );
 }

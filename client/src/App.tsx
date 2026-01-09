@@ -14,6 +14,7 @@ import Articles from "./pages/Articles";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
+import ComponentShowcase from "./pages/ComponentShowcase";
 import Home from "./pages/Home";
 import MediaAppearances from "./pages/MediaAppearances";
 import ProjectDetail from "./pages/ProjectDetail";
@@ -27,6 +28,9 @@ function Router() {
     <Layout>
       <Switch>
         <Route path="/" component={Home} />
+        {import.meta.env.DEV ? (
+          <Route path="/components" component={ComponentShowcase} />
+        ) : null}
 
         <Route path="/admin/blog" component={AdminBlogDashboard} />
         <Route path="/admin">{() => <Redirect to="/admin/blog" />}</Route>

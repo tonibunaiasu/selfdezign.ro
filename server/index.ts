@@ -3,17 +3,13 @@ import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
-import cookieParser from "cookie-parser";
-import { registerDecapAuth } from "./_core/decapAuth";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function startServer() {
   const app = express();
-app.set("trust proxy", 1);
-app.use(cookieParser());
-try { registerDecapAuth(app); } catch (e) { console.error("[DecapAuth] disabled:", e); }
+  app.set("trust proxy", 1);
 
   const server = createServer(app);
   
