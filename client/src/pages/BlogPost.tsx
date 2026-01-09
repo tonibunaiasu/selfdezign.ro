@@ -1,15 +1,16 @@
 import { useRoute, Link } from "wouter";
 import { blogPosts } from "@/data/blog-posts";
 import NotFound from "@/pages/NotFound";
-import { Calendar, User, ArrowLeft, Share2 } from "lucide-react";
+import { Calendar, User, ArrowLeft, Share2, Link as LinkIcon, Linkedin, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function BlogPost() {
   const [match, params] = useRoute("/blog/:slug");
   const post = match ? blogPosts.find(p => p.slug === params.slug) : null;
   const { language } = useLanguage();
+  const [copied, setCopied] = useState(false);
 
   const content = {
     ro: {
@@ -35,6 +36,10 @@ export default function BlogPost() {
   };
 
   const c = content[language];
+  const shareUrl = useMemo(() => {
+    if (typeof window === "undefined") return "";
+    return window.location.href;
+  }, [params?.slug]);
 
   // Update Metadata & Inject JSON-LD for SEO/LLM
   useEffect(() => {
@@ -86,6 +91,29 @@ export default function BlogPost() {
 
   if (!match || !post) return <NotFound />;
 
+  const handleShare = async () => {
+    if (!shareUrl) return;
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: post.title,
+          text: post.excerpt,
+          url: shareUrl,
+        });
+        return;
+      } catch {
+        // Fallback to clipboard
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.prompt("Copiază linkul articolului:", shareUrl);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background pb-24">
       {/* Hero Image */}
@@ -125,7 +153,7 @@ export default function BlogPost() {
         {/* Main Content */}
         <div className="lg:col-span-8">
           <div 
-            className="prose prose-lg max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-img:rounded-none"
+            className="prose prose-lg max-w-[720px] mx-auto prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-p:leading-8 prose-p:text-[17px] prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-img:rounded-none prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:pl-6 prose-blockquote:text-gray-700 prose-blockquote:font-medium"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
@@ -171,7 +199,7 @@ export default function BlogPost() {
             <h3 className="font-display font-bold text-xl mb-6 uppercase tracking-widest">{c.aboutAuthor}</h3>
             <div className="flex items-center gap-4 mb-4">
               <div className="w-16 h-16 bg-gray-200 rounded-full overflow-hidden">
-                <img src="/images/irina-stoica.jpg" alt="Author" className="w-full h-full object-cover" />
+                <img src="/irina-stoica.webp" alt="Author" className="w-full h-full object-cover" />
               </div>
               <div>
                 <p className="font-bold">{post.author}</p>
@@ -188,11 +216,44 @@ export default function BlogPost() {
 
           <div>
             <h3 className="font-display font-bold text-xl mb-6 uppercase tracking-widest">{c.share}</h3>
-            <div className="flex gap-2">
-              <Button variant="outline" size="icon" className="rounded-none border-gray-200 hover:border-accent hover:text-accent">
-                <Share2 className="w-4 h-4" />
+            <div className="flex flex-wrap gap-3">
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-none border-gray-200 hover:border-accent hover:text-accent uppercase tracking-widest text-xs"
+                onClick={handleShare}
+              >
+                <Share2 className="w-4 h-4 mr-2" />
+                {copied ? "Link copiat" : "Share"}
               </Button>
-              {/* Add real share buttons here */}
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="sm" className="rounded-none border-gray-200 hover:border-accent hover:text-accent uppercase tracking-widest text-xs">
+                  <Facebook className="w-4 h-4 mr-2" />
+                  Facebook
+                </Button>
+              </a>
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="sm" className="rounded-none border-gray-200 hover:border-accent hover:text-accent uppercase tracking-widest text-xs">
+                  <Linkedin className="w-4 h-4 mr-2" />
+                  LinkedIn
+                </Button>
+              </a>
+              <a
+                href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(shareUrl)}`}
+              >
+                <Button variant="outline" size="sm" className="rounded-none border-gray-200 hover:border-accent hover:text-accent uppercase tracking-widest text-xs">
+                  <LinkIcon className="w-4 h-4 mr-2" />
+                  Email
+                </Button>
+              </a>
             </div>
           </div>
         </div>

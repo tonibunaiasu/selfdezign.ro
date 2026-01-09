@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
@@ -98,6 +98,14 @@ export default function Contact() {
               <div className="space-y-2">
                 <a href="tel:+40721528448" className="block text-lg hover:text-accent transition-colors font-medium">+40-721-528-448</a>
                 <a href="mailto:hello@selfdezign.ro" className="block text-lg hover:text-accent transition-colors font-medium">hello@selfdezign.ro</a>
+              </div>
+              <div className="mt-6">
+                <a href="https://wa.me/40721528447" target="_blank" rel="noopener noreferrer">
+                  <Button className="bg-[#25D366] text-black hover:bg-[#25D366]/90 rounded-none uppercase tracking-widest font-bold text-xs px-6">
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    WhatsApp
+                  </Button>
+                </a>
               </div>
             </div>
 

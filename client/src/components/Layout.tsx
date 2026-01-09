@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
-import { Menu, X, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Menu, X, Facebook, Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import NewsletterForm from "@/components/NewsletterForm";
@@ -220,6 +220,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </a>
                 <a href="https://www.linkedin.com/company/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300" title="LinkedIn">
                   <Linkedin size={18} />
+                </a>
+                <a href="https://wa.me/40721528447" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300" title="WhatsApp">
+                  <MessageCircle size={18} />
                 </a>
               </div>
             </div>
