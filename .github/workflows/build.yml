@@ -12,13 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - uses: pnpm/action-setup@v4
-      
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
       
-      - run: pnpm install
+      - run: corepack enable
+      - run: corepack prepare pnpm@10.18.1 --activate
+      - run: pnpm install --no-frozen-lockfile --prod=false
       - run: pnpm run build
       
       - uses: actions/upload-artifact@v4
