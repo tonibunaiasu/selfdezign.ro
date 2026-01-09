@@ -31,7 +31,8 @@ async function startServer() {
       const contents = fs.readdirSync(parentDir);
       console.error("[ERROR] Parent directory contents:", contents);
     } catch (err) {
-      console.error("[ERROR] Could not read parent directory:", err.message);
+      const message = err instanceof Error ? err.message : String(err);
+      console.error("[ERROR] Could not read parent directory:", message);
     }
   }
   
@@ -39,9 +40,9 @@ async function startServer() {
   app.use(express.static(distPath));
 
   // Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'healthy', timestamp: new Date().toISOString() });
-});
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "healthy", timestamp: new Date().toISOString() });
+  });
   
   // SPA fallback: serve index.html for all non-static routes
   app.get("*", (req, res) => {
@@ -54,7 +55,7 @@ app.get('/api/health', (req, res) => {
     }
   });
   
-  const port = process.env.PORT || 3000;
+  const port = Number(process.env.PORT ?? 3000);
   server.listen(port, "0.0.0.0", () => {
     console.log(`[Server] Running on http://0.0.0.0:${port}/`);
   });

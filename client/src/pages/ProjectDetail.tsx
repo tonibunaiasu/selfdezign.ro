@@ -109,7 +109,7 @@ export default function ProjectDetail() {
     <Layout>
       <SEO 
         title={project.title}
-        description={project.description}
+        description={project.description.join(" ")}
         image={project.coverImage}
         url={`/proiect/${project.slug}`}
         type="article"
