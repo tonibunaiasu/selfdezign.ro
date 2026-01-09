@@ -3,8 +3,10 @@ import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function NewsletterForm() {
+  const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -22,7 +24,7 @@ export default function NewsletterForm() {
     },
     onError: (error) => {
       setStatus("error");
-      setMessage(error.message || "A apărut o eroare. Te rugăm să încerci din nou.");
+      setMessage(error.message || t.footer.subscribeError);
     },
   });
 
@@ -38,11 +40,11 @@ export default function NewsletterForm() {
     <div className="w-full">
       <div className="flex items-center gap-2 mb-4">
         <Mail className="w-5 h-5 text-[var(--color-brand-yellow)]" />
-        <h4 className="font-display font-bold text-lg uppercase tracking-wider">Newsletter</h4>
+        <h4 className="font-display font-bold text-lg uppercase tracking-wider">{t.footer.newsletter}</h4>
       </div>
       
       <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-        Abonează-te pentru a primi cele mai noi articole despre design interior și tendințe în arhitectură.
+        {t.footer.newsletterText}
       </p>
 
       {status === "success" ? (
@@ -55,7 +57,7 @@ export default function NewsletterForm() {
           <div className="flex gap-2">
             <Input
               type="email"
-              placeholder="Adresa ta de email"
+              placeholder={t.footer.emailPlaceholder}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-none focus:border-accent focus:ring-accent"
@@ -69,7 +71,7 @@ export default function NewsletterForm() {
               {status === "loading" ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
               ) : (
-                "Abonează-te"
+                t.footer.subscribe
               )}
             </Button>
           </div>

@@ -9,6 +9,7 @@ export interface Translations {
     projects: string;
     contact: string;
     blog: string;
+    media: string;
     bookCall: string;
   };
   // Homepage
@@ -175,6 +176,13 @@ export interface Translations {
     visitTitle: string;
     visitAddress: string;
     visitNote: string;
+    officesTitle: string;
+    office1Label: string;
+    office1Address: string;
+    office2Label: string;
+    office2Address: string;
+    followUs: string;
+    tagline: string;
   };
   // Common
   common: {
@@ -194,6 +202,7 @@ export const translations: Record<Language, Translations> = {
       projects: "Proiecte",
       contact: "Contact",
       blog: "Blog",
+      media: "În presă",
       bookCall: "Hai sa vorbim"
     },
     home: {
@@ -349,7 +358,14 @@ export const translations: Record<Language, Translations> = {
       scheduleTime: "Luni - Vineri, 09:00 - 18:00",
       visitTitle: "Vizite la birou",
       visitAddress: "Sky Tower, Calea Floreasca nr. 246C, etaj 18, București 014476",
-      visitNote: "Doar cu programare"
+      visitNote: "Doar cu programare",
+      officesTitle: "Birouri",
+      office1Label: "B1",
+      office1Address: "Strada Politiei, nr. 3, București",
+      office2Label: "B2",
+      office2Address: "Sky Tower, Calea Floreasca nr. 246C, etaj 18, București",
+      followUs: "Urmărește-ne",
+      tagline: "Din arhitectura personalității tale."
     },
     common: {
       loading: "Se încarcă...",
@@ -366,6 +382,7 @@ export const translations: Record<Language, Translations> = {
       projects: "Projects",
       contact: "Contact",
       blog: "Blog",
+      media: "As Seen On",
       bookCall: "Let's talk"
     },
     home: {
@@ -521,7 +538,14 @@ export const translations: Record<Language, Translations> = {
       scheduleTime: "Monday - Friday, 09:00 - 18:00",
       visitTitle: "Office visits",
       visitAddress: "Sky Tower, Calea Floreasca no. 246C, floor 18, Bucharest 014476",
-      visitNote: "By appointment only"
+      visitNote: "By appointment only",
+      officesTitle: "Studios",
+      office1Label: "B1",
+      office1Address: "Strada Politiei 3, Bucharest",
+      office2Label: "B2",
+      office2Address: "Sky Tower, Calea Floreasca 246C, floor 18, Bucharest",
+      followUs: "Follow us",
+      tagline: "From the architecture of your personality."
     },
     common: {
       loading: "Loading...",

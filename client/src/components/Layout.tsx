@@ -63,7 +63,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { href: "/echipa", label: t.nav.team },
     { href: "/proiecte", label: t.nav.projects },
     { href: "/blog", label: t.nav.blog },
-    { href: "/aparitii-media", label: "În presă" },
+    { href: "/aparitii-media", label: t.nav.media },
   ];
 
   return (
@@ -188,15 +188,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-[var(--color-brand-yellow)] uppercase tracking-widest mb-6 text-sm">Birouri</h4>
+            <h4 className="font-display font-bold text-[var(--color-brand-yellow)] uppercase tracking-widest mb-6 text-sm">{t.footer.officesTitle}</h4>
             <ul className="space-y-4 text-sm text-gray-400">
               <li>
-                <span className="block text-white mb-1">B1:</span>
-                Strada Politiei, nr. 3, București
+                <span className="block text-white mb-1">{t.footer.office1Label}:</span>
+                {t.footer.office1Address}
               </li>
               <li>
-                <span className="block text-white mb-1">B2:</span>
-                Sky Tower, Calea Floreasca nr. 246C, etaj 18, București
+                <span className="block text-white mb-1">{t.footer.office2Label}:</span>
+                {t.footer.office2Address}
               </li>
             </ul>
           </div>
@@ -210,7 +210,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mt-8 md:mt-12 pt-6 md:pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-              <h4 className="font-display font-bold text-[var(--color-brand-yellow)] uppercase tracking-widest mb-4 text-sm">Urmărește-ne</h4>
+              <h4 className="font-display font-bold text-[var(--color-brand-yellow)] uppercase tracking-widest mb-4 text-sm">{t.footer.followUs}</h4>
               <div className="flex gap-4">
                 <a href="https://www.facebook.com/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300" title="Facebook">
                   <Facebook size={18} />
@@ -230,7 +230,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <div className="container mt-8 md:mt-16 pt-6 md:pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
           <p>© 2025 SelfDezign®. {t.footer.rights}</p>
-          <p>Din arhitectura personalității tale.</p>
+          <p>{t.footer.tagline}</p>
         </div>
       </footer>
     </div>
