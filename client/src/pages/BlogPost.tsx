@@ -152,8 +152,8 @@ export default function BlogPost() {
       <div className="container mt-16 px-4 grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Main Content */}
         <div className="lg:col-span-8">
-          <div 
-            className="prose prose-lg max-w-[720px] mx-auto prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-p:leading-8 prose-p:text-[17px] prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-img:rounded-none prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:pl-6 prose-blockquote:text-gray-700 prose-blockquote:font-medium"
+          <article 
+            className="blog-prose"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
