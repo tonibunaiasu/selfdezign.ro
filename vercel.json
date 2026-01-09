@@ -3,8 +3,7 @@
   "buildCommand": "pnpm run build:client",
   "outputDirectory": "dist/public",
   "cleanUrls": true,
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
