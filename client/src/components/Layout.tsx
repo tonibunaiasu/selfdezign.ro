@@ -29,6 +29,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash) return;
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location]);
   
   // Handle touch events for swipe gesture
   const onTouchStart = (e: React.TouchEvent) => {
