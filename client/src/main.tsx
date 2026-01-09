@@ -10,6 +10,16 @@ import "./index.css";
 
 const queryClient = new QueryClient();
 
+if (typeof window !== "undefined") {
+  const redirectParam = new URLSearchParams(window.location.search).get("redirect");
+  if (redirectParam) {
+    const decoded = decodeURIComponent(redirectParam);
+    if (decoded.startsWith("/")) {
+      window.history.replaceState(null, "", decoded);
+    }
+  }
+}
+
 const redirectToLoginIfUnauthorized = (error: unknown) => {
   if (!(error instanceof TRPCClientError)) return;
   if (typeof window === "undefined") return;
