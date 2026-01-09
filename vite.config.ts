@@ -24,20 +24,8 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
-    rollupOptions: {
-      output: {
-        manualChunks: (id: string) => {
-          if (id.includes("node_modules")) {
-            if (id.includes("@radix-ui")) return "vendor-ui";
-            return "vendor";
-          }
-          return undefined;
-        },
-      },
-    },
     assetsInlineLimit: 4096,
-    minify: "terser",
-    terserOptions: { compress: { drop_console: true } },
+    minify: "esbuild",
   },
   server: {
     host: true,
