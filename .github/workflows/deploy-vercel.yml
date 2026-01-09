@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Deploy to Vercel (prod)
-        uses: vercel/vercel-action@v3
+        uses: vercel/action@v3
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
