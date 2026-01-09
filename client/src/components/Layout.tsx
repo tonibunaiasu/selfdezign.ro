@@ -63,7 +63,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { href: "/echipa", label: t.nav.team },
     { href: "/proiecte", label: t.nav.projects },
     { href: "/blog", label: t.nav.blog },
-    { href: "/aparituri-media", label: "Media" },
+    { href: "/aparitii-media", label: "În presă" },
   ];
 
   return (

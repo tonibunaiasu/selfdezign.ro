@@ -47,7 +47,8 @@ function Router() {
         <Route path="/viziune" component={Vision} />
         <Route path="/valori" component={Values} />
         <Route path="/echipa" component={Team} />
-        <Route path="/aparituri-media" component={MediaAppearances} />
+        <Route path="/aparituri-media">{() => <Redirect to="/aparitii-media" />}</Route>
+        <Route path="/aparitii-media" component={MediaAppearances} />
 
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
