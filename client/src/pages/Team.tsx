@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Linkedin, Mail } from "lucide-react";
-import Layout from "@/components/Layout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
@@ -76,18 +75,16 @@ export default function Team() {
 
   if (page?.renderMode === "replace" && page.html) {
     return (
-      <Layout>
-        <section className="py-20">
-          <div className="container">
-            <PayloadHtml html={page.html} />
-          </div>
-        </section>
-      </Layout>
+      <section className="py-20">
+        <div className="container">
+          <PayloadHtml html={page.html} />
+        </div>
+      </section>
     );
   }
 
   return (
-    <Layout>
+    <>
       {payloadMode === "prepend" ? payloadSection : null}
       {/* Hero Section */}
       <section className="pt-32 pb-16 bg-black text-white">
@@ -225,6 +222,6 @@ export default function Team() {
         </div>
       </section>
       {payloadMode === "append" ? payloadSection : null}
-    </Layout>
+    </>
   );
 }

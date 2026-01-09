@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useParams } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, X, ChevronLeft, ChevronRight, MapPin, Calendar, Camera } from "lucide-react";
-import Layout from "@/components/Layout";
 import { getProjectBySlug, projects } from "@/data/projects-data";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
@@ -49,16 +48,14 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">{c.notFound}</h1>
-            <Link href="/proiecte" className="text-accent hover:underline">
-              {c.backToProjects}
-            </Link>
-          </div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4">{c.notFound}</h1>
+          <Link href="/proiecte" className="text-accent hover:underline">
+            {c.backToProjects}
+          </Link>
         </div>
-      </Layout>
+      </div>
     );
   }
 
@@ -106,7 +103,7 @@ export default function ProjectDetail() {
   };
 
   return (
-    <Layout>
+    <>
       <SEO 
         title={project.title}
         description={project.description.join(" ")}
@@ -340,6 +337,6 @@ export default function ProjectDetail() {
           </Link>
         </div>
       </section>
-    </Layout>
+    </>
   );
 }
