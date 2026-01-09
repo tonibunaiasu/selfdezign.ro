@@ -74,6 +74,12 @@ export default function MediaAppearances() {
       : date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   };
 
+  const getPreviewImage = (link?: string, image?: string) => {
+    if (image) return image;
+    if (!link || link === "#") return "";
+    return `https://image.thum.io/get/width/1200/${link}`;
+  };
+
   return (
     <section className="py-24 bg-white">
       <div className="container">
@@ -94,6 +100,18 @@ export default function MediaAppearances() {
               key={appearance.id}
               className={`p-6 rounded-lg border-2 transition-all hover:shadow-lg ${getCategoryColor(appearance.category)}`}
             >
+              {getPreviewImage(appearance.link, appearance.image) ? (
+                <div className="mb-5 aspect-[16/9] overflow-hidden bg-black/5">
+                  <img
+                    src={getPreviewImage(appearance.link, appearance.image)}
+                    alt={appearance.title}
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              ) : null}
               {/* Category Badge */}
               <div className="flex items-center justify-between mb-4">
                 <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${getCategoryBadgeColor(appearance.category)}`}>
