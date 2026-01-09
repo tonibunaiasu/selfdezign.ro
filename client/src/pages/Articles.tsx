@@ -1,56 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
+import { mediaAppearances } from "@/data/media-appearances";
 
-const articles = [
-  {
-    id: 1,
-    title: "Irina Stoica, arhitecta care vede oportunități acolo unde alții văd doar ziduri",
-    source: "Revista Cariere",
-    date: "27 August, 2024",
-    image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=2670&auto=format&fit=crop",
-    link: "#"
-  },
-  {
-    id: 2,
-    title: "SelfDezign won the BIG SEE Interior Design Award 2024 in the Workplace category",
-    source: "Romania-Insider",
-    date: "20 May, 2024",
-    image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2669&auto=format&fit=crop",
-    link: "#"
-  },
-  {
-    id: 3,
-    title: "Cafeneaua Veche e ca nouă și-a luat marele premiu pentru arhitectură de interior",
-    source: "B365",
-    date: "25 Martie, 2024",
-    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2647&auto=format&fit=crop",
-    link: "#"
-  },
-  {
-    id: 4,
-    title: "Accor va deschide în iunie 2024 un hotel ibis Styles în stațiunea Venus",
-    source: "Revista BIZ",
-    date: "5 Martie, 2024",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2670&auto=format&fit=crop",
-    link: "#"
-  },
-  {
-    id: 5,
-    title: "Cea mai veche cafenea din București, premiată pentru arhitectura interioară",
-    source: "Știrile PRO TV",
-    date: "19 Octombrie, 2023",
-    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=2574&auto=format&fit=crop",
-    link: "#"
-  },
-  {
-    id: 6,
-    title: "Cum a reintrat cea mai veche cafenea bucureșteană pe lista noastră de localuri preferate",
-    source: "Designist",
-    date: "9 Octombrie, 2023",
-    image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2574&auto=format&fit=crop",
-    link: "#"
-  }
+const articleImages = [
+  "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=2670&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2669&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2647&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2670&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=2574&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=2574&auto=format&fit=crop",
 ];
+
+const formatDate = (value: string) => {
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return value;
+  return parsed.toLocaleDateString("ro-RO", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
 
 export default function Articles() {
   return (
@@ -80,31 +49,33 @@ export default function Articles() {
       {/* Articles Grid */}
       <div className="container mt-16 px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-          {articles.map((article) => (
+          {mediaAppearances.map((article, index) => (
             <article key={article.id} className="group flex flex-col h-full">
               <div className="relative aspect-video overflow-hidden bg-gray-100 mb-6">
                 <div className="absolute inset-0 bg-[var(--color-brand-yellow)]/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 mix-blend-multiply"></div>
                 <img 
-                  src={article.image} 
+                  src={articleImages[index % articleImages.length]} 
                   alt={article.title}
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
                 <div className="absolute top-4 left-4 bg-white text-black text-xs font-bold px-3 py-1 uppercase tracking-widest z-20">
-                  {article.source}
+                  {article.publication}
                 </div>
               </div>
               
               <div className="flex-grow flex flex-col">
                 <div className="text-xs text-gray-500 mb-3 font-medium uppercase tracking-wider border-b border-gray-100 pb-3 inline-block w-full">
-                  {article.date}
+                  {formatDate(article.date)}
                 </div>
                 <h3 className="text-xl font-display font-bold leading-tight mb-4 group-hover:text-accent transition-colors">
                   {article.title}
                 </h3>
                 <div className="mt-auto pt-4">
-                  <Button variant="link" className="p-0 h-auto text-black font-bold uppercase tracking-widest text-xs group-hover:translate-x-2 transition-transform">
-                    Citește Articolul <ArrowUpRight className="ml-1 w-4 h-4" />
-                  </Button>
+                  <a href={article.link} target="_blank" rel="noopener noreferrer">
+                    <Button variant="link" className="p-0 h-auto text-black font-bold uppercase tracking-widest text-xs group-hover:translate-x-2 transition-transform">
+                      Citește Articolul <ArrowUpRight className="ml-1 w-4 h-4" />
+                    </Button>
+                  </a>
                 </div>
               </div>
             </article>
