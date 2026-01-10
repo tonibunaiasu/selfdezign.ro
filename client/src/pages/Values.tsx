@@ -226,7 +226,7 @@ export default function Values() {
     <div className="min-h-screen bg-background">
       {payloadMode === "prepend" ? payloadSection : null}
       <SEO
-        title={content[language].title}
+        title={content[language].badge}
         description={content[language].subtitle}
         url="/valori"
       />
