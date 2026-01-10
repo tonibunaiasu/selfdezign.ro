@@ -23,3 +23,20 @@ export function getResponsiveImageProps(
     sizes,
   };
 }
+
+export function getLocalImageProps(
+  src: string,
+  sizes: string,
+  widths: number[] = [480, 768, 1024, 1280, 1600]
+): ResponsiveImageProps {
+  if (!src.startsWith("/")) return {};
+  if (!import.meta.env.PROD) return { sizes };
+
+  const buildUrl = (width: number) =>
+    `/_vercel/image?url=${encodeURIComponent(src)}&w=${width}&q=75`;
+
+  return {
+    srcSet: widths.map((width) => `${buildUrl(width)} ${width}w`).join(", "),
+    sizes,
+  };
+}

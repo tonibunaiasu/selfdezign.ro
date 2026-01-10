@@ -6,6 +6,7 @@ import { getProjectBySlug, projects } from "@/data/projects-data";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { getLocalImageProps } from "@/lib/images";
 
 export default function ProjectDetail() {
   const params = useParams<{ slug: string }>();
@@ -178,6 +179,7 @@ export default function ProjectDetail() {
             alt={project.title}
             decoding="async"
             fetchPriority="high"
+            {...getLocalImageProps(project.coverImage, "100vw")}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
@@ -315,6 +317,10 @@ export default function ProjectDetail() {
                     alt={image.alt}
                     loading="lazy"
                     decoding="async"
+                    {...getLocalImageProps(
+                      image.src,
+                      "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    )}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
@@ -408,6 +414,10 @@ export default function ProjectDetail() {
                           alt={relatedProject.title}
                           loading="lazy"
                           decoding="async"
+                          {...getLocalImageProps(
+                            relatedProject.coverImage,
+                            "(max-width: 768px) 100vw, 33vw"
+                          )}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />

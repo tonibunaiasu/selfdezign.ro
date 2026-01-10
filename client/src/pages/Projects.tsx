@@ -6,6 +6,7 @@ import { projects as projectsData } from "@/data/projects-data";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
+import { getLocalImageProps } from "@/lib/images";
 
 export default function Projects() {
   const { t, language } = useLanguage();
@@ -104,6 +105,10 @@ export default function Projects() {
                   <img 
                     src={project.coverImage} 
                     alt={project.title}
+                    {...getLocalImageProps(
+                      project.coverImage,
+                      "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    )}
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
                   />
