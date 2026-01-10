@@ -65,7 +65,7 @@ export default function BlogPost() {
       if (!text) continue;
       const id = text
         .toLowerCase()
-        .replace(/[^\p{L}\p{N}\s-]/gu, "")
+        .replace(/[^a-z0-9\s-]/g, "")
         .replace(/\s+/g, "-")
         .replace(/-+/g, "-");
       items.push({ id, text, level });
@@ -202,7 +202,7 @@ export default function BlogPost() {
                   const plain = String(text).replace(/<[^>]+>/g, "").trim();
                   const id = plain
                     .toLowerCase()
-                    .replace(/[^\p{L}\p{N}\s-]/gu, "")
+                    .replace(/[^a-z0-9\s-]/g, "")
                     .replace(/\s+/g, "-")
                     .replace(/-+/g, "-");
                   return `<${level} id="${id}">${text}</${level}>`;
