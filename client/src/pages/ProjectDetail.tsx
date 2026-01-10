@@ -26,7 +26,7 @@ export default function ProjectDetail() {
       relatedProjects: "Proiecte Similare",
       ctaTitle: "Ai un proiect în minte?",
       ctaText: "Hai să discutăm despre cum putem transforma spațiul tău într-o experiență unică.",
-      contactUs: "CONTACTEAZĂ-NE"
+      contactUs: "CERE O OFERTĂ"
     },
     en: {
       notFound: "Project not found",
@@ -40,7 +40,7 @@ export default function ProjectDetail() {
       relatedProjects: "Related Projects",
       ctaTitle: "Have a project in mind?",
       ctaText: "Let's discuss how we can transform your space into a unique experience.",
-      contactUs: "CONTACT US"
+      contactUs: "REQUEST A QUOTE"
     }
   };
 

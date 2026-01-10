@@ -144,7 +144,7 @@ export default function Projects() {
               <Button 
                 className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm"
               >
-                {language === 'ro' ? 'Începe un proiect' : 'Start a project'}
+                {t.nav.bookCall}
               </Button>
             </a>
           </Link>

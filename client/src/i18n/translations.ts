@@ -203,7 +203,7 @@ export const translations: Record<Language, Translations> = {
       contact: "Contact",
       blog: "Blog",
       media: "În presă",
-      bookCall: "Hai sa vorbim"
+      bookCall: "Cere o ofertă"
     },
     home: {
       tagline: "YOU ARE THE DESIGNER",
@@ -213,7 +213,7 @@ export const translations: Record<Language, Translations> = {
       heroTitle4: "NATURA UMANĂ",
       heroDescription: "Vino să creăm experiențe care transformă designul interior într-o declarație a identității personale sau de brand.",
       discoverProjects: "Descoperă Proiectele",
-      contactUs: "Contactează-ne",
+      contactUs: "Cere o ofertă",
       featuredProject: "PROIECT RECOMANDAT",
       awardsTitle: "Premii & Distincții",
       awardsSubtitle: "Recunoaștere pentru excelență în design interior",
@@ -383,7 +383,7 @@ export const translations: Record<Language, Translations> = {
       contact: "Contact",
       blog: "Blog",
       media: "As Seen On",
-      bookCall: "Let's talk"
+      bookCall: "Request a quote"
     },
     home: {
       tagline: "YOU ARE THE DESIGNER",
@@ -393,7 +393,7 @@ export const translations: Record<Language, Translations> = {
       heroTitle4: "HUMAN NATURE",
       heroDescription: "Let's create experiences that transform interior design into a statement of personal or brand identity.",
       discoverProjects: "Discover Projects",
-      contactUs: "Contact Us",
+      contactUs: "Request a quote",
       featuredProject: "FEATURED PROJECT",
       awardsTitle: "Awards & Distinctions",
       awardsSubtitle: "Recognition for excellence in interior design",
