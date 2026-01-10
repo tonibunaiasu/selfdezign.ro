@@ -3,6 +3,7 @@ import { blogPosts } from "@/data/blog-posts";
 import { ArrowRight, Calendar, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 
 export default function Blog() {
   const { language } = useLanguage();
@@ -26,6 +27,11 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
+      <SEO
+        title={language === "ro" ? "Blog" : "Blog"}
+        description={c.subtitle}
+        url="/blog"
+      />
       {/* Header */}
       <div className="bg-black text-white pt-32 pb-24 px-4">
         <div className="container">

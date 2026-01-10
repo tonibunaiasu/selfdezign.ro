@@ -3,8 +3,9 @@ import { blogPosts } from "@/data/blog-posts";
 import NotFound from "@/pages/NotFound";
 import { Calendar, User, ArrowLeft, Share2, Link as LinkIcon, Linkedin, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 
 export default function BlogPost() {
   const [match, params] = useRoute("/blog/:slug");
@@ -41,55 +42,35 @@ export default function BlogPost() {
     return window.location.href;
   }, [params?.slug]);
 
-  // Update Metadata & Inject JSON-LD for SEO/LLM
-  useEffect(() => {
-    if (post) {
-      // Update Title & Meta Description
-      document.title = `${post.title} | SelfDezign Blog`;
-      let metaDesc = document.querySelector('meta[name="description"]');
-      if (!metaDesc) {
-        metaDesc = document.createElement('meta');
-        metaDesc.setAttribute('name', 'description');
-        document.head.appendChild(metaDesc);
-      }
-      metaDesc.setAttribute('content', post.excerpt);
-
-      // JSON-LD
-      const script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.text = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": post.title,
-        "image": [post.image],
-        "datePublished": post.date,
-        "author": [{
-            "@type": "Person",
-            "name": post.author,
-            "url": "https://selfdezign.ro/despre"
-          }],
-        "publisher": {
-           "@type": "Organization",
-           "name": "SelfDezign",
-           "logo": {
-             "@type": "ImageObject",
-             "url": "https://selfdezign.ro/logo.png"
-           }
-        },
-        "description": post.excerpt,
-        "mainEntityOfPage": {
-           "@type": "WebPage",
-           "@id": `https://selfdezign.ro/blog/${post.slug}`
-        }
-      });
-      document.head.appendChild(script);
-      return () => {
-        document.head.removeChild(script);
-      }
-    }
-  }, [post]);
-
   if (!match || !post) return <NotFound />;
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "image": [post.image],
+    "datePublished": post.date,
+    "author": [
+      {
+        "@type": "Person",
+        "name": post.author,
+        "url": "https://selfdezign.ro/despre",
+      },
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "SelfDezign",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://selfdezign.ro/images/logo_selfdezign.png",
+      },
+    },
+    "description": post.excerpt,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://selfdezign.ro/blog/${post.slug}`,
+    },
+  };
 
   const handleShare = async () => {
     if (!shareUrl) return;
@@ -116,6 +97,14 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
+      <SEO
+        title={post.title}
+        description={post.excerpt}
+        image={post.image}
+        url={`/blog/${post.slug}`}
+        type="article"
+        structuredData={structuredData}
+      />
       {/* Hero Image */}
       <div className="relative h-[60vh] w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/40 z-10"></div>

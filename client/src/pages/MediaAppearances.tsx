@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import MediaAppearances from "@/components/MediaAppearances";
+import SEO from "@/components/SEO";
 
 export default function MediaAppearancesPage() {
   const { t, language } = useLanguage();
@@ -19,6 +20,11 @@ export default function MediaAppearancesPage() {
 
   return (
     <div className="flex flex-col gap-0">
+      <SEO
+        title={heroTexts.heroTitle}
+        description={heroTexts.heroSubtitle}
+        url="/aparitii-media"
+      />
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center justify-center bg-gradient-to-br from-gray-900 to-black text-white py-20">
         <div className="absolute inset-0 z-0 opacity-20">
