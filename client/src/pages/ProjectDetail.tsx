@@ -102,6 +102,18 @@ export default function ProjectDetail() {
     "datePublished": project.year
   };
 
+  const galleryStructuredData = hasGallery
+    ? {
+        "@type": "ImageGallery",
+        "name": `${project.title} - Galerie`,
+        "associatedMedia": project.gallery.map((image) => ({
+          "@type": "ImageObject",
+          "contentUrl": `https://selfdezign.ro${image.src}`,
+          "caption": image.alt,
+        })),
+      }
+    : null;
+
   const breadcrumbStructuredData = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -137,7 +149,11 @@ export default function ProjectDetail() {
         type="article"
         structuredData={{
           "@context": "https://schema.org",
-          "@graph": [projectStructuredData, breadcrumbStructuredData]
+          "@graph": [
+            projectStructuredData,
+            breadcrumbStructuredData,
+            ...(galleryStructuredData ? [galleryStructuredData] : []),
+          ],
         }}
       />
       {/* Hero Section */}
