@@ -15,10 +15,7 @@ export interface Translations {
   // Homepage
   home: {
     tagline: string;
-    heroTitle1: string;
-    heroTitle2: string;
-    heroTitle3: string;
-    heroTitle4: string;
+    heroTitle: string;
     heroDescription: string;
     discoverProjects: string;
     contactUs: string;
@@ -211,11 +208,8 @@ export const translations: Record<Language, Translations> = {
     },
     home: {
       tagline: "YOU ARE THE DESIGNER",
-      heroTitle1: "DESIGNUL",
-      heroTitle2: "INTERIOR",
-      heroTitle3: "ÎNTÂLNEȘTE",
-      heroTitle4: "NATURA UMANĂ",
-      heroDescription: "Vino să creăm experiențe care transformă designul interior într-o declarație a identității personale sau de brand.",
+      heroTitle: "Design interior pentru cine ești.",
+      heroDescription: "Proiectăm experiențe care îți susțin identitatea.",
       discoverProjects: "Descoperă Proiectele",
       contactUs: "Cere o ofertă",
       featuredProject: "PROIECT RECOMANDAT",
@@ -395,11 +389,8 @@ export const translations: Record<Language, Translations> = {
     },
     home: {
       tagline: "YOU ARE THE DESIGNER",
-      heroTitle1: "INTERIOR",
-      heroTitle2: "DESIGN",
-      heroTitle3: "MEETS",
-      heroTitle4: "HUMAN NATURE",
-      heroDescription: "Let's create experiences that transform interior design into a statement of personal or brand identity.",
+      heroTitle: "Interior design for who you are.",
+      heroDescription: "We design experiences that support your identity.",
       discoverProjects: "Discover Projects",
       contactUs: "Request a quote",
       featuredProject: "FEATURED PROJECT",

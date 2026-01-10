@@ -123,11 +123,8 @@ export default function Home() {
               <span className="text-accent text-xs font-bold tracking-widest uppercase">{t.home.tagline}</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tighter">
-              {t.home.heroTitle1} <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">{t.home.heroTitle2}</span> <br/>
-              {t.home.heroTitle3} <br/>
-              <span className="text-accent">{t.home.heroTitle4}</span>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.95] tracking-tighter">
+              {t.home.heroTitle}
             </h1>
             
             <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed border-l-2 border-accent pl-6">
