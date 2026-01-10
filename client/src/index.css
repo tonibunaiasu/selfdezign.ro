@@ -223,6 +223,29 @@
     @apply prose-blockquote:pl-6 prose-blockquote:text-gray-700 prose-blockquote:font-medium;
   }
 
+  .logo-marquee {
+    @apply overflow-hidden border-y border-gray-100 py-4;
+  }
+
+  .logo-marquee-track {
+    display: flex;
+    gap: 2.5rem;
+    width: max-content;
+    animation: logo-marquee 32s linear infinite;
+    will-change: transform;
+  }
+
+  .logo-marquee-item {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    white-space: nowrap;
+  }
+
+  .logo-marquee:hover .logo-marquee-track {
+    animation-play-state: paused;
+  }
+
   @media (min-width: 640px) {
     .container {
       padding-left: 1.5rem; /* 24px - tablet padding */
@@ -251,5 +274,20 @@
   }
   body {
     font-family: var(--font-sans);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee-track {
+    animation: none;
+  }
+}
+
+@keyframes logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }

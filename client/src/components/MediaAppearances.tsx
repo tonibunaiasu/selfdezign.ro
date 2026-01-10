@@ -100,6 +100,7 @@ export default function MediaAppearances() {
     .filter((item, index, array) => {
       return array.findIndex((other) => other.domain === item.domain) === index;
     });
+  const marqueeItems = [...logoItems, ...logoItems];
 
   return (
     <section className="py-24 bg-white">
@@ -119,26 +120,28 @@ export default function MediaAppearances() {
             <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">
               {t.asSeenOn}
             </p>
-            <div className="flex flex-wrap items-center gap-6">
-              {logoItems.map((item) => (
-                <div key={item.domain} className="h-8 flex items-center">
-                  <img
-                    src={`https://logo.clearbit.com/${item.domain}`}
-                    alt={item.publication}
-                    loading="lazy"
-                    decoding="async"
-                    referrerPolicy="no-referrer"
-                    className="h-8 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition-opacity"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      target.style.display = "none";
-                    }}
-                  />
-                  <span className="text-xs font-semibold uppercase tracking-widest text-gray-500 ml-3">
-                    {item.publication}
-                  </span>
-                </div>
-              ))}
+            <div className="logo-marquee">
+              <div className="logo-marquee-track">
+                {marqueeItems.map((item, index) => (
+                  <div key={`${item.domain}-${index}`} className="logo-marquee-item">
+                    <img
+                      src={`https://logo.clearbit.com/${item.domain}`}
+                      alt={item.publication}
+                      loading="lazy"
+                      decoding="async"
+                      referrerPolicy="no-referrer"
+                      className="h-8 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition-opacity"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.style.display = "none";
+                      }}
+                    />
+                    <span className="text-xs font-semibold uppercase tracking-widest text-gray-500 ml-3 whitespace-nowrap">
+                      {item.publication}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ) : null}
