@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
+import SEO from "@/components/SEO";
 
 const valuesData = {
   ro: [
@@ -224,6 +225,11 @@ export default function Values() {
   return (
     <div className="min-h-screen bg-background">
       {payloadMode === "prepend" ? payloadSection : null}
+      <SEO
+        title={content[language].title}
+        description={content[language].subtitle}
+        url="/valori"
+      />
       {/* Hero Section */}
       <section className="bg-black text-white pt-32 pb-24 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">

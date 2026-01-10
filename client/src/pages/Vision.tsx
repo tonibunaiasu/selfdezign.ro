@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Target, Eye, Compass } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
+import SEO from "@/components/SEO";
 
 export default function Vision() {
   const { t, language } = useLanguage();
@@ -104,6 +105,11 @@ export default function Vision() {
   return (
     <div className="min-h-screen bg-background">
       {payloadMode === "prepend" ? payloadSection : null}
+      <SEO
+        title={c.badge}
+        description={c.vision.lead}
+        url="/viziune"
+      />
       {/* Hero Section */}
       <section className="bg-black text-white pt-32 pb-24 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
