@@ -17,6 +17,10 @@ export interface Project {
   photographer?: string;
   description: string[];
   proofPoints?: string[];
+  process?: string;
+  materials?: string;
+  budget?: string;
+  duration?: string;
   coverImage: string;
   gallery: ProjectImage[];
 }
@@ -41,6 +45,10 @@ export const projects: Project[] = [
       "+22% timp mediu petrecut în locație",
       "+15% vânzări pe metru pătrat"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Lemn, metal, sticlă, textile premium",
+    budget: "La cerere",
+    duration: "8–16 săptămâni (orientativ)",
     coverImage: "/projects/bloom/bloom-1.webp",
     gallery: [
       { src: "/projects/bloom/bloom-1.webp", alt: "Bloom - vedere generală interior" },
@@ -78,6 +86,10 @@ export const projects: Project[] = [
       "+28% rezervări în weekend",
       "+22% timp mediu petrecut în locație"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Lemn, piatră naturală, metal, textile premium",
+    budget: "La cerere",
+    duration: "8–16 săptămâni (orientativ)",
     coverImage: "/projects/cafeneaua-veche/cafeneaua-veche-1.webp",
     gallery: [
       { src: "/projects/cafeneaua-veche/cafeneaua-veche-1.webp", alt: "Cafeneaua Veche - bar și scaune înalte" },
@@ -108,6 +120,10 @@ export const projects: Project[] = [
       "+22% timp mediu petrecut în locație",
       "+15% vânzări pe metru pătrat"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Lemn, piatră, metal, textile premium",
+    budget: "La cerere",
+    duration: "8–16 săptămâni (orientativ)",
     coverImage: "/projects/zero-grade/zero-grade-1.webp",
     gallery: [
       { src: "/projects/zero-grade/zero-grade-1.webp", alt: "Zero Grade - clădirea în formă de A" },
@@ -138,6 +154,10 @@ export const projects: Project[] = [
       "+22% timp mediu petrecut în locație",
       "+1.2 puncte rating în review-uri"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Lemn, piatră, sticlă, textile premium",
+    budget: "La cerere",
+    duration: "10–18 săptămâni (orientativ)",
     coverImage: "/projects/restaurant-poeme/restaurant-poeme-1.webp",
     gallery: [
       { src: "/projects/restaurant-poeme/restaurant-poeme-1.webp", alt: "Restaurant Poeme - barul principal" },
@@ -167,6 +187,10 @@ export const projects: Project[] = [
       "+20% utilizare a zonelor de colaborare",
       "-18% zgomot perceput în open-space"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Lemn, metal, sticlă, acustică textilă",
+    budget: "La cerere",
+    duration: "6–14 săptămâni (orientativ)",
     coverImage: "/projects/cafeteria-ibm/cafeteria-ibm-1.webp",
     gallery: [
       { src: "/projects/cafeteria-ibm/cafeteria-ibm-1.webp", alt: "Cafeteria IBM - zona de dining cu lămpi portocalii" },
@@ -198,6 +222,10 @@ export const projects: Project[] = [
       "+20% utilizare a zonelor de colaborare",
       "-18% zgomot perceput în open-space"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Lemn, metal, sticlă, acustică textilă",
+    budget: "La cerere",
+    duration: "6–14 săptămâni (orientativ)",
     coverImage: "/projects/ezugi-gaming/ezugi-gaming-1.webp",
     gallery: [
       { src: "/projects/ezugi-gaming/ezugi-gaming-1.webp", alt: "Ezugi - recepția" },
@@ -229,6 +257,10 @@ export const projects: Project[] = [
       "+20% utilizare a zonelor de colaborare",
       "-18% zgomot perceput în open-space"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Lemn, metal, sticlă, acustică textilă",
+    budget: "La cerere",
+    duration: "6–14 săptămâni (orientativ)",
     coverImage: "/projects/prima-development/prima-development-1.webp",
     gallery: [
       { src: "/projects/prima-development/prima-development-1.webp", alt: "Prima Development - open space cu plante" },
@@ -257,6 +289,10 @@ export const projects: Project[] = [
       "+20% utilizare a zonelor de colaborare",
       "-18% zgomot perceput în open-space"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Lemn, metal, sticlă, acustică textilă",
+    budget: "La cerere",
+    duration: "6–14 săptămâni (orientativ)",
     coverImage: "/projects/myhive/myhive-1.webp",
     gallery: [
       { src: "/projects/myhive/myhive-1.webp", alt: "MyHive - lobby principal" },
@@ -286,6 +322,10 @@ export const projects: Project[] = [
       "+24% RevPAR",
       "+35% mențiuni pozitive despre design"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Lemn, catifea, piatră, tapet personalizat",
+    budget: "La cerere",
+    duration: "12–20 săptămâni (orientativ)",
     coverImage: "/projects/hotel-bucharest/hotel-bucharest-3.webp",
     gallery: [
       { src: "/projects/hotel-bucharest/hotel-bucharest-3.webp", alt: "Hotel Bucharest - tapetul tropical și covor" },
@@ -319,6 +359,10 @@ export const projects: Project[] = [
       "+22% timp mediu petrecut în showroom",
       "+18% trafic pietonal"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Lemn natural, piatră, metal, sticlă",
+    budget: "La cerere",
+    duration: "8–16 săptămâni (orientativ)",
     coverImage: "/projects/mafi/mafi-1.webp",
     gallery: [
       { src: "/projects/mafi/mafi-1.webp", alt: "Mafi Showroom - pardoseală și canapea rotundă" },
@@ -349,6 +393,10 @@ export const projects: Project[] = [
       "+20% engagement în zona brandului",
       "+15% retenție a vizitatorilor"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Structuri modulare, textile, metal, branding custom",
+    budget: "La cerere",
+    duration: "6–12 săptămâni (orientativ)",
     coverImage: "/projects/outdoor-event/outdoor-event-1.webp",
     gallery: [
       { src: "/projects/outdoor-event/outdoor-event-1.webp", alt: "Eveniment Outdoor - structură geodezică" },
@@ -374,6 +422,10 @@ export const projects: Project[] = [
       "+28% participare la activări",
       "+15% retenție a vizitatorilor"
     ],
+    process: "Brief → Concept → Design detaliat → Implementare",
+    materials: "Structuri modulare, textile, metal, branding custom",
+    budget: "La cerere",
+    duration: "6–12 săptămâni (orientativ)",
     coverImage: "/projects/fmcg-branding/fmcg-branding-1.webp",
     gallery: [
       { src: "/projects/fmcg-branding/fmcg-branding-1.webp", alt: "FMCG Branding - grill urban" },

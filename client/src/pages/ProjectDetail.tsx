@@ -5,6 +5,7 @@ import { ArrowLeft, X, ChevronLeft, ChevronRight, MapPin, Calendar, Camera } fro
 import { getProjectBySlug, projects } from "@/data/projects-data";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 export default function ProjectDetail() {
   const params = useParams<{ slug: string }>();
@@ -25,6 +26,11 @@ export default function ProjectDetail() {
       galleryComingSoon: "Galeria foto pentru acest proiect va fi adăugată în curând.",
       relatedProjects: "Proiecte Similare",
       resultsTitle: "Rezultate",
+      detailsTitle: "Detalii proiect",
+      processLabel: "Proces",
+      materialsLabel: "Materiale",
+      budgetLabel: "Buget estimativ",
+      durationLabel: "Durată",
       ctaTitle: "Ai un proiect în minte?",
       ctaText: "Hai să discutăm despre cum putem transforma spațiul tău într-o experiență unică.",
       contactUs: "CERE O OFERTĂ"
@@ -40,6 +46,11 @@ export default function ProjectDetail() {
       galleryComingSoon: "The photo gallery for this project will be added soon.",
       relatedProjects: "Related Projects",
       resultsTitle: "Results",
+      detailsTitle: "Project details",
+      processLabel: "Process",
+      materialsLabel: "Materials",
+      budgetLabel: "Estimated budget",
+      durationLabel: "Timeline",
       ctaTitle: "Have a project in mind?",
       ctaText: "Let's discuss how we can transform your space into a unique experience.",
       contactUs: "REQUEST A QUOTE"
@@ -238,6 +249,37 @@ export default function ProjectDetail() {
                     <li key={point}>• {point}</li>
                   ))}
                 </ul>
+              </div>
+            ) : null}
+            {project.process || project.materials || project.budget || project.duration ? (
+              <div className="mt-10 border-t border-gray-200 pt-8">
+                <h3 className="text-2xl font-display font-bold mb-4">{c.detailsTitle}</h3>
+                <Accordion type="single" collapsible className="w-full">
+                  {project.process ? (
+                    <AccordionItem value="process">
+                      <AccordionTrigger>{c.processLabel}</AccordionTrigger>
+                      <AccordionContent>{project.process}</AccordionContent>
+                    </AccordionItem>
+                  ) : null}
+                  {project.materials ? (
+                    <AccordionItem value="materials">
+                      <AccordionTrigger>{c.materialsLabel}</AccordionTrigger>
+                      <AccordionContent>{project.materials}</AccordionContent>
+                    </AccordionItem>
+                  ) : null}
+                  {project.budget ? (
+                    <AccordionItem value="budget">
+                      <AccordionTrigger>{c.budgetLabel}</AccordionTrigger>
+                      <AccordionContent>{project.budget}</AccordionContent>
+                    </AccordionItem>
+                  ) : null}
+                  {project.duration ? (
+                    <AccordionItem value="duration">
+                      <AccordionTrigger>{c.durationLabel}</AccordionTrigger>
+                      <AccordionContent>{project.duration}</AccordionContent>
+                    </AccordionItem>
+                  ) : null}
+                </Accordion>
               </div>
             ) : null}
           </div>
