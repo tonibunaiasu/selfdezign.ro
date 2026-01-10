@@ -7,7 +7,6 @@ import { useMemo, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import { getResponsiveImageProps } from "@/lib/images";
-import { Link } from "wouter";
 import { projects } from "@/data/projects-data";
 
 export default function BlogPost() {
