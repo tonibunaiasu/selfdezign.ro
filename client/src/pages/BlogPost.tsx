@@ -119,7 +119,7 @@ export default function BlogPost() {
           src={post.image} 
           alt={post.title}
           decoding="async"
-          fetchpriority="high"
+          fetchPriority="high"
           {...getResponsiveImageProps(post.image, "100vw")}
           className="w-full h-full object-cover"
         />

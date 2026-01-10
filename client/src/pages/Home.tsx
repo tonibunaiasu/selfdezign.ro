@@ -165,7 +165,7 @@ export default function Home() {
                     alt={activeCaseStudy.title}
                     loading="eager"
                     decoding="async"
-                    fetchpriority="high"
+                    fetchPriority="high"
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
                   />
                   <div className="absolute top-6 left-6 z-20 flex flex-col gap-3">

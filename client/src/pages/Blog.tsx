@@ -7,7 +7,7 @@ import SEO from "@/components/SEO";
 import { getResponsiveImageProps } from "@/lib/images";
 
 export default function Blog() {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
 
   const content = {
     ro: {
