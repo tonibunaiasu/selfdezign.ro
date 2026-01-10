@@ -124,7 +124,10 @@ export default function Home() {
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.95] tracking-tighter">
-              {t.home.heroTitle}
+              {t.home.heroTitlePrefix}{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
+                {t.home.heroTitleEmphasis}
+              </span>
             </h1>
             
             <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed border-l-2 border-accent pl-6">

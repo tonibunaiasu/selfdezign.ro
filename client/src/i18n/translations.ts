@@ -15,7 +15,8 @@ export interface Translations {
   // Homepage
   home: {
     tagline: string;
-    heroTitle: string;
+    heroTitlePrefix: string;
+    heroTitleEmphasis: string;
     heroDescription: string;
     discoverProjects: string;
     contactUs: string;
@@ -208,7 +209,8 @@ export const translations: Record<Language, Translations> = {
     },
     home: {
       tagline: "YOU ARE THE DESIGNER",
-      heroTitle: "Design interior pentru cine ești.",
+      heroTitlePrefix: "Design interior pentru",
+      heroTitleEmphasis: "cine ești.",
       heroDescription: "Proiectăm experiențe care îți susțin identitatea.",
       discoverProjects: "Descoperă Proiectele",
       contactUs: "Cere o ofertă",
@@ -389,7 +391,8 @@ export const translations: Record<Language, Translations> = {
     },
     home: {
       tagline: "YOU ARE THE DESIGNER",
-      heroTitle: "Interior design for who you are.",
+      heroTitlePrefix: "Interior design for",
+      heroTitleEmphasis: "who you are.",
       heroDescription: "We design experiences that support your identity.",
       discoverProjects: "Discover Projects",
       contactUs: "Request a quote",
