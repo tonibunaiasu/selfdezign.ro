@@ -96,7 +96,7 @@ export default function Projects() {
       {/* Grid */}
       <div className="container mt-12 px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
+              {filteredProjects.map((project) => (
             <Link key={project.id} href={`/proiect/${project.slug}`}>
               <div className="group cursor-pointer">
                 <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 mb-4">
@@ -122,6 +122,13 @@ export default function Projects() {
                   {project.title}
                 </h3>
                 <p className="text-gray-500 text-sm mt-1">{project.location} • {project.year}</p>
+                {project.proofPoints && project.proofPoints.length > 0 ? (
+                  <ul className="mt-4 space-y-1 text-xs uppercase tracking-widest text-gray-500">
+                    {project.proofPoints.slice(0, 2).map((point) => (
+                      <li key={point}>• {point}</li>
+                    ))}
+                  </ul>
+                ) : null}
               </div>
             </Link>
           ))}

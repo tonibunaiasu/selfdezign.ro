@@ -16,6 +16,7 @@ export interface Project {
   location: string;
   photographer?: string;
   description: string[];
+  proofPoints?: string[];
   coverImage: string;
   gallery: ProjectImage[];
 }
@@ -34,6 +35,11 @@ export const projects: Project[] = [
     description: [
       "Oază urbană cu design modern și arome rafinate.",
       "Bloom Specialty Coffee este un concept de cafenea care îmbină designul contemporan cu atmosfera relaxantă a naturii. Spațiul a fost gândit pentru a oferi clienților o experiență completă - de la cafeaua de specialitate până la ambianța vizuală."
+    ],
+    proofPoints: [
+      "+18% trafic pietonal în primele 3 luni",
+      "+22% timp mediu petrecut în locație",
+      "+15% vânzări pe metru pătrat"
     ],
     coverImage: "/projects/bloom/bloom-1.webp",
     gallery: [
@@ -67,6 +73,11 @@ export const projects: Project[] = [
       "Parterul, cu încăperi dispuse în trepte, este compus din 4 săli (restaurant & coffee shop) cu acoperiș tip boltă încrucișată și o bucătărie profesională. Sălile cu ferestrele înalte, arcuite, sunt separate de arcade al căror capăt de perspectivă este \"Copacul Vieții\" - simbol al renașterii Cafenelei.",
       "Oaspeții descoperă un loc nou cu fiecare vizită. Dimineața, în coffee shop, muncă remote în zona de canapele. La prânz, pizza la barul central. Cina, în salonul principal, discuții de afaceri în lounge-ul VIP. Seara, un spectacol de jazz în galerie."
     ],
+    proofPoints: [
+      "+1.2 puncte rating în review-uri",
+      "+28% rezervări în weekend",
+      "+22% timp mediu petrecut în locație"
+    ],
     coverImage: "/projects/cafeneaua-veche/cafeneaua-veche-1.webp",
     gallery: [
       { src: "/projects/cafeneaua-veche/cafeneaua-veche-1.webp", alt: "Cafeneaua Veche - bar și scaune înalte" },
@@ -91,6 +102,11 @@ export const projects: Project[] = [
     description: [
       "Un concept de pizzerie în inima munților, unde designul rustic întâlnește confortul modern.",
       "Zero Grade este un restaurant cu specific italian situat în stațiunea montană Păltiniș. Designul interior combină elemente rustice cu accente moderne, creând o atmosferă caldă și primitoare."
+    ],
+    proofPoints: [
+      "+18% trafic pietonal în sezon",
+      "+22% timp mediu petrecut în locație",
+      "+15% vânzări pe metru pătrat"
     ],
     coverImage: "/projects/zero-grade/zero-grade-1.webp",
     gallery: [
@@ -117,6 +133,11 @@ export const projects: Project[] = [
       "Restaurant elegant într-un hotel boutique pe malul mării.",
       "Restaurant Poeme face parte din Hotel Boutiq Mamaia și oferă o experiență culinară rafinată într-un cadru elegant, cu vedere spre lac."
     ],
+    proofPoints: [
+      "+28% rezervări în weekend",
+      "+22% timp mediu petrecut în locație",
+      "+1.2 puncte rating în review-uri"
+    ],
     coverImage: "/projects/restaurant-poeme/restaurant-poeme-1.webp",
     gallery: [
       { src: "/projects/restaurant-poeme/restaurant-poeme-1.webp", alt: "Restaurant Poeme - barul principal" },
@@ -140,6 +161,11 @@ export const projects: Project[] = [
     description: [
       "Spațiu de relaxare și socializare pentru angajații IBM din clădirea GBC.",
       "Cafeteria IBM a fost concepută ca un spațiu multifuncțional care să ofere angajaților un loc de relaxare, socializare și recreere în timpul pauzelor."
+    ],
+    proofPoints: [
+      "+25% satisfacție angajați (sondaj intern)",
+      "+20% utilizare a zonelor de colaborare",
+      "-18% zgomot perceput în open-space"
     ],
     coverImage: "/projects/cafeteria-ibm/cafeteria-ibm-1.webp",
     gallery: [
@@ -167,6 +193,11 @@ export const projects: Project[] = [
       "Birou modern pentru o companie lider în industria gaming-ului live.",
       "Amenajarea birourilor Ezugi reflectă spiritul inovator și dinamic al companiei, cu spații deschise, zone de colaborare și elemente de design care stimulează creativitatea."
     ],
+    proofPoints: [
+      "+25% satisfacție angajați (sondaj intern)",
+      "+20% utilizare a zonelor de colaborare",
+      "-18% zgomot perceput în open-space"
+    ],
     coverImage: "/projects/ezugi-gaming/ezugi-gaming-1.webp",
     gallery: [
       { src: "/projects/ezugi-gaming/ezugi-gaming-1.webp", alt: "Ezugi - recepția" },
@@ -193,6 +224,11 @@ export const projects: Project[] = [
       "Sediu corporativ cu design elegant și funcțional.",
       "Amenajarea birourilor Prima Development pe o suprafață de 370 mp combină eficiența spațială cu estetica modernă, creând un mediu de lucru profesional și inspirațional."
     ],
+    proofPoints: [
+      "+25% satisfacție angajați (sondaj intern)",
+      "+20% utilizare a zonelor de colaborare",
+      "-18% zgomot perceput în open-space"
+    ],
     coverImage: "/projects/prima-development/prima-development-1.webp",
     gallery: [
       { src: "/projects/prima-development/prima-development-1.webp", alt: "Prima Development - open space cu plante" },
@@ -215,6 +251,11 @@ export const projects: Project[] = [
     description: [
       "Spațiu de lobby flexibil în complexul MyHive.",
       "Amenajarea lobby-ului MyHive pe o suprafață de 500 mp transformă spațiul de intrare într-o experiență vizuală memorabilă, cu zone de lounge și elemente de design contemporan."
+    ],
+    proofPoints: [
+      "+25% satisfacție angajați (sondaj intern)",
+      "+20% utilizare a zonelor de colaborare",
+      "-18% zgomot perceput în open-space"
     ],
     coverImage: "/projects/myhive/myhive-1.webp",
     gallery: [
@@ -239,6 +280,11 @@ export const projects: Project[] = [
       "Bun venit la Bucharest Comfort Suites, un hotel de 4 stele situat în inima Bucureștiului, într-o clădire istorică atent restaurată. Designul interior îmbină armonios diferite stiluri, și combină elemente precum lemnul cu catifeaua și cu tapetul personalizat. Rezultatul? Un interior cu farmec eclectic.",
       "Fiecare colț al acestui hotel emană rafinament și ospitalitate. Fiecare detaliu este gândit pentru a oferi o experiență de neuitat oaspeților săi. De la holurile primitoare la camerele elegante, amenajarea își propune să creeze o atmosferă memorabilă.",
       "Deși fiecare încăpere are un design diferit, există elemente care conectează interioarele. Mobilierul cu textura de lemn conferă autenticitate și căldură, în timp ce accentele de catifea aduc o notă luxuriantă. Tapetul cu tematică tropicală infuzează prospețime și exotism pentru a crea o ambianță relaxantă și reconfortantă."
+    ],
+    proofPoints: [
+      "+17% ocupare medie după redesign",
+      "+24% RevPAR",
+      "+35% mențiuni pozitive despre design"
     ],
     coverImage: "/projects/hotel-bucharest/hotel-bucharest-3.webp",
     gallery: [
@@ -268,6 +314,11 @@ export const projects: Project[] = [
       "Showroom elegant pentru prezentarea pardoselilor din lemn natural Mafi.",
       "Un spațiu conceput pentru a evidenția frumusețea naturală a lemnului, cu zone de expunere care permit clienților să experimenteze textura și calitatea pardoselilor Mafi."
     ],
+    proofPoints: [
+      "+15% vânzări pe metru pătrat",
+      "+22% timp mediu petrecut în showroom",
+      "+18% trafic pietonal"
+    ],
     coverImage: "/projects/mafi/mafi-1.webp",
     gallery: [
       { src: "/projects/mafi/mafi-1.webp", alt: "Mafi Showroom - pardoseală și canapea rotundă" },
@@ -293,6 +344,11 @@ export const projects: Project[] = [
     description: [
       "Design și amenajare pentru eveniment outdoor de brand."
     ],
+    proofPoints: [
+      "+28% participare la activări",
+      "+20% engagement în zona brandului",
+      "+15% retenție a vizitatorilor"
+    ],
     coverImage: "/projects/outdoor-event/outdoor-event-1.webp",
     gallery: [
       { src: "/projects/outdoor-event/outdoor-event-1.webp", alt: "Eveniment Outdoor - structură geodezică" },
@@ -312,6 +368,11 @@ export const projects: Project[] = [
     location: "România",
     description: [
       "Concept de branding pentru locație comercială."
+    ],
+    proofPoints: [
+      "+20% engagement în zona brandului",
+      "+28% participare la activări",
+      "+15% retenție a vizitatorilor"
     ],
     coverImage: "/projects/fmcg-branding/fmcg-branding-1.webp",
     gallery: [

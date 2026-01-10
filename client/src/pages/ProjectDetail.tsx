@@ -24,6 +24,7 @@ export default function ProjectDetail() {
       viewImage: "Vezi imaginea",
       galleryComingSoon: "Galeria foto pentru acest proiect va fi adăugată în curând.",
       relatedProjects: "Proiecte Similare",
+      resultsTitle: "Rezultate",
       ctaTitle: "Ai un proiect în minte?",
       ctaText: "Hai să discutăm despre cum putem transforma spațiul tău într-o experiență unică.",
       contactUs: "CERE O OFERTĂ"
@@ -38,6 +39,7 @@ export default function ProjectDetail() {
       viewImage: "View image",
       galleryComingSoon: "The photo gallery for this project will be added soon.",
       relatedProjects: "Related Projects",
+      resultsTitle: "Results",
       ctaTitle: "Have a project in mind?",
       ctaText: "Let's discuss how we can transform your space into a unique experience.",
       contactUs: "REQUEST A QUOTE"
@@ -228,6 +230,16 @@ export default function ProjectDetail() {
                 ))}
               </div>
             </motion.div>
+            {project.proofPoints && project.proofPoints.length > 0 ? (
+              <div className="mt-10 border-t border-gray-200 pt-8">
+                <h3 className="text-2xl font-display font-bold mb-4">{c.resultsTitle}</h3>
+                <ul className="space-y-2 text-gray-700">
+                  {project.proofPoints.map((point) => (
+                    <li key={point}>• {point}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
         </div>
       </section>
