@@ -13,7 +13,7 @@ interface SEOProps {
 export default function SEO({ 
   title, 
   description, 
-  image = '/images/logo_selfdezign.png',
+  image = '/og/default.svg',
   imageAlt,
   url,
   type = 'website',
