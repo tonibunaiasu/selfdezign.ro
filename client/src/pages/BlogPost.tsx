@@ -40,8 +40,7 @@ export default function BlogPost() {
   const c = { ...content[language], ...{
     ctaTitle: t.blog.ctaTitle,
     ctaText: t.blog.ctaText,
-    ctaButton: t.blog.ctaButton,
-    ctaWhatsapp: t.blog.ctaWhatsapp
+    ctaButton: t.blog.ctaButton
   }};
   const shareUrl = useMemo(() => {
     if (typeof window === "undefined") return "";
@@ -217,7 +216,7 @@ export default function BlogPost() {
               </Link>
               <a href="https://wa.me/40721528447" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="rounded-none uppercase tracking-widest font-bold text-xs w-full">
-                  {c.ctaWhatsapp}
+                  {t.nav.bookConsultation}
                 </Button>
               </a>
             </div>

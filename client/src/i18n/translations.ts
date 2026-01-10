@@ -11,6 +11,7 @@ export interface Translations {
     blog: string;
     media: string;
     bookCall: string;
+    bookConsultation: string;
   };
   // Homepage
   home: {
@@ -144,6 +145,8 @@ export interface Translations {
     sending: string;
     successMessage: string;
     errorMessage: string;
+    trustNote: string;
+    responseTime: string;
     infoTitle: string;
     addressTitle: string;
     address1: string;
@@ -211,7 +214,8 @@ export const translations: Record<Language, Translations> = {
       contact: "Contact",
       blog: "Blog",
       media: "În presă",
-      bookCall: "Cere o ofertă"
+      bookCall: "Cere o ofertă",
+      bookConsultation: "Consultanță 45 min"
     },
     home: {
       tagline: "YOU ARE THE DESIGNER",
@@ -337,6 +341,8 @@ export const translations: Record<Language, Translations> = {
       sending: "Se trimite...",
       successMessage: "Mesajul a fost trimis cu succes!",
       errorMessage: "A apărut o eroare. Te rugăm să încerci din nou.",
+      trustNote: "Estimare inițială gratuită.",
+      responseTime: "Răspundem în 24h.",
       infoTitle: "Informații de Contact",
       addressTitle: "Adresă",
       address1: "Sky Tower, Calea Floreasca nr. 246C",
@@ -399,7 +405,8 @@ export const translations: Record<Language, Translations> = {
       contact: "Contact",
       blog: "Blog",
       media: "As Seen On",
-      bookCall: "Request a quote"
+      bookCall: "Request a quote",
+      bookConsultation: "45-min consult"
     },
     home: {
       tagline: "YOU ARE THE DESIGNER",
@@ -525,6 +532,8 @@ export const translations: Record<Language, Translations> = {
       sending: "Sending...",
       successMessage: "Message sent successfully!",
       errorMessage: "An error occurred. Please try again.",
+      trustNote: "Free initial estimate.",
+      responseTime: "We reply within 24h.",
       infoTitle: "Contact Information",
       addressTitle: "Address",
       address1: "Sky Tower, Calea Floreasca no. 246C",

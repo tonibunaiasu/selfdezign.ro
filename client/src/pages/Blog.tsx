@@ -63,7 +63,7 @@ export default function Blog() {
             </Link>
             <a href="https://wa.me/40721528447" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" className="rounded-none uppercase tracking-widest font-bold text-xs px-6">
-                {t.blog.ctaWhatsapp}
+                {t.nav.bookConsultation}
               </Button>
             </a>
           </div>

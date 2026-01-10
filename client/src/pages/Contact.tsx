@@ -77,6 +77,10 @@ export default function Contact() {
               <Button size="lg" className="w-full bg-black text-white hover:bg-[var(--color-brand-yellow)] hover:text-black rounded-none h-14 text-base font-bold uppercase tracking-widest transition-colors">
                 {t.contact.sendButton}
               </Button>
+              <div className="flex items-center justify-between text-xs uppercase tracking-widest text-gray-500">
+                <span>{t.contact.responseTime}</span>
+                <span>{t.contact.trustNote}</span>
+              </div>
             </form>
           </div>
 
