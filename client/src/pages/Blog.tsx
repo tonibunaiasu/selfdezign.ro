@@ -90,9 +90,11 @@ export default function Blog() {
                   />
                   <div className="absolute top-4 left-4 flex gap-2">
                     {post.tags.slice(0, 2).map(tag => (
-                      <span key={tag} className="bg-white/90 backdrop-blur text-black text-xs font-bold px-3 py-1 uppercase tracking-widest">
-                        {tag}
-                      </span>
+                      <Link key={tag} href={`/blog/tag/${encodeURIComponent(tag)}`}>
+                        <a className="bg-white/90 backdrop-blur text-black text-xs font-bold px-3 py-1 uppercase tracking-widest hover:text-accent transition-colors">
+                          {tag}
+                        </a>
+                      </Link>
                     ))}
                   </div>
                 </a>

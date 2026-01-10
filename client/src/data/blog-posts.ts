@@ -8,6 +8,7 @@ export interface BlogPost {
   date: string;
   image: string;
   tags: string[];
+  relatedProjects?: string[];
   faqs: { question: string; answer: string }[];
 }
 
@@ -21,6 +22,7 @@ export const blogPosts: BlogPost[] = [
     date: "2024-12-15",
     image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop",
     tags: ["Tendințe 2025", "Sustenabilitate", "Smart Home", "Biophilic Design"],
+    relatedProjects: ["bloom-specialty-coffee", "cafeneaua-veche-9", "bucharest-comfort-suites"],
     content: `
       <h2>Reconectarea cu esențialul</h2>
       <p>Într-o lume tot mai digitalizată, tendințele de design interior pentru 2025 marchează o nevoie profundă de reconectare cu lumea fizică, naturală. Nu mai vorbim doar despre a adăuga o plantă într-un colț, ci despre <strong>Biophilic Design 2.0</strong> - o integrare structurală a naturii în spațiile de locuit și de lucru.</p>
@@ -80,6 +82,7 @@ export const blogPosts: BlogPost[] = [
     date: "2024-11-28",
     image: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?q=80&w=2535&auto=format&fit=crop",
     tags: ["Iluminat", "Ghid Practic", "Atmosferă"],
+    relatedProjects: ["global-leader-gaming", "prima-development", "restaurant-poeme"],
     content: `
       <p>Iluminatul este adesea subestimat în designul interior, deși este elementul care dictează atmosfera. O cameră superb mobilată poate arăta ternă cu o lumină nepotrivită.</p>
       <h2>Cele 3 straturi ale iluminatului</h2>

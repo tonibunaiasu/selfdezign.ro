@@ -7,6 +7,8 @@ import { useMemo, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import { getResponsiveImageProps } from "@/lib/images";
+import { Link } from "wouter";
+import { projects } from "@/data/projects-data";
 
 export default function BlogPost() {
   const [match, params] = useRoute("/blog/:slug");
@@ -103,6 +105,10 @@ export default function BlogPost() {
     },
   };
 
+  const relatedProjects = post.relatedProjects
+    ? projects.filter((project) => post.relatedProjects?.includes(project.slug))
+    : [];
+
   const handleShare = async () => {
     if (!shareUrl) return;
     if (navigator.share) {
@@ -172,6 +178,15 @@ export default function BlogPost() {
                 <span className="flex items-center gap-2">{readingTime} {t.blog.readTime}</span>
               ) : null}
             </div>
+            <div className="flex flex-wrap gap-2 mt-6">
+              {post.tags.map((tag) => (
+                <Link key={tag} href={`/blog/tag/${encodeURIComponent(tag)}`}>
+                  <a className="text-xs font-bold uppercase tracking-widest bg-white/10 text-white px-3 py-1 hover:text-accent transition-colors">
+                    {tag}
+                  </a>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -226,11 +241,11 @@ export default function BlogPost() {
             </div>
           )}
 
-          {/* Related Articles for Internal Linking SEO */}
-          <div className="mt-16 pt-12 border-t border-gray-200">
-            <h3 className="text-2xl font-display font-bold mb-8">{c.relatedTitle}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {blogPosts
+      {/* Related Articles for Internal Linking SEO */}
+      <div className="mt-16 pt-12 border-t border-gray-200">
+        <h3 className="text-2xl font-display font-bold mb-8">{c.relatedTitle}</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {blogPosts
                 .filter(p => p.id !== post.id)
                 .slice(0, 2)
                 .map(related => (
@@ -255,6 +270,31 @@ export default function BlogPost() {
                 ))}
             </div>
           </div>
+
+          {relatedProjects.length > 0 ? (
+            <div className="mt-16 pt-12 border-t border-gray-200">
+              <h3 className="text-2xl font-display font-bold mb-8">{t.blog.relatedProjects}</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {relatedProjects.slice(0, 2).map((project) => (
+                  <Link key={project.id} href={`/proiect/${project.slug}`}>
+                    <a className="group block">
+                      <div className="aspect-video bg-gray-100 mb-4 overflow-hidden">
+                        <img
+                          src={project.coverImage}
+                          alt={project.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      <h4 className="font-bold text-lg leading-tight group-hover:text-accent transition-colors">{project.title}</h4>
+                      <p className="text-gray-500 text-sm mt-1">{project.location} • {project.year}</p>
+                    </a>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
 
         {/* Sidebar */}

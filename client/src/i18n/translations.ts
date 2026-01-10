@@ -168,6 +168,8 @@ export interface Translations {
     ctaText: string;
     ctaButton: string;
     ctaWhatsapp: string;
+    tagsTitle: string;
+    relatedProjects: string;
   };
   // Footer
   footer: {
@@ -362,7 +364,9 @@ export const translations: Record<Language, Translations> = {
       ctaTitle: "Cere o ofertă personalizată",
       ctaText: "Spune-ne despre proiectul tău și revenim cu o propunere clară, rapidă.",
       ctaButton: "Cere o ofertă",
-      ctaWhatsapp: "Scrie-ne pe WhatsApp"
+      ctaWhatsapp: "Scrie-ne pe WhatsApp",
+      tagsTitle: "Tag",
+      relatedProjects: "Proiecte relevante"
     },
     footer: {
       description: "Studio de design interior specializat în proiecte comerciale și rezidențiale. Transformăm spațiile în experiențe.",
@@ -553,7 +557,9 @@ export const translations: Record<Language, Translations> = {
       ctaTitle: "Request a tailored quote",
       ctaText: "Tell us about your project and we’ll come back with a clear proposal fast.",
       ctaButton: "Request a quote",
-      ctaWhatsapp: "Message us on WhatsApp"
+      ctaWhatsapp: "Message us on WhatsApp",
+      tagsTitle: "Tag",
+      relatedProjects: "Related projects"
     },
     footer: {
       description: "Interior design studio specializing in commercial and residential projects. We transform spaces into experiences.",
