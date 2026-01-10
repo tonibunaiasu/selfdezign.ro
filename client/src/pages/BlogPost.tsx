@@ -106,7 +106,7 @@ export default function BlogPost() {
       <SEO
         title={post.title}
         description={post.excerpt}
-        image={post.image}
+        image={`/og/blog-${post.slug}.svg`}
         imageAlt={post.title}
         url={`/blog/${post.slug}`}
         type="article"

@@ -5,7 +5,8 @@
   "packageManager": "pnpm@10.18.1",
   "scripts": {
     "dev": "NODE_ENV=development tsx server/_core/index.ts",
-    "build:client": "vite build",
+    "generate:og": "tsx scripts/generate-og.ts",
+    "build:client": "pnpm run generate:og && vite build",
     "build:server": "esbuild server/index.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/index.js",
     "build": "pnpm run build:client && pnpm run build:server",
     "start": "NODE_ENV=production node dist/index.js",

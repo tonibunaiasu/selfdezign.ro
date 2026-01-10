@@ -1,0 +1,92 @@
+import path from "node:path";
+import { promises as fs } from "node:fs";
+import { blogPosts } from "../client/src/data/blog-posts";
+import { projects } from "../client/src/data/projects-data";
+
+type OgParams = {
+  title: string;
+  subtitle: string;
+  eyebrow: string;
+};
+
+const OG_WIDTH = 1200;
+const OG_HEIGHT = 630;
+const OUTPUT_DIR = path.resolve("client", "public", "og");
+
+const escapeXml = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+
+const createSvg = ({ title, subtitle, eyebrow }: OgParams) => {
+  const safeTitle = escapeXml(title);
+  const safeSubtitle = escapeXml(subtitle);
+  const safeEyebrow = escapeXml(eyebrow);
+
+  return `
+<svg width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f0f0f"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f5c400"/>
+      <stop offset="100%" stop-color="#ff6b6b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="80" y="96" width="1040" height="438" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+  <rect x="80" y="96" width="180" height="6" fill="url(#accent)"/>
+  <text x="80" y="210" fill="#f5c400" font-family="Space Grotesk, Arial, sans-serif" font-size="28" letter-spacing="6">SELFDEZIGN</text>
+  <text x="80" y="260" fill="#8c8c8c" font-family="Inter, Arial, sans-serif" font-size="18" letter-spacing="4">${safeEyebrow}</text>
+  <text x="80" y="340" fill="#ffffff" font-family="Space Grotesk, Arial, sans-serif" font-size="58" font-weight="700">
+    ${safeTitle}
+  </text>
+  <text x="80" y="400" fill="#bdbdbd" font-family="Inter, Arial, sans-serif" font-size="26">
+    ${safeSubtitle}
+  </text>
+  <text x="80" y="480" fill="#8c8c8c" font-family="Inter, Arial, sans-serif" font-size="20" letter-spacing="4">
+    ARCHITECTURE + INTERIOR
+  </text>
+</svg>
+`;
+};
+
+const writeOg = async (filename: string, params: OgParams) => {
+  const svg = createSvg(params);
+  const filePath = path.join(OUTPUT_DIR, filename);
+  await fs.writeFile(filePath, svg, "utf8");
+};
+
+const run = async () => {
+  await fs.mkdir(OUTPUT_DIR, { recursive: true });
+
+  await Promise.all(
+    blogPosts.map((post) =>
+      writeOg(`blog-${post.slug}.svg`, {
+        title: post.title,
+        subtitle: "SelfDezign Blog",
+        eyebrow: "ARTICLE",
+      })
+    )
+  );
+
+  await Promise.all(
+    projects.map((project) =>
+      writeOg(`project-${project.slug}.svg`, {
+        title: project.title,
+        subtitle: project.category,
+        eyebrow: "PROJECT",
+      })
+    )
+  );
+};
+
+run().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

@@ -144,7 +144,7 @@ export default function ProjectDetail() {
       <SEO 
         title={project.title}
         description={project.description.join(" ")}
-        image={project.coverImage}
+        image={`/og/project-${project.slug}.svg`}
         imageAlt={project.title}
         url={`/proiect/${project.slug}`}
         type="article"
