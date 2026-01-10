@@ -4,6 +4,7 @@ import { ArrowRight, Calendar, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
+import { getResponsiveImageProps } from "@/lib/images";
 
 export default function Blog() {
   const { language } = useLanguage();
@@ -81,6 +82,10 @@ export default function Blog() {
                     alt={post.title}
                     loading="lazy"
                     decoding="async"
+                    {...getResponsiveImageProps(
+                      post.image,
+                      "(max-width: 768px) 100vw, 50vw"
+                    )}
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute top-4 left-4 flex gap-2">

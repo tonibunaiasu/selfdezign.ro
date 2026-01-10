@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import { mediaAppearances } from "@/data/media-appearances";
+import { getResponsiveImageProps } from "@/lib/images";
 
 const articleImages = [
   "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=2670&auto=format&fit=crop",
@@ -56,6 +57,10 @@ export default function Articles() {
                 <img 
                   src={articleImages[index % articleImages.length]} 
                   alt={article.title}
+                  {...getResponsiveImageProps(
+                    articleImages[index % articleImages.length],
+                    "(max-width: 768px) 100vw, 50vw"
+                  )}
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
                 <div className="absolute top-4 left-4 bg-white text-black text-xs font-bold px-3 py-1 uppercase tracking-widest z-20">

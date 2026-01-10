@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useMemo, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
+import { getResponsiveImageProps } from "@/lib/images";
 
 export default function BlogPost() {
   const [match, params] = useRoute("/blog/:slug");
@@ -118,6 +119,7 @@ export default function BlogPost() {
           alt={post.title}
           decoding="async"
           fetchpriority="high"
+          {...getResponsiveImageProps(post.image, "100vw")}
           className="w-full h-full object-cover"
         />
         <div className="absolute bottom-0 left-0 w-full z-20 p-4 pb-12">
@@ -184,6 +186,10 @@ export default function BlogPost() {
                           alt={related.title}
                           loading="lazy"
                           decoding="async"
+                          {...getResponsiveImageProps(
+                            related.image,
+                            "(max-width: 768px) 100vw, 50vw"
+                          )}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>

@@ -9,6 +9,7 @@ import SEO from "@/components/SEO";
 import caseStudiesData from "@/data/case-studies.json";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
+import { getResponsiveImageProps } from "@/lib/images";
 
 type CaseStudy = {
   title: string;
@@ -394,6 +395,10 @@ export default function Home() {
                   <img
                     src={cat.img}
                     alt={cat.title}
+                    {...getResponsiveImageProps(
+                      cat.img,
+                      "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    )}
                     className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
