@@ -47,6 +47,32 @@ export default function BlogPost() {
     return window.location.href;
   }, [params?.slug]);
 
+  const readingTime = useMemo(() => {
+    if (!post?.content) return null;
+    const text = post.content.replace(/<[^>]+>/g, " ");
+    const words = text.trim().split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.round(words / 200));
+  }, [post?.content]);
+
+  const tocItems = useMemo(() => {
+    if (!post?.content) return [];
+    const regex = /<(h2|h3)>(.*?)<\/\1>/gi;
+    const items: { id: string; text: string; level: "h2" | "h3" }[] = [];
+    let match: RegExpExecArray | null;
+    while ((match = regex.exec(post.content)) !== null) {
+      const level = match[1] as "h2" | "h3";
+      const text = match[2].replace(/<[^>]+>/g, "").trim();
+      if (!text) continue;
+      const id = text
+        .toLowerCase()
+        .replace(/[^\p{L}\p{N}\s-]/gu, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-");
+      items.push({ id, text, level });
+    }
+    return items;
+  }, [post?.content]);
+
   if (!match || !post) return <NotFound />;
 
   const structuredData = {
@@ -139,9 +165,12 @@ export default function BlogPost() {
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white max-w-4xl leading-tight mb-6">
               {post.title}
             </h1>
-            <div className="flex items-center gap-6 text-sm text-gray-200 font-medium uppercase tracking-wider">
+            <div className="flex flex-wrap items-center gap-6 text-sm text-gray-200 font-medium uppercase tracking-wider">
               <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-accent" /> {post.date}</span>
               <span className="flex items-center gap-2"><User className="w-4 h-4 text-accent" /> {post.author}</span>
+              {readingTime ? (
+                <span className="flex items-center gap-2">{readingTime} {t.blog.readTime}</span>
+              ) : null}
             </div>
           </div>
         </div>
@@ -150,9 +179,36 @@ export default function BlogPost() {
       <div className="container mt-16 px-4 grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* Main Content */}
         <div className="lg:col-span-8">
+          {tocItems.length > 0 ? (
+            <div className="mb-10 border border-gray-100 bg-white p-6">
+              <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">Cuprins</p>
+              <ul className="space-y-2 text-sm">
+                {tocItems.map((item) => (
+                  <li key={item.id} className={item.level === "h3" ? "pl-4 text-gray-500" : "text-gray-800"}>
+                    <a href={`#${item.id}`} className="hover:text-accent transition-colors">
+                      {item.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
           <article 
             className="blog-prose"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{
+              __html: post.content.replace(
+                /<(h2|h3)>(.*?)<\/\1>/gi,
+                (_match, level, text) => {
+                  const plain = String(text).replace(/<[^>]+>/g, "").trim();
+                  const id = plain
+                    .toLowerCase()
+                    .replace(/[^\p{L}\p{N}\s-]/gu, "")
+                    .replace(/\s+/g, "-")
+                    .replace(/-+/g, "-");
+                  return `<${level} id="${id}">${text}</${level}>`;
+                }
+              ),
+            }}
           />
 
           {/* FAQ Section for SEO/LLM */}
