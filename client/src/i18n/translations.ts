@@ -238,7 +238,7 @@ export const translations: Record<Language, Translations> = {
       isAbout4: "E despre starea ta de bine, nu despre egoul lor.",
       conclusion1: "Unii designeri vor să-și lase semnătura pe pereții tăi.",
       conclusion2: "La SelfDezign construim spațiul care îți permite să ți-o lași tu.",
-      signature: "SelfDezign. Design pentru cine ești. Creat din arhitectura personalității tale.",
+      signature: "Nu proiectăm pentru Instagram. Proiectăm pentru oameni și branduri care vor spații autentice, funcționale și memorabile.",
       visionLink: "Viziune & Misiune",
       valuesLink: "Principii & Valori"
     },
@@ -420,7 +420,7 @@ export const translations: Record<Language, Translations> = {
       isAbout4: "It's about your well-being, not their ego.",
       conclusion1: "Some designers want to leave their signature on your walls.",
       conclusion2: "At SelfDezign, we build the space that allows you to leave yours.",
-      signature: "SelfDezign. Design for who you are. Created from the architecture of your personality.",
+      signature: "We don’t design for Instagram. We design for people and brands who want authentic, functional, memorable spaces.",
       visionLink: "Vision & Mission",
       valuesLink: "Principles & Values"
     },
