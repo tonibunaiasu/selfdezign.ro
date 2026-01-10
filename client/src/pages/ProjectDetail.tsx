@@ -145,6 +145,7 @@ export default function ProjectDetail() {
         title={project.title}
         description={project.description.join(" ")}
         image={project.coverImage}
+        imageAlt={project.title}
         url={`/proiect/${project.slug}`}
         type="article"
         structuredData={{

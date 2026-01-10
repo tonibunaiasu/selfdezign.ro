@@ -4,6 +4,7 @@ interface SEOProps {
   title: string;
   description: string;
   image?: string;
+  imageAlt?: string;
   url?: string;
   type?: 'website' | 'article';
   structuredData?: object;
@@ -13,6 +14,7 @@ export default function SEO({
   title, 
   description, 
   image = '/images/logo_selfdezign.png',
+  imageAlt,
   url,
   type = 'website',
   structuredData
@@ -22,6 +24,7 @@ export default function SEO({
   const baseUrl = 'https://selfdezign.ro';
   const fullUrl = url ? `${baseUrl}${url}` : baseUrl;
   const fullImage = image.startsWith('http') ? image : `${baseUrl}${image}`;
+  const fullImageAlt = imageAlt || title;
 
   useEffect(() => {
     // Update document title
@@ -48,6 +51,7 @@ export default function SEO({
     updateMetaTag('og:title', fullTitle);
     updateMetaTag('og:description', description);
     updateMetaTag('og:image', fullImage);
+    updateMetaTag('og:image:alt', fullImageAlt);
     updateMetaTag('og:url', fullUrl);
     updateMetaTag('og:type', type);
     updateMetaTag('og:site_name', siteName);
@@ -57,6 +61,7 @@ export default function SEO({
     updateMetaTag('twitter:title', fullTitle, true);
     updateMetaTag('twitter:description', description, true);
     updateMetaTag('twitter:image', fullImage, true);
+    updateMetaTag('twitter:image:alt', fullImageAlt, true);
 
     // Structured data (JSON-LD)
     if (structuredData) {

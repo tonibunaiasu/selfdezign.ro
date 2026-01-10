@@ -107,6 +107,7 @@ export default function BlogPost() {
         title={post.title}
         description={post.excerpt}
         image={post.image}
+        imageAlt={post.title}
         url={`/blog/${post.slug}`}
         type="article"
         structuredData={structuredData}
