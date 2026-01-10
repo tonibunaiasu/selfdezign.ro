@@ -44,6 +44,31 @@ export default function Blog() {
         </div>
       </div>
 
+      <div className="container mt-12 px-4">
+        <div className="border border-gray-100 bg-white p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="max-w-2xl">
+            <h2 className="text-2xl md:text-3xl font-display font-bold mb-3">
+              {t.blog.ctaTitle}
+            </h2>
+            <p className="text-gray-600">
+              {t.blog.ctaText}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/contact">
+              <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs px-6">
+                {t.blog.ctaButton}
+              </Button>
+            </Link>
+            <a href="https://wa.me/40721528447" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="rounded-none uppercase tracking-widest font-bold text-xs px-6">
+                {t.blog.ctaWhatsapp}
+              </Button>
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* Blog Grid */}
       <div className="container mt-16 px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

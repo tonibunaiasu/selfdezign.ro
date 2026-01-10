@@ -10,7 +10,7 @@ import SEO from "@/components/SEO";
 export default function BlogPost() {
   const [match, params] = useRoute("/blog/:slug");
   const post = match ? blogPosts.find(p => p.slug === params.slug) : null;
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   const content = {
@@ -36,7 +36,12 @@ export default function BlogPost() {
     }
   };
 
-  const c = content[language];
+  const c = { ...content[language], ...{
+    ctaTitle: t.blog.ctaTitle,
+    ctaText: t.blog.ctaText,
+    ctaButton: t.blog.ctaButton,
+    ctaWhatsapp: t.blog.ctaWhatsapp
+  }};
   const shareUrl = useMemo(() => {
     if (typeof window === "undefined") return "";
     return window.location.href;
@@ -192,6 +197,25 @@ export default function BlogPost() {
 
         {/* Sidebar */}
         <div className="lg:col-span-4 space-y-12">
+          <div className="bg-white border border-gray-100 p-6 sticky top-24">
+            <h3 className="font-display font-bold text-xl mb-3">{c.ctaTitle}</h3>
+            <p className="text-gray-600 text-sm mb-6">
+              {c.ctaText}
+            </p>
+            <div className="flex flex-col gap-3">
+              <Link href="/contact">
+                <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs">
+                  {c.ctaButton}
+                </Button>
+              </Link>
+              <a href="https://wa.me/40721528447" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" className="rounded-none uppercase tracking-widest font-bold text-xs w-full">
+                  {c.ctaWhatsapp}
+                </Button>
+              </a>
+            </div>
+          </div>
+
           <div className="bg-gray-50 p-8 border border-gray-100 sticky top-24">
             <h3 className="font-display font-bold text-xl mb-6 uppercase tracking-widest">{c.aboutAuthor}</h3>
             <div className="flex items-center gap-4 mb-4">

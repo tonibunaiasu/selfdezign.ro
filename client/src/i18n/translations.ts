@@ -157,6 +157,10 @@ export interface Translations {
     readTime: string;
     relatedArticles: string;
     faqTitle: string;
+    ctaTitle: string;
+    ctaText: string;
+    ctaButton: string;
+    ctaWhatsapp: string;
   };
   // Footer
   footer: {
@@ -340,7 +344,11 @@ export const translations: Record<Language, Translations> = {
       readMore: "Citește mai mult",
       readTime: "min de citit",
       relatedArticles: "Articole Similare",
-      faqTitle: "Întrebări Frecvente"
+      faqTitle: "Întrebări Frecvente",
+      ctaTitle: "Cere o ofertă personalizată",
+      ctaText: "Spune-ne despre proiectul tău și revenim cu o propunere clară, rapidă.",
+      ctaButton: "Cere o ofertă",
+      ctaWhatsapp: "Scrie-ne pe WhatsApp"
     },
     footer: {
       description: "Studio de design interior specializat în proiecte comerciale și rezidențiale. Transformăm spațiile în experiențe.",
@@ -520,7 +528,11 @@ export const translations: Record<Language, Translations> = {
       readMore: "Read more",
       readTime: "min read",
       relatedArticles: "Related Articles",
-      faqTitle: "Frequently Asked Questions"
+      faqTitle: "Frequently Asked Questions",
+      ctaTitle: "Request a tailored quote",
+      ctaText: "Tell us about your project and we’ll come back with a clear proposal fast.",
+      ctaButton: "Request a quote",
+      ctaWhatsapp: "Message us on WhatsApp"
     },
     footer: {
       description: "Interior design studio specializing in commercial and residential projects. We transform spaces into experiences.",
