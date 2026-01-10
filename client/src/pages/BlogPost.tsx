@@ -122,6 +122,8 @@ export default function BlogPost() {
         <img 
           src={post.image} 
           alt={post.title}
+          decoding="async"
+          fetchpriority="high"
           className="w-full h-full object-cover"
         />
         <div className="absolute bottom-0 left-0 w-full z-20 p-4 pb-12">
@@ -183,7 +185,13 @@ export default function BlogPost() {
                   <Link key={related.id} href={`/blog/${related.slug}`}>
                     <a className="group block">
                       <div className="aspect-video bg-gray-100 mb-4 overflow-hidden">
-                        <img src={related.image} alt={related.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <img
+                          src={related.image}
+                          alt={related.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
                       </div>
                       <h4 className="font-bold text-lg leading-tight group-hover:text-accent transition-colors">{related.title}</h4>
                     </a>

@@ -162,8 +162,9 @@ export default function Home() {
                   <img 
                     src={activeCaseStudy.coverImage}
                     alt={activeCaseStudy.title}
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
+                    fetchpriority="high"
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
                   />
                   <div className="absolute top-6 left-6 z-20 flex flex-col gap-3">
@@ -253,26 +254,36 @@ export default function Home() {
               <img 
                 src="/awards/share-architects-logo.webp" 
                 alt="Share Architects" 
+                loading="lazy"
+                decoding="async"
                 className="h-14 md:h-20 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
               />
               <img 
                 src="/awards/design-week-blue.webp" 
                 alt="Design Week" 
+                loading="lazy"
+                decoding="async"
                 className="h-16 md:h-24 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
               />
               <img 
                 src="/awards/romanian-design-week.webp" 
                 alt="Romanian Design Week" 
+                loading="lazy"
+                decoding="async"
                 className="h-16 md:h-24 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
               />
               <img 
                 src="/awards/big-see-award.webp" 
                 alt="BIG SEE Interior Design Award 2024" 
+                loading="lazy"
+                decoding="async"
                 className="h-16 md:h-24 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
               />
               <img 
                 src="/awards/bienala-arhitectura.webp" 
                 alt="Bienala Națională de Arhitectură 2023" 
+                loading="lazy"
+                decoding="async"
                 className="h-14 md:h-20 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
               />
             </div>
