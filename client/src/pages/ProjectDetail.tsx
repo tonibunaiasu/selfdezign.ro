@@ -92,7 +92,7 @@ export default function ProjectDetail() {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     "name": project.title,
-    "description": project.description,
+    "description": project.description.join(" "),
     "image": `https://selfdezign.ro${project.coverImage}`,
     "creator": {
       "@type": "Organization",
@@ -100,6 +100,31 @@ export default function ProjectDetail() {
     },
     "about": project.category,
     "datePublished": project.year
+  };
+
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Acasă",
+        "item": "https://selfdezign.ro"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": c.allProjects,
+        "item": "https://selfdezign.ro/proiecte"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": project.title,
+        "item": `https://selfdezign.ro/proiect/${project.slug}`
+      }
+    ]
   };
 
   return (
@@ -110,7 +135,10 @@ export default function ProjectDetail() {
         image={project.coverImage}
         url={`/proiect/${project.slug}`}
         type="article"
-        structuredData={projectStructuredData}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@graph": [projectStructuredData, breadcrumbStructuredData]
+        }}
       />
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[500px]">
