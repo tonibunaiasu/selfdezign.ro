@@ -11,6 +11,7 @@ export default function MediaAppearances() {
     ro: {
       title: "Apariții Media",
       subtitle: "Proiectele SelfDezign sunt remarcate și apreciate de publicații de specialitate",
+      asSeenOn: "As Seen On",
       awards: "Premii",
       press: "Presă",
       features: "Articole",
@@ -19,6 +20,7 @@ export default function MediaAppearances() {
     en: {
       title: "Media Appearances",
       subtitle: "SelfDezign projects are recognized and appreciated by specialized publications",
+      asSeenOn: "As Seen On",
       awards: "Awards",
       press: "Press",
       features: "Features",
@@ -74,11 +76,30 @@ export default function MediaAppearances() {
       : date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   };
 
+  const getDomainFromLink = (link?: string) => {
+    if (!link || link === "#") return "";
+    try {
+      return new URL(link).hostname.replace(/^www\./, "");
+    } catch {
+      return "";
+    }
+  };
+
   const getPreviewImage = (link?: string, image?: string) => {
     if (image) return image;
     if (!link || link === "#") return "";
     return `https://image.thum.io/get/width/1200/${link}`;
   };
+
+  const logoItems = appearances
+    .map((item) => ({
+      publication: item.publication,
+      domain: getDomainFromLink(item.link),
+    }))
+    .filter((item) => item.domain)
+    .filter((item, index, array) => {
+      return array.findIndex((other) => other.domain === item.domain) === index;
+    });
 
   return (
     <section className="py-24 bg-white">
@@ -92,6 +113,35 @@ export default function MediaAppearances() {
             {t.subtitle}
           </p>
         </div>
+
+        {logoItems.length > 0 ? (
+          <div className="mb-16">
+            <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">
+              {t.asSeenOn}
+            </p>
+            <div className="flex flex-wrap items-center gap-6">
+              {logoItems.map((item) => (
+                <div key={item.domain} className="h-8 flex items-center">
+                  <img
+                    src={`https://logo.clearbit.com/${item.domain}`}
+                    alt={item.publication}
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
+                    className="h-8 w-auto object-contain grayscale opacity-70 hover:opacity-100 transition-opacity"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.style.display = "none";
+                    }}
+                  />
+                  <span className="text-xs font-semibold uppercase tracking-widest text-gray-500 ml-3">
+                    {item.publication}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
         {/* Media Appearances Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
