@@ -12,6 +12,12 @@ export default function MediaAppearances() {
       title: "Apariții Media",
       subtitle: "Proiectele SelfDezign sunt remarcate și apreciate de publicații de specialitate",
       asSeenOn: "As Seen On",
+      stats: {
+        awards: "Premii și distincții",
+        projects: "Proiecte finalizate",
+        area: "m² proiectați",
+        since: "Din 2018"
+      },
       awards: "Premii",
       press: "Presă",
       features: "Articole",
@@ -21,6 +27,12 @@ export default function MediaAppearances() {
       title: "Media Appearances",
       subtitle: "SelfDezign projects are recognized and appreciated by specialized publications",
       asSeenOn: "As Seen On",
+      stats: {
+        awards: "Awards and distinctions",
+        projects: "Projects delivered",
+        area: "m² designed",
+        since: "Since 2018"
+      },
       awards: "Awards",
       press: "Press",
       features: "Features",
@@ -116,7 +128,7 @@ export default function MediaAppearances() {
         </div>
 
         {logoItems.length > 0 ? (
-          <div className="mb-16">
+          <div className="mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">
               {t.asSeenOn}
             </p>
@@ -145,6 +157,25 @@ export default function MediaAppearances() {
             </div>
           </div>
         ) : null}
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div className="border border-gray-200 p-6 text-center">
+            <p className="text-3xl font-display font-bold text-black">10+</p>
+            <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.stats.awards}</p>
+          </div>
+          <div className="border border-gray-200 p-6 text-center">
+            <p className="text-3xl font-display font-bold text-black">250</p>
+            <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.stats.projects}</p>
+          </div>
+          <div className="border border-gray-200 p-6 text-center">
+            <p className="text-3xl font-display font-bold text-black">10,000</p>
+            <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.stats.area}</p>
+          </div>
+          <div className="border border-gray-200 p-6 text-center">
+            <p className="text-3xl font-display font-bold text-black">2018</p>
+            <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.stats.since}</p>
+          </div>
+        </div>
 
         {/* Media Appearances Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

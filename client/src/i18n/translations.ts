@@ -23,6 +23,12 @@ export interface Translations {
     featuredProject: string;
     awardsTitle: string;
     awardsSubtitle: string;
+    stats: {
+      awards: string;
+      projects: string;
+      area: string;
+      since: string;
+    };
     aboutTitle: string;
     aboutDescription1: string;
     aboutDescription2: string;
@@ -217,6 +223,12 @@ export const translations: Record<Language, Translations> = {
       featuredProject: "PROIECT RECOMANDAT",
       awardsTitle: "Premii & Distincții",
       awardsSubtitle: "Recunoaștere pentru excelență în design interior",
+      stats: {
+        awards: "Premii și distincții",
+        projects: "Proiecte finalizate",
+        area: "m² proiectați",
+        since: "Din 2018"
+      },
       aboutTitle: "Despre SelfDezign",
       aboutDescription1: "SelfDezign este un studio de design interior fondat în 2015, specializat în proiecte comerciale și rezidențiale.",
       aboutDescription2: "Credem că designul interior nu este doar despre estetică, ci despre crearea unor spații care reflectă personalitatea și valorile celor care le locuiesc.",
@@ -399,6 +411,12 @@ export const translations: Record<Language, Translations> = {
       featuredProject: "FEATURED PROJECT",
       awardsTitle: "Awards & Distinctions",
       awardsSubtitle: "Recognition for excellence in interior design",
+      stats: {
+        awards: "Awards and distinctions",
+        projects: "Projects delivered",
+        area: "m² designed",
+        since: "Since 2018"
+      },
       aboutTitle: "About SelfDezign",
       aboutDescription1: "SelfDezign is an interior design studio founded in 2015, specializing in commercial and residential projects.",
       aboutDescription2: "We believe interior design is not just about aesthetics, but about creating spaces that reflect the personality and values of those who inhabit them.",

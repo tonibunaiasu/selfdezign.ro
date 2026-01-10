@@ -292,6 +292,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trust Bar */}
+      <section className="py-14 bg-white border-b border-gray-100">
+        <div className="container">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="border border-gray-200 p-6 text-center">
+              <p className="text-3xl font-display font-bold text-black">10+</p>
+              <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">
+                {t.home.stats.awards}
+              </p>
+            </div>
+            <div className="border border-gray-200 p-6 text-center">
+              <p className="text-3xl font-display font-bold text-black">250</p>
+              <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">
+                {t.home.stats.projects}
+              </p>
+            </div>
+            <div className="border border-gray-200 p-6 text-center">
+              <p className="text-3xl font-display font-bold text-black">10,000</p>
+              <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.home.stats.area}</p>
+            </div>
+            <div className="border border-gray-200 p-6 text-center">
+              <p className="text-3xl font-display font-bold text-black">2018</p>
+              <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.home.stats.since}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section className="py-24 bg-gray-50">
         <div className="container">
