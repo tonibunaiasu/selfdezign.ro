@@ -160,6 +160,7 @@ import {
 import { useTheme } from "@/contexts/ThemeContext";
 import { format } from "date-fns";
 import { zhCN } from "date-fns/locale";
+import SEO from "@/components/SEO";
 import {
   AlertCircle,
   CalendarIcon,
@@ -228,6 +229,12 @@ export default function ComponentsShowcase() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Component Showcase"
+        description="Component showcase for development."
+        url="/components"
+        robots="noindex, nofollow"
+      />
       <main className="container max-w-6xl mx-auto">
         <div className="space-y-2 justify-between flex">
           <h2 className="text-3xl font-bold tracking-tight mb-6">
