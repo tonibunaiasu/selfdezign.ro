@@ -1,17 +1,18 @@
 import { Link, useRoute } from "wouter";
-import { blogPosts } from "@/data/blog-posts";
 import { ArrowRight, Calendar, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import { getResponsiveImageProps } from "@/lib/images";
+import { useBlogPosts } from "@/lib/blog";
 
 export default function BlogTag() {
   const { language, t } = useLanguage();
+  const { posts } = useBlogPosts();
   const [match, params] = useRoute("/blog/tag/:tag");
   const tag = match ? decodeURIComponent(params.tag) : "";
 
-  const filtered = blogPosts.filter((post) => post.tags.includes(tag));
+  const filtered = posts.filter((post) => post.tags.includes(tag));
 
   return (
     <div className="min-h-screen bg-background pb-24">

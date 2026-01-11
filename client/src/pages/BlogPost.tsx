@@ -1,5 +1,4 @@
 import { useRoute, Link } from "wouter";
-import { blogPosts } from "@/data/blog-posts";
 import NotFound from "@/pages/NotFound";
 import { Calendar, User, ArrowLeft, Share2, Link as LinkIcon, Linkedin, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,10 +8,11 @@ import SEO from "@/components/SEO";
 import { getLocalImageProps, getResponsiveImageProps } from "@/lib/images";
 import { projects } from "@/data/projects-data";
 import { trackEvent } from "@/lib/analytics";
+import { useBlogPostBySlug } from "@/lib/blog";
 
 export default function BlogPost() {
   const [match, params] = useRoute("/blog/:slug");
-  const post = match ? blogPosts.find(p => p.slug === params.slug) : null;
+  const { post, posts } = useBlogPostBySlug(match ? params.slug : undefined);
   const { language, t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
@@ -245,7 +245,7 @@ export default function BlogPost() {
       <div className="mt-16 pt-12 border-t border-gray-200">
         <h3 className="text-2xl font-display font-bold mb-8">{c.relatedTitle}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {blogPosts
+          {posts
                 .filter(p => p.id !== post.id)
                 .slice(0, 2)
                 .map(related => (
@@ -335,21 +335,26 @@ export default function BlogPost() {
             <div className="flex items-center gap-4 mb-4">
               <div className="w-16 h-16 bg-gray-200 rounded-full overflow-hidden">
                 <img
-                  src="/irina-stoica.webp"
-                  alt="Author"
+                  src={post.authorImage || "/irina-stoica.webp"}
+                  alt={post.authorImageAlt || "Author"}
                   loading="lazy"
                   decoding="async"
-                  {...getLocalImageProps("/irina-stoica.webp", "64px")}
+                  {...getLocalImageProps(
+                    post.authorImage || "/irina-stoica.webp",
+                    "64px"
+                  )}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div>
                 <p className="font-bold">{post.author}</p>
-                <p className="text-xs text-gray-500 uppercase tracking-wider">{c.authorRole}</p>
+                <p className="text-xs text-gray-500 uppercase tracking-wider">
+                  {post.authorRole || c.authorRole}
+                </p>
               </div>
             </div>
             <p className="text-gray-600 text-sm mb-6">
-              {c.authorBio}
+              {post.authorBio || c.authorBio}
             </p>
             <a
               href={post.authorLinkedIn || "https://ro.linkedin.com/in/arh-irina-stoica"}

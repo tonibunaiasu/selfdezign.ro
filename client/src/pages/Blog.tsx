@@ -1,14 +1,15 @@
 import { Link } from "wouter";
-import { blogPosts } from "@/data/blog-posts";
 import { ArrowRight, Calendar, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import { getResponsiveImageProps } from "@/lib/images";
 import { trackEvent } from "@/lib/analytics";
+import { useBlogPosts } from "@/lib/blog";
 
 export default function Blog() {
   const { language, t } = useLanguage();
+  const { posts } = useBlogPosts();
 
   const content = {
     ro: {
@@ -82,7 +83,7 @@ export default function Blog() {
       {/* Blog Grid */}
       <div className="container mt-16 px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {blogPosts.map((post) => (
+          {posts.map((post) => (
             <article key={post.id} className="group flex flex-col h-full border border-gray-100 bg-white hover:shadow-lg transition-shadow duration-300">
               <Link href={`/blog/${post.slug}`}>
                 <a className="block relative aspect-video overflow-hidden bg-gray-100">
