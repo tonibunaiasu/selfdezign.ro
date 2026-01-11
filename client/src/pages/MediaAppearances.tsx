@@ -1,9 +1,12 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import MediaAppearances from "@/components/MediaAppearances";
 import SEO from "@/components/SEO";
+import { usePayloadPage } from "@/lib/payload";
 
 export default function MediaAppearancesPage() {
   const { t, language } = useLanguage();
+  const { page } = usePayloadPage("aparitii-media");
+  const cmsLayout = page?.mediaLayout?.[language];
 
   const texts = {
     ro: {
@@ -17,12 +20,26 @@ export default function MediaAppearancesPage() {
   };
 
   const heroTexts = texts[language as keyof typeof texts];
+  const heroTitle = cmsLayout?.heroTitle || heroTexts.heroTitle;
+  const heroSubtitle = cmsLayout?.heroSubtitle || heroTexts.heroSubtitle;
+  const sectionTitle = cmsLayout?.sectionTitle;
+  const sectionSubtitle = cmsLayout?.sectionSubtitle;
+  const asSeenOnLabel = cmsLayout?.asSeenOnLabel;
+  const readMoreLabel = cmsLayout?.readMoreLabel;
+  const stats = cmsLayout?.stats?.length
+    ? cmsLayout.stats.map((stat) => ({
+        value: stat.value || "",
+        label: stat.label || "",
+      }))
+    : undefined;
+  const seoTitle = page?.seoTitle || heroTitle;
+  const seoDescription = page?.seoDescription || heroSubtitle;
 
   return (
     <div className="flex flex-col gap-0">
       <SEO
-        title={heroTexts.heroTitle}
-        description={heroTexts.heroSubtitle}
+        title={seoTitle}
+        description={seoDescription}
         url="/aparitii-media"
       />
       {/* Hero Section */}
@@ -33,16 +50,22 @@ export default function MediaAppearancesPage() {
 
         <div className="container relative z-10 text-center">
           <h1 className="text-5xl md:text-6xl font-display font-bold tracking-tighter mb-6">
-            {heroTexts.heroTitle}
+            {heroTitle}
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            {heroTexts.heroSubtitle}
+            {heroSubtitle}
           </p>
         </div>
       </section>
 
       {/* Media Appearances Component */}
-      <MediaAppearances />
+      <MediaAppearances
+        title={sectionTitle}
+        subtitle={sectionSubtitle}
+        asSeenOnLabel={asSeenOnLabel}
+        readMoreLabel={readMoreLabel}
+        stats={stats}
+      />
     </div>
   );
 }

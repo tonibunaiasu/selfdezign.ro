@@ -218,6 +218,32 @@ export type PayloadPage = {
       }>;
     };
   };
+  mediaLayout?: {
+    ro?: {
+      heroTitle?: string;
+      heroSubtitle?: string;
+      sectionTitle?: string;
+      sectionSubtitle?: string;
+      asSeenOnLabel?: string;
+      readMoreLabel?: string;
+      stats?: Array<{
+        value?: string;
+        label?: string;
+      }>;
+    };
+    en?: {
+      heroTitle?: string;
+      heroSubtitle?: string;
+      sectionTitle?: string;
+      sectionSubtitle?: string;
+      asSeenOnLabel?: string;
+      readMoreLabel?: string;
+      stats?: Array<{
+        value?: string;
+        label?: string;
+      }>;
+    };
+  };
   updatedAt?: string;
 };
 

@@ -1,11 +1,30 @@
 import { ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { mediaAppearances, mediaAppearancesEN } from "@/data/media-appearances";
+import { useMediaAppearances } from "@/lib/media-appearances";
 
-export default function MediaAppearances() {
+type MediaStatsItem = {
+  value: string;
+  label: string;
+};
+
+type MediaAppearancesProps = {
+  title?: string;
+  subtitle?: string;
+  asSeenOnLabel?: string;
+  readMoreLabel?: string;
+  stats?: MediaStatsItem[];
+};
+
+export default function MediaAppearances({
+  title,
+  subtitle,
+  asSeenOnLabel,
+  readMoreLabel,
+  stats,
+}: MediaAppearancesProps) {
   const { language } = useLanguage();
-  
-  const appearances = language === "ro" ? mediaAppearances : mediaAppearancesEN;
+  const { items } = useMediaAppearances(language);
+  const appearances = items;
 
   const texts = {
     ro: {
@@ -41,6 +60,19 @@ export default function MediaAppearances() {
   };
 
   const t = texts[language as keyof typeof texts];
+  const resolvedTitle = title || t.title;
+  const resolvedSubtitle = subtitle || t.subtitle;
+  const resolvedAsSeenOn = asSeenOnLabel || t.asSeenOn;
+  const resolvedReadMore = readMoreLabel || t.readMore;
+  const resolvedStats: MediaStatsItem[] =
+    stats && stats.length
+      ? stats
+      : [
+          { value: "10+", label: t.stats.awards },
+          { value: "250", label: t.stats.projects },
+          { value: "10,000", label: t.stats.area },
+          { value: "2018", label: t.stats.since },
+        ];
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -120,17 +152,17 @@ export default function MediaAppearances() {
         {/* Header */}
         <div className="max-w-2xl mb-16">
           <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4">
-            {t.title}
+            {resolvedTitle}
           </h2>
           <p className="text-lg text-gray-600">
-            {t.subtitle}
+            {resolvedSubtitle}
           </p>
         </div>
 
         {logoItems.length > 0 ? (
           <div className="mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">
-              {t.asSeenOn}
+              {resolvedAsSeenOn}
             </p>
             <div className="logo-marquee">
               <div className="logo-marquee-track">
@@ -159,22 +191,12 @@ export default function MediaAppearances() {
         ) : null}
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          <div className="border border-gray-200 p-6 text-center">
-            <p className="text-3xl font-display font-bold text-black">10+</p>
-            <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.stats.awards}</p>
-          </div>
-          <div className="border border-gray-200 p-6 text-center">
-            <p className="text-3xl font-display font-bold text-black">250</p>
-            <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.stats.projects}</p>
-          </div>
-          <div className="border border-gray-200 p-6 text-center">
-            <p className="text-3xl font-display font-bold text-black">10,000</p>
-            <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.stats.area}</p>
-          </div>
-          <div className="border border-gray-200 p-6 text-center">
-            <p className="text-3xl font-display font-bold text-black">2018</p>
-            <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.stats.since}</p>
-          </div>
+          {resolvedStats.map((stat, index) => (
+            <div key={`${stat.label}-${index}`} className="border border-gray-200 p-6 text-center">
+              <p className="text-3xl font-display font-bold text-black">{stat.value}</p>
+              <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{stat.label}</p>
+            </div>
+          ))}
         </div>
 
         {/* Media Appearances Grid */}
@@ -240,7 +262,7 @@ export default function MediaAppearances() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-accent font-semibold hover:text-accent/80 transition-colors text-sm"
                 >
-                  {t.readMore}
+                  {resolvedReadMore}
                   <ExternalLink className="w-4 h-4" />
                 </a>
               )}
