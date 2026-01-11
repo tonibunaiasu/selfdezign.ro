@@ -7,6 +7,7 @@ import NewsletterForm from "@/components/NewsletterForm";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { initAnalytics, trackEvent, trackPageView, trackScrollDepth } from "@/lib/analytics";
+import { useFooter, useNavigation, useSiteSettings } from "@/lib/globals";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -14,7 +15,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const { settings } = useSiteSettings();
+  const { navigation } = useNavigation();
+  const { footer } = useFooter();
   const scrollDepthTracked = useRef<Set<number>>(new Set());
   
   // Minimum swipe distance (in px) to trigger close
@@ -84,14 +88,54 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const navLinks = [
-    { href: "/", label: t.nav.home },
-    { href: "/despre", label: t.nav.about },
-    { href: "/echipa", label: t.nav.team },
-    { href: "/proiecte", label: t.nav.projects },
-    { href: "/blog", label: t.nav.blog },
-    { href: "/aparitii-media", label: t.nav.media },
-  ];
+  const navLinks =
+    navigation?.links?.length
+      ? navigation.links
+          .filter((link) => link.href)
+          .map((link) => ({
+            href: link.href || "/",
+            label:
+              language === "ro"
+                ? link.labelRo || link.labelEn || ""
+                : link.labelEn || link.labelRo || "",
+          }))
+      : [
+          { href: "/", label: t.nav.home },
+          { href: "/despre", label: t.nav.about },
+          { href: "/echipa", label: t.nav.team },
+          { href: "/proiecte", label: t.nav.projects },
+          { href: "/blog", label: t.nav.blog },
+          { href: "/aparitii-media", label: t.nav.media },
+        ];
+
+  const ctaLabel =
+    language === "ro"
+      ? navigation?.cta?.labelRo || t.nav.bookCall
+      : navigation?.cta?.labelEn || t.nav.bookCall;
+  const ctaHref = navigation?.cta?.href || "/contact";
+
+  const logoUrl = settings?.logoUrl || "/images/logo_selfdezign.png";
+  const footerLogoUrl = settings?.logoFooterUrl || "/images/logo-footer-ruler.webp";
+  const whatsapp = settings?.contact?.whatsapp || "https://wa.me/40721528447";
+  const phone = settings?.contact?.phone || "+40-721-528-448";
+  const email = settings?.contact?.email || "hello@selfdezign.ro";
+  const footerDescription = footer?.description || t.footer.description;
+  const footerNewsletterTitle = footer?.newsletterTitle;
+  const footerNewsletterText = footer?.newsletterText;
+  const footerOffices =
+    footer?.offices?.length
+      ? footer.offices
+      : [
+          { label: t.footer.office1Label, address: t.footer.office1Address },
+          { label: t.footer.office2Label, address: t.footer.office2Address },
+        ];
+  const footerCopyright =
+    footer?.copyright || `© 2025 SelfDezign®. ${t.footer.rights}`;
+  const social = settings?.social || {
+    facebook: "https://www.facebook.com/selfdezign",
+    instagram: "https://www.instagram.com/selfdezign.ro/",
+    linkedin: "https://www.linkedin.com/company/selfdezign",
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-[var(--color-brand-yellow)] selection:text-accent-foreground">
@@ -113,7 +157,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <a className="flex items-center gap-2 group">
               {/* Logo - SelfDezign brand */}
               <img 
-                src="/images/logo_selfdezign.png" 
+                src={logoUrl}
                 alt="SelfDezign Logo" 
                 className="h-12 sm:h-14 w-auto object-contain"
               />
@@ -138,12 +182,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </a>
               </Link>
             ))}
-            <Link href="/contact">
+            <Link href={ctaHref}>
               <Button
                 className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs px-6 shadow-[0_10px_40px_-12px_rgba(245,196,0,0.35)]"
-                onClick={() => trackEvent("cta_click", { placement: "header", label: t.nav.bookCall })}
+                onClick={() => trackEvent("cta_click", { placement: "header", label: ctaLabel })}
               >
-                {t.nav.bookCall}
+                {ctaLabel}
               </Button>
             </Link>
             <LanguageToggle />
@@ -185,13 +229,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </a>
               </Link>
             ))}
-            <Link href="/contact">
+            <Link href={ctaHref}>
               <Button
                 size="lg"
                 className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold mt-8 w-64"
-                onClick={() => trackEvent("cta_click", { placement: "mobile_menu", label: t.nav.bookCall })}
+                onClick={() => trackEvent("cta_click", { placement: "mobile_menu", label: ctaLabel })}
               >
-                {t.nav.bookCall}
+                {ctaLabel}
               </Button>
             </Link>
             <div className="mt-6">
@@ -211,10 +255,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              <img src="/images/logo-footer-ruler.webp" alt="SelfDezign" className="h-40 w-auto" />
+              <img src={footerLogoUrl} alt="SelfDezign" className="h-40 w-auto" />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              {t.footer.description}
+              {footerDescription}
             </p>
           </div>
 
@@ -222,13 +266,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <h4 className="font-display font-bold text-[var(--color-brand-yellow)] uppercase tracking-widest mb-6 text-sm">{t.footer.contact}</h4>
             <ul className="space-y-4 text-sm text-gray-400">
               <li>
-                <a href="tel:+40721528448" className="hover:text-white transition-colors">
-                  +40-721-528-448
+                <a href={`tel:${phone.replace(/\s+/g, "")}`} className="hover:text-white transition-colors">
+                  {phone}
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@selfdezign.ro" className="hover:text-white transition-colors">
-                  hello@selfdezign.ro
+                <a href={`mailto:${email}`} className="hover:text-white transition-colors">
+                  {email}
                 </a>
               </li>
             </ul>
@@ -237,19 +281,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div>
             <h4 className="font-display font-bold text-[var(--color-brand-yellow)] uppercase tracking-widest mb-6 text-sm">{t.footer.officesTitle}</h4>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li>
-                <span className="block text-white mb-1">{t.footer.office1Label}:</span>
-                {t.footer.office1Address}
-              </li>
-              <li>
-                <span className="block text-white mb-1">{t.footer.office2Label}:</span>
-                {t.footer.office2Address}
-              </li>
+              {footerOffices.map((office, index) => (
+                <li key={`${office.label}-${index}`}>
+                  {office.label ? (
+                    <span className="block text-white mb-1">{office.label}:</span>
+                  ) : null}
+                  {office.address}
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <NewsletterForm />
+            <NewsletterForm title={footerNewsletterTitle} text={footerNewsletterText} />
           </div>
         </div>
 
@@ -260,7 +304,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <h4 className="font-display font-bold text-[var(--color-brand-yellow)] uppercase tracking-widest mb-4 text-sm">{t.footer.followUs}</h4>
               <div className="flex gap-4">
                 <a
-                  href="https://www.facebook.com/selfdezign"
+                  href={social.facebook || "https://www.facebook.com/selfdezign"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300"
@@ -270,7 +314,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <Facebook size={18} />
                 </a>
                 <a
-                  href="https://www.instagram.com/selfdezign.ro/"
+                  href={social.instagram || "https://www.instagram.com/selfdezign.ro/"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300"
@@ -280,7 +324,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <Instagram size={18} />
                 </a>
                 <a
-                  href="https://www.linkedin.com/company/selfdezign"
+                  href={social.linkedin || "https://www.linkedin.com/company/selfdezign"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300"
@@ -290,7 +334,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <Linkedin size={18} />
                 </a>
                 <a
-                  href="https://wa.me/40721528447"
+                  href={whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300"
@@ -305,7 +349,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         <div className="container mt-8 md:mt-16 pt-6 md:pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-          <p>© 2025 SelfDezign®. {t.footer.rights}</p>
+          <p>{footerCopyright}</p>
           <p>{t.footer.tagline}</p>
         </div>
       </footer>

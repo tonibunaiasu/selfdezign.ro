@@ -5,11 +5,27 @@ import { Input } from "@/components/ui/input";
 import { Mail, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-export default function NewsletterForm() {
+type NewsletterFormProps = {
+  title?: string;
+  text?: string;
+  placeholder?: string;
+  buttonLabel?: string;
+};
+
+export default function NewsletterForm({
+  title,
+  text,
+  placeholder,
+  buttonLabel,
+}: NewsletterFormProps) {
   const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const titleText = title || t.footer.newsletter;
+  const bodyText = text || t.footer.newsletterText;
+  const placeholderText = placeholder || t.footer.emailPlaceholder;
+  const submitLabel = buttonLabel || t.footer.subscribe;
 
   const subscribeMutation = trpc.newsletter.subscribe.useMutation({
     onSuccess: (data) => {
@@ -46,11 +62,11 @@ export default function NewsletterForm() {
     <div className="w-full">
       <div className="flex items-center gap-2 mb-4">
         <Mail className="w-5 h-5 text-[var(--color-brand-yellow)]" />
-        <h4 className="font-display font-bold text-lg uppercase tracking-wider">{t.footer.newsletter}</h4>
+        <h4 className="font-display font-bold text-lg uppercase tracking-wider">{titleText}</h4>
       </div>
       
       <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-        {t.footer.newsletterText}
+        {bodyText}
       </p>
 
       {status === "success" ? (
@@ -62,9 +78,9 @@ export default function NewsletterForm() {
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="flex gap-2">
             <Input
-              aria-label={t.footer.emailPlaceholder}
+              aria-label={placeholderText}
               type="email"
-              placeholder={t.footer.emailPlaceholder}
+              placeholder={placeholderText}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-none focus:border-accent focus:ring-accent"
@@ -78,7 +94,7 @@ export default function NewsletterForm() {
               {status === "loading" ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
               ) : (
-                t.footer.subscribe
+                submitLabel
               )}
             </Button>
           </div>
