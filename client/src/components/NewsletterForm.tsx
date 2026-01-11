@@ -56,6 +56,7 @@ export default function NewsletterForm() {
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="flex gap-2">
             <Input
+              aria-label={t.footer.emailPlaceholder}
               type="email"
               placeholder={t.footer.emailPlaceholder}
               value={email}

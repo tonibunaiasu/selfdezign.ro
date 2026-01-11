@@ -61,15 +61,29 @@ export default function Contact() {
             <form className="space-y-6">
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-bold uppercase tracking-widest text-gray-500">{t.contact.nameLabel}</label>
-                <Input id="name" placeholder={t.contact.namePlaceholder} className="bg-white border-gray-200 h-12 rounded-none focus:ring-accent focus:border-accent" />
+                <Input
+                  id="name"
+                  placeholder={t.contact.namePlaceholder}
+                  className="bg-white border-gray-200 h-12 rounded-none focus:ring-accent focus:border-accent"
+                />
               </div>
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-bold uppercase tracking-widest text-gray-500">{t.contact.emailLabel}</label>
-                <Input id="email" type="email" placeholder={t.contact.emailPlaceholder} className="bg-white border-gray-200 h-12 rounded-none focus:ring-accent focus:border-accent" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder={t.contact.emailPlaceholder}
+                  className="bg-white border-gray-200 h-12 rounded-none focus:ring-accent focus:border-accent"
+                />
               </div>
               <div className="space-y-2">
                 <label htmlFor="phone" className="text-sm font-bold uppercase tracking-widest text-gray-500">{t.contact.phoneLabel}</label>
-                <Input id="phone" type="tel" placeholder={t.contact.phonePlaceholder} className="bg-white border-gray-200 h-12 rounded-none focus:ring-accent focus:border-accent" />
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder={t.contact.phonePlaceholder}
+                  className="bg-white border-gray-200 h-12 rounded-none focus:ring-accent focus:border-accent"
+                />
               </div>
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-bold uppercase tracking-widest text-gray-500">{t.contact.messageLabel}</label>

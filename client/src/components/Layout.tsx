@@ -95,6 +95,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-[var(--color-brand-yellow)] selection:text-accent-foreground">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:shadow"
+      >
+        Skip to content
+      </a>
       {/* Navigation */}
       <header
         className={cn(
@@ -147,6 +153,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <button
             className="md:hidden text-foreground p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
           </button>
@@ -160,6 +169,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile menu"
         >
           <nav className="flex flex-col items-center gap-8">
             {navLinks.map((link) => (
@@ -189,7 +202,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       )}
 
       {/* Main Content */}
-      <main className="flex-grow pt-24">
+      <main id="main-content" className="flex-grow pt-24">
         {children}
       </main>
 
@@ -246,13 +259,34 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div>
               <h4 className="font-display font-bold text-[var(--color-brand-yellow)] uppercase tracking-widest mb-4 text-sm">{t.footer.followUs}</h4>
               <div className="flex gap-4">
-                <a href="https://www.facebook.com/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300" title="Facebook">
+                <a
+                  href="https://www.facebook.com/selfdezign"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300"
+                  title="Facebook"
+                  aria-label="Facebook"
+                >
                   <Facebook size={18} />
                 </a>
-                <a href="https://www.instagram.com/selfdezign.ro/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300" title="Instagram">
+                <a
+                  href="https://www.instagram.com/selfdezign.ro/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300"
+                  title="Instagram"
+                  aria-label="Instagram"
+                >
                   <Instagram size={18} />
                 </a>
-                <a href="https://www.linkedin.com/company/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300" title="LinkedIn">
+                <a
+                  href="https://www.linkedin.com/company/selfdezign"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300"
+                  title="LinkedIn"
+                  aria-label="LinkedIn"
+                >
                   <Linkedin size={18} />
                 </a>
                 <a
@@ -261,6 +295,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   rel="noopener noreferrer"
                   className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300"
                   title="WhatsApp"
+                  aria-label="WhatsApp"
                   onClick={() => trackEvent("whatsapp_click", { placement: "footer" })}
                 >
                   <MessageCircle size={18} />
