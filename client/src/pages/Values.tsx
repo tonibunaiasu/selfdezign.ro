@@ -166,18 +166,15 @@ export default function Values() {
     </section>
   ) : null;
 
-  if (page?.renderMode === "replace" && page.html) {
-    return (
-      <div className="min-h-screen bg-background">
-        <section className="py-20">
-          <div className="container">
-            <PayloadHtml html={page.html} />
-          </div>
-        </section>
-      </div>
-    );
-  }
-  
+  const iconMap: Record<string, typeof Heart> = {
+    heart: Heart,
+    users: Users,
+    lightbulb: Lightbulb,
+    shield: Shield,
+    leaf: Leaf,
+    sparkles: Sparkles,
+  };
+
   const values = valuesData[language];
   const principles = principlesData[language];
 
@@ -221,13 +218,18 @@ export default function Values() {
   };
 
   const c = content[language];
+  const cmsLayout = page?.valuesLayout?.[language];
+  const cmsValues = cmsLayout?.valuesItems?.length ? cmsLayout.valuesItems : null;
+  const cmsPrinciples = cmsLayout?.principlesItems?.length
+    ? cmsLayout.principlesItems
+    : null;
 
   return (
     <div className="min-h-screen bg-background">
       {payloadMode === "prepend" ? payloadSection : null}
       <SEO
-        title={content[language].badge}
-        description={content[language].subtitle}
+        title={cmsLayout?.badge ?? content[language].badge}
+        description={cmsLayout?.subtitle ?? content[language].subtitle}
         url="/valori"
       />
       {/* Hero Section */}
@@ -238,22 +240,26 @@ export default function Values() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-white/20 rounded-full"></div>
         </div>
         <div className="container relative z-10">
-          <Link href="/despre">
+          <Link href={cmsLayout?.backLinkHref ?? "/despre"}>
             <a className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8">
               <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm uppercase tracking-widest">{c.backLink}</span>
+              <span className="text-sm uppercase tracking-widest">
+                {cmsLayout?.backLinkLabel ?? c.backLink}
+              </span>
             </a>
           </Link>
           <div className="max-w-4xl">
             <span className="inline-block bg-[var(--color-brand-yellow)] text-black text-xs font-bold px-4 py-2 uppercase tracking-widest mb-8">
-              {c.badge}
+              {cmsLayout?.badge ?? c.badge}
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter leading-[0.9] mb-8">
-              {c.title1} <br />
-              <span className="text-accent">{c.title2}</span>
+              {cmsLayout?.title1 ?? c.title1} <br />
+              <span className="text-accent">
+                {cmsLayout?.title2 ?? c.title2}
+              </span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl">
-              {c.subtitle}
+              {cmsLayout?.subtitle ?? c.subtitle}
             </p>
           </div>
         </div>
@@ -264,24 +270,37 @@ export default function Values() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-4">
-              {c.valuesTitle}
+              {cmsLayout?.valuesTitle ?? c.valuesTitle}
             </h2>
             <p className="text-gray-600 max-w-xl mx-auto">
-              {c.valuesSubtitle}
+              {cmsLayout?.valuesSubtitle ?? c.valuesSubtitle}
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {values.map((value, index) => (
+            {(cmsValues ?? values).map((value, index) => {
+              const iconKey = "iconKey" in value ? value.iconKey : undefined;
+              const IconComponent = iconKey ? iconMap[iconKey] : value.icon;
+              const colorClass = value.color ?? "bg-black";
+
+              return (
               <div key={index} className="group p-8 border border-gray-200 hover:border-accent transition-colors">
-                <div className={`w-14 h-14 ${value.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <value.icon className={`w-7 h-7 ${value.color === 'bg-[var(--color-brand-yellow)]' ? 'text-black' : 'text-accent'}`} />
+                <div className={`w-14 h-14 ${colorClass} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  {IconComponent ? (
+                    <IconComponent
+                      className={`w-7 h-7 ${
+                        colorClass === "bg-[var(--color-brand-yellow)]"
+                          ? "text-black"
+                          : "text-accent"
+                      }`}
+                    />
+                  ) : null}
                 </div>
                 <h3 className="text-2xl font-display font-bold mb-1">{value.title}</h3>
                 <p className="text-accent text-sm font-medium uppercase tracking-widest mb-4">{value.subtitle}</p>
                 <p className="text-gray-600 leading-relaxed">{value.description}</p>
               </div>
-            ))}
+            )})}
           </div>
         </div>
       </section>
@@ -292,15 +311,15 @@ export default function Values() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-4">
-                {c.principlesTitle}
+                {cmsLayout?.principlesTitle ?? c.principlesTitle}
               </h2>
               <p className="text-gray-600">
-                {c.principlesSubtitle}
+                {cmsLayout?.principlesSubtitle ?? c.principlesSubtitle}
               </p>
             </div>
             
             <div className="space-y-8">
-              {principles.map((principle, index) => (
+              {(cmsPrinciples ?? principles).map((principle, index) => (
                 <div key={index} className="flex gap-6 p-6 bg-white border-l-4 border-accent">
                   <span className="text-4xl font-display font-bold text-accent/30">{principle.number}</span>
                   <div>
@@ -319,13 +338,13 @@ export default function Values() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-8">
-              {c.promiseTitle}
+              {cmsLayout?.promiseTitle ?? c.promiseTitle}
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed mb-8">
-              {c.promiseText}
+              {cmsLayout?.promiseText ?? c.promiseText}
             </p>
             <p className="text-2xl font-display font-bold text-accent">
-              {c.promiseHighlight}
+              {cmsLayout?.promiseHighlight ?? c.promiseHighlight}
             </p>
           </div>
         </div>
@@ -335,20 +354,20 @@ export default function Values() {
       <section className="py-24 bg-white">
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-6">
-            {c.ctaTitle}
+            {cmsLayout?.ctaTitle ?? c.ctaTitle}
           </h2>
           <p className="text-gray-600 max-w-xl mx-auto mb-8">
-            {c.ctaText}
+            {cmsLayout?.ctaText ?? c.ctaText}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
+            <Link href={cmsLayout?.ctaPrimaryHref ?? "/contact"}>
               <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm">
-                {t.nav.contact}
+                {cmsLayout?.ctaPrimaryLabel ?? t.nav.contact}
               </Button>
             </Link>
-            <Link href="/proiecte">
+            <Link href={cmsLayout?.ctaSecondaryHref ?? "/proiecte"}>
               <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm">
-                {t.nav.projects}
+                {cmsLayout?.ctaSecondaryLabel ?? t.nav.projects}
               </Button>
             </Link>
           </div>
@@ -359,12 +378,16 @@ export default function Values() {
       <section className="py-16 bg-gray-50 border-t border-gray-200">
         <div className="container">
           <div className="flex justify-start">
-            <Link href="/viziune">
+            <Link href={cmsLayout?.prevPageHref ?? "/viziune"}>
               <a className="group flex items-center gap-4 text-gray-600 hover:text-black transition-colors">
                 <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                 <div>
-                  <span className="text-xs uppercase tracking-widest text-gray-400 block">{c.prevPage}</span>
-                  <span className="font-display font-bold">{c.prevTitle}</span>
+                  <span className="text-xs uppercase tracking-widest text-gray-400 block">
+                    {cmsLayout?.prevPageLabel ?? c.prevPage}
+                  </span>
+                  <span className="font-display font-bold">
+                    {cmsLayout?.prevPageTitle ?? c.prevTitle}
+                  </span>
                 </div>
               </a>
             </Link>

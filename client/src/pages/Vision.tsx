@@ -17,18 +17,6 @@ export default function Vision() {
     </section>
   ) : null;
 
-  if (page?.renderMode === "replace" && page.html) {
-    return (
-      <div className="min-h-screen bg-background">
-        <section className="py-20">
-          <div className="container">
-            <PayloadHtml html={page.html} />
-          </div>
-        </section>
-      </div>
-    );
-  }
-
   const content = {
     ro: {
       backLink: "Înapoi la Despre Noi",
@@ -101,13 +89,18 @@ export default function Vision() {
   };
 
   const c = content[language];
+  const cmsLayout = page?.visionLayout?.[language] as
+    | Record<string, string>
+    | undefined;
+  const getValue = (key: string, fallback: string) =>
+    cmsLayout?.[key] ?? fallback;
 
   return (
     <div className="min-h-screen bg-background">
       {payloadMode === "prepend" ? payloadSection : null}
       <SEO
-        title={c.badge}
-        description={c.vision.lead}
+        title={getValue("badge", c.badge)}
+        description={getValue("visionLead", c.vision.lead)}
         url="/viziune"
       />
       {/* Hero Section */}
@@ -118,19 +111,23 @@ export default function Vision() {
           }}></div>
         </div>
         <div className="container relative z-10">
-          <Link href="/despre">
+          <Link href={getValue("backLinkHref", "/despre")}>
             <a className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8">
               <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm uppercase tracking-widest">{c.backLink}</span>
+              <span className="text-sm uppercase tracking-widest">
+                {getValue("backLinkLabel", c.backLink)}
+              </span>
             </a>
           </Link>
           <div className="max-w-4xl">
             <span className="inline-block bg-[var(--color-brand-yellow)] text-black text-xs font-bold px-4 py-2 uppercase tracking-widest mb-8">
-              {c.badge}
+              {getValue("badge", c.badge)}
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter leading-[0.9] mb-8">
-              {c.title1} <br />
-              <span className="text-accent">{c.title2}</span>
+              {getValue("title1", c.title1)} <br />
+              <span className="text-accent">
+                {getValue("title2", c.title2)}
+              </span>
             </h1>
           </div>
         </div>
@@ -146,21 +143,21 @@ export default function Vision() {
                   <Eye className="w-8 h-8 text-black" />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-4">
-                  {c.vision.title}
+                  {getValue("visionTitle", c.vision.title)}
                 </h2>
                 <p className="text-gray-500 uppercase tracking-widest text-sm">
-                  {c.vision.subtitle}
+                  {getValue("visionSubtitle", c.vision.subtitle)}
                 </p>
               </div>
             </div>
             <div className="lg:col-span-8">
               <div className="space-y-8 text-lg text-gray-700 leading-relaxed">
                 <p className="text-2xl font-display font-semibold text-black">
-                  {c.vision.lead}
+                  {getValue("visionLead", c.vision.lead)}
                 </p>
-                <p>{c.vision.p1}</p>
-                <p>{c.vision.p2}</p>
-                <p>{c.vision.p3}</p>
+                <p>{getValue("visionP1", c.vision.p1)}</p>
+                <p>{getValue("visionP2", c.vision.p2)}</p>
+                <p>{getValue("visionP3", c.vision.p3)}</p>
               </div>
             </div>
           </div>
@@ -177,21 +174,21 @@ export default function Vision() {
                   <Target className="w-8 h-8 text-accent" />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-4">
-                  {c.mission.title}
+                  {getValue("missionTitle", c.mission.title)}
                 </h2>
                 <p className="text-gray-500 uppercase tracking-widest text-sm">
-                  {c.mission.subtitle}
+                  {getValue("missionSubtitle", c.mission.subtitle)}
                 </p>
               </div>
             </div>
             <div className="lg:col-span-8">
               <div className="space-y-8 text-lg text-gray-700 leading-relaxed">
                 <p className="text-2xl font-display font-semibold text-black">
-                  {c.mission.lead}
+                  {getValue("missionLead", c.mission.lead)}
                 </p>
-                <p>{c.mission.p1}</p>
-                <p>{c.mission.p2}</p>
-                <p>{c.mission.p3}</p>
+                <p>{getValue("missionP1", c.mission.p1)}</p>
+                <p>{getValue("missionP2", c.mission.p2)}</p>
+                <p>{getValue("missionP3", c.mission.p3)}</p>
               </div>
             </div>
           </div>
@@ -208,22 +205,22 @@ export default function Vision() {
                   <Compass className="w-8 h-8 text-black" />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tighter mb-4">
-                  {c.purpose.title}
+                  {getValue("purposeTitle", c.purpose.title)}
                 </h2>
                 <p className="text-gray-500 uppercase tracking-widest text-sm">
-                  {c.purpose.subtitle}
+                  {getValue("purposeSubtitle", c.purpose.subtitle)}
                 </p>
               </div>
             </div>
             <div className="lg:col-span-8">
               <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
                 <p className="text-2xl font-display font-semibold text-white">
-                  {c.purpose.lead}
+                  {getValue("purposeLead", c.purpose.lead)}
                 </p>
-                <p>{c.purpose.p1}</p>
-                <p>{c.purpose.p2}</p>
+                <p>{getValue("purposeP1", c.purpose.p1)}</p>
+                <p>{getValue("purposeP2", c.purpose.p2)}</p>
                 <p className="text-accent font-semibold">
-                  {c.purpose.p3}
+                  {getValue("purposeP3", c.purpose.p3)}
                 </p>
               </div>
             </div>
@@ -235,20 +232,28 @@ export default function Vision() {
       <section className="py-16 bg-white border-t border-gray-200">
         <div className="container">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <Link href="/despre">
+            <Link href={getValue("prevPageHref", "/despre")}>
               <a className="group flex items-center gap-4 text-gray-600 hover:text-black transition-colors">
                 <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                 <div>
-                  <span className="text-xs uppercase tracking-widest text-gray-400 block">{c.prevPage}</span>
-                  <span className="font-display font-bold">{c.prevTitle}</span>
+                  <span className="text-xs uppercase tracking-widest text-gray-400 block">
+                    {getValue("prevPageLabel", c.prevPage)}
+                  </span>
+                  <span className="font-display font-bold">
+                    {getValue("prevPageTitle", c.prevTitle)}
+                  </span>
                 </div>
               </a>
             </Link>
-            <Link href="/valori">
+            <Link href={getValue("nextPageHref", "/valori")}>
               <a className="group flex items-center gap-4 text-gray-600 hover:text-black transition-colors">
                 <div className="text-right">
-                  <span className="text-xs uppercase tracking-widest text-gray-400 block">{c.nextPage}</span>
-                  <span className="font-display font-bold">{c.nextTitle}</span>
+                  <span className="text-xs uppercase tracking-widest text-gray-400 block">
+                    {getValue("nextPageLabel", c.nextPage)}
+                  </span>
+                  <span className="font-display font-bold">
+                    {getValue("nextPageTitle", c.nextTitle)}
+                  </span>
                 </div>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>

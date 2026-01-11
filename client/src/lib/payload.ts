@@ -79,6 +79,84 @@ export type PayloadPage = {
       imageUrl: string;
     }>;
   };
+  visionLayout?: {
+    ro?: Record<string, string>;
+    en?: Record<string, string>;
+  };
+  valuesLayout?: {
+    ro?: {
+      backLinkLabel?: string;
+      backLinkHref?: string;
+      badge?: string;
+      title1?: string;
+      title2?: string;
+      subtitle?: string;
+      valuesTitle?: string;
+      valuesSubtitle?: string;
+      valuesItems?: Array<{
+        iconKey?: string;
+        title?: string;
+        subtitle?: string;
+        description?: string;
+        color?: string;
+      }>;
+      principlesTitle?: string;
+      principlesSubtitle?: string;
+      principlesItems?: Array<{
+        number?: string;
+        title?: string;
+        description?: string;
+      }>;
+      promiseTitle?: string;
+      promiseText?: string;
+      promiseHighlight?: string;
+      ctaTitle?: string;
+      ctaText?: string;
+      ctaPrimaryLabel?: string;
+      ctaPrimaryHref?: string;
+      ctaSecondaryLabel?: string;
+      ctaSecondaryHref?: string;
+      prevPageLabel?: string;
+      prevPageTitle?: string;
+      prevPageHref?: string;
+    };
+    en?: {
+      backLinkLabel?: string;
+      backLinkHref?: string;
+      badge?: string;
+      title1?: string;
+      title2?: string;
+      subtitle?: string;
+      valuesTitle?: string;
+      valuesSubtitle?: string;
+      valuesItems?: Array<{
+        iconKey?: string;
+        title?: string;
+        subtitle?: string;
+        description?: string;
+        color?: string;
+      }>;
+      principlesTitle?: string;
+      principlesSubtitle?: string;
+      principlesItems?: Array<{
+        number?: string;
+        title?: string;
+        description?: string;
+      }>;
+      promiseTitle?: string;
+      promiseText?: string;
+      promiseHighlight?: string;
+      ctaTitle?: string;
+      ctaText?: string;
+      ctaPrimaryLabel?: string;
+      ctaPrimaryHref?: string;
+      ctaSecondaryLabel?: string;
+      ctaSecondaryHref?: string;
+      prevPageLabel?: string;
+      prevPageTitle?: string;
+      prevPageHref?: string;
+    };
+  };
   updatedAt?: string;
 };
 
