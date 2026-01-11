@@ -16,7 +16,9 @@ const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const BlogTag = lazy(() => import("./pages/BlogTag"));
 const Contact = lazy(() => import("./pages/Contact"));
-const ComponentShowcase = lazy(() => import("./pages/ComponentShowcase"));
+const ComponentShowcase = import.meta.env.DEV
+  ? lazy(() => import("./pages/ComponentShowcase"))
+  : null;
 const Home = lazy(() => import("./pages/Home"));
 const MediaAppearances = lazy(() => import("./pages/MediaAppearances"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
@@ -31,7 +33,7 @@ function Router() {
       <Suspense fallback={null}>
         <Switch>
           <Route path="/" component={Home} />
-          {import.meta.env.DEV ? (
+          {import.meta.env.DEV && ComponentShowcase ? (
             <Route path="/components" component={ComponentShowcase} />
           ) : null}
 

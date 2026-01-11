@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import { mediaAppearances } from "@/data/media-appearances";
 import { getResponsiveImageProps } from "@/lib/images";
+import SEO from "@/components/SEO";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const articleImages = [
   "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=2670&auto=format&fit=crop",
@@ -23,8 +25,19 @@ const formatDate = (value: string) => {
 };
 
 export default function Articles() {
+  const { t, language } = useLanguage();
+  const description =
+    language === "ro"
+      ? "Aparițiile în presă și publicațiile care au prezentat proiectele SelfDezign."
+      : "Press mentions and publications that featured SelfDezign projects.";
+
   return (
     <div className="min-h-screen bg-background pb-24">
+      <SEO
+        title={t.nav.media}
+        description={description}
+        url="/articole"
+      />
       {/* Header */}
       <div className="bg-black text-white pt-32 pb-24 px-4">
         <div className="container">

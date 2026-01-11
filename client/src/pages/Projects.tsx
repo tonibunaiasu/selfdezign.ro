@@ -7,6 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
 import { getLocalImageProps } from "@/lib/images";
+import SEO from "@/components/SEO";
 
 export default function Projects() {
   const { t, language } = useLanguage();
@@ -61,6 +62,11 @@ export default function Projects() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
+      <SEO
+        title={t.projects.title}
+        description={t.projects.subtitle}
+        url="/proiecte"
+      />
       {payloadMode === "prepend" ? payloadSection : null}
       {/* Header */}
       <div className="bg-black text-white pt-32 pb-16 px-4">

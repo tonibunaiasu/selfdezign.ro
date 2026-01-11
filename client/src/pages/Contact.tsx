@@ -8,6 +8,7 @@ import { usePayloadPage } from "@/lib/payload";
 import { trackEvent } from "@/lib/analytics";
 import { trpc } from "@/lib/trpc";
 import { useState } from "react";
+import SEO from "@/components/SEO";
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -60,6 +61,11 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={t.contact.title}
+        description={t.contact.subtitle}
+        url="/contact"
+      />
       {payloadMode === "prepend" ? payloadSection : null}
       {/* Hero Text */}
       <div className="bg-black text-white pt-32 pb-24 px-4">

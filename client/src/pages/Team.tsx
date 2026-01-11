@@ -4,6 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
 import { getLocalImageProps } from "@/lib/images";
+import SEO from "@/components/SEO";
 
 interface TeamMember {
   id: string;
@@ -86,6 +87,11 @@ export default function Team() {
 
   return (
     <>
+      <SEO
+        title={t.team.title}
+        description={t.team.subtitle}
+        url="/echipa"
+      />
       {payloadMode === "prepend" ? payloadSection : null}
       {/* Hero Section */}
       <section className="pt-32 pb-16 bg-black text-white">
