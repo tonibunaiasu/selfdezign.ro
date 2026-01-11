@@ -113,7 +113,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <a className="flex items-center gap-2 group">
               {/* Logo - SelfDezign brand */}
               <img 
-                src="/images/logo_selfdezign.webp" 
+                src="/images/logo_selfdezign.png" 
                 alt="SelfDezign Logo" 
                 className="h-12 sm:h-14 w-auto object-contain"
               />
