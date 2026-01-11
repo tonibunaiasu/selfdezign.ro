@@ -7,12 +7,6 @@
     <title>Redirecting…</title>
   </head>
   <body>
-    <script>
-      (function () {
-        var path = window.location.pathname + window.location.search + window.location.hash;
-        var redirect = encodeURIComponent(path);
-        window.location.replace("/?redirect=" + redirect);
-      })();
-    </script>
+    <script src="/spa-redirect.js"></script>
   </body>
 </html>
