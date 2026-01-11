@@ -30,10 +30,16 @@ export default function NewsletterForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim()) return;
+    const trimmed = email.trim();
+    if (!trimmed) return;
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(trimmed)) {
+      setStatus("error");
+      setMessage(t.footer.subscribeError);
+      return;
+    }
     
     setStatus("loading");
-    subscribeMutation.mutate({ email: email.trim() });
+    subscribeMutation.mutate({ email: trimmed });
   };
 
   return (

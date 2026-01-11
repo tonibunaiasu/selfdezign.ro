@@ -4,6 +4,8 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { addSubscriber, unsubscribe, getActiveSubscribers, createBlogPost, getBlogPosts, getBlogPostById, updateBlogPost, deleteBlogPost } from "./db";
 import { z } from "zod";
+import { checkRateLimit } from "./_core/rateLimit";
+import { TRPCError } from "@trpc/server";
 
 export const appRouter = router({
   // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -26,7 +28,18 @@ export const appRouter = router({
         email: z.string().email("Adresa de email nu este validă"),
         name: z.string().optional(),
       }))
-      .mutation(async ({ input }) => {
+      .mutation(async ({ input, ctx }) => {
+        try {
+          checkRateLimit(ctx, { windowMs: 15 * 60 * 1000, max: 5 });
+        } catch (error) {
+          if (error instanceof Error && (error as Error & { retryAfter?: number }).message === "RATE_LIMIT") {
+            throw new TRPCError({
+              code: "TOO_MANY_REQUESTS",
+              message: "Prea multe solicitări. Încearcă din nou mai târziu.",
+            });
+          }
+          throw error;
+        }
         return await addSubscriber(input);
       }),
 
@@ -34,7 +47,18 @@ export const appRouter = router({
       .input(z.object({
         email: z.string().email("Adresa de email nu este validă"),
       }))
-      .mutation(async ({ input }) => {
+      .mutation(async ({ input, ctx }) => {
+        try {
+          checkRateLimit(ctx, { windowMs: 15 * 60 * 1000, max: 10 });
+        } catch (error) {
+          if (error instanceof Error && (error as Error & { retryAfter?: number }).message === "RATE_LIMIT") {
+            throw new TRPCError({
+              code: "TOO_MANY_REQUESTS",
+              message: "Prea multe solicitări. Încearcă din nou mai târziu.",
+            });
+          }
+          throw error;
+        }
         return await unsubscribe(input.email);
       }),
 
