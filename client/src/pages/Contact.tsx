@@ -5,6 +5,7 @@ import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -74,7 +75,11 @@ export default function Contact() {
                 <label htmlFor="message" className="text-sm font-bold uppercase tracking-widest text-gray-500">{t.contact.messageLabel}</label>
                 <Textarea id="message" placeholder={t.contact.messagePlaceholder} className="bg-white border-gray-200 min-h-[150px] rounded-none focus:ring-accent focus:border-accent" />
               </div>
-              <Button size="lg" className="w-full bg-black text-white hover:bg-[var(--color-brand-yellow)] hover:text-black rounded-none h-14 text-base font-bold uppercase tracking-widest transition-colors">
+              <Button
+                size="lg"
+                className="w-full bg-black text-white hover:bg-[var(--color-brand-yellow)] hover:text-black rounded-none h-14 text-base font-bold uppercase tracking-widest transition-colors"
+                onClick={() => trackEvent("cta_click", { placement: "contact_form", label: t.contact.sendButton })}
+              >
                 {t.contact.sendButton}
               </Button>
               <div className="flex items-center justify-between text-xs uppercase tracking-widest text-gray-500">
@@ -104,7 +109,12 @@ export default function Contact() {
                 <a href="mailto:hello@selfdezign.ro" className="block text-lg hover:text-accent transition-colors font-medium">hello@selfdezign.ro</a>
               </div>
               <div className="mt-6">
-                <a href="https://wa.me/40721528447" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://wa.me/40721528447"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent("whatsapp_click", { placement: "contact" })}
+                >
                   <Button className="bg-[#25D366] text-black hover:bg-[#25D366]/90 rounded-none uppercase tracking-widest font-bold text-xs px-6">
                     <MessageCircle className="mr-2 h-4 w-4" />
                     WhatsApp

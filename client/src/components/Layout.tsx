@@ -1,11 +1,12 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { Menu, X, Facebook, Instagram, Linkedin, MessageCircle } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import NewsletterForm from "@/components/NewsletterForm";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { initAnalytics, trackEvent, trackPageView, trackScrollDepth } from "@/lib/analytics";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -14,6 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const { t } = useLanguage();
+  const scrollDepthTracked = useRef<Set<number>>(new Set());
   
   // Minimum swipe distance (in px) to trigger close
   const minSwipeDistance = 50;
@@ -34,6 +36,31 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     if (typeof window === "undefined") return;
     if (window.location.hash) return;
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    initAnalytics();
+    trackPageView(location);
+    scrollDepthTracked.current = new Set();
+
+    const thresholds = [25, 50, 75, 100];
+    const handleScrollDepth = () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (maxScroll <= 0) return;
+      const percent = Math.round((window.scrollY / maxScroll) * 100);
+
+      thresholds.forEach((threshold) => {
+        if (percent >= threshold && !scrollDepthTracked.current.has(threshold)) {
+          scrollDepthTracked.current.add(threshold);
+          trackScrollDepth(threshold, location);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScrollDepth, { passive: true });
+    handleScrollDepth();
+    return () => window.removeEventListener("scroll", handleScrollDepth);
   }, [location]);
   
   // Handle touch events for swipe gesture
@@ -106,7 +133,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             <Link href="/contact">
-              <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs px-6 shadow-[0_10px_40px_-12px_rgba(245,196,0,0.35)]">
+              <Button
+                className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs px-6 shadow-[0_10px_40px_-12px_rgba(245,196,0,0.35)]"
+                onClick={() => trackEvent("cta_click", { placement: "header", label: t.nav.bookCall })}
+              >
                 {t.nav.bookCall}
               </Button>
             </Link>
@@ -143,7 +173,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             <Link href="/contact">
-              <Button size="lg" className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold mt-8 w-64">
+              <Button
+                size="lg"
+                className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold mt-8 w-64"
+                onClick={() => trackEvent("cta_click", { placement: "mobile_menu", label: t.nav.bookCall })}
+              >
                 {t.nav.bookCall}
               </Button>
             </Link>
@@ -221,7 +255,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <a href="https://www.linkedin.com/company/selfdezign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300" title="LinkedIn">
                   <Linkedin size={18} />
                 </a>
-                <a href="https://wa.me/40721528447" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300" title="WhatsApp">
+                <a
+                  href="https://wa.me/40721528447"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-[var(--color-brand-yellow)] hover:text-black hover:border-accent transition-all duration-300"
+                  title="WhatsApp"
+                  onClick={() => trackEvent("whatsapp_click", { placement: "footer" })}
+                >
                   <MessageCircle size={18} />
                 </a>
               </div>

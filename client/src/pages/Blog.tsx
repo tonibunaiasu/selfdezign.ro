@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import { getResponsiveImageProps } from "@/lib/images";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Blog() {
   const { language, t } = useLanguage();
@@ -57,11 +58,19 @@ export default function Blog() {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link href="/contact">
-              <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs px-6">
+              <Button
+                className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs px-6"
+                onClick={() => trackEvent("cta_click", { placement: "blog_cta", label: t.blog.ctaButton })}
+              >
                 {t.blog.ctaButton}
               </Button>
             </Link>
-            <a href="https://wa.me/40721528447" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://wa.me/40721528447"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent("whatsapp_click", { placement: "blog_cta" })}
+            >
               <Button variant="outline" className="rounded-none uppercase tracking-widest font-bold text-xs px-6">
                 {t.nav.bookConsultation}
               </Button>

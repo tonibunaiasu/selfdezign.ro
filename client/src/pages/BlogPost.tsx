@@ -8,6 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import { getResponsiveImageProps } from "@/lib/images";
 import { projects } from "@/data/projects-data";
+import { trackEvent } from "@/lib/analytics";
 
 export default function BlogPost() {
   const [match, params] = useRoute("/blog/:slug");
@@ -305,11 +306,19 @@ export default function BlogPost() {
             </p>
             <div className="flex flex-col gap-3">
               <Link href="/contact">
-                <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs">
+                <Button
+                  className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs"
+                  onClick={() => trackEvent("cta_click", { placement: "blog_post_sidebar", label: c.ctaButton })}
+                >
                   {c.ctaButton}
                 </Button>
               </Link>
-              <a href="https://wa.me/40721528447" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://wa.me/40721528447"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("whatsapp_click", { placement: "blog_post_sidebar" })}
+              >
                 <Button variant="outline" className="rounded-none uppercase tracking-widest font-bold text-xs w-full">
                   {t.nav.bookConsultation}
                 </Button>
