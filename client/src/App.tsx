@@ -1,60 +1,63 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Redirect, Route, Switch } from "wouter";
+import { lazy, Suspense } from "react";
 
 import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from "./components/Layout";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
-import About from "./pages/About";
-import AdminBlogDashboard from "./pages/AdminBlogDashboard";
-import Articles from "./pages/Articles";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
-import BlogTag from "./pages/BlogTag";
-import Contact from "./pages/Contact";
-import ComponentShowcase from "./pages/ComponentShowcase";
-import Home from "./pages/Home";
-import MediaAppearances from "./pages/MediaAppearances";
-import ProjectDetail from "./pages/ProjectDetail";
-import Projects from "./pages/Projects";
-import Team from "./pages/Team";
-import Values from "./pages/Values";
-import Vision from "./pages/Vision";
+const NotFound = lazy(() => import("@/pages/NotFound"));
+const About = lazy(() => import("./pages/About"));
+const AdminBlogDashboard = lazy(() => import("./pages/AdminBlogDashboard"));
+const Articles = lazy(() => import("./pages/Articles"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+const BlogTag = lazy(() => import("./pages/BlogTag"));
+const Contact = lazy(() => import("./pages/Contact"));
+const ComponentShowcase = lazy(() => import("./pages/ComponentShowcase"));
+const Home = lazy(() => import("./pages/Home"));
+const MediaAppearances = lazy(() => import("./pages/MediaAppearances"));
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Team = lazy(() => import("./pages/Team"));
+const Values = lazy(() => import("./pages/Values"));
+const Vision = lazy(() => import("./pages/Vision"));
 
 function Router() {
   return (
     <Layout>
-      <Switch>
-        <Route path="/" component={Home} />
-        {import.meta.env.DEV ? (
-          <Route path="/components" component={ComponentShowcase} />
-        ) : null}
+      <Suspense fallback={null}>
+        <Switch>
+          <Route path="/" component={Home} />
+          {import.meta.env.DEV ? (
+            <Route path="/components" component={ComponentShowcase} />
+          ) : null}
 
-        <Route path="/admin/blog" component={AdminBlogDashboard} />
-        <Route path="/admin">{() => <Redirect to="/admin/blog" />}</Route>
+          <Route path="/admin/blog" component={AdminBlogDashboard} />
+          <Route path="/admin">{() => <Redirect to="/admin/blog" />}</Route>
 
-        <Route path="/proiecte" component={Projects} />
-        <Route path="/proiect/:slug" component={ProjectDetail} />
+          <Route path="/proiecte" component={Projects} />
+          <Route path="/proiect/:slug" component={ProjectDetail} />
 
-        <Route path="/contact" component={Contact} />
-        <Route path="/articole" component={Articles} />
-        <Route path="/blog" component={Blog} />
-        <Route path="/blog/tag/:tag" component={BlogTag} />
-        <Route path="/blog/:slug" component={BlogPost} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/articole" component={Articles} />
+          <Route path="/blog" component={Blog} />
+          <Route path="/blog/tag/:tag" component={BlogTag} />
+          <Route path="/blog/:slug" component={BlogPost} />
 
-        <Route path="/despre" component={About} />
-        <Route path="/viziune" component={Vision} />
-        <Route path="/valori" component={Values} />
-        <Route path="/echipa" component={Team} />
-        <Route path="/aparituri-media">{() => <Redirect to="/aparitii-media" />}</Route>
-        <Route path="/aparitii-media" component={MediaAppearances} />
+          <Route path="/despre" component={About} />
+          <Route path="/viziune" component={Vision} />
+          <Route path="/valori" component={Values} />
+          <Route path="/echipa" component={Team} />
+          <Route path="/aparituri-media">{() => <Redirect to="/aparitii-media" />}</Route>
+          <Route path="/aparitii-media" component={MediaAppearances} />
 
-        <Route path="/404" component={NotFound} />
-        <Route component={NotFound} />
-      </Switch>
+          <Route path="/404" component={NotFound} />
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
     </Layout>
   );
 }
