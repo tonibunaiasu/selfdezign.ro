@@ -221,8 +221,8 @@ export const translations: Record<Language, Translations> = {
     },
     home: {
       tagline: "YOU ARE THE DESIGNER",
-      heroTitlePrefix: "Design interior pentru",
-      heroTitleEmphasis: "cine ești.",
+      heroTitlePrefix: "Design interior din",
+      heroTitleEmphasis: "arhitectura personalității tale.",
       heroDescription: "Proiectăm experiențe care îți susțin identitatea.",
       discoverProjects: "Descoperă Proiectele",
       contactUs: "Cere o ofertă",
@@ -236,7 +236,7 @@ export const translations: Record<Language, Translations> = {
         since: "Din 2018"
       },
       aboutTitle: "Despre SelfDezign",
-      aboutDescription1: "SelfDezign este un studio de design interior fondat în 2015, specializat în proiecte comerciale și rezidențiale.",
+      aboutDescription1: "SelfDezign este un studio de design interior fondat în 2018, specializat în proiecte comerciale și rezidențiale.",
       aboutDescription2: "Credem că designul interior nu este doar despre estetică, ci despre crearea unor spații care reflectă personalitatea și valorile celor care le locuiesc.",
       aboutDescription3: "Fiecare proiect este o colaborare strânsă cu clientul, pentru a transforma viziunea în realitate.",
       learnMore: "Află mai multe",
@@ -429,7 +429,7 @@ export const translations: Record<Language, Translations> = {
         since: "Since 2018"
       },
       aboutTitle: "About SelfDezign",
-      aboutDescription1: "SelfDezign is an interior design studio founded in 2015, specializing in commercial and residential projects.",
+      aboutDescription1: "SelfDezign is an interior design studio founded in 2018, specializing in commercial and residential projects.",
       aboutDescription2: "We believe interior design is not just about aesthetics, but about creating spaces that reflect the personality and values of those who inhabit them.",
       aboutDescription3: "Each project is a close collaboration with the client, to transform vision into reality.",
       learnMore: "Learn More",

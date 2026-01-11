@@ -1,14 +1,24 @@
 {
   "items": [
     {
-      "title": "Exemplu proiect",
-      "slug": "exemplu-proiect",
+      "title": "Cafeneaua Veche 9",
+      "slug": "cafeneaua-veche-9",
       "category": "Restaurant",
-      "metricValue": "+18%",
-      "metricLabel": "Creștere vânzări",
-      "summary": "Descriere scurtă a proiectului (1–2 propoziții).",
-      "coverImage": "/images/placeholder.jpg",
-      "draft": true
+      "metricValue": "+28%",
+      "metricLabel": "Rezervări weekend",
+      "summary": "Renașterea unui spațiu istoric, unde experiența culinară și designul se întâlnesc firesc.",
+      "coverImage": "/projects/cafeneaua-veche/cafeneaua-veche-1.webp",
+      "draft": false
+    },
+    {
+      "title": "Ezugi Offices",
+      "slug": "global-leader-gaming",
+      "category": "Office",
+      "metricValue": "+25%",
+      "metricLabel": "Satisfacție angajați",
+      "summary": "Birouri dinamice pentru un lider global în gaming live, optimizate pentru colaborare și energie.",
+      "coverImage": "/projects/ezugi-gaming/ezugi-gaming-1.webp",
+      "draft": false
     }
   ]
 }
