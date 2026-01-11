@@ -30,6 +30,55 @@ export type PayloadPage = {
     ctaLabel?: string;
     ctaHref?: string;
   };
+  homeLayout?: {
+    heroTagline?: string;
+    heroTitlePrefix?: string;
+    heroTitleEmphasis?: string;
+    heroDescription?: string;
+    heroPrimaryCtaLabel?: string;
+    heroPrimaryCtaHref?: string;
+    heroSecondaryCtaLabel?: string;
+    heroSecondaryCtaHref?: string;
+    featuredProjectLabel?: string;
+    featuredPrimaryCtaLabel?: string;
+    featuredSecondaryCtaLabel?: string;
+    featuredCaseStudies?: Array<{
+      title: string;
+      slug: string;
+      category?: string;
+      metricValue?: string;
+      metricLabel?: string;
+      summary?: string;
+      coverImageUrl?: string;
+    }>;
+    awardsTitle?: string;
+    awardsLogos?: Array<{
+      imageUrl: string;
+      alt?: string;
+    }>;
+    trustStats?: Array<{
+      value: string;
+      label: string;
+    }>;
+    aboutTitle?: string;
+    aboutDescription1?: string;
+    aboutDescription2?: string;
+    aboutDescription3?: string;
+    aboutImageUrl?: string;
+    aboutImageAlt?: string;
+    founderName?: string;
+    founderRole?: string;
+    learnMoreLabel?: string;
+    learnMoreHref?: string;
+    categoriesTitle?: string;
+    categoriesCtaLabel?: string;
+    categoriesCtaHref?: string;
+    categories?: Array<{
+      key: string;
+      title: string;
+      imageUrl: string;
+    }>;
+  };
   updatedAt?: string;
 };
 

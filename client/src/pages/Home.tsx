@@ -25,11 +25,25 @@ type CaseStudy = {
 export default function Home() {
   const { t } = useLanguage();
   const { page } = usePayloadPage("home");
-  const caseStudies = useMemo(
+  const homeLayout = page?.homeLayout;
+  const fallbackCaseStudies = useMemo(
     () =>
       (caseStudiesData.items as CaseStudy[]).filter((item) => !item.draft),
     []
   );
+  const cmsCaseStudies = useMemo(() => {
+    if (!homeLayout?.featuredCaseStudies?.length) return [];
+    return homeLayout.featuredCaseStudies.map((item) => ({
+      title: item.title,
+      slug: item.slug,
+      category: item.category ?? "",
+      metricValue: item.metricValue ?? "",
+      metricLabel: item.metricLabel ?? "",
+      summary: item.summary ?? "",
+      coverImage: item.coverImageUrl ?? "",
+    }));
+  }, [homeLayout?.featuredCaseStudies]);
+  const caseStudies = cmsCaseStudies.length ? cmsCaseStudies : fallbackCaseStudies;
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -100,8 +114,11 @@ export default function Home() {
     <div className="flex flex-col gap-0">
       {payloadMode === "prepend" ? payloadSection : null}
       <SEO 
-        title="Acasă"
-        description="SelfDezign - Studio de design interior specializat în proiecte comerciale și rezidențiale. Designul interior întâlnește natura umană."
+        title={page?.seoTitle ?? "Acasă"}
+        description={
+          page?.seoDescription ??
+          "SelfDezign - Studio de design interior specializat în proiecte comerciale și rezidențiale. Designul interior întâlnește natura umană."
+        }
         url="/"
         structuredData={organizationStructuredData}
       />
@@ -120,33 +137,35 @@ export default function Home() {
         <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-8">
             <div className="inline-block px-4 py-1 border border-accent/30 rounded-full bg-[var(--color-brand-yellow)]/5 backdrop-blur-sm">
-              <span className="text-accent text-xs font-bold tracking-widest uppercase">{t.home.tagline}</span>
+              <span className="text-accent text-xs font-bold tracking-widest uppercase">
+                {homeLayout?.heroTagline ?? t.home.tagline}
+              </span>
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.95] tracking-tighter">
-              {t.home.heroTitlePrefix}{" "}
+              {homeLayout?.heroTitlePrefix ?? t.home.heroTitlePrefix}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
-                {t.home.heroTitleEmphasis}
+                {homeLayout?.heroTitleEmphasis ?? t.home.heroTitleEmphasis}
               </span>
             </h1>
             
             <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed border-l-2 border-accent pl-6">
-              {t.home.heroDescription}
+              {homeLayout?.heroDescription ?? t.home.heroDescription}
             </p>
             
             <div className="flex flex-wrap gap-4 pt-4">
-              <Link href="/proiecte">
+              <Link href={homeLayout?.heroPrimaryCtaHref ?? "/proiecte"}>
                 <a className="inline-block">
                   <Button size="lg" className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest group">
-                    {t.home.discoverProjects}
+                    {homeLayout?.heroPrimaryCtaLabel ?? t.home.discoverProjects}
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </a>
               </Link>
-              <Link href="/contact">
+              <Link href={homeLayout?.heroSecondaryCtaHref ?? "/contact"}>
                 <a className="inline-block">
                   <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white hover:text-black rounded-none h-14 px-8 text-base font-bold uppercase tracking-widest">
-                    {t.home.contactUs}
+                    {homeLayout?.heroSecondaryCtaLabel ?? t.home.contactUs}
                   </Button>
                 </a>
               </Link>
@@ -170,7 +189,7 @@ export default function Home() {
                   />
                   <div className="absolute top-6 left-6 z-20 flex flex-col gap-3">
                     <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 text-white text-xs uppercase tracking-[0.2em]">
-                      {t.home.featuredProject}
+                      {homeLayout?.featuredProjectLabel ?? t.home.featuredProject}
                       <span className="inline-block w-2 h-2 bg-[var(--color-brand-yellow)] rounded-full animate-pulse"></span>
                     </span>
                     <div className="flex items-center gap-2 px-4 py-2 bg-black/70 text-white backdrop-blur-sm border border-white/10">
@@ -188,7 +207,7 @@ export default function Home() {
                       <Link href={`/proiect/${activeCaseStudy.slug}`}>
                         <a>
                           <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none h-12 px-6 uppercase tracking-widest font-bold">
-                            {t.projects.viewProject}
+                            {homeLayout?.featuredPrimaryCtaLabel ?? t.projects.viewProject}
                             <ArrowRight className="ml-2 h-4 w-4" />
                           </Button>
                         </a>
@@ -196,7 +215,7 @@ export default function Home() {
                       <Link href="/contact">
                         <a>
                           <Button variant="ghost" className="text-white hover:text-[var(--color-brand-yellow)] hover:bg-white/10 rounded-none">
-                            {t.home.contactUs}
+                            {homeLayout?.featuredSecondaryCtaLabel ?? t.home.contactUs}
                           </Button>
                         </a>
                       </Link>
@@ -249,44 +268,30 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-16">
             <div className="md:w-1/3">
-              <h3 className="font-display font-bold text-3xl md:text-4xl uppercase tracking-tight">{t.home.awardsTitle}</h3>
+              <h3 className="font-display font-bold text-3xl md:text-4xl uppercase tracking-tight">
+                {homeLayout?.awardsTitle ?? t.home.awardsTitle}
+              </h3>
             </div>
             <div className="md:w-2/3 flex flex-wrap items-center justify-center md:justify-end gap-10 md:gap-14">
-              <img 
-                src="/awards/share-architects-logo.webp" 
-                alt="Share Architects" 
-                loading="lazy"
-                decoding="async"
-                className="h-14 md:h-20 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
-              />
-              <img 
-                src="/awards/design-week-blue.webp" 
-                alt="Design Week" 
-                loading="lazy"
-                decoding="async"
-                className="h-16 md:h-24 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
-              />
-              <img 
-                src="/awards/romanian-design-week.webp" 
-                alt="Romanian Design Week" 
-                loading="lazy"
-                decoding="async"
-                className="h-16 md:h-24 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
-              />
-              <img 
-                src="/awards/big-see-award.webp" 
-                alt="BIG SEE Interior Design Award 2024" 
-                loading="lazy"
-                decoding="async"
-                className="h-16 md:h-24 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
-              />
-              <img 
-                src="/awards/bienala-arhitectura.webp" 
-                alt="Bienala Națională de Arhitectură 2023" 
-                loading="lazy"
-                decoding="async"
-                className="h-14 md:h-20 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
-              />
+              {(homeLayout?.awardsLogos?.length
+                ? homeLayout.awardsLogos
+                : [
+                    { imageUrl: "/awards/share-architects-logo.webp", alt: "Share Architects" },
+                    { imageUrl: "/awards/design-week-blue.webp", alt: "Design Week" },
+                    { imageUrl: "/awards/romanian-design-week.webp", alt: "Romanian Design Week" },
+                    { imageUrl: "/awards/big-see-award.webp", alt: "BIG SEE Interior Design Award 2024" },
+                    { imageUrl: "/awards/bienala-arhitectura.webp", alt: "Bienala Națională de Arhitectură 2023" },
+                  ]
+              ).map((logo, index) => (
+                <img
+                  key={`${logo.imageUrl}-${index}`}
+                  src={logo.imageUrl}
+                  alt={logo.alt || "Award logo"}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-14 md:h-20 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -296,26 +301,22 @@ export default function Home() {
       <section className="py-14 bg-white border-b border-gray-100">
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="border border-gray-200 p-6 text-center">
-              <p className="text-3xl font-display font-bold text-black">10+</p>
-              <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">
-                {t.home.stats.awards}
-              </p>
-            </div>
-            <div className="border border-gray-200 p-6 text-center">
-              <p className="text-3xl font-display font-bold text-black">250</p>
-              <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">
-                {t.home.stats.projects}
-              </p>
-            </div>
-            <div className="border border-gray-200 p-6 text-center">
-              <p className="text-3xl font-display font-bold text-black">10,000</p>
-              <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.home.stats.area}</p>
-            </div>
-            <div className="border border-gray-200 p-6 text-center">
-              <p className="text-3xl font-display font-bold text-black">2018</p>
-              <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">{t.home.stats.since}</p>
-            </div>
+            {(homeLayout?.trustStats?.length
+              ? homeLayout.trustStats
+              : [
+                  { value: "10+", label: t.home.stats.awards },
+                  { value: "250", label: t.home.stats.projects },
+                  { value: "10,000", label: t.home.stats.area },
+                  { value: "2018", label: t.home.stats.since },
+                ]
+            ).map((stat, index) => (
+              <div key={`${stat.label}-${index}`} className="border border-gray-200 p-6 text-center">
+                <p className="text-3xl font-display font-bold text-black">{stat.value}</p>
+                <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -327,8 +328,8 @@ export default function Home() {
             <div className="relative order-2 lg:order-1">
               <div className="aspect-square bg-gray-200 relative overflow-hidden">
                  <img 
-                  src="/irina-stoica.webp" 
-                  alt="Arh. Irina Stoica" 
+                  src={homeLayout?.aboutImageUrl ?? "/irina-stoica.webp"} 
+                  alt={homeLayout?.aboutImageAlt ?? "Arh. Irina Stoica"} 
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.currentTarget.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop";
@@ -336,28 +337,33 @@ export default function Home() {
                 />
               </div>
               <div className="absolute -bottom-8 -right-8 bg-black text-white p-8 max-w-xs hidden md:block">
-                <p className="font-display font-bold text-xl mb-2">{t.home.founderName}</p>
-                <p className="text-gray-400 text-sm">{t.home.founderRole}</p>
+                <p className="font-display font-bold text-xl mb-2">
+                  {homeLayout?.founderName ?? t.home.founderName}
+                </p>
+                <p className="text-gray-400 text-sm">
+                  {homeLayout?.founderRole ?? t.home.founderRole}
+                </p>
               </div>
             </div>
             
             <div className="order-1 lg:order-2 space-y-8">
               <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight">
-                {t.home.aboutTitle}
+                {homeLayout?.aboutTitle ?? t.home.aboutTitle}
               </h2>
               
               <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
-                <p>{t.home.aboutDescription1}</p>
-                <p>{t.home.aboutDescription2}</p>
+                <p>{homeLayout?.aboutDescription1 ?? t.home.aboutDescription1}</p>
+                <p>{homeLayout?.aboutDescription2 ?? t.home.aboutDescription2}</p>
                 <blockquote className="border-l-4 border-accent pl-6 py-2 italic text-black font-medium">
-                  "{t.home.aboutDescription3}"
+                  "{homeLayout?.aboutDescription3 ?? t.home.aboutDescription3}"
                 </blockquote>
               </div>
               
-              <Link href="/contact">
+              <Link href={homeLayout?.learnMoreHref ?? "/contact"}>
                 <a className="inline-block">
                   <Button variant="link" className="text-black font-bold uppercase tracking-widest p-0 hover:text-accent transition-colors text-lg">
-                    {t.home.learnMore} <ChevronRight className="ml-1 w-5 h-5" />
+                    {homeLayout?.learnMoreLabel ?? t.home.learnMore}{" "}
+                    <ChevronRight className="ml-1 w-5 h-5" />
                   </Button>
                 </a>
               </Link>
@@ -374,57 +380,60 @@ export default function Home() {
         <div className="container">
           <div className="flex justify-between items-end mb-16">
             <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tighter">
-              {t.projects.title}
+              {homeLayout?.categoriesTitle ?? t.projects.title}
             </h2>
-            <Link href="/proiecte">
+            <Link href={homeLayout?.categoriesCtaHref ?? "/proiecte"}>
               <a className="inline-block hidden md:block">
                 <Button variant="outline" className="border-white/20 text-white hover:bg-white hover:text-black rounded-none uppercase tracking-widest">
-                  {t.projects.viewProject}
+                  {homeLayout?.categoriesCtaLabel ?? t.projects.viewProject}
                 </Button>
               </a>
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-            {[
-              {
-                key: "Restaurant",
-                title: t.projects.categories.restaurant,
-                img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2670&auto=format&fit=crop",
-              },
-              {
-                key: "Office",
-                title: t.projects.categories.office,
-                img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2669&auto=format&fit=crop",
-              },
-              {
-                key: "Hotel",
-                title: t.projects.categories.hotel,
-                img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2670&auto=format&fit=crop",
-              },
-              {
-                key: "Comercial",
-                title: t.projects.categories.comercial,
-                img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=2670&auto=format&fit=crop",
-              },
-              {
-                key: "Brand Experience",
-                title: t.projects.categories.brandExperience,
-                img: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2670&auto=format&fit=crop",
-              },
-              {
-                key: "Rezidențial",
-                title: t.projects.categories.rezidential,
-                img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop",
-              },
-            ].map((cat, idx) => (
+            {(homeLayout?.categories?.length
+              ? homeLayout.categories
+              : [
+                  {
+                    key: "Restaurant",
+                    title: t.projects.categories.restaurant,
+                    imageUrl: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2670&auto=format&fit=crop",
+                  },
+                  {
+                    key: "Office",
+                    title: t.projects.categories.office,
+                    imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2669&auto=format&fit=crop",
+                  },
+                  {
+                    key: "Hotel",
+                    title: t.projects.categories.hotel,
+                    imageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2670&auto=format&fit=crop",
+                  },
+                  {
+                    key: "Comercial",
+                    title: t.projects.categories.comercial,
+                    imageUrl: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=2670&auto=format&fit=crop",
+                  },
+                  {
+                    key: "Brand Experience",
+                    title: t.projects.categories.brandExperience,
+                    imageUrl: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2670&auto=format&fit=crop",
+                  },
+                  {
+                    key: "Rezidențial",
+                    title: t.projects.categories.rezidential,
+                    imageUrl: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop",
+                  },
+                ]
+            ).map((cat, idx) => (
               <Link key={cat.key} href={`/proiecte?category=${encodeURIComponent(cat.key)}`}>
                 <a className="group relative aspect-[4/5] overflow-hidden block bg-gray-900">
                   <img
-                    src={cat.img}
+                    src={cat.imageUrl}
                     alt={cat.title}
                     {...getResponsiveImageProps(
-                      cat.img,
+                      cat.imageUrl,
                       "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     )}
                     className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
