@@ -89,12 +89,14 @@ const mapFaqs = (
 const mapPost = (post: PayloadBlogPost) => {
   const author =
     typeof post.author === "object" && post.author ? post.author : undefined;
+  const fallback = fallbackPosts.find((item) => item.slug === post.slug);
+  const image = resolveMediaUrl(post.coverImage, post.coverImageUrl) || fallback?.image || "";
 
   return {
     id: String(post.id ?? post.slug),
     slug: post.slug,
     title: post.title,
-    excerpt: post.excerpt ?? "",
+    excerpt: post.excerpt ?? fallback?.excerpt ?? "",
     content: post.contentHtml ?? "",
     author: post.authorName ?? author?.name ?? "",
     authorRole: post.authorRole ?? author?.role ?? undefined,
@@ -103,7 +105,7 @@ const mapPost = (post: PayloadBlogPost) => {
     authorImage: resolveUrl(post.authorImageUrl ?? author?.photo?.url ?? undefined),
     authorImageAlt: post.authorImageAlt ?? author?.photo?.alt ?? undefined,
     date: post.publishedAt ?? post.createdAt ?? "",
-    image: resolveMediaUrl(post.coverImage, post.coverImageUrl),
+    image,
     tags: mapTags(post.tags),
     relatedProjects: mapRelatedProjects(post.relatedProjects),
     faqs: mapFaqs(post.faqs),
