@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "NODE_ENV=development tsx server/_core/index.ts",
     "generate:og": "tsx scripts/generate-og.ts",
-    "build:client": "pnpm run generate:og && vite build",
+    "generate:sitemap": "tsx scripts/generate-sitemap.ts",
+    "build:client": "pnpm run generate:sitemap && pnpm run generate:og && vite build",
     "build:server": "esbuild server/index.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/index.js",
     "build": "pnpm run build:client && pnpm run build:server",
     "start": "NODE_ENV=production node dist/index.js",

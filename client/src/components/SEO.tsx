@@ -44,8 +44,21 @@ export default function SEO({
       element.setAttribute('content', content);
     };
 
+    const updateLinkTag = (rel: string, href: string) => {
+      let element = document.querySelector(`link[rel="${rel}"]`);
+
+      if (!element) {
+        element = document.createElement('link');
+        element.setAttribute('rel', rel);
+        document.head.appendChild(element);
+      }
+
+      element.setAttribute('href', href);
+    };
+
     // Basic meta tags
     updateMetaTag('description', description, true);
+    updateLinkTag('canonical', fullUrl);
 
     // Open Graph tags
     updateMetaTag('og:title', fullTitle);
