@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
-import { addSubscriber, unsubscribe, getActiveSubscribers, createBlogPost, getBlogPosts, getBlogPostById, updateBlogPost, deleteBlogPost } from "./db";
+import { addSubscriber, unsubscribe, getActiveSubscribers, createBlogPost, getBlogPosts, getBlogPostById, updateBlogPost, deleteBlogPost, addContactMessage } from "./db";
 import { z } from "zod";
 import { checkRateLimit } from "./_core/rateLimit";
 import { TRPCError } from "@trpc/server";
@@ -69,6 +69,37 @@ export const appRouter = router({
           throw new Error("Nu ai permisiunea de a accesa această resursă.");
         }
         return await getActiveSubscribers();
+      }),
+  }),
+
+  // Contact form submissions
+  contact: router({
+    submit: publicProcedure
+      .input(z.object({
+        name: z.string().min(2, "Numele este prea scurt"),
+        email: z.string().email("Adresa de email nu este validă"),
+        phone: z.string().min(6).max(50).optional(),
+        message: z.string().min(10, "Mesajul este prea scurt"),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        try {
+          checkRateLimit(ctx, { windowMs: 15 * 60 * 1000, max: 5 });
+        } catch (error) {
+          if (error instanceof Error && (error as Error & { retryAfter?: number }).message === "RATE_LIMIT") {
+            throw new TRPCError({
+              code: "TOO_MANY_REQUESTS",
+              message: "Prea multe solicitări. Încearcă din nou mai târziu.",
+            });
+          }
+          throw error;
+        }
+
+        return await addContactMessage({
+          name: input.name,
+          email: input.email,
+          phone: input.phone ?? null,
+          message: input.message,
+        });
       }),
   }),
 

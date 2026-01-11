@@ -6,10 +6,37 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
 import { trackEvent } from "@/lib/analytics";
+import { trpc } from "@/lib/trpc";
+import { useState } from "react";
 
 export default function Contact() {
   const { t } = useLanguage();
   const { page } = usePayloadPage("contact");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const contactMutation = trpc.contact.submit.useMutation({
+    onSuccess: (data) => {
+      if (data.success) {
+        setStatus("success");
+        setMessage(t.contact.successMessage);
+        setForm({ name: "", email: "", phone: "", message: "" });
+      } else {
+        setStatus("error");
+        setMessage(data.message || t.contact.errorMessage);
+      }
+    },
+    onError: (error) => {
+      setStatus("error");
+      setMessage(error.message || t.contact.errorMessage);
+    },
+  });
   const payloadMode = page?.renderMode ?? "append";
   const payloadSection = page?.html ? (
     <section className="py-16 bg-white">
@@ -58,13 +85,29 @@ export default function Contact() {
           {/* Contact Form */}
           <div className="bg-gray-50 p-8 md:p-12 border border-gray-100">
             <h2 className="text-3xl font-display font-bold mb-8 uppercase">{t.contact.formTitle}</h2>
-            <form className="space-y-6">
+            <form
+              className="space-y-6"
+              onSubmit={(event) => {
+                event.preventDefault();
+                setStatus("loading");
+                setMessage("");
+                contactMutation.mutate({
+                  name: form.name.trim(),
+                  email: form.email.trim(),
+                  phone: form.phone.trim() || undefined,
+                  message: form.message.trim(),
+                });
+              }}
+            >
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-bold uppercase tracking-widest text-gray-500">{t.contact.nameLabel}</label>
                 <Input
                   id="name"
                   placeholder={t.contact.namePlaceholder}
                   className="bg-white border-gray-200 h-12 rounded-none focus:ring-accent focus:border-accent"
+                  value={form.name}
+                  onChange={(event) => setForm((prev) => ({ ...prev, name: event.target.value }))}
+                  required
                 />
               </div>
               <div className="space-y-2">
@@ -74,6 +117,9 @@ export default function Contact() {
                   type="email"
                   placeholder={t.contact.emailPlaceholder}
                   className="bg-white border-gray-200 h-12 rounded-none focus:ring-accent focus:border-accent"
+                  value={form.email}
+                  onChange={(event) => setForm((prev) => ({ ...prev, email: event.target.value }))}
+                  required
                 />
               </div>
               <div className="space-y-2">
@@ -83,19 +129,36 @@ export default function Contact() {
                   type="tel"
                   placeholder={t.contact.phonePlaceholder}
                   className="bg-white border-gray-200 h-12 rounded-none focus:ring-accent focus:border-accent"
+                  value={form.phone}
+                  onChange={(event) => setForm((prev) => ({ ...prev, phone: event.target.value }))}
                 />
               </div>
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-bold uppercase tracking-widest text-gray-500">{t.contact.messageLabel}</label>
-                <Textarea id="message" placeholder={t.contact.messagePlaceholder} className="bg-white border-gray-200 min-h-[150px] rounded-none focus:ring-accent focus:border-accent" />
+                <Textarea
+                  id="message"
+                  placeholder={t.contact.messagePlaceholder}
+                  className="bg-white border-gray-200 min-h-[150px] rounded-none focus:ring-accent focus:border-accent"
+                  value={form.message}
+                  onChange={(event) => setForm((prev) => ({ ...prev, message: event.target.value }))}
+                  required
+                />
               </div>
               <Button
                 size="lg"
                 className="w-full bg-black text-white hover:bg-[var(--color-brand-yellow)] hover:text-black rounded-none h-14 text-base font-bold uppercase tracking-widest transition-colors"
                 onClick={() => trackEvent("cta_click", { placement: "contact_form", label: t.contact.sendButton })}
+                disabled={status === "loading"}
+                type="submit"
               >
-                {t.contact.sendButton}
+                {status === "loading" ? t.contact.sending : t.contact.sendButton}
               </Button>
+              {status === "success" ? (
+                <div className="text-sm text-green-600 font-medium">{message}</div>
+              ) : null}
+              {status === "error" ? (
+                <div className="text-sm text-red-600 font-medium">{message || t.contact.errorMessage}</div>
+              ) : null}
               <div className="flex items-center justify-between text-xs uppercase tracking-widest text-gray-500">
                 <span>{t.contact.responseTime}</span>
                 <span>{t.contact.trustNote}</span>

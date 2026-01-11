@@ -1,6 +1,6 @@
 import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, subscribers, InsertSubscriber, Subscriber, blogPosts, BlogPost, InsertBlogPost } from "../drizzle/schema";
+import { InsertUser, users, subscribers, InsertSubscriber, Subscriber, blogPosts, BlogPost, InsertBlogPost, contactMessages, InsertContactMessage } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -225,6 +225,22 @@ export async function updateBlogPost(id: number, data: Partial<InsertBlogPost>):
   } catch (error) {
     console.error("[Database] Failed to update blog post:", error);
     throw error;
+  }
+}
+
+// Contact messages
+export async function addContactMessage(data: InsertContactMessage): Promise<{ success: boolean; message: string }> {
+  const db = await getDb();
+  if (!db) {
+    return { success: false, message: "Database not available" };
+  }
+
+  try {
+    await db.insert(contactMessages).values(data);
+    return { success: true, message: "Mesajul a fost trimis cu succes!" };
+  } catch (error) {
+    console.error("[Database] Failed to add contact message:", error);
+    return { success: false, message: "A apărut o eroare. Te rugăm să încerci din nou." };
   }
 }
 
