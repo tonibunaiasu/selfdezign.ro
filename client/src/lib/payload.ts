@@ -78,6 +78,8 @@ export type PayloadPage = {
       title: string;
       imageUrl: string;
     }>;
+    testimonialsTitle?: string;
+    testimonialsSubtitle?: string;
   };
   visionLayout?: {
     ro?: Record<string, string>;

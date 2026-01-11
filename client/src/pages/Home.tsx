@@ -381,7 +381,10 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <Testimonials />
+      <Testimonials
+        title={homeLayout?.testimonialsTitle}
+        subtitle={homeLayout?.testimonialsSubtitle}
+      />
 
       {/* Categories Preview */}
       <section className="py-24 bg-black text-white">
