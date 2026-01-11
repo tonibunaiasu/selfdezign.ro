@@ -12,6 +12,24 @@ export type PayloadPage = {
   seoTitle?: string;
   seoDescription?: string;
   renderMode?: "replace" | "prepend" | "append";
+  aboutLayout?: {
+    heroBadge?: string;
+    heroTitle?: string;
+    heroSubtitle?: string;
+    positioningLeftTitle?: string;
+    positioningLeftBody?: string;
+    positioningRightTitle?: string;
+    positioningRightBody?: string;
+    quoteLead?: string;
+    quoteHighlight?: string;
+    signatureTitle?: string;
+    navOneLabel?: string;
+    navOneHref?: string;
+    navTwoLabel?: string;
+    navTwoHref?: string;
+    ctaLabel?: string;
+    ctaHref?: string;
+  };
   updatedAt?: string;
 };
 
