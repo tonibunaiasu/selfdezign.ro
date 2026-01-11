@@ -32,7 +32,7 @@ type PayloadResponse<T> = {
 };
 
 type MediaAppearanceItem = {
-  id: string;
+  id: string | number;
   title: string;
   publication: string;
   date: string;
