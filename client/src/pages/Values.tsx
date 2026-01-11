@@ -279,8 +279,10 @@ export default function Values() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {(cmsValues ?? values).map((value, index) => {
-              const iconKey = "iconKey" in value ? value.iconKey : undefined;
-              const IconComponent = iconKey ? iconMap[iconKey] : value.icon;
+              const iconKey =
+                "iconKey" in value ? value.iconKey : undefined;
+              const IconComponent =
+                iconKey ? iconMap[iconKey] : "icon" in value ? value.icon : undefined;
               const colorClass = value.color ?? "bg-black";
 
               return (
