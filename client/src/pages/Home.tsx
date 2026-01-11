@@ -26,6 +26,13 @@ export default function Home() {
   const { t } = useLanguage();
   const { page } = usePayloadPage("home");
   const homeLayout = page?.homeLayout;
+  const hasHomeLayout = Boolean(
+    homeLayout &&
+      (homeLayout.heroTitlePrefix ||
+        homeLayout.heroDescription ||
+        homeLayout.featuredCaseStudies?.length ||
+        homeLayout.categories?.length)
+  );
   const fallbackCaseStudies = useMemo(
     () =>
       (caseStudiesData.items as CaseStudy[]).filter((item) => !item.draft),
@@ -81,7 +88,7 @@ export default function Home() {
   };
 
   const payloadMode = page?.renderMode ?? "append";
-  const payloadSection = page?.html ? (
+  const payloadSection = page?.html && !hasHomeLayout ? (
     <section className="py-16 bg-white">
       <div className="container">
         <PayloadHtml html={page.html} />
