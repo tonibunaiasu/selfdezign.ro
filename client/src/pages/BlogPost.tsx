@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useMemo, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
-import { getResponsiveImageProps } from "@/lib/images";
+import { getLocalImageProps, getResponsiveImageProps } from "@/lib/images";
 import { projects } from "@/data/projects-data";
 import { trackEvent } from "@/lib/analytics";
 
@@ -284,6 +284,10 @@ export default function BlogPost() {
                           alt={project.title}
                           loading="lazy"
                           decoding="async"
+                          {...getLocalImageProps(
+                            project.coverImage,
+                            "(max-width: 768px) 100vw, 33vw"
+                          )}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
@@ -330,7 +334,14 @@ export default function BlogPost() {
             <h3 className="font-display font-bold text-xl mb-6 uppercase tracking-widest">{c.aboutAuthor}</h3>
             <div className="flex items-center gap-4 mb-4">
               <div className="w-16 h-16 bg-gray-200 rounded-full overflow-hidden">
-                <img src="/irina-stoica.webp" alt="Author" className="w-full h-full object-cover" />
+                <img
+                  src="/irina-stoica.webp"
+                  alt="Author"
+                  loading="lazy"
+                  decoding="async"
+                  {...getLocalImageProps("/irina-stoica.webp", "64px")}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <p className="font-bold">{post.author}</p>

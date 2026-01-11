@@ -3,6 +3,7 @@ import { Linkedin, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
+import { getLocalImageProps } from "@/lib/images";
 
 interface TeamMember {
   id: string;
@@ -127,6 +128,10 @@ export default function Team() {
                         alt={member.name}
                         loading="lazy"
                         decoding="async"
+                        {...getLocalImageProps(
+                          member.image,
+                          "(max-width: 768px) 100vw, 50vw"
+                        )}
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           // Fallback to initials if image doesn't load
