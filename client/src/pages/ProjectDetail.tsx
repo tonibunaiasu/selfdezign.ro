@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link, useParams } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, X, ChevronLeft, ChevronRight, MapPin, Calendar, Camera } from "lucide-react";
-import { getProjectBySlug, projects } from "@/data/projects-data";
+import PayloadHtml from "@/components/PayloadHtml";
+import { useProjectBySlug } from "@/lib/projects";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -10,7 +11,7 @@ import { getLocalImageProps } from "@/lib/images";
 
 export default function ProjectDetail() {
   const params = useParams<{ slug: string }>();
-  const project = getProjectBySlug(params.slug || "");
+  const { project, projects, isLoading } = useProjectBySlug(params.slug || "");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { language } = useLanguage();
@@ -60,6 +61,16 @@ export default function ProjectDetail() {
 
   const c = content[language];
 
+  if (!project && isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gray-500">Se incarca...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -100,14 +111,18 @@ export default function ProjectDetail() {
   const relatedProjects = projects
     .filter(p => p.categorySlug === project.categorySlug && p.id !== project.id)
     .slice(0, 3);
+
+  const descriptionText = project.descriptionText ?? project.description.join(" ");
+  const toAbsoluteUrl = (url: string) =>
+    url.startsWith("http") ? url : `https://selfdezign.ro${url}`;
   
   // Structured data for project
   const projectStructuredData = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     "name": project.title,
-    "description": project.description.join(" "),
-    "image": `https://selfdezign.ro${project.coverImage}`,
+    "description": descriptionText,
+    "image": toAbsoluteUrl(project.coverImage),
     "creator": {
       "@type": "Organization",
       "name": "SelfDezign"
@@ -122,7 +137,7 @@ export default function ProjectDetail() {
         "name": `${project.title} - Galerie`,
         "associatedMedia": project.gallery.map((image) => ({
           "@type": "ImageObject",
-          "contentUrl": `https://selfdezign.ro${image.src}`,
+          "contentUrl": toAbsoluteUrl(image.src),
           "caption": image.alt,
         })),
       }
@@ -157,7 +172,7 @@ export default function ProjectDetail() {
     <>
       <SEO 
         title={project.title}
-        description={project.description.join(" ")}
+        description={descriptionText}
         image={`/og/project-${project.slug}.svg`}
         imageAlt={project.title}
         url={`/proiect/${project.slug}`}
@@ -237,11 +252,15 @@ export default function ProjectDetail() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl font-bold mb-8 font-display">{c.aboutProject}</h2>
-              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
-                {project.description.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </div>
+              {project.descriptionHtml ? (
+                <PayloadHtml html={project.descriptionHtml} />
+              ) : (
+                <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
+                  {project.description.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
+              )}
             </motion.div>
             {project.proofPoints && project.proofPoints.length > 0 ? (
               <div className="mt-10 border-t border-gray-200 pt-8">

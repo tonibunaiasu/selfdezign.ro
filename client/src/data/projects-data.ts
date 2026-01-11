@@ -16,12 +16,15 @@ export interface Project {
   location: string;
   photographer?: string;
   description: string[];
+  descriptionHtml?: string;
+  descriptionText?: string;
   proofPoints?: string[];
   process?: string;
   materials?: string;
   budget?: string;
   duration?: string;
   coverImage: string;
+  order?: number;
   gallery: ProjectImage[];
 }
 

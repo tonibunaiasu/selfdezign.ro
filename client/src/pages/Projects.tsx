@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { projects as projectsData } from "@/data/projects-data";
+import { useProjects } from "@/lib/projects";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
@@ -13,6 +13,7 @@ export default function Projects() {
   const { page } = usePayloadPage("projects");
   const [location] = useLocation();
   const [activeCategory, setActiveCategory] = useState("all");
+  const { projects } = useProjects();
   
   // Read category from URL parameter on mount
   useEffect(() => {
@@ -34,8 +35,8 @@ export default function Projects() {
   ];
 
   const filteredProjects = activeCategory === "all" 
-    ? projectsData 
-    : projectsData.filter(p => p.category === activeCategory);
+    ? projects 
+    : projects.filter(p => p.category === activeCategory);
 
   const payloadMode = page?.renderMode ?? "append";
   const payloadSection = page?.html ? (
