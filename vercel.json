@@ -20,6 +20,9 @@
       ]
     }
   ],
+  "env": {
+    "VITE_ENABLE_LOCAL_SRCSET": "true"
+  },
   "redirects": [
     {
       "source": "/cms",
