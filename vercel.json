@@ -20,6 +20,18 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/cms",
+      "destination": "https://cms.selfdezign.ro",
+      "permanent": true
+    },
+    {
+      "source": "/cms/(.*)",
+      "destination": "https://cms.selfdezign.ro/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
