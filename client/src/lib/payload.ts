@@ -176,6 +176,48 @@ export type PayloadPage = {
     joinCtaHref?: string;
     noteText?: string;
   };
+  contactLayout?: {
+    ro?: {
+      heroTitle?: string;
+      heroSubtitle?: string;
+      infoTitle?: string;
+      formTitle?: string;
+      responseTime?: string;
+      trustNote?: string;
+      scheduleTitle?: string;
+      scheduleText?: string;
+      phoneTitle?: string;
+      phone?: string;
+      email?: string;
+      whatsapp?: string;
+      whatsappLabel?: string;
+      addressTitle?: string;
+      addresses?: Array<{
+        label?: string;
+        address?: string;
+      }>;
+    };
+    en?: {
+      heroTitle?: string;
+      heroSubtitle?: string;
+      infoTitle?: string;
+      formTitle?: string;
+      responseTime?: string;
+      trustNote?: string;
+      scheduleTitle?: string;
+      scheduleText?: string;
+      phoneTitle?: string;
+      phone?: string;
+      email?: string;
+      whatsapp?: string;
+      whatsappLabel?: string;
+      addressTitle?: string;
+      addresses?: Array<{
+        label?: string;
+        address?: string;
+      }>;
+    };
+  };
   updatedAt?: string;
 };
 

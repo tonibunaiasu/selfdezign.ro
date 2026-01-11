@@ -11,8 +11,32 @@ import { useState } from "react";
 import SEO from "@/components/SEO";
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { page } = usePayloadPage("contact");
+  const cmsLayout = page?.contactLayout?.[language];
+  const seoTitle = page?.seoTitle || t.contact.title;
+  const seoDescription = page?.seoDescription || t.contact.subtitle;
+  const heroTitle = cmsLayout?.heroTitle || t.contact.title;
+  const heroSubtitle = cmsLayout?.heroSubtitle || t.contact.subtitle;
+  const infoTitle = cmsLayout?.infoTitle || t.contact.infoTitle;
+  const formTitle = cmsLayout?.formTitle || t.contact.formTitle;
+  const responseTime = cmsLayout?.responseTime || t.contact.responseTime;
+  const trustNote = cmsLayout?.trustNote || t.contact.trustNote;
+  const scheduleTitle = cmsLayout?.scheduleTitle || t.contact.scheduleTitle;
+  const scheduleText = cmsLayout?.scheduleText || t.contact.schedule;
+  const phoneTitle = cmsLayout?.phoneTitle || t.contact.phoneTitle;
+  const phone = cmsLayout?.phone || "+40-721-528-448";
+  const email = cmsLayout?.email || "hello@selfdezign.ro";
+  const whatsapp = cmsLayout?.whatsapp || "https://wa.me/40721528447";
+  const whatsappLabel = cmsLayout?.whatsappLabel || "WhatsApp";
+  const addressTitle = cmsLayout?.addressTitle || t.contact.addressTitle;
+  const addressList =
+    cmsLayout?.addresses?.length
+      ? cmsLayout.addresses
+      : [
+          { label: t.contact.address1, address: "Strada Politiei, nr. 3, București" },
+          { label: t.contact.address2, address: "Calea Floreasca nr. 246C, etaj 18, București" },
+        ];
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -62,8 +86,8 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title={t.contact.title}
-        description={t.contact.subtitle}
+        title={seoTitle}
+        description={seoDescription}
         url="/contact"
       />
       {payloadMode === "prepend" ? payloadSection : null}
@@ -71,15 +95,15 @@ export default function Contact() {
       <div className="bg-black text-white pt-32 pb-24 px-4">
         <div className="container">
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-12 tracking-tighter">
-            {t.contact.title}
+            {heroTitle}
           </h1>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light">
-              {t.contact.subtitle}
+              {heroSubtitle}
             </p>
             <div className="border-l-2 border-accent pl-6">
               <p className="text-gray-400">
-                {t.contact.infoTitle}
+                {infoTitle}
               </p>
             </div>
           </div>
@@ -90,7 +114,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Form */}
           <div className="bg-gray-50 p-8 md:p-12 border border-gray-100">
-            <h2 className="text-3xl font-display font-bold mb-8 uppercase">{t.contact.formTitle}</h2>
+            <h2 className="text-3xl font-display font-bold mb-8 uppercase">{formTitle}</h2>
             <form
               className="space-y-6"
               onSubmit={(event) => {
@@ -166,8 +190,8 @@ export default function Contact() {
                 <div className="text-sm text-red-600 font-medium">{message || t.contact.errorMessage}</div>
               ) : null}
               <div className="flex items-center justify-between text-xs uppercase tracking-widest text-gray-500">
-                <span>{t.contact.responseTime}</span>
-                <span>{t.contact.trustNote}</span>
+                <span>{responseTime}</span>
+                <span>{trustNote}</span>
               </div>
             </form>
           </div>
@@ -177,30 +201,30 @@ export default function Contact() {
             <div>
               <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3">
                 <Clock className="text-accent w-6 h-6" />
-                {t.contact.scheduleTitle}
+                {scheduleTitle}
               </h3>
-              <p className="text-gray-600 text-lg">{t.contact.schedule}</p>
+              <p className="text-gray-600 text-lg">{scheduleText}</p>
             </div>
 
             <div>
               <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3">
                 <Phone className="text-accent w-6 h-6" />
-                {t.contact.phoneTitle}
+                {phoneTitle}
               </h3>
               <div className="space-y-2">
-                <a href="tel:+40721528448" className="block text-lg hover:text-accent transition-colors font-medium">+40-721-528-448</a>
-                <a href="mailto:hello@selfdezign.ro" className="block text-lg hover:text-accent transition-colors font-medium">hello@selfdezign.ro</a>
+                <a href={`tel:${phone.replace(/\s+/g, "")}`} className="block text-lg hover:text-accent transition-colors font-medium">{phone}</a>
+                <a href={`mailto:${email}`} className="block text-lg hover:text-accent transition-colors font-medium">{email}</a>
               </div>
               <div className="mt-6">
                 <a
-                  href="https://wa.me/40721528447"
+                  href={whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackEvent("whatsapp_click", { placement: "contact" })}
                 >
                   <Button className="bg-[#25D366] text-black hover:bg-[#25D366]/90 rounded-none uppercase tracking-widest font-bold text-xs px-6">
                     <MessageCircle className="mr-2 h-4 w-4" />
-                    WhatsApp
+                    {whatsappLabel}
                   </Button>
                 </a>
               </div>
@@ -209,17 +233,17 @@ export default function Contact() {
             <div>
               <h3 className="text-xl font-display font-bold mb-6 flex items-center gap-3">
                 <MapPin className="text-accent w-6 h-6" />
-                {t.contact.addressTitle}
+                {addressTitle}
               </h3>
               <div className="space-y-6">
-                <div className="bg-white p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                  <span className="text-accent font-bold text-xs uppercase tracking-widest mb-2 block">{t.contact.address1}</span>
-                  <p className="text-gray-800 font-medium">Strada Politiei, nr. 3, București</p>
-                </div>
-                <div className="bg-white p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                  <span className="text-accent font-bold text-xs uppercase tracking-widest mb-2 block">{t.contact.address2}</span>
-                  <p className="text-gray-800 font-medium">Calea Floreasca nr. 246C, etaj 18, București</p>
-                </div>
+                {addressList.map((address, index) => (
+                  <div key={`${address.label}-${index}`} className="bg-white p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                    {address.label ? (
+                      <span className="text-accent font-bold text-xs uppercase tracking-widest mb-2 block">{address.label}</span>
+                    ) : null}
+                    <p className="text-gray-800 font-medium">{address.address}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
