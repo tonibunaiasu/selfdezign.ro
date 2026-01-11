@@ -24,7 +24,7 @@ export default function BlogPost() {
       aboutAuthor: "Despre Autor",
       authorRole: "Arhitect & Designer",
       authorBio: "Pasionată de spațiile care spun povești și de intersecția dintre natură și arhitectură.",
-      viewPortfolio: "Vezi Portofoliul",
+      viewPortfolio: "Vezi profil profesional",
       share: "Share"
     },
     en: {
@@ -34,7 +34,7 @@ export default function BlogPost() {
       aboutAuthor: "About the Author",
       authorRole: "Architect & Designer",
       authorBio: "Passionate about spaces that tell stories and the intersection of nature and architecture.",
-      viewPortfolio: "View Portfolio",
+      viewPortfolio: "View professional profile",
       share: "Share"
     }
   };
@@ -351,9 +351,15 @@ export default function BlogPost() {
             <p className="text-gray-600 text-sm mb-6">
               {c.authorBio}
             </p>
-            <Button variant="outline" className="w-full border-black text-black hover:bg-black hover:text-white rounded-none uppercase tracking-widest text-xs">
-              {c.viewPortfolio}
-            </Button>
+            <a
+              href={post.authorLinkedIn || "https://ro.linkedin.com/in/arh-irina-stoica"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="outline" className="w-full border-black text-black hover:bg-black hover:text-white rounded-none uppercase tracking-widest text-xs">
+                {c.viewPortfolio}
+              </Button>
+            </a>
           </div>
 
           <div>

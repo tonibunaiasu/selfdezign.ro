@@ -5,6 +5,7 @@ export interface BlogPost {
   excerpt: string;
   content: string;
   author: string;
+  authorLinkedIn?: string;
   date: string;
   image: string;
   tags: string[];
@@ -19,6 +20,7 @@ export const blogPosts: BlogPost[] = [
     title: "Tendințe în Design Interior pentru 2025: Întoarcerea la Natură și Tehnologie Invizibilă",
     excerpt: "Descoperă cum anul 2025 redefinește spațiile noastre prin materiale sustenabile, culori inspirate din pământ și integrarea subtilă a tehnologiei smart home.",
     author: "Arh. Irina Stoica",
+    authorLinkedIn: "https://ro.linkedin.com/in/arh-irina-stoica",
     date: "2024-12-15",
     image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop",
     tags: ["Tendințe 2025", "Sustenabilitate", "Smart Home", "Biophilic Design"],
@@ -79,6 +81,7 @@ export const blogPosts: BlogPost[] = [
     title: "Ghid Complet: Cum alegi lumina perfectă pentru fiecare cameră",
     excerpt: "Lumina poate transforma complet atmosfera unei încăperi. Află diferența dintre lumina caldă și rece și cum să stratifici iluminatul pentru un efect wow.",
     author: "Echipa SelfDezign",
+    authorLinkedIn: "https://ro.linkedin.com/in/arh-irina-stoica",
     date: "2024-11-28",
     image: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?q=80&w=2535&auto=format&fit=crop",
     tags: ["Iluminat", "Ghid Practic", "Atmosferă"],
