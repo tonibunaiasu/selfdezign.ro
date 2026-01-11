@@ -157,20 +157,50 @@ export type PayloadPage = {
       prevPageHref?: string;
     };
   };
+  teamLayout?: {
+    heroTitle?: string;
+    heroSubtitle?: string;
+    members?: Array<{
+      name?: string;
+      roleRo?: string;
+      roleEn?: string;
+      bioRo?: string;
+      bioEn?: string;
+      image?: { url?: string } | number | string;
+      linkedin?: string;
+      email?: string;
+    }>;
+    joinTitle?: string;
+    joinText?: string;
+    joinCtaLabel?: string;
+    joinCtaHref?: string;
+    noteText?: string;
+  };
   updatedAt?: string;
 };
 
-function getPayloadApiBase() {
+function getPayloadBaseUrl() {
   const baseUrl =
     import.meta.env.VITE_PAYLOAD_URL ?? "https://cms.selfdezign.ro";
-  return `${baseUrl.replace(/\/+$/, "")}/api`;
+  return baseUrl.replace(/\/+$/, "");
+}
+
+function getPayloadApiBase() {
+  return `${getPayloadBaseUrl()}/api`;
+}
+
+export function resolvePayloadMediaUrl(value?: string | null) {
+  if (!value) return "";
+  if (/^https?:\/\//i.test(value)) return value;
+  const normalized = value.startsWith("/") ? value : `/${value}`;
+  return `${getPayloadBaseUrl()}${normalized}`;
 }
 
 export async function fetchPayloadPage(slug: string) {
   const apiBase = getPayloadApiBase();
   const url = `${apiBase}/pages?where[slug][equals]=${encodeURIComponent(
     slug
-  )}&limit=1`;
+  )}&limit=1&depth=1`;
 
   const response = await fetch(url, { credentials: "omit" });
   if (!response.ok) {

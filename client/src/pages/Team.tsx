@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { Linkedin, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PayloadHtml from "@/components/PayloadHtml";
-import { usePayloadPage } from "@/lib/payload";
+import { resolvePayloadMediaUrl, usePayloadPage } from "@/lib/payload";
 import { getLocalImageProps } from "@/lib/images";
 import SEO from "@/components/SEO";
 
 interface TeamMember {
-  id: string;
+  id?: string;
   name: string;
   roleRo: string;
   roleEn: string;
@@ -66,6 +66,54 @@ const teamMembers: TeamMember[] = [
 export default function Team() {
   const { t, language } = useLanguage();
   const { page } = usePayloadPage("team");
+  const cmsLayout = page?.teamLayout;
+  const cmsMembers = cmsLayout?.members?.length
+    ? cmsLayout.members.map((member, index) => ({
+        id:
+          member.name
+            ?.toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/(^-|-$)/g, "") || `member-${index}`,
+        name: member.name || "",
+        roleRo: member.roleRo || member.roleEn || "",
+        roleEn: member.roleEn || member.roleRo || "",
+        bioRo: member.bioRo || member.bioEn || "",
+        bioEn: member.bioEn || member.bioRo || "",
+        image: resolvePayloadMediaUrl(
+          typeof member.image === "string"
+            ? member.image
+            : member.image && typeof member.image === "object"
+            ? member.image.url
+            : ""
+        ),
+        linkedin: member.linkedin,
+        email: member.email,
+      }))
+    : null;
+  const members = cmsMembers?.length ? cmsMembers : teamMembers;
+  const heroTitle = cmsLayout?.heroTitle || t.team.title;
+  const heroSubtitle = cmsLayout?.heroSubtitle || t.team.subtitle;
+  const joinTitle =
+    cmsLayout?.joinTitle ||
+    (language === "ro" ? "Vrei să faci parte din echipă?" : "Want to join the team?");
+  const joinText =
+    cmsLayout?.joinText ||
+    (language === "ro"
+      ? "Căutăm mereu oameni pasionați de design, care cred că spațiile pot schimba vieți. Dacă te regăsești în valorile noastre, hai să vorbim."
+      : "We're always looking for people passionate about design who believe that spaces can change lives. If you share our values, let's talk.");
+  const joinCtaLabel =
+    cmsLayout?.joinCtaLabel ||
+    (language === "ro" ? "TRIMITE-NE CV-UL TĂU" : "SEND US YOUR CV");
+  const joinCtaHref =
+    cmsLayout?.joinCtaHref ||
+    "mailto:hello@selfdezign.ro?subject=Aplicație pentru echipa SelfDezign";
+  const noteText =
+    cmsLayout?.noteText ||
+    (language === "ro"
+      ? "* Fotografiile membrilor echipei vor fi actualizate în curând."
+      : "* Team member photos will be updated soon.");
+  const seoTitle = page?.seoTitle || t.team.title;
+  const seoDescription = page?.seoDescription || t.team.subtitle;
   const payloadMode = page?.renderMode ?? "append";
   const payloadSection = page?.html ? (
     <section className="py-16 bg-white">
@@ -88,8 +136,8 @@ export default function Team() {
   return (
     <>
       <SEO
-        title={t.team.title}
-        description={t.team.subtitle}
+        title={seoTitle}
+        description={seoDescription}
         url="/echipa"
       />
       {payloadMode === "prepend" ? payloadSection : null}
@@ -103,10 +151,10 @@ export default function Team() {
             className="max-w-4xl"
           >
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-              {t.team.title}<span className="text-accent">.</span>
+              {heroTitle}<span className="text-accent">.</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-              {t.team.subtitle}
+              {heroSubtitle}
             </p>
           </motion.div>
         </div>
@@ -116,9 +164,9 @@ export default function Team() {
       <section className="py-20 bg-white">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-            {teamMembers.map((member, index) => (
+            {members.map((member, index) => (
               <motion.div
-                key={member.id}
+                key={member.id || member.name || `member-${index}`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -129,15 +177,22 @@ export default function Team() {
                   {/* Photo */}
                   <div className="w-full md:w-48 h-64 md:h-56 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                     <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                      {(() => {
+                        const isLocalImage =
+                          member.image.startsWith("/") &&
+                          !member.image.startsWith("/media/");
+                        return (
                       <img
                         src={member.image}
                         alt={member.name}
                         loading="lazy"
                         decoding="async"
-                        {...getLocalImageProps(
-                          member.image,
-                          "(max-width: 768px) 100vw, 50vw"
-                        )}
+                        {...(isLocalImage
+                          ? getLocalImageProps(
+                              member.image,
+                              "(max-width: 768px) 100vw, 50vw"
+                            )
+                          : {})}
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           // Fallback to initials if image doesn't load
@@ -150,6 +205,8 @@ export default function Team() {
                           `;
                         }}
                       />
+                        );
+                      })()}
                     </div>
                   </div>
 
@@ -205,19 +262,17 @@ export default function Team() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                {language === 'ro' ? 'Vrei să faci parte din echipă?' : 'Want to join the team?'}
+                {joinTitle}
               </h2>
               <p className="text-gray-300 text-lg mb-8">
-                {language === 'ro' 
-                  ? 'Căutăm mereu oameni pasionați de design, care cred că spațiile pot schimba vieți. Dacă te regăsești în valorile noastre, hai să vorbim.'
-                  : "We're always looking for people passionate about design who believe that spaces can change lives. If you share our values, let's talk."}
+                {joinText}
               </p>
               <a
-                href="mailto:hello@selfdezign.ro?subject=Aplicație pentru echipa SelfDezign"
+                href={joinCtaHref}
                 className="inline-flex items-center gap-2 bg-[var(--color-brand-yellow)] text-black px-8 py-4 font-bold hover:bg-[var(--color-brand-yellow)]/90 transition-colors"
               >
                 <Mail size={20} />
-                {language === 'ro' ? 'TRIMITE-NE CV-UL TĂU' : 'SEND US YOUR CV'}
+                {joinCtaLabel}
               </a>
             </motion.div>
           </div>
@@ -228,9 +283,7 @@ export default function Team() {
       <section className="py-8 bg-gray-100">
         <div className="container">
           <p className="text-center text-gray-500 text-sm">
-            {language === 'ro' 
-              ? '* Fotografiile membrilor echipei vor fi actualizate în curând.'
-              : '* Team member photos will be updated soon.'}
+            {noteText}
           </p>
         </div>
       </section>
