@@ -61,7 +61,7 @@ export default function Home() {
     "@type": "Organization",
     "name": "SelfDezign",
     "url": "https://selfdezign.ro",
-    "logo": "https://selfdezign.ro/images/logo_selfdezign.png",
+    "logo": "https://selfdezign.ro/images/logo_selfdezign.webp",
     "description": "Studio de design interior specializat în proiecte comerciale și rezidențiale. Designul interior întâlnește natura umană.",
     "address": {
       "@type": "PostalAddress",

@@ -95,7 +95,7 @@ export default function BlogPost() {
       "name": "SelfDezign",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://selfdezign.ro/images/logo_selfdezign.png",
+        "url": "https://selfdezign.ro/images/logo_selfdezign.webp",
       },
     },
     "description": post.excerpt,

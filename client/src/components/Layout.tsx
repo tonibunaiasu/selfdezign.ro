@@ -113,7 +113,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <a className="flex items-center gap-2 group">
               {/* Logo - SelfDezign brand */}
               <img 
-                src="/images/logo_selfdezign.png" 
+                src="/images/logo_selfdezign.webp" 
                 alt="SelfDezign Logo" 
                 className="h-12 sm:h-14 w-auto object-contain"
               />
@@ -211,7 +211,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              <img src="/images/logo-footer-ruler.png" alt="SelfDezign" className="h-40 w-auto" />
+              <img src="/images/logo-footer-ruler.webp" alt="SelfDezign" className="h-40 w-auto" />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               {t.footer.description}
