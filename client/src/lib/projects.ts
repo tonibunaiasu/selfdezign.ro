@@ -119,13 +119,15 @@ const mapProject = (project: PayloadProject): Project => {
   const descriptionText =
     project.descriptionText ??
     (descriptionHtml ? stripHtml(descriptionHtml) : "");
+  const normalizedCategory =
+    project.category === "Rezidential" ? "Rezidențial" : project.category;
 
   return {
     id: String(project.id ?? project.slug),
     slug: project.slug,
     title: project.title,
-    category: project.category,
-    categorySlug: slugify(project.category),
+    category: normalizedCategory,
+    categorySlug: slugify(normalizedCategory),
     year: project.year ?? "",
     status: project.projectStatus ?? "",
     location: project.location ?? "",
