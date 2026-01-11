@@ -9,7 +9,7 @@ import SEO from "@/components/SEO";
 import caseStudiesData from "@/data/case-studies.json";
 import PayloadHtml from "@/components/PayloadHtml";
 import { usePayloadPage } from "@/lib/payload";
-import { getResponsiveImageProps } from "@/lib/images";
+import { getLocalImageProps, getResponsiveImageProps } from "@/lib/images";
 
 type CaseStudy = {
   title: string;
@@ -185,6 +185,7 @@ export default function Home() {
                     loading="eager"
                     decoding="async"
                     fetchPriority="high"
+                    {...getLocalImageProps(activeCaseStudy.coverImage, "50vw")}
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
                   />
                   <div className="absolute top-6 left-6 z-20 flex flex-col gap-3">
@@ -289,6 +290,7 @@ export default function Home() {
                   alt={logo.alt || "Award logo"}
                   loading="lazy"
                   decoding="async"
+                  {...getLocalImageProps(logo.imageUrl, "120px")}
                   className="h-14 md:h-20 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
                 />
               ))}
@@ -330,6 +332,12 @@ export default function Home() {
                  <img 
                   src={homeLayout?.aboutImageUrl ?? "/irina-stoica.webp"} 
                   alt={homeLayout?.aboutImageAlt ?? "Arh. Irina Stoica"} 
+                  loading="lazy"
+                  decoding="async"
+                  {...getLocalImageProps(
+                    homeLayout?.aboutImageUrl ?? "/irina-stoica.webp",
+                    "(max-width: 1024px) 100vw, 50vw"
+                  )}
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.currentTarget.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop";
