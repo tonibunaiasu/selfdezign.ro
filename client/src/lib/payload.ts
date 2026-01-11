@@ -244,6 +244,32 @@ export type PayloadPage = {
       }>;
     };
   };
+  projectsLayout?: {
+    ro?: {
+      heroTitle?: string;
+      heroSubtitle?: string;
+      categories?: Array<{
+        key?: string;
+        label?: string;
+      }>;
+      ctaTitle?: string;
+      ctaText?: string;
+      ctaButtonLabel?: string;
+      ctaButtonHref?: string;
+    };
+    en?: {
+      heroTitle?: string;
+      heroSubtitle?: string;
+      categories?: Array<{
+        key?: string;
+        label?: string;
+      }>;
+      ctaTitle?: string;
+      ctaText?: string;
+      ctaButtonLabel?: string;
+      ctaButtonHref?: string;
+    };
+  };
   updatedAt?: string;
 };
 

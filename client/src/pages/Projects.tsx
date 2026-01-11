@@ -12,6 +12,19 @@ import SEO from "@/components/SEO";
 export default function Projects() {
   const { t, language } = useLanguage();
   const { page } = usePayloadPage("projects");
+  const cmsLayout = page?.projectsLayout?.[language];
+  const heroTitle = cmsLayout?.heroTitle || t.projects.title;
+  const heroSubtitle = cmsLayout?.heroSubtitle || t.projects.subtitle;
+  const ctaTitle =
+    cmsLayout?.ctaTitle ||
+    (language === "ro" ? "Ai un proiect în minte?" : "Have a project in mind?");
+  const ctaText =
+    cmsLayout?.ctaText ||
+    (language === "ro"
+      ? "Hai să transformăm viziunea ta într-o realitate. Contactează-ne pentru o consultație gratuită."
+      : "Let's transform your vision into reality. Contact us for a free consultation.");
+  const ctaButtonLabel = cmsLayout?.ctaButtonLabel || t.nav.bookCall;
+  const ctaButtonHref = cmsLayout?.ctaButtonHref || "/contact";
   const [location] = useLocation();
   const [activeCategory, setActiveCategory] = useState("all");
   const { projects } = useProjects();
@@ -25,15 +38,21 @@ export default function Projects() {
     }
   }, [location]);
 
-  const categories = [
-    { key: "all", label: t.projects.allCategories },
-    { key: "Restaurant", label: t.projects.categories.restaurant },
-    { key: "Office", label: t.projects.categories.office },
-    { key: "Hotel", label: t.projects.categories.hotel },
-    { key: "Comercial", label: t.projects.categories.comercial },
-    { key: "Brand Experience", label: t.projects.categories.brandExperience },
-    { key: "Rezidențial", label: t.projects.categories.rezidential }
-  ];
+  const categories =
+    cmsLayout?.categories?.length
+      ? cmsLayout.categories.map((cat) => ({
+          key: cat.key || "",
+          label: cat.label || "",
+        }))
+      : [
+          { key: "all", label: t.projects.allCategories },
+          { key: "Restaurant", label: t.projects.categories.restaurant },
+          { key: "Office", label: t.projects.categories.office },
+          { key: "Hotel", label: t.projects.categories.hotel },
+          { key: "Comercial", label: t.projects.categories.comercial },
+          { key: "Brand Experience", label: t.projects.categories.brandExperience },
+          { key: "Rezidențial", label: t.projects.categories.rezidential },
+        ];
 
   const filteredProjects = activeCategory === "all" 
     ? projects 
@@ -63,8 +82,8 @@ export default function Projects() {
   return (
     <div className="min-h-screen bg-background pb-24">
       <SEO
-        title={t.projects.title}
-        description={t.projects.subtitle}
+        title={page?.seoTitle || heroTitle}
+        description={page?.seoDescription || heroSubtitle}
         url="/proiecte"
       />
       {payloadMode === "prepend" ? payloadSection : null}
@@ -72,10 +91,10 @@ export default function Projects() {
       <div className="bg-black text-white pt-32 pb-16 px-4">
         <div className="container">
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 tracking-tighter">
-            {t.projects.title}
+            {heroTitle}
           </h1>
           <p className="text-gray-400 max-w-2xl text-lg">
-            {t.projects.subtitle}
+            {heroSubtitle}
           </p>
         </div>
       </div>
@@ -151,19 +170,17 @@ export default function Projects() {
       <div className="container mt-24 px-4">
         <div className="bg-black text-white p-12 md:p-16 text-center">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 tracking-tighter">
-            {language === 'ro' ? 'Ai un proiect în minte?' : 'Have a project in mind?'}
+            {ctaTitle}
           </h2>
           <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-            {language === 'ro' 
-              ? 'Hai să transformăm viziunea ta într-o realitate. Contactează-ne pentru o consultație gratuită.'
-              : "Let's transform your vision into reality. Contact us for a free consultation."}
+            {ctaText}
           </p>
-          <Link href="/contact">
+          <Link href={ctaButtonHref}>
             <a>
               <Button 
                 className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold px-8 py-6 text-sm"
               >
-                {t.nav.bookCall}
+                {ctaButtonLabel}
               </Button>
             </a>
           </Link>
