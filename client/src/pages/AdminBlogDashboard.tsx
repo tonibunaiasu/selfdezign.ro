@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Plus, Edit2, Trash2, Eye, X } from "lucide-react";
 import { toast } from "sonner";
+import SEO from "@/components/SEO";
 
 interface BlogFormData {
   id?: number;
@@ -148,6 +149,12 @@ export default function AdminBlogDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
+      <SEO
+        title="Admin Blog"
+        description="Admin dashboard for SelfDezign blog."
+        url="/admin/blog"
+        robots="noindex, nofollow"
+      />
       <div className="container max-w-6xl">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold">Admin Dashboard - Blog</h1>

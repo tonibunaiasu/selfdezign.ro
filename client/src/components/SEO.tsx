@@ -8,6 +8,7 @@ interface SEOProps {
   url?: string;
   type?: 'website' | 'article';
   structuredData?: object;
+  robots?: string;
 }
 
 export default function SEO({ 
@@ -17,7 +18,8 @@ export default function SEO({
   imageAlt,
   url,
   type = 'website',
-  structuredData
+  structuredData,
+  robots
 }: SEOProps) {
   const siteName = 'SelfDezign';
   const fullTitle = `${title} | ${siteName}`;
@@ -58,6 +60,10 @@ export default function SEO({
 
     // Basic meta tags
     updateMetaTag('description', description, true);
+    if (robots) {
+      updateMetaTag('robots', robots, true);
+      updateMetaTag('googlebot', robots, true);
+    }
     updateLinkTag('canonical', fullUrl);
 
     // Open Graph tags
@@ -88,7 +94,7 @@ export default function SEO({
       
       scriptElement.textContent = JSON.stringify(structuredData);
     }
-  }, [title, description, image, url, type, structuredData, fullTitle, fullUrl, fullImage]);
+  }, [title, description, image, url, type, structuredData, fullTitle, fullUrl, fullImage, robots]);
 
   return null;
 }
