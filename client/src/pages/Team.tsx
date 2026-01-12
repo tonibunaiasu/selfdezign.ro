@@ -26,7 +26,7 @@ const teamMembers: TeamMember[] = [
     roleEn: "Founder & Lead Designer",
     bioRo: "Cu o experiență de peste 15 ani în design interior, Irina este vizionara din spatele SelfDezign. Pasiunea ei pentru spații care reflectă personalitatea celor care le locuiesc a stat la baza filozofiei studioului.",
     bioEn: "With over 15 years of experience in interior design, Irina is the visionary behind SelfDezign. Her passion for spaces that reflect the personality of those who inhabit them has been the foundation of the studio's philosophy.",
-    image: "/awards/irina-stoica.webp",
+    image: "/team/irina-mango.webp",
     linkedin: "https://linkedin.com/in/irina-stoica",
     email: "irina@selfdezign.ro"
   },
@@ -37,7 +37,7 @@ const teamMembers: TeamMember[] = [
     roleEn: "Co-Founder & Business Development",
     bioRo: "Toni aduce viziunea strategică și asigură că fiecare proiect SelfDezign depășește așteptările clienților. Experiența sa în management și dezvoltare de business completează perfect latura creativă a echipei.",
     bioEn: "Toni brings strategic vision and ensures that every SelfDezign project exceeds client expectations. His experience in management and business development perfectly complements the creative side of the team.",
-    image: "/team/toni-bunaiasu.webp",
+    image: "/team/toni-cherries.webp",
     linkedin: "https://linkedin.com/in/toni-bunaiasu",
     email: "toni@selfdezign.ro"
   },
@@ -48,18 +48,18 @@ const teamMembers: TeamMember[] = [
     roleEn: "Junior Interior Designer",
     bioRo: "Mario aduce o perspectivă fresh și inovatoare în fiecare proiect. Specializat în design comercial și office, el transformă spațiile de lucru în medii care inspiră productivitate și creativitate.",
     bioEn: "Mario brings a fresh and innovative perspective to every project. Specializing in commercial and office design, he transforms workspaces into environments that inspire productivity and creativity.",
-    image: "/team/mario.webp",
+    image: "/team/mario-coconut.webp",
     email: "mario@selfdezign.ro"
   },
   {
-    id: "teodora-brancus",
-    name: "Teodora Brâncuș",
+    id: "pina-bodega",
+    name: "Pina Bodega",
     roleRo: "Interior Designer",
     roleEn: "Interior Designer",
-    bioRo: "Teodora este expertă în design rezidențial și are un ochi deosebit pentru detalii. Abordarea ei empatică o ajută să înțeleagă profund nevoile clienților și să creeze spații cu adevărat personalizate.",
-    bioEn: "Teodora is an expert in residential design and has a keen eye for detail. Her empathetic approach helps her deeply understand client needs and create truly personalized spaces.",
-    image: "/team/teodora-brancus.webp",
-    email: "teodora@selfdezign.ro"
+    bioRo: "Pina este expertă în design rezidențial și are un ochi deosebit pentru detalii. Abordarea ei empatică o ajută să înțeleagă profund nevoile clienților și să creeze spații cu adevărat personalizate.",
+    bioEn: "Pina is an expert in residential design and has a keen eye for detail. Her empathetic approach helps her deeply understand client needs and create truly personalized spaces.",
+    image: "/team/pina-gogosar.webp",
+    email: "pina@selfdezign.ro"
   }
 ];
 
