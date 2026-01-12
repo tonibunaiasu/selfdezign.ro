@@ -220,13 +220,6 @@ export default function Home() {
                           </Button>
                         </a>
                       </Link>
-                      <Link href="/contact">
-                        <a>
-                          <Button variant="ghost" className="text-white hover:text-[var(--color-brand-yellow)] hover:bg-white/10 rounded-none">
-                            {homeLayout?.featuredSecondaryCtaLabel ?? t.home.contactUs}
-                          </Button>
-                        </a>
-                      </Link>
                     </div>
                   </div>
                 </div>
