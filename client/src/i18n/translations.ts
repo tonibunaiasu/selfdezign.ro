@@ -369,7 +369,7 @@ export const translations: Record<Language, Translations> = {
       relatedProjects: "Proiecte relevante"
     },
     footer: {
-      description: "Studio de design interior specializat în proiecte comerciale și rezidențiale. Transformăm spațiile în experiențe.",
+      description: "Studio de design interior și arhitectură specializat în proiecte comerciale, HORECA și office. Transformăm spațiile în experiențe.",
       quickLinks: "Link-uri Rapide",
       contact: "Contact",
       newsletter: "Newsletter",
@@ -562,7 +562,7 @@ export const translations: Record<Language, Translations> = {
       relatedProjects: "Related projects"
     },
     footer: {
-      description: "Interior design studio specializing in commercial and residential projects. We transform spaces into experiences.",
+      description: "Interior design and architecture studio specializing in commercial, hospitality, and office projects. We transform spaces into experiences.",
       quickLinks: "Quick Links",
       contact: "Contact",
       newsletter: "Newsletter",

@@ -281,16 +281,18 @@ export default function Home() {
               </h3>
             </div>
             <div className="md:w-2/3 flex flex-wrap items-center justify-center md:justify-end gap-10 md:gap-14">
-              {(homeLayout?.awardsLogos?.length
-                ? homeLayout.awardsLogos
-                : [
-                    { imageUrl: "/awards/share-architects-logo.webp", alt: "Share Architects" },
-                    { imageUrl: "/awards/design-week-blue.webp", alt: "Design Week" },
-                    { imageUrl: "/awards/romanian-design-week.webp", alt: "Romanian Design Week" },
-                    { imageUrl: "/awards/big-see-award.webp", alt: "BIG SEE Interior Design Award 2024" },
-                    { imageUrl: "/awards/bienala-arhitectura.webp", alt: "Bienala Națională de Arhitectură 2023" },
-                  ]
-              ).map((logo, index) => (
+              {(() => {
+                const fallbackLogos = [
+                  { imageUrl: "/awards/share-architects-logo.webp", alt: "Share Architects" },
+                  { imageUrl: "/awards/design-week-blue.webp", alt: "Design Week" },
+                  { imageUrl: "/awards/romanian-design-week.webp", alt: "Romanian Design Week" },
+                  { imageUrl: "/awards/big-see-award.webp", alt: "BIG SEE Interior Design Award 2024" },
+                  { imageUrl: "/awards/bienala-arhitectura.webp", alt: "Bienala Națională de Arhitectură 2023" },
+                ];
+                const cmsLogos =
+                  homeLayout?.awardsLogos?.filter((logo) => logo?.imageUrl) ?? [];
+                const logos = cmsLogos.length ? cmsLogos : fallbackLogos;
+                return logos.map((logo, index) => (
                 <img
                   key={`${logo.imageUrl}-${index}`}
                   src={logo.imageUrl}
@@ -300,7 +302,8 @@ export default function Home() {
                   {...getLocalImageProps(logo.imageUrl, "120px")}
                   className="h-14 md:h-20 object-contain opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-105"
                 />
-              ))}
+                ));
+              })()}
             </div>
           </div>
         </div>

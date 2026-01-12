@@ -131,7 +131,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           { label: t.footer.office2Label, address: t.footer.office2Address },
         ];
   const footerCopyright =
-    footer?.copyright || `© 2025 SelfDezign®. ${t.footer.rights}`;
+    footer?.copyright || `© 2026 SelfDezign®. ${t.footer.rights}`;
   const social = settings?.social || {
     facebook: "https://www.facebook.com/selfdezign",
     instagram: "https://www.instagram.com/selfdezign.ro/",
