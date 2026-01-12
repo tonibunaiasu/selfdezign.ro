@@ -27,6 +27,14 @@ const Team = lazy(() => import("./pages/Team"));
 const Values = lazy(() => import("./pages/Values"));
 const Vision = lazy(() => import("./pages/Vision"));
 
+function CmsRedirect({ params }: { params?: { rest?: string } }) {
+  if (typeof window !== "undefined") {
+    const suffix = params?.rest ? `/${params.rest}` : "";
+    window.location.replace(`https://cms.selfdezign.ro${suffix}`);
+  }
+  return null;
+}
+
 function Router() {
   return (
     <Layout>
@@ -48,6 +56,9 @@ function Router() {
           <Route path="/blog" component={Blog} />
           <Route path="/blog/tag/:tag" component={BlogTag} />
           <Route path="/blog/:slug" component={BlogPost} />
+
+          <Route path="/cms" component={CmsRedirect} />
+          <Route path="/cms/:rest*" component={CmsRedirect} />
 
           <Route path="/despre" component={About} />
           <Route path="/viziune" component={Vision} />
