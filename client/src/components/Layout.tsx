@@ -115,7 +115,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const ctaHref = navigation?.cta?.href || "/contact";
 
   const logoUrl = settings?.logoUrl || "/images/logo_selfdezign.png";
-  const footerLogoUrl = settings?.logoFooterUrl || "/images/logo-footer-ruler.webp";
+  const footerLogoUrl =
+    settings?.logoFooterUrl || "/images/logo-footer-ruler-crop.webp";
   const whatsapp = settings?.contact?.whatsapp || "https://wa.me/40721528447";
   const phone = settings?.contact?.phone || "+40-721-528-448";
   const email = settings?.contact?.email || "hello@selfdezign.ro";
@@ -254,8 +255,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <footer className="bg-black text-white py-12 md:py-16 border-t border-white/10">
         <div className="container grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <img src={footerLogoUrl} alt="SelfDezign" className="h-40 w-auto" />
+            <div className="flex items-start">
+              <img
+                src={footerLogoUrl}
+                alt="SelfDezign"
+                className="h-24 md:h-28 lg:h-32 w-auto block"
+              />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               {footerDescription}
