@@ -178,15 +178,6 @@ export default function BlogPost() {
                 <span className="flex items-center gap-2">{readingTime} {t.blog.readTime}</span>
               ) : null}
             </div>
-            <div className="flex flex-wrap gap-2 mt-6">
-              {post.tags.map((tag) => (
-                <Link key={tag} href={`/blog/tag/${encodeURIComponent(tag)}`}>
-                  <a className="text-xs font-bold uppercase tracking-widest bg-white/10 text-white px-3 py-1 hover:text-accent transition-colors">
-                    {tag}
-                  </a>
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </div>
