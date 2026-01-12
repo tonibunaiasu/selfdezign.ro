@@ -259,7 +259,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <img
                 src={footerLogoUrl}
                 alt="SelfDezign"
-                className="h-[4.5rem] md:h-[5.25rem] lg:h-24 w-auto block"
+                className="h-[3.6rem] md:h-[4.2rem] lg:h-[4.8rem] w-auto block"
               />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
