@@ -27,7 +27,7 @@ export default function Contact() {
   const phoneTitle = cmsLayout?.phoneTitle || t.contact.phoneTitle;
   const phone = cmsLayout?.phone || "+40-721-528-448";
   const email = cmsLayout?.email || "hello@selfdezign.ro";
-  const whatsapp = cmsLayout?.whatsapp || "https://wa.me/40721528447";
+  const whatsapp = cmsLayout?.whatsapp || "https://wa.me/40721528448";
   const whatsappLabel = cmsLayout?.whatsappLabel || "WhatsApp";
   const addressTitle = cmsLayout?.addressTitle || t.contact.addressTitle;
   const addressList =

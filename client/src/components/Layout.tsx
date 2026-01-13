@@ -117,7 +117,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const logoUrl = settings?.logoUrl || "/images/logo_selfdezign.png";
   const footerLogoUrl =
     settings?.logoFooterUrl || "/images/logo-footer-ruler-crop.webp";
-  const whatsapp = settings?.contact?.whatsapp || "https://wa.me/40721528447";
+  const whatsapp = settings?.contact?.whatsapp || "https://wa.me/40721528448";
   const phone = settings?.contact?.phone || "+40-721-528-448";
   const email = settings?.contact?.email || "hello@selfdezign.ro";
   const footerDescription = footer?.description || t.footer.description;
@@ -130,8 +130,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           { label: t.footer.office1Label, address: t.footer.office1Address },
           { label: t.footer.office2Label, address: t.footer.office2Address },
         ];
-  const footerCopyright =
-    footer?.copyright || `© 2026 SelfDezign®. ${t.footer.rights}`;
+  const footerCopyright = footer?.copyright || null;
   const social = settings?.social || {
     facebook: "https://www.facebook.com/selfdezign",
     instagram: "https://www.instagram.com/selfdezign.ro/",
@@ -354,7 +353,24 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         <div className="container mt-8 md:mt-16 pt-6 md:pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-          <p>{footerCopyright}</p>
+          <p>
+            {footerCopyright ? (
+              footerCopyright
+            ) : (
+              <>
+                © 2026{" "}
+                <a
+                  href="https://cms.selfdezign.ro/admin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline-offset-4 hover:underline"
+                >
+                  SelfDezign®
+                </a>
+                . {t.footer.rights}
+              </>
+            )}
+          </p>
           <p>{t.footer.tagline}</p>
         </div>
       </footer>

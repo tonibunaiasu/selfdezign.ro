@@ -300,7 +300,7 @@ export default function BlogPost() {
               {c.ctaText}
             </p>
             <a
-              href="https://wa.me/40721528447"
+              href="https://wa.me/40721528448"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackEvent("whatsapp_click", { placement: "blog_post_sidebar" })}
