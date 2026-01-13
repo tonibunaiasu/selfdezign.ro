@@ -295,30 +295,16 @@ export default function BlogPost() {
         {/* Sidebar */}
         <div className="lg:col-span-4 space-y-12">
           <div className="bg-white border border-gray-100 p-6 sticky top-24">
-            <h3 className="font-display font-bold text-xl mb-3">{c.ctaTitle}</h3>
-            <p className="text-gray-600 text-sm mb-6">
-              {c.ctaText}
-            </p>
-            <div className="flex flex-col gap-3">
-              <Link href="/contact">
-                <Button
-                  className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs"
-                  onClick={() => trackEvent("cta_click", { placement: "blog_post_sidebar", label: c.ctaButton })}
-                >
-                  {c.ctaButton}
-                </Button>
-              </Link>
-              <a
-                href="https://wa.me/40721528447"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("whatsapp_click", { placement: "blog_post_sidebar" })}
-              >
-                <Button variant="outline" className="rounded-none uppercase tracking-widest font-bold text-xs w-full">
-                  {t.nav.bookConsultation}
-                </Button>
-              </a>
-            </div>
+            <a
+              href="https://wa.me/40721528447"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent("whatsapp_click", { placement: "blog_post_sidebar" })}
+            >
+              <Button className="bg-[var(--color-brand-yellow)] text-black hover:bg-[var(--color-brand-yellow)]/90 rounded-none uppercase tracking-widest font-bold text-xs w-full">
+                {t.nav.bookConsultation}
+              </Button>
+            </a>
           </div>
 
           <div className="bg-gray-50 p-8 border border-gray-100 sticky top-24">
