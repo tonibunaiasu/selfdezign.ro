@@ -295,6 +295,10 @@ export default function BlogPost() {
         {/* Sidebar */}
         <div className="lg:col-span-4 space-y-12">
           <div className="bg-white border border-gray-100 p-6 sticky top-24">
+            <h3 className="font-display font-bold text-xl mb-3">{c.ctaTitle}</h3>
+            <p className="text-gray-600 text-sm mb-6">
+              {c.ctaText}
+            </p>
             <a
               href="https://wa.me/40721528447"
               target="_blank"
