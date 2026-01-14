@@ -171,7 +171,14 @@
   // Create chat button
   const button = document.createElement('div');
   button.id = 'sd-chat-button';
-  button.textContent = 'SD';
+  button.innerHTML = `
+    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="#1a1a1a" d="M6.5 19.5l.3-2H7a7 7 0 1 1 0-14h10a7 7 0 0 1 0 14H10l-3.5 2z"/>
+      <circle cx="9.5" cy="10.5" r="1.25" fill="#ffffff"/>
+      <circle cx="12.5" cy="10.5" r="1.25" fill="#ffffff"/>
+      <circle cx="15.5" cy="10.5" r="1.25" fill="#ffffff"/>
+    </svg>
+  `;
   document.body.appendChild(button);
 
   // Create chat window
