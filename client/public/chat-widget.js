@@ -12,6 +12,14 @@
    */
   const style = document.createElement('style');
   style.textContent = `
+    :root {
+      --sd-black: #1a1a1a;
+      --sd-accent: #f5c400;
+      --sd-accent-strong: #ff6b6b;
+      --sd-gray: #8c8c8c;
+      --sd-surface: #ffffff;
+      --sd-soft: #f7f5ef;
+    }
     #sd-chat-button {
       position: fixed;
       bottom: 20px;
@@ -19,72 +27,135 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: #333;
-      color: #fff;
+      background: var(--sd-accent);
+      color: var(--sd-black);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 24px;
+      font-size: 18px;
+      font-weight: 700;
       cursor: pointer;
       z-index: 9999;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
     }
     #sd-chat-window {
       position: fixed;
-      bottom: 80px;
+      bottom: 84px;
       right: 20px;
-      width: 320px;
-      max-height: 400px;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 360px;
+      max-height: 520px;
+      background: var(--sd-surface);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.18);
       display: none;
       flex-direction: column;
       overflow: hidden;
       z-index: 9999;
+      font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     }
     #sd-chat-header {
-      background: #333;
-      color: #fff;
-      padding: 8px;
-      font-weight: bold;
+      background: var(--sd-black);
+      color: var(--sd-accent);
+      padding: 12px 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      letter-spacing: 0.2px;
+    }
+    #sd-chat-header-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    #sd-chat-header-title span {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+    }
+    #sd-chat-close {
+      background: transparent;
+      color: var(--sd-accent);
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    #sd-chat-subheader {
+      background: #111;
+      color: rgba(255,255,255,0.7);
+      font-size: 11px;
+      padding: 6px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     #sd-chat-messages {
       flex: 1;
-      padding: 8px;
+      padding: 14px;
       overflow-y: auto;
       font-size: 14px;
+      background: linear-gradient(180deg, #ffffff 0%, #faf8f3 100%);
     }
     #sd-chat-input {
-      border-top: 1px solid #ddd;
+      border-top: 1px solid rgba(0,0,0,0.08);
       display: flex;
+      padding: 10px;
+      gap: 8px;
+      background: #fff;
     }
     #sd-chat-input input {
       flex: 1;
-      border: none;
-      padding: 8px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 10px;
+      padding: 10px 12px;
       font-size: 14px;
+      outline: none;
     }
     #sd-chat-input button {
-      padding: 8px 12px;
+      padding: 10px 14px;
       border: none;
-      background: #333;
-      color: #fff;
+      border-radius: 10px;
+      background: var(--sd-accent);
+      color: var(--sd-black);
+      font-weight: 600;
       cursor: pointer;
     }
+    #sd-chat-consent {
+      font-size: 11px;
+      color: var(--sd-gray);
+      padding: 0 14px 12px 14px;
+      background: #fff;
+      line-height: 1.4;
+    }
     .sd-chat-bubble {
-      margin: 4px 0;
-      padding: 6px 10px;
-      border-radius: 4px;
-      max-width: 80%;
+      margin: 6px 0;
+      padding: 8px 12px;
+      border-radius: 12px;
+      max-width: 82%;
+      line-height: 1.4;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
     .sd-chat-bubble.user {
-      background: #eef;
+      background: #fff2bf;
       align-self: flex-end;
     }
     .sd-chat-bubble.assistant {
-      background: #f7f7f7;
+      background: var(--sd-soft);
       align-self: flex-start;
+    }
+    @media (max-width: 480px) {
+      #sd-chat-window {
+        left: 12px;
+        right: 12px;
+        width: auto;
+        bottom: 76px;
+        max-height: 70vh;
+      }
+      #sd-chat-button {
+        right: 12px;
+        bottom: 12px;
+      }
     }
   `;
   document.head.appendChild(style);
@@ -100,18 +171,28 @@
   // Create chat button
   const button = document.createElement('div');
   button.id = 'sd-chat-button';
-  button.textContent = '💬';
+  button.textContent = 'SD';
   document.body.appendChild(button);
 
   // Create chat window
   const windowEl = document.createElement('div');
   windowEl.id = 'sd-chat-window';
   windowEl.innerHTML = `
-    <div id="sd-chat-header">SelfDezign Chat</div>
+    <div id="sd-chat-header">
+      <div id="sd-chat-header-title">
+        <div>SelfDezign®</div>
+        <span>Asistent AI</span>
+      </div>
+      <button id="sd-chat-close" type="button" aria-label="Inchide">×</button>
+    </div>
+    <div id="sd-chat-subheader">Program L-V 09:00-18:00 · Asistentul raspunde 24/7</div>
     <div id="sd-chat-messages"></div>
     <div id="sd-chat-input">
       <input type="text" placeholder="Scrie mesajul..." />
       <button type="button">Trimite</button>
+    </div>
+    <div id="sd-chat-consent">
+      Continuand, esti de acord ca mesajele tale sa fie procesate pentru a oferi raspunsuri si pentru a imbunatati serviciul. Nu trimite date sensibile.
     </div>
   `;
   document.body.appendChild(windowEl);
@@ -119,9 +200,25 @@
   const messagesEl = windowEl.querySelector('#sd-chat-messages');
   const inputEl = windowEl.querySelector('#sd-chat-input input');
   const sendBtn = windowEl.querySelector('#sd-chat-input button');
+  const closeBtn = windowEl.querySelector('#sd-chat-close');
 
   const messages = [];
   let sessionId = `${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
+
+  function trackEvent(name, data) {
+    const payload = Object.assign({ sessionId }, data || {});
+    try {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', name, payload);
+      }
+      if (window.dataLayer && typeof window.dataLayer.push === 'function') {
+        window.dataLayer.push(Object.assign({ event: name }, payload));
+      }
+      window.dispatchEvent(new CustomEvent('sd:chat', { detail: { event: name, ...payload } }));
+    } catch (err) {
+      console.warn('Chat tracking failed', err);
+    }
+  }
 
   function appendBubble(content, role) {
     const bubble = document.createElement('div');
@@ -136,6 +233,7 @@
     if (!text) return;
     appendBubble(text, 'user');
     messages.push({ role: 'user', content: text });
+    trackEvent('chat_message_sent', { length: text.length });
     inputEl.value = '';
     try {
       const res = await fetch(`${apiBase}/api/chat`, {
@@ -143,12 +241,17 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages, sessionId })
       });
+      if (!res.ok) {
+        throw new Error(`Request failed with status ${res.status}`);
+      }
       const aiResponse = await res.text();
       appendBubble(aiResponse, 'assistant');
       messages.push({ role: 'assistant', content: aiResponse });
+      trackEvent('chat_message_received', { length: aiResponse.length });
     } catch (err) {
       console.error(err);
       appendBubble('A ap\u0103rut o eroare. V\u0103 rug\u0103m \u00eencerca\u021bi din nou.', 'assistant');
+      trackEvent('chat_error', { message: String(err && err.message ? err.message : err) });
     }
   }
 
@@ -161,8 +264,14 @@
   });
 
   button.addEventListener('click', () => {
-    windowEl.style.display = windowEl.style.display === 'flex' ? 'none' : 'flex';
+    const isOpen = windowEl.style.display === 'flex';
+    windowEl.style.display = isOpen ? 'none' : 'flex';
     windowEl.style.flexDirection = 'column';
+    trackEvent(isOpen ? 'chat_close' : 'chat_open');
+  });
+  closeBtn.addEventListener('click', () => {
+    windowEl.style.display = 'none';
+    trackEvent('chat_close');
   });
 
   // Optional: send transcript on unload
@@ -179,6 +288,9 @@
           { type: 'application/json' }
         ])
       );
+      trackEvent('chat_transcript_sent', { length: transcript.length });
     }
   });
+
+  trackEvent('chat_widget_loaded');
 })();
