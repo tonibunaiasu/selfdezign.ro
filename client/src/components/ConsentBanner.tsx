@@ -65,7 +65,7 @@ export default function ConsentBanner() {
   };
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-[9999] md:left-auto md:right-4 md:max-w-sm">
+    <div className="fixed bottom-4 left-4 right-4 z-[9999] md:left-4 md:right-auto md:max-w-sm">
       <div className="rounded-2xl border border-black/10 bg-white/95 p-4 shadow-[0_10px_30px_rgba(0,0,0,0.12)] backdrop-blur">
         <p className="text-xs text-gray-600">
           Folosim cookie-uri pentru masurare si marketing. Poti accepta sau refuza.{" "}
