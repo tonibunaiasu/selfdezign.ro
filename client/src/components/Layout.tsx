@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import NewsletterForm from "@/components/NewsletterForm";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { initAnalytics, trackEvent, trackPageView, trackScrollDepth } from "@/lib/analytics";
+import { trackEvent, trackPageView, trackScrollDepth } from "@/lib/analytics";
 import { useFooter, useNavigation, useSiteSettings } from "@/lib/globals";
+import ConsentBanner from "@/components/ConsentBanner";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -44,7 +45,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    initAnalytics();
     trackPageView(location);
     scrollDepthTracked.current = new Set();
 
@@ -374,6 +374,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <p>{t.footer.tagline}</p>
         </div>
       </footer>
+      <ConsentBanner />
     </div>
   );
 }
