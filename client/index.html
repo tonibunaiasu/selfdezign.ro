@@ -5,14 +5,22 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>SelfDezign - Din arhitectura personalității tale</title>
-    <meta name="description" content="Design interior personalizat care reflecta arhitectura personalitatii tale. Consultatii de design, proiecte rezidentiale si comerciale." />
-    <meta name="keywords" content="design interior, designer interior, consultatie design, proiecte design, interior personalizat" />
-    <!-- Meta Pixel Code -->
+    <title>SelfDezign - Din arhitectura personalităţii tale</title>
+    <meta name="description" content="Design interior personalizat care reflecta arhitectura personalităţii tale. Consultaţii de design, proiecte design, designer interior specializat" />
+    <meta name="keywords" content="design interior, designer interior, proiecte design, consultaţii design, interior designer, designer arhitectură" />
+    <!-- Google Consent Mode V2 - Required for EEA users -->
     <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied'
+      });
+    </script>
+    <!-- Meta Pixel Code - NO noscript in head (HTML5 compliance) -->
+    <script>
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
+      n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
       if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
       n.queue=[];t=b.createElement(e);t.async=!0;
       t.src=v;s=b.getElementsByTagName(e)[0];
@@ -20,25 +28,9 @@
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '515349582147793');
       fbq('track', 'PageView');
+      fbq('consent', 'unevent');
     </script>
-    <script>
-      // Meta Consent Mode - set to denied by default for EEA compliance
-      fbq('consent', 'revoke');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=515349582147793&ev=PageView&noscript=1" /></noscript>
-    <!-- End Meta Pixel Code -->
-  </head>
-    <!-- Google Consent Mode V2 - Required for EEA users -->
-    <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('consent', 'default', {
-                  'analytics_storage': 'denied',
-                  'ad_storage': 'denied'
-                        });
-        </script>
-      <!-- Google Analytics 4 -->
+    <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YR3153SB9F"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -47,12 +39,10 @@
       window.GA_MEASUREMENT_ID = 'G-YR3153SB9F';
       gtag('config', window.GA_MEASUREMENT_ID);
     </script>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      src="/chat-widget.js"
-      defer
-      data-api-base="https://rag-agent-sd.vercel.app"></script>
+    <script src="/chat-widget.js" defer></script>
   </body>
 </html>
