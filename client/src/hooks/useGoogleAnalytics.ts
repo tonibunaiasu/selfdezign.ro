@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 export function useGoogleAnalytics() {
   useEffect(() => {
     // Verifica daca GA4 e deja incarcat
-    if (typeof window !== 'undefined' && window.gtag) {
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
       // GA4 e deja disponibil din HTML script
       console.log('[GA4] Google Analytics 4 is initialized');
     }
@@ -20,7 +20,7 @@ export function useGoogleAnalytics() {
  * @param eventData - Date suplimentare despre eveniment
  */
 export function trackEvent(eventName: string, eventData?: Record<string, any>) {
-  if (typeof window !== 'undefined' && window.gtag) {
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
     window.gtag('event', eventName, eventData || {});
   } else {
     console.warn(`[GA4] Cannot track event "${eventName}": gtag not available`);
@@ -33,20 +33,10 @@ export function trackEvent(eventName: string, eventData?: Record<string, any>) {
  * @param pagePath - Path-ul paginii
  */
 export function trackPageView(pageTitle: string, pagePath: string) {
-  if (typeof window !== 'undefined' && window.gtag) {
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
     window.gtag('config', (window as any).GA_MEASUREMENT_ID, {
       'page_title': pageTitle,
       'page_path': pagePath,
     });
-  }
-}
-
-/**
- * Declare gtag pentru TypeScript
- */
-declare global {
-  interface Window {
-    gtag: (...args: any[]) => void;
-    GA_MEASUREMENT_ID: string;
   }
 }
