@@ -62,15 +62,6 @@ export default function Contact() {
       setMessage(error.message || t.contact.errorMessage);
     },
   });
-  const payloadMode = page?.renderMode ?? "append";
-  const payloadSection = page?.html ? (
-    <section className="py-16 bg-white">
-      <div className="container">
-        <PayloadHtml html={page.html} />
-      </div>
-    </section>
-  ) : null;
-
   if (page?.renderMode === "replace" && page.html) {
     return (
       <div className="min-h-screen bg-background">
@@ -90,7 +81,6 @@ export default function Contact() {
         description={seoDescription}
         url="/contact"
       />
-      {payloadMode === "prepend" ? payloadSection : null}
       {/* Hero Text */}
       <div className="bg-black text-white pt-32 pb-24 px-4">
         <div className="container">
@@ -249,7 +239,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-      {payloadMode === "append" ? payloadSection : null}
     </div>
   );
 }
