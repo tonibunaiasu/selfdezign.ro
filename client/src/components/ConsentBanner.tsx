@@ -33,7 +33,20 @@ export default function ConsentBanner() {
     } else if (stored === "denied") {
       setMetaConsent(false);
     }
-  }, []);
+    if (stored !== "unknown") return;
+
+    const onScroll = () => {
+      persistConsent("granted");
+      setConsent("granted");
+      initAnalytics();
+      trackPageView(location);
+      setMetaConsent(true);
+      window.removeEventListener("scroll", onScroll);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true, once: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [location]);
 
   if (consent !== "unknown") return null;
 

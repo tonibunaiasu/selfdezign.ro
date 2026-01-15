@@ -38,7 +38,8 @@ export default function Cookies() {
             <h2 className="text-xl font-semibold text-black mb-2">Consimtamant</h2>
             <p>
               Poti accepta sau refuza cookie-urile direct din bannerul de consimtamant. Daca refuzi, nu vom initia
-              aceste servicii.
+              aceste servicii. Daca interactionezi cu pagina prin scroll, consideram consimtamantul acordat si
+              activam serviciile de masurare si marketing.
             </p>
           </div>
           <div>
@@ -60,4 +61,3 @@ export default function Cookies() {
     </div>
   );
 }
-

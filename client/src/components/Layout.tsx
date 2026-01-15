@@ -371,7 +371,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </>
             )}
           </p>
-          <p>{t.footer.tagline}</p>
+          <p className="flex flex-wrap items-center gap-2">
+            <a href="/cookies" className="underline-offset-4 hover:underline">
+              Politica de Cookies
+            </a>
+            <span aria-hidden="true">•</span>
+            <span>{t.footer.tagline}</span>
+          </p>
         </div>
       </footer>
       <ConsentBanner />
