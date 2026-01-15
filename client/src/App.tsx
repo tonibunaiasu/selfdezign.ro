@@ -16,6 +16,7 @@ const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const BlogTag = lazy(() => import("./pages/BlogTag"));
 const Contact = lazy(() => import("./pages/Contact"));
+const Cookies = lazy(() => import("./pages/Cookies"));
 const ComponentShowcase = import.meta.env.DEV
   ? lazy(() => import("./pages/ComponentShowcase"))
   : null;
@@ -52,6 +53,7 @@ function Router() {
           <Route path="/proiect/:slug" component={ProjectDetail} />
 
           <Route path="/contact" component={Contact} />
+          <Route path="/cookies" component={Cookies} />
           <Route path="/articole" component={Articles} />
           <Route path="/blog" component={Blog} />
           <Route path="/blog/tag/:tag" component={BlogTag} />
