@@ -1,6 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Redirect, Route, Switch } from "wouter";
+import { Redirect, Route, Switch, type RouteComponentProps } from "wouter";
 import { lazy, Suspense } from "react";
 
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -27,7 +27,7 @@ const Team = lazy(() => import("./pages/Team"));
 const Values = lazy(() => import("./pages/Values"));
 const Vision = lazy(() => import("./pages/Vision"));
 
-function CmsRedirect({ params }: { params?: { rest?: string } }) {
+function CmsRedirect({ params }: RouteComponentProps<{ rest?: string }>) {
   if (typeof window !== "undefined") {
     const suffix = params?.rest ? `/${params.rest}` : "";
     window.location.replace(`https://cms.selfdezign.ro${suffix}`);
