@@ -854,7 +854,7 @@ export default function ComponentsShowcase() {
                   <Breadcrumb>
                     <BreadcrumbList>
                       <BreadcrumbItem>
-                        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                        <BreadcrumbLink href="/">{t.common.homeLink}</BreadcrumbLink>
                       </BreadcrumbItem>
                       <BreadcrumbSeparator />
                       <BreadcrumbItem>

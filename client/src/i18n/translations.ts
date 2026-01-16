@@ -56,25 +56,62 @@ export interface Translations {
     visionLink: string;
     valuesLink: string;
   };
-  // Vision page
-  vision: {
-    title: string;
-    subtitle: string;
-    visionTitle: string;
-    visionText: string;
-    missionTitle: string;
-    missionText: string;
-    whyTitle: string;
-    whyText: string;
-    aboutLink: string;
-    valuesLink: string;
-  };
+    // Vision page
+    vision: {
+      backLink: string;
+      badge: string;
+      title1: string;
+      title2: string;
+      vision: {
+        title: string;
+        subtitle: string;
+        lead: string;
+        p1: string;
+        p2: string;
+        p3: string;
+      };
+      mission: {
+        title: string;
+        subtitle: string;
+        lead: string;
+        p1: string;
+        p2: string;
+        p3: string;
+      };
+      purpose: {
+        title: string;
+        subtitle: string;
+        lead: string;
+        p1: string;
+        p2: string;
+        p3: string;
+      };
+      prevPage: string;
+      prevTitle: string;
+      nextPage: string;
+      nextTitle: string;
+      aboutLink: string;
+      valuesLink: string;
+    };
   // Values page
   values: {
-    title: string;
-    subtitle: string;
-    valuesTitle: string;
-    principlesTitle: string;
+    backLink: string;
+    badge: string;
+    title1: string;
+    title2: string;
+    introLead: string;
+    introP1: string;
+    introP2: string;
+    promiseLead: string;
+    promiseP1: string;
+    promiseP2: string;
+    promiseHighlight: string;
+    prevPage: string;
+    prevTitle: string;
+    nextPage: string;
+    nextTitle: string;
+    valuesSectionTitle: string;
+    principlesSectionTitle: string;
     aboutLink: string;
     visionLink: string;
     value1Title: string;
@@ -89,11 +126,23 @@ export interface Translations {
     value5Text: string;
     value6Title: string;
     value6Text: string;
-    principle1: string;
-    principle2: string;
-    principle3: string;
-    principle4: string;
-    principle5: string;
+    principles: {
+      principle1Number: string;
+      principle1Title: string;
+      principle1Description: string;
+      principle2Number: string;
+      principle2Title: string;
+      principle2Description: string;
+      principle3Number: string;
+      principle3Title: string;
+      principle3Description: string;
+      principle4Number: string;
+      principle4Title: string;
+      principle4Description: string;
+      principle5Number: string;
+      principle5Title: string;
+      principle5Description: string;
+    };
   };
   // Team page
   team: {
@@ -203,6 +252,9 @@ export interface Translations {
     error: string;
     notFound: string;
     backHome: string;
+    homeLink: string;
+    notFoundTitle: string;
+    notFoundDescription: string;
   };
 }
 
@@ -220,7 +272,7 @@ export const translations: Record<Language, Translations> = {
       bookConsultation: "Consultanță 45 min"
     },
     home: {
-      tagline: "YOU ARE THE DESIGNER",
+      tagline: "TU EȘTI DESIGNERUL",
       heroTitlePrefix: "Design interior din",
       heroTitleEmphasis: "arhitectura personalității tale.",
       heroDescription: "Proiectăm experiențe care îți susțin identitatea.",
@@ -261,24 +313,61 @@ export const translations: Record<Language, Translations> = {
       valuesLink: "Principii & Valori"
     },
     vision: {
-      title: "Viziune & Misiune",
-      subtitle: "Încotro mergem și de ce existăm",
-      visionTitle: "Viziunea Noastră",
-      visionText: "Să redefinim standardele designului interior în România, demonstrând că spațiile în care trăim și muncim pot fi atât funcționale, cât și profund personale. Ne imaginăm o lume în care fiecare interior spune o poveste autentică.",
-      missionTitle: "Misiunea Noastră",
-      missionText: "Să creăm spații care îmbunătățesc calitatea vieții oamenilor, punând nevoile și personalitatea clientului în centrul fiecărui proiect. Transformăm visele în realitate prin design inteligent, materiale de calitate și atenție la detalii.",
-      whyTitle: "De Ce Existăm",
-      whyText: "Existăm pentru că am văzut prea multe spații create pentru ego-ul designerului, nu pentru binele locatarului. Am fondat SelfDezign din dorința de a oferi o alternativă: un design care te pune pe tine pe primul loc.",
+      backLink: "Înapoi la Despre Noi",
+      badge: "Viziune & Misiune",
+      title1: "UNDE MERGEM",
+      title2: "ȘI DE CE",
+      vision: {
+        title: "Viziunea noastră",
+        subtitle: "Cum vedem viitorul",
+        lead: "Credem într-o lume în care fiecare spațiu spune o poveste autentică despre cel care îl locuiește.",
+        p1: "Ne imaginăm un viitor în care designul interior nu mai este un lux rezervat puținilor, ci un drept fundamental al fiecăruia de a trăi într-un mediu care îi susține bunăstarea, creativitatea și identitatea.",
+        p2: "Vrem să redefinim industria designului interior în România, mutând focusul de la tendințe efemere și estetică de suprafață către soluții durabile care pun omul în centru.",
+        p3: "Viziunea noastră este să devenim partenerul de încredere al fiecărui client care înțelege că spațiul în care trăiește sau lucrează are puterea de a-i transforma viața."
+      },
+      mission: {
+        title: "Misiunea noastră",
+        subtitle: "Ce facem în fiecare zi",
+        lead: "Transformăm spații în extensii ale personalității tale.",
+        p1: "În fiecare proiect, ne propunem să ascultăm mai mult decât să vorbim. Să înțelegem nu doar ce vrei, ci și de ce vrei. Să descoperim tiparele invizibile ale vieții tale de zi cu zi și să le dăm formă fizică.",
+        p2: "Misiunea noastră este să creăm spații care funcționează pentru tine, nu invers. Spații care te fac să te simți acasă din prima secundă. Spații care îți susțin rutinele, îți amplifică momentele de bucurie și îți oferă refugiu în cele dificile.",
+        p3: "Nu proiectăm pentru reviste. Proiectăm pentru oameni reali, cu vieți reale, cu nevoi care se schimbă și evoluează."
+      },
+      purpose: {
+        title: "Scopul nostru",
+        subtitle: "De ce existăm",
+        lead: "Existăm pentru că starea ta de bine contează.",
+        p1: "Într-o lume în care petrecem 90% din timp în interior, calitatea spațiilor în care trăim și muncim nu este un moft. Este o necesitate.",
+        p2: "Scopul nostru este să demonstrăm că designul interior bun nu înseamnă compromisuri. Poți avea un spațiu frumos care este și funcțional. Poți avea un spațiu personal care este și profesional. Poți avea un spațiu care te reprezintă fără să te ruineze.",
+        p3: "SelfDezign există pentru a pune designul în slujba ta, nu invers."
+      },
+      prevPage: "Pagina anterioară",
+      prevTitle: "Despre SelfDezign",
+      nextPage: "Pagina următoare",
+      nextTitle: "Principii & Valori",
       aboutLink: "Despre Noi",
       valuesLink: "Principii & Valori"
     },
     values: {
-      title: "Principii & Valori",
-      subtitle: "Ce ne ghidează în tot ceea ce facem",
-      valuesTitle: "Valorile Noastre",
-      principlesTitle: "Principiile de Lucru",
-      aboutLink: "Despre Noi",
-      visionLink: "Viziune & Misiune",
+      backLink: "Înapoi la Viziune & Misiune",
+      badge: "Principii & Valori",
+      title1: "CE NE GHI",
+      title2: "DEAZĂ",
+      introLead: "Credem că un spațiu bine proiectat este o fundație solidă pentru o viață împlinită. De aceea, ne ghidăm după principii clare în tot ceea ce facem.",
+      introP1: "Fiecare detaliu contează, iar fiecare decizie este luată cu gândul la impactul pe termen lung. Construim relații bazate pe încredere și transparență, pentru că știm că un proiect de succes este rezultatul unei colaborări armonioase.",
+      introP2: "De la prima discuție și până la finalizarea proiectului, ne asigurăm că valorile noastre se reflectă în fiecare etapă a procesului. Suntem aici să transformăm viziunea ta într-o realitate tangibilă.",
+      promiseLead: "Noi credem că designul interior trebuie să fie o promisiune: o promisiune de a crea un spațiu care nu doar arată bine, ci care te face să te simți bine, care îți susține obiectivele și care evoluează odată cu tine.",
+      promiseP1: "Designul este o investiție în bunăstarea ta și în succesul afacerii tale. De aceea, fiecare proiect este abordat cu maximă seriozitate și profesionalism. Ne luăm angajamente și le respectăm, indiferent de provocări.",
+      promiseP2: "Angajamentul nostru este să îți oferim nu doar un spațiu, ci o experiență de design memorabilă, adaptată perfect nevoilor și stilului tău de viață.",
+      promiseHighlight: "Îți vom livra un spațiu unde te vei simți acasă.",
+      prevPage: "Pagina anterioară",
+      prevTitle: "Viziune & Misiune",
+      nextPage: "Pagina următoare",
+      nextTitle: "Echipa",
+      valuesSectionTitle: "Valorile Noastre",
+      principlesSectionTitle: "Principiile de Lucru",
+      aboutLink: "/despre",
+      visionLink: "/viziune",
       value1Title: "Autenticitate",
       value1Text: "Fiecare proiect reflectă personalitatea unică a clientului, nu tendințele de moment sau preferințele noastre personale.",
       value2Title: "Funcționalitate",
@@ -291,11 +380,21 @@ export const translations: Record<Language, Translations> = {
       value5Text: "Comunicăm deschis despre bugete, termene și provocări. Nu există surprize neplăcute în colaborarea cu noi.",
       value6Title: "Sustenabilitate",
       value6Text: "Alegem materiale și soluții care respectă mediul înconjurător, fără a compromite estetica sau durabilitatea.",
-      principle1: "Ascultăm înainte de a desena",
-      principle2: "Respectăm bugetul stabilit",
-      principle3: "Livrăm la timp, fără excepții",
-      principle4: "Comunicăm proactiv și constant",
-      principle5: "Garantăm satisfacția clientului"
+      principle1Number: "01",
+      principle1Title: "Ascultăm înainte să vorbim",
+      principle1Description: "Fiecare proiect începe cu întrebări, nu cu răspunsuri. Vrem să înțelegem cum trăiești, ce te deranjează, ce te face fericit. Abia apoi deschidem caietul de schițe.",
+      principle2Number: "02",
+      principle2Title: "Designul servește omul, nu invers",
+      principle2Description: "Nu vei fi nevoit să-ți schimbi obiceiurile pentru a te potrivi spațiului. Spațiul se va adapta la tine, la rutinele tale, la modul tău unic de a trăi.",
+      principle3Number: "03",
+      principle3Title: "Transparență totală",
+      principle3Description: "Știi exact ce primești, cât costă și când va fi gata. Fără costuri ascunse, fără termene amânate, fără surprize. Comunicarea deschisă este fundația încrederii.",
+      principle4Number: "04",
+      principle4Title: "Calitate fără compromis",
+      principle4Description: "Preferăm să spunem nu unui proiect decât să livrăm ceva sub standardele noastre. Reputația se construiește proiect cu proiect, și fiecare contează.",
+      principle5Number: "05",
+      principle5Title: "Evoluție continuă",
+      principle5Description: "Industria se schimbă, materialele evoluează, tehnicile se îmbunătățesc. Investim constant în educație și experimentare pentru a oferi cele mai bune soluții."
     },
     team: {
       title: "Echipa Noastră",
@@ -397,8 +496,11 @@ export const translations: Record<Language, Translations> = {
       loading: "Se încarcă...",
       error: "A apărut o eroare",
       notFound: "Pagina nu a fost găsită",
-      backHome: "Înapoi acasă"
-    }
+      backHome: "Înapoi acasă",
+      homeLink: "Acasă",
+      notFoundTitle: "Pagina nu a fost găsită",
+      notFoundDescription: "Ne pare rău, pagina pe care o cauți nu există. Este posibil să fi fost mutată sau ștearsă."
+    },
   },
   en: {
     nav: {
@@ -454,24 +556,61 @@ export const translations: Record<Language, Translations> = {
       valuesLink: "Principles & Values"
     },
     vision: {
-      title: "Vision & Mission",
-      subtitle: "Where we're going and why we exist",
-      visionTitle: "Our Vision",
-      visionText: "To redefine interior design standards in Romania, demonstrating that the spaces we live and work in can be both functional and deeply personal. We envision a world where every interior tells an authentic story.",
-      missionTitle: "Our Mission",
-      missionText: "To create spaces that improve people's quality of life, putting the client's needs and personality at the center of every project. We transform dreams into reality through intelligent design, quality materials, and attention to detail.",
-      whyTitle: "Why We Exist",
-      whyText: "We exist because we've seen too many spaces created for the designer's ego, not for the inhabitant's well-being. We founded SelfDezign out of a desire to offer an alternative: design that puts you first.",
+      backLink: "Back to About Us",
+      badge: "Vision & Mission",
+      title1: "WHERE WE'RE GOING",
+      title2: "AND WHY",
+      vision: {
+        title: "Our Vision",
+        subtitle: "How we see the future",
+        lead: "We believe in a world where every space tells an authentic story about the person who inhabits it.",
+        p1: "We envision a future where interior design is no longer a luxury reserved for the few, but a fundamental right for everyone to live in an environment that supports their well-being, creativity, and identity.",
+        p2: "We want to redefine the interior design industry in Romania, shifting focus from ephemeral trends and surface aesthetics to sustainable solutions that put people first.",
+        p3: "Our vision is to become the trusted partner of every client who understands that the space they live or work in has the power to transform their life."
+      },
+      mission: {
+        title: "Our Mission",
+        subtitle: "What we do every day",
+        lead: "We transform spaces into extensions of your personality.",
+        p1: "In every project, we aim to listen more than we speak. To understand not just what you want, but why you want it. To discover the invisible patterns of your daily life and give them physical form.",
+        p2: "Our mission is to create spaces that work for you, not the other way around. Spaces that make you feel at home from the first second. Spaces that support your routines, amplify your moments of joy, and offer refuge in difficult times.",
+        p3: "We don't design for magazines. We design for real people, with real lives, with needs that change and evolve."
+      },
+      purpose: {
+        title: "Our Purpose",
+        subtitle: "Why we exist",
+        lead: "We exist because your well-being matters.",
+        p1: "In a world where we spend 90% of our time indoors, the quality of the spaces we live and work in is not a whim. It's a necessity.",
+        p2: "Our purpose is to demonstrate that good interior design doesn't mean compromises. You can have a beautiful space that is also functional. You can have a personal space that is also professional. You can have a space that represents you without breaking the bank.",
+        p3: "SelfDezign exists to put design at your service, not the other way around."
+      },
+      prevPage: "Previous page",
+      prevTitle: "About SelfDezign",
+      nextPage: "Next page",
+      nextTitle: "Principles & Values",
       aboutLink: "About Us",
-      valuesLink: "Principles & Values"
+      valuesLink: "Principles & Values",
     },
     values: {
-      title: "Principles & Values",
-      subtitle: "What guides us in everything we do",
-      valuesTitle: "Our Values",
-      principlesTitle: "Working Principles",
-      aboutLink: "About Us",
-      visionLink: "Vision & Mission",
+      backLink: "Back to Vision & Mission",
+      badge: "Principles & Values",
+      title1: "WHAT GUIDES",
+      title2: "US",
+      introLead: "We believe that a well-designed space is a solid foundation for a fulfilling life. That's why we are guided by clear principles in everything we do.",
+      introP1: "Every detail matters, and every decision is made with long-term impact in mind. We build relationships based on trust and transparency, because we know that a successful project is the result of harmonious collaboration.",
+      introP2: "From the first discussion to the completion of the project, we ensure that our values are reflected in every stage of the process. We are here to transform your vision into a tangible reality.",
+      promiseLead: "We believe that interior design should be a promise: a promise to create a space that not only looks good, but makes you feel good, supports your goals, and evolves with you.",
+      promiseP1: "Design is an investment in your well-being and the success of your business. That's why every project is approached with maximum seriousness and professionalism. We make commitments and we respect them, regardless of challenges.",
+      promiseP2: "Our commitment is to offer you not just a space, but a memorable design experience, perfectly adapted to your needs and lifestyle.",
+      promiseHighlight: "We will deliver a space where you will feel at home.",
+      prevPage: "Previous page",
+      prevTitle: "Vision & Mission",
+      nextPage: "Next page",
+      nextTitle: "Team",
+      valuesSectionTitle: "Our Values",
+      principlesSectionTitle: "Working Principles",
+      aboutLink: "/about",
+      visionLink: "/vision",
       value1Title: "Authenticity",
       value1Text: "Each project reflects the client's unique personality, not current trends or our personal preferences.",
       value2Title: "Functionality",
@@ -484,11 +623,21 @@ export const translations: Record<Language, Translations> = {
       value5Text: "We communicate openly about budgets, deadlines, and challenges. There are no unpleasant surprises when working with us.",
       value6Title: "Sustainability",
       value6Text: "We choose materials and solutions that respect the environment, without compromising aesthetics or durability.",
-      principle1: "We listen before we draw",
-      principle2: "We respect the established budget",
-      principle3: "We deliver on time, without exceptions",
-      principle4: "We communicate proactively and constantly",
-      principle5: "We guarantee client satisfaction"
+      principle1Number: "01",
+      principle1Title: "We listen before we speak",
+      principle1Description: "Every project starts with questions, not answers. We want to understand how you live, what bothers you, what makes you happy. Only then do we open the sketchbook.",
+      principle2Number: "02",
+      principle2Title: "Design serves people, not the other way around",
+      principle2Description: "You won't have to change your habits to fit the space. The space will adapt to you, to your routines, to your unique way of living.",
+      principle3Number: "03",
+      principle3Title: "Total transparency",
+      principle3Description: "You know exactly what you're getting, how much it costs, and when it will be ready. No hidden costs, no postponed deadlines, no surprises. Open communication is the foundation of trust.",
+      principle4Number: "04",
+      principle4Title: "Quality without compromise",
+      principle4Description: "We'd rather say no to a project than deliver something below our standards. Reputation is built project by project, and each one counts.",
+      principle5Number: "05",
+      principle5Title: "Continuous evolution",
+      principle5Description: "The industry changes, materials evolve, techniques improve. We constantly invest in education and experimentation to offer the best solutions."
     },
     team: {
       title: "Our Team",
@@ -590,7 +739,10 @@ export const translations: Record<Language, Translations> = {
       loading: "Loading...",
       error: "An error occurred",
       notFound: "Page not found",
-      backHome: "Back home"
+      backHome: "Back home",
+      homeLink: "Home",
+      notFoundTitle: "Page Not Found",
+      notFoundDescription: "Sorry, the page you are looking for doesn't exist. It may have been moved or deleted."
     }
   }
 };
